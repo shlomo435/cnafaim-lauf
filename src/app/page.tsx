@@ -71,40 +71,17 @@ function WingsLogo({ className = '', style }: { className?: string; style?: Reac
       style={style}
       aria-hidden="true"
     >
-      {/* Left wing */}
-      <path
-        d="M24 17 C19 7, 3 5, 3 15 C3 25, 17 27, 24 17Z"
-        fill="currentColor"
-      />
-      {/* Right wing */}
-      <path
-        d="M24 17 C29 7, 45 5, 45 15 C45 25, 31 27, 24 17Z"
-        fill="currentColor"
-        opacity="0.65"
-      />
-      {/* Lower tail feathers */}
-      <path
-        d="M24 17 C22 24, 15 30, 17 33 C19 31, 22 27, 24 17Z"
-        fill="currentColor"
-        opacity="0.5"
-      />
-      <path
-        d="M24 17 C26 24, 33 30, 31 33 C29 31, 26 27, 24 17Z"
-        fill="currentColor"
-        opacity="0.35"
-      />
+      <path d="M24 17 C19 7, 3 5, 3 15 C3 25, 17 27, 24 17Z" fill="currentColor" />
+      <path d="M24 17 C29 7, 45 5, 45 15 C45 25, 31 27, 24 17Z" fill="currentColor" opacity="0.65" />
+      <path d="M24 17 C22 24, 15 30, 17 33 C19 31, 22 27, 24 17Z" fill="currentColor" opacity="0.5" />
+      <path d="M24 17 C26 24, 33 30, 31 33 C29 31, 26 27, 24 17Z" fill="currentColor" opacity="0.35" />
     </svg>
   );
 }
 
-
-// ======================
-// SECTION LABEL
-// ======================
-
 function SectionLabel({ text }: { text: string }) {
   return (
-    <p className="text-xs font-semibold tracking-[0.22em] uppercase mb-4" style={{ color: '#8FAE95' }}>
+    <p className="text-xs font-semibold tracking-[0.22em] uppercase mb-3" style={{ color: '#8FAE95' }}>
       {text}
     </p>
   );
@@ -128,8 +105,7 @@ export default function Home() {
 
       {/* ===== HEADER ===== */}
       <header className="sticky top-0 z-50 backdrop-blur-sm border-b" style={{ backgroundColor: 'rgba(248,245,240,0.96)', borderColor: '#D5E0D0' }}>
-        <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-          {/* Logo */}
+        <div className="max-w-6xl mx-auto px-6 h-18 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <WingsLogo className="w-9 h-7" style={{ color: '#4A6B50' } as React.CSSProperties} />
             <span className="font-display text-xl font-medium" style={{ color: '#4A6B50' }}>
@@ -137,15 +113,14 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Nav */}
           <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: '#56645A' }}>
             <a href="#about"    className="transition-colors hover:text-[#4A6B50]">אודות</a>
             <a href="#services" className="transition-colors hover:text-[#4A6B50]">תחומי טיפול</a>
+            <a href="#cards"    className="transition-colors hover:text-[#4A6B50]">קלפים טיפוליים</a>
             <a href="#approach" className="transition-colors hover:text-[#4A6B50]">הגישה שלי</a>
             <a href="#contact"  className="transition-colors hover:text-[#4A6B50]">יצירת קשר</a>
           </nav>
 
-          {/* CTA */}
           <a
             href="#contact"
             className="text-sm font-medium px-6 py-2.5 rounded-full text-white transition-all shadow-sm hover:shadow-md"
@@ -160,26 +135,22 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden">
-        {/* Background shape */}
         <div
           className="absolute top-0 left-0 h-full -z-10 rounded-r-[100px]"
           style={{ width: '38%', backgroundColor: '#EDF3EB', opacity: 0.6 }}
         />
-        {/* Soft glow */}
         <div
           className="absolute top-20 left-20 w-96 h-96 rounded-full -z-10"
           style={{ backgroundColor: '#C8DCC5', opacity: 0.15, filter: 'blur(64px)' }}
         />
 
-        <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 flex flex-col md:flex-row items-center gap-10">
-
-          {/* Text */}
+        <div className="max-w-6xl mx-auto px-6 py-16 md:py-22 flex flex-col md:flex-row items-center gap-10">
           <div className="flex-1 text-right">
             <SectionLabel text="מרכז טיפולי-לימודי" />
-            <h1 className="font-display text-6xl md:text-8xl font-light leading-[1.05] mb-6" style={{ color: '#292E27' }}>
+            <h1 className="font-display text-6xl md:text-8xl font-light leading-[1.05] mb-5" style={{ color: '#292E27' }}>
               כנפיים<br />לעוף
             </h1>
-            <p className="text-xl md:text-2xl font-light leading-relaxed mb-8" style={{ color: '#56645A', maxWidth: '26rem', marginRight: 0, marginLeft: 'auto' }}>
+            <p className="text-xl md:text-2xl font-light leading-relaxed mb-7" style={{ color: '#56645A', maxWidth: '26rem', marginRight: 0, marginLeft: 'auto' }}>
               ליווי לצמיחה, חיזוק וחיבור עצמי<br className="hidden md:block" />
               לילדים, נערות ונשים
             </p>
@@ -205,13 +176,16 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Portrait */}
+          {/* Hero image: founder speaking */}
           <div className="flex-shrink-0">
             <div className="relative">
-              <div className="relative w-72 h-96 md:w-80 md:h-[440px] rounded-3xl overflow-hidden shadow-2xl">
-                <img src="/founder-portrait.jpg" alt="גאולה אלון" className="w-full h-full object-cover object-top" />
+              <div className="relative w-72 h-96 md:w-80 md:h-[430px] rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="/founder_speaking.jpg"
+                  alt="גאולה אלון בהרצאה"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
-              {/* Decorative frames */}
               <div
                 className="absolute -bottom-4 -left-4 w-20 h-20 rounded-2xl -z-10 border"
                 style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
@@ -231,17 +205,28 @@ export default function Home() {
       </div>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-6 py-16">
+      <section id="about" className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 gap-10 items-center">
 
           {/* About images */}
           <div className="relative order-2 md:order-1">
-            <div className="relative w-full h-[380px] rounded-3xl overflow-hidden shadow-lg">
-              <img src="/founder-about.jpg" alt="גאולה אלון" className="w-full h-full object-cover object-top" />
+            <div className="relative w-full h-[360px] rounded-3xl overflow-hidden shadow-lg">
+              <img
+                src="/founder_portrait.jpg"
+                alt="גאולה אלון"
+                className="w-full h-full object-cover object-top"
+              />
             </div>
-            {/* Lecture photo inset */}
-            <div className="absolute -bottom-6 -left-4 w-44 h-28 rounded-2xl overflow-hidden shadow-xl border-2" style={{ borderColor: '#FFFFFF' }}>
-              <img src="/lecture.jpg" alt="הרצאה" className="w-full h-full object-cover object-top" />
+            {/* Inset: audience / conference photo */}
+            <div
+              className="absolute -bottom-6 -left-4 w-44 h-28 rounded-2xl overflow-hidden shadow-xl border-2"
+              style={{ borderColor: '#FFFFFF' }}
+            >
+              <img
+                src="/conference_audience.jpg"
+                alt="קהל בהרצאה"
+                className="w-full h-full object-cover object-center"
+              />
             </div>
             <div
               className="absolute -bottom-6 -right-6 w-28 h-28 rounded-2xl -z-10 border"
@@ -259,26 +244,26 @@ export default function Home() {
             <h2 className="font-display text-5xl font-light mb-2" style={{ color: '#292E27' }}>
               גאולה אלון
             </h2>
-            <div className="w-16 h-0.5 mt-4 mb-6" style={{ backgroundColor: '#8FAE95' }} />
-            <div className="space-y-5 font-light leading-loose text-[1.05rem]" style={{ color: '#56645A' }}>
+            <div className="w-16 h-0.5 mt-3 mb-5" style={{ backgroundColor: '#8FAE95' }} />
+            <div className="space-y-4 font-light leading-loose text-[1.05rem]" style={{ color: '#56645A' }}>
               <p>
-                מעל עשרים שנה של עבודה קלינית ולימודית עם ילדים, נערות ונשים הם הבסיס
-                שממנו צמח המרכז. הדרך לשינוי אמיתי עוברת דרך הבנה עמוקה של הצרכים
-                הייחודיים של כל אדם.
+                מעל עשרים שנה של ניסיון קליני ולימודי עם ילדים, נערות ונשים הם הבסיס שממנו
+                צמח המרכז. הדרך לשינוי אמיתי עוברת דרך הבנה עמוקה ומכילה של הצרכים
+                הייחודיים של כל אדם, ומתוך מרחב שמרגיש כמו בית.
               </p>
               <p>
-                הגישה הטיפולית משלבת שיטות מוכחות: טיפול קוגניטיבי-התנהגותי (CBT),
-                EMR, NLP ולימוד מתקן (Remedial Teaching), כולן מותאמות ומשולבות לפי
-                הצורך הספציפי של כל מטופל.
+                הגישה הטיפולית הוליסטית משלבת שיטות מוכחות: טיפול קוגניטיבי-התנהגותי (CBT),
+                EMR, NLP ולימוד מתקן (Remedial Teaching), כולן מותאמות אישית לפי הצורך
+                הספציפי של כל מטופל, בכל שלב בדרך.
               </p>
               <p>
-                אני מאמינה שכל אדם נושא בתוכו משאבים ויכולות. תפקידי הוא לעזור לך
-                למצוא אותם, לחזק אותם ולהשתמש בהם כדי לצמוח ולהתפתח.
+                אני מאמינה שכל אדם נושא בתוכו משאבים ויכולות. תפקידי הוא לעזור לך לגלות
+                אותם, לחזק אותם ולהשתמש בהם כדי לצמוח, להתפתח ולחיות חיים מלאים ומשמעותיים.
               </p>
             </div>
 
             {/* Stats */}
-            <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+            <div className="mt-5 grid grid-cols-3 gap-4 text-center">
               {[
                 { num: '+20', label: 'שנות ניסיון' },
                 { num: 'CBT',  label: 'טיפול קוגניטיבי' },
@@ -286,13 +271,13 @@ export default function Home() {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl py-5 px-2 border"
+                  className="rounded-2xl py-4 px-2 border"
                   style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
                 >
                   <div className="font-display text-2xl font-semibold" style={{ color: '#4A6B50' }}>
                     {stat.num}
                   </div>
-                  <div className="text-xs mt-1.5 font-light" style={{ color: '#8A9888' }}>
+                  <div className="text-xs mt-1 font-light" style={{ color: '#8A9888' }}>
                     {stat.label}
                   </div>
                 </div>
@@ -303,9 +288,9 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section id="services" className="py-16" style={{ backgroundColor: '#EDF3EB' }}>
+      <section id="services" className="py-12" style={{ backgroundColor: '#EDF3EB' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-10">
+          <div className="text-right mb-8">
             <SectionLabel text="תחומי טיפול" />
             <h2 className="font-display text-5xl font-light" style={{ color: '#292E27' }}>
               במה אני יכולה לעזור
@@ -320,14 +305,9 @@ export default function Home() {
                   i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
                 style={{ backgroundColor: '#FFFFFF', borderColor: '#D5E0D0' }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = '#8FAE95';
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = '#D5E0D0';
-                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#8FAE95'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = '#D5E0D0'; }}
               >
-                {/* Background number */}
                 <div
                   className="font-display absolute top-3 left-4 text-8xl font-bold leading-none select-none pointer-events-none"
                   style={{ color: '#EBF3E8' }}
@@ -337,10 +317,10 @@ export default function Home() {
                 </div>
                 <div className="relative">
                   <div
-                    className="w-10 h-0.5 mb-6 transition-all duration-300 group-hover:w-16"
+                    className="w-10 h-0.5 mb-5 transition-all duration-300 group-hover:w-16"
                     style={{ backgroundColor: '#8FAE95' }}
                   />
-                  <h3 className="font-display text-xl font-medium mb-3" style={{ color: '#292E27' }}>
+                  <h3 className="font-display text-xl font-medium mb-2.5" style={{ color: '#292E27' }}>
                     {service.title}
                   </h3>
                   <p className="text-sm leading-relaxed font-light" style={{ color: '#6A7870' }}>
@@ -353,64 +333,173 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== APPROACH ===== */}
-      <section id="approach" className="max-w-6xl mx-auto px-6 py-16">
-        <div className="text-right mb-10">
-          <SectionLabel text="הגישה שלי" />
-          <h2 className="font-display text-5xl font-light" style={{ color: '#292E27' }}>
-            מה מייחד את המרכז
-          </h2>
-        </div>
+      {/* ===== THERAPY CARDS ===== */}
+      <section id="cards" className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="group rounded-2xl p-6 text-right border transition-all duration-300 hover:shadow-md"
-              style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0' }}
-              onMouseEnter={e => {
-                e.currentTarget.style.backgroundColor = '#EDF3EB';
-                e.currentTarget.style.borderColor = '#8FAE95';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.backgroundColor = '#F8F5F0';
-                e.currentTarget.style.borderColor = '#D5E0D0';
-              }}
-            >
-              {/* Icon dot */}
-              <div
-                className="w-9 h-9 rounded-full mb-5 flex items-center justify-center border transition-colors"
-                style={{ backgroundColor: '#EDF3EB', borderColor: '#C8D8C0' }}
-              >
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#8FAE95' }} />
-              </div>
-              <h3 className="font-display text-base font-semibold mb-2.5" style={{ color: '#292E27' }}>
-                {feature.title}
-              </h3>
-              <p className="text-xs leading-relaxed font-light" style={{ color: '#6A7870' }}>
-                {feature.description}
+          {/* Cards text */}
+          <div className="text-right">
+            <SectionLabel text="קלפים טיפוליים" />
+            <h2 className="font-display text-4xl md:text-5xl font-light leading-snug mb-4" style={{ color: '#292E27' }}>
+              קלפים שמדליקים<br />
+              ניצוץ בכל ילד
+            </h2>
+            <div className="w-16 h-0.5 mb-5" style={{ backgroundColor: '#8FAE95' }} />
+            <div className="space-y-4 font-light leading-loose text-[1.05rem]" style={{ color: '#56645A' }}>
+              <p>
+                הקלפים הטיפוליים של כנפיים לעוף פותחו במיוחד כדי לשפר ולחזק את הקשר
+                עם הילדים שלנו. כל קלף נועד להצית ניצוץ של סקרנות, שיח ופתיחות,
+                וליצור שפה משותפת בין הורים לילדים.
+              </p>
+              <p>
+                הקופסה הצהובה של ניצוץ מכילה קלפים שעוצבו לעורר שיחות משמעותיות,
+                לחזק ביטחון עצמי ולאפשר לכל ילד להרגיש נראה, נשמע ואהוב.
+                פשוט להשתמש בהם, עמוקים בתוצאות שלהם.
+              </p>
+              <p>
+                מושלמים לשימוש ביתי, בטיפול, ובכל מרחב שרוצים להדליק אור בלב ילד.
               </p>
             </div>
-          ))}
+
+            {/* Card highlights */}
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              {[
+                { title: 'ניצוץ', subtitle: 'מדליקים אור בכל ילד' },
+                { title: 'קשר', subtitle: 'משפרים את הקשר עם הילדים' },
+                { title: 'שיח', subtitle: 'פותחים שיחות משמעותיות' },
+                { title: 'ביטחון', subtitle: 'מחזקים ערך עצמי ואהבה' },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl p-4 text-right border"
+                  style={{ backgroundColor: '#FDFAF6', borderColor: '#D5E0D0' }}
+                >
+                  <div className="font-display text-lg font-semibold mb-0.5" style={{ color: '#4A6B50' }}>
+                    {item.title}
+                  </div>
+                  <div className="text-xs font-light" style={{ color: '#8A9888' }}>
+                    {item.subtitle}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6">
+              <a
+                href="#contact"
+                className="inline-block px-8 py-3.5 rounded-full text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
+                style={{ backgroundColor: '#4A6B50' }}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3A5B40')}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4A6B50')}
+              >
+                לפרטים ורכישה
+              </a>
+            </div>
+          </div>
+
+          {/* Cards image */}
+          <div className="relative flex justify-center">
+            <div className="relative">
+              {/* Warm glow behind the box */}
+              <div
+                className="absolute inset-0 rounded-3xl -z-10"
+                style={{
+                  background: 'radial-gradient(ellipse at center, rgba(255,220,100,0.25) 0%, transparent 70%)',
+                  transform: 'scale(1.15)',
+                }}
+              />
+              <div className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="/therapy_cards_box.jpg"
+                  alt="קופסת קלפי ניצוץ"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              {/* Decorative accent */}
+              <div
+                className="absolute -bottom-5 -right-5 w-24 h-24 rounded-2xl -z-10 border"
+                style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
+              />
+              <div
+                className="absolute -top-4 -left-4 w-14 h-14 rounded-full -z-10"
+                style={{ backgroundColor: '#F5E9A0', opacity: 0.7 }}
+              />
+              {/* Floating label */}
+              <div
+                className="absolute top-4 right-4 px-4 py-2 rounded-full text-xs font-semibold shadow-md"
+                style={{ backgroundColor: '#FFFFFF', color: '#4A6B50', border: '1px solid #D5E0D0' }}
+              >
+                ניצוץ | Spark
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="h-px" style={{ background: 'linear-gradient(to left, transparent, #C0D4B8, transparent)' }} />
+      </div>
+
+      {/* ===== APPROACH ===== */}
+      <section id="approach" className="py-12" style={{ backgroundColor: '#EDF3EB' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-right mb-8">
+            <SectionLabel text="הגישה שלי" />
+            <h2 className="font-display text-5xl font-light" style={{ color: '#292E27' }}>
+              מה מייחד את המרכז
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            {features.map((feature) => (
+              <div
+                key={feature.title}
+                className="group rounded-2xl p-5 text-right border transition-all duration-300 hover:shadow-md"
+                style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0' }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = '#EDF3EB';
+                  e.currentTarget.style.borderColor = '#8FAE95';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = '#F8F5F0';
+                  e.currentTarget.style.borderColor = '#D5E0D0';
+                }}
+              >
+                <div
+                  className="w-9 h-9 rounded-full mb-4 flex items-center justify-center border transition-colors"
+                  style={{ backgroundColor: '#EDF3EB', borderColor: '#C8D8C0' }}
+                >
+                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#8FAE95' }} />
+                </div>
+                <h3 className="font-display text-base font-semibold mb-2" style={{ color: '#292E27' }}>
+                  {feature.title}
+                </h3>
+                <p className="text-xs leading-relaxed font-light" style={{ color: '#6A7870' }}>
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-16" style={{ backgroundColor: '#EDF3EB' }}>
+      <section id="contact" className="py-12" style={{ backgroundColor: '#F8F5F0' }}>
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid md:grid-cols-5 gap-10 items-start">
 
             {/* Contact info */}
             <div className="md:col-span-2 text-right">
               <SectionLabel text="יצירת קשר" />
-              <h2 className="font-display text-4xl font-light mb-6 leading-snug" style={{ color: '#292E27' }}>
+              <h2 className="font-display text-4xl font-light mb-5 leading-snug" style={{ color: '#292E27' }}>
                 מוזמנים לפנות
               </h2>
-              <p className="font-light leading-loose mb-10 text-[1.05rem]" style={{ color: '#56645A' }}>
+              <p className="font-light leading-loose mb-8 text-[1.05rem]" style={{ color: '#56645A' }}>
                 לשאלות, מידע נוסף או תיאום שיחת היכרות,
                 אני כאן. כל פניה מטופלת בדיסקרטיות ובמהירות.
               </p>
-              <div className="space-y-6 text-sm">
+              <div className="space-y-5 text-sm">
                 <div className="flex flex-col text-right gap-1.5">
                   <span className="text-xs font-semibold tracking-[0.18em] uppercase" style={{ color: '#8A9888' }}>
                     מיקום
@@ -429,11 +518,11 @@ export default function Home() {
 
             {/* Form */}
             <div
-              className="md:col-span-3 rounded-3xl p-8 border shadow-sm"
+              className="md:col-span-3 rounded-3xl p-7 border shadow-sm"
               style={{ backgroundColor: '#FFFFFF', borderColor: '#D5E0D0' }}
             >
               {submitted ? (
-                <div className="py-16 text-center">
+                <div className="py-14 text-center">
                   <div
                     className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 border"
                     style={{ backgroundColor: '#EDF3EB', borderColor: '#C8D8C0' }}
@@ -450,8 +539,8 @@ export default function Home() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid sm:grid-cols-2 gap-5">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5 text-right">
                       <label className="text-xs font-semibold tracking-wide" style={{ color: '#56645A' }}>
                         שם מלא
@@ -461,7 +550,7 @@ export default function Home() {
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="w-full px-4 py-3.5 rounded-xl text-sm text-right focus:outline-none transition-all border"
+                        className="w-full px-4 py-3 rounded-xl text-sm text-right focus:outline-none transition-all border"
                         style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0', color: '#292E27' }}
                         onFocus={e => { e.target.style.borderColor = '#8FAE95'; e.target.style.boxShadow = '0 0 0 3px rgba(143,174,149,0.15)'; }}
                         onBlur={e =>  { e.target.style.borderColor = '#D5E0D0'; e.target.style.boxShadow = 'none'; }}
@@ -477,7 +566,7 @@ export default function Home() {
                         required
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="w-full px-4 py-3.5 rounded-xl text-sm focus:outline-none transition-all border"
+                        className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all border"
                         style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0', color: '#292E27' }}
                         onFocus={e => { e.target.style.borderColor = '#8FAE95'; e.target.style.boxShadow = '0 0 0 3px rgba(143,174,149,0.15)'; }}
                         onBlur={e =>  { e.target.style.borderColor = '#D5E0D0'; e.target.style.boxShadow = 'none'; }}
@@ -495,7 +584,7 @@ export default function Home() {
                       required
                       value={form.subject}
                       onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                      className="w-full px-4 py-3.5 rounded-xl text-sm text-right appearance-none focus:outline-none transition-all border"
+                      className="w-full px-4 py-3 rounded-xl text-sm text-right appearance-none focus:outline-none transition-all border"
                       style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0', color: '#292E27' }}
                       onFocus={e => { e.target.style.borderColor = '#8FAE95'; e.target.style.boxShadow = '0 0 0 3px rgba(143,174,149,0.15)'; }}
                       onBlur={e =>  { e.target.style.borderColor = '#D5E0D0'; e.target.style.boxShadow = 'none'; }}
@@ -505,6 +594,7 @@ export default function Home() {
                       <option value="adult">טיפול למבוגרת</option>
                       <option value="learning">קשיי למידה</option>
                       <option value="anxiety">חרדה ורגש</option>
+                      <option value="cards">קלפים טיפוליים</option>
                       <option value="info">מידע כללי</option>
                     </select>
                   </div>
@@ -518,7 +608,7 @@ export default function Home() {
                       rows={4}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="w-full px-4 py-3.5 rounded-xl text-sm text-right resize-none focus:outline-none transition-all border"
+                      className="w-full px-4 py-3 rounded-xl text-sm text-right resize-none focus:outline-none transition-all border"
                       style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0', color: '#292E27' }}
                       onFocus={e => { e.target.style.borderColor = '#8FAE95'; e.target.style.boxShadow = '0 0 0 3px rgba(143,174,149,0.15)'; }}
                       onBlur={e =>  { e.target.style.borderColor = '#D5E0D0'; e.target.style.boxShadow = 'none'; }}
@@ -528,7 +618,7 @@ export default function Home() {
 
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-xl text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
+                    className="w-full py-3.5 rounded-xl text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
                     style={{ backgroundColor: '#4A6B50' }}
                     onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3A5B40')}
                     onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4A6B50')}
@@ -543,8 +633,8 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="py-12" style={{ backgroundColor: '#1A2419', color: '#A8BCA0' }}>
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-right">
+      <footer className="py-10" style={{ backgroundColor: '#1A2419', color: '#A8BCA0' }}>
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
           <div className="flex items-center gap-3">
             <WingsLogo className="w-8 h-6" style={{ color: '#6B8F71' } as React.CSSProperties} />
             <div>
