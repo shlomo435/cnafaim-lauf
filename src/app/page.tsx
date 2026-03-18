@@ -176,13 +176,13 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Hero image: founder speaking */}
+          {/* Hero image: founder portrait */}
           <div className="flex-shrink-0">
             <div className="relative">
               <div className="relative w-72 h-96 md:w-80 md:h-[430px] rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src="/founder_speaking.jpg"
-                  alt="גאולה אלון בהרצאה"
+                  src="/founder_portrait.jpg"
+                  alt="גאולה אלון"
                   className="w-full h-full object-cover object-top"
                 />
               </div>
@@ -212,8 +212,8 @@ export default function Home() {
           <div className="relative order-2 md:order-1">
             <div className="relative w-full h-[360px] rounded-3xl overflow-hidden shadow-lg">
               <img
-                src="/founder_portrait.jpg"
-                alt="גאולה אלון"
+                src="/founder_speaking.jpg"
+                alt="גאולה אלון בהרצאה"
                 className="w-full h-full object-cover object-top"
               />
             </div>
@@ -334,104 +334,113 @@ export default function Home() {
       </section>
 
       {/* ===== THERAPY CARDS ===== */}
-      <section id="cards" className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-
-          {/* Cards text */}
-          <div className="text-right">
+      <section id="cards" className="py-16" style={{ backgroundColor: '#FDFAF6' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Section heading */}
+          <div className="text-right mb-12">
             <SectionLabel text="קלפים טיפוליים" />
-            <h2 className="font-display text-4xl md:text-5xl font-light leading-snug mb-4" style={{ color: '#292E27' }}>
-              קלפים שמדליקים<br />
-              ניצוץ בכל ילד
+            <h2 className="font-display text-5xl md:text-6xl font-light leading-snug" style={{ color: '#292E27' }}>
+              "ניצוץ" – קלפים<br />
+              להדלקת האור הפנימי
             </h2>
-            <div className="w-16 h-0.5 mb-5" style={{ backgroundColor: '#8FAE95' }} />
-            <div className="space-y-4 font-light leading-loose text-[1.05rem]" style={{ color: '#56645A' }}>
-              <p>
-                הקלפים הטיפוליים של כנפיים לעוף פותחו במיוחד כדי לשפר ולחזק את הקשר
-                עם הילדים שלנו. כל קלף נועד להצית ניצוץ של סקרנות, שיח ופתיחות,
-                וליצור שפה משותפת בין הורים לילדים.
-              </p>
-              <p>
-                הקופסה הצהובה של ניצוץ מכילה קלפים שעוצבו לעורר שיחות משמעותיות,
-                לחזק ביטחון עצמי ולאפשר לכל ילד להרגיש נראה, נשמע ואהוב.
-                פשוט להשתמש בהם, עמוקים בתוצאות שלהם.
-              </p>
-              <p>
-                מושלמים לשימוש ביתי, בטיפול, ובכל מרחב שרוצים להדליק אור בלב ילד.
-              </p>
-            </div>
-
-            {/* Card highlights */}
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              {[
-                { title: 'ניצוץ', subtitle: 'מדליקים אור בכל ילד' },
-                { title: 'קשר', subtitle: 'משפרים את הקשר עם הילדים' },
-                { title: 'שיח', subtitle: 'פותחים שיחות משמעותיות' },
-                { title: 'ביטחון', subtitle: 'מחזקים ערך עצמי ואהבה' },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-2xl p-4 text-right border"
-                  style={{ backgroundColor: '#FDFAF6', borderColor: '#D5E0D0' }}
-                >
-                  <div className="font-display text-lg font-semibold mb-0.5" style={{ color: '#4A6B50' }}>
-                    {item.title}
-                  </div>
-                  <div className="text-xs font-light" style={{ color: '#8A9888' }}>
-                    {item.subtitle}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6">
-              <a
-                href="#contact"
-                className="inline-block px-8 py-3.5 rounded-full text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
-                style={{ backgroundColor: '#4A6B50' }}
-                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3A5B40')}
-                onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4A6B50')}
-              >
-                לפרטים ורכישה
-              </a>
-            </div>
           </div>
 
-          {/* Cards image */}
-          <div className="relative flex justify-center">
-            <div className="relative">
-              {/* Warm glow behind the box */}
-              <div
-                className="absolute inset-0 rounded-3xl -z-10"
-                style={{
-                  background: 'radial-gradient(ellipse at center, rgba(255,220,100,0.25) 0%, transparent 70%)',
-                  transform: 'scale(1.15)',
-                }}
-              />
-              <div className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="/therapy_cards_box.jpg"
-                  alt="קופסת קלפי ניצוץ"
-                  className="w-full h-auto object-cover"
+          <div className="grid md:grid-cols-2 gap-14 items-center">
+
+            {/* Cards image */}
+            <div className="relative flex justify-center order-2 md:order-1">
+              <div className="relative">
+                {/* Warm glow behind the box */}
+                <div
+                  className="absolute inset-0 rounded-3xl -z-10"
+                  style={{
+                    background: 'radial-gradient(ellipse at center, rgba(255,220,100,0.3) 0%, transparent 68%)',
+                    transform: 'scale(1.2)',
+                  }}
                 />
-              </div>
-              {/* Decorative accent */}
-              <div
-                className="absolute -bottom-5 -right-5 w-24 h-24 rounded-2xl -z-10 border"
-                style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
-              />
-              <div
-                className="absolute -top-4 -left-4 w-14 h-14 rounded-full -z-10"
-                style={{ backgroundColor: '#F5E9A0', opacity: 0.7 }}
-              />
-              {/* Floating label */}
-              <div
-                className="absolute top-4 right-4 px-4 py-2 rounded-full text-xs font-semibold shadow-md"
-                style={{ backgroundColor: '#FFFFFF', color: '#4A6B50', border: '1px solid #D5E0D0' }}
-              >
-                ניצוץ | Spark
+                <div className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl">
+                  <img
+                    src="/therapy_cards_box.jpg"
+                    alt="קלפי ניצוץ – קלפים שמדליקים אור בכל ילד"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+                {/* Decorative accents */}
+                <div
+                  className="absolute -bottom-5 -right-5 w-24 h-24 rounded-2xl -z-10 border"
+                  style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
+                />
+                <div
+                  className="absolute -top-4 -left-4 w-16 h-16 rounded-full -z-10"
+                  style={{ backgroundColor: '#F5E9A0', opacity: 0.75 }}
+                />
+                {/* Floating label */}
+                <div
+                  className="absolute top-4 right-4 px-4 py-2 rounded-full text-xs font-semibold shadow-md"
+                  style={{ backgroundColor: '#FFFFFF', color: '#4A6B50', border: '1px solid #D5E0D0' }}
+                >
+                  ניצוץ – קלפים שמדליקים אור בכל ילד!
+                </div>
               </div>
             </div>
+
+            {/* Cards text */}
+            <div className="text-right order-1 md:order-2">
+              <div className="w-16 h-0.5 mb-6" style={{ backgroundColor: '#8FAE95' }} />
+              <div className="space-y-5 font-light leading-loose text-[1.05rem]" style={{ color: '#56645A' }}>
+                <p>
+                  קלפי "ניצוץ" נוצרו כדי לתת לכל ילד מרחב בטוח לביטוי עצמי. כל קלף
+                  מזמין שיחה שמאפשרת לילד לבטא את עולמו הרגשי, להתחבר לכוחות הפנימיים
+                  שלו, ולחוות שהוא נראה, נשמע ומוקדש.
+                </p>
+                <p>
+                  הקלפים פועלים כגשר תקשורת בין הורים לילדים. הם יוצרים שפה משותפת
+                  שמחזקת ומעמיקה את הקשר, בונה אמון ופותחת דיאלוג פתוח ואמיתי. הורים
+                  מגלים בהם כלי רב-עוצמה לחיבור מחדש בשגרת היומיום.
+                </p>
+                <p>
+                  לצד החיבור ההורי, קלפי "ניצוץ" תומכים בבניית ביטחון עצמי ועמידות
+                  רגשית. שימוש קבוע בהם מסייע לילדים לפתח חוסן, לזהות את חוזקותיהם
+                  ולהתמודד טוב יותר עם אתגרי החיים.
+                </p>
+              </div>
+
+              {/* Highlights grid */}
+              <div className="mt-7 grid grid-cols-2 gap-3">
+                {[
+                  { title: 'ביטוי עצמי', subtitle: 'מרחב בטוח לעיבוד רגשות' },
+                  { title: 'קשר הורי', subtitle: 'גשר תקשורת ואמון' },
+                  { title: 'דיאלוג פתוח', subtitle: 'שיחות משמעותיות בבית' },
+                  { title: 'עמידות רגשית', subtitle: 'ביטחון עצמי וחוסן' },
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-2xl p-4 text-right border"
+                    style={{ backgroundColor: '#FFFFFF', borderColor: '#D5E0D0' }}
+                  >
+                    <div className="font-display text-lg font-semibold mb-0.5" style={{ color: '#4A6B50' }}>
+                      {item.title}
+                    </div>
+                    <div className="text-xs font-light" style={{ color: '#8A9888' }}>
+                      {item.subtitle}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-7">
+                <a
+                  href="#contact"
+                  className="inline-block px-8 py-3.5 rounded-full text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
+                  style={{ backgroundColor: '#4A6B50' }}
+                  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3A5B40')}
+                  onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4A6B50')}
+                >
+                  לפרטים ורכישה
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
