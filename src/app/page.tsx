@@ -97,60 +97,6 @@ function WingsLogo({ className = '', style }: { className?: string; style?: Reac
   );
 }
 
-function FounderPortrait() {
-  return (
-    <div className="relative w-full h-full overflow-hidden" style={{ background: 'linear-gradient(135deg, #C2D9C6 0%, #8DAE94 50%, #5D7D63 100%)' }}>
-      {/* Botanical circle decoration */}
-      <svg
-        className="absolute inset-0 w-full h-full"
-        viewBox="0 0 320 440"
-        preserveAspectRatio="xMidYMid slice"
-        aria-hidden="true"
-      >
-        <circle cx="290" cy="55"  r="155" stroke="white" strokeWidth="1"   fill="none" opacity="0.18" />
-        <circle cx="290" cy="55"  r="100" stroke="white" strokeWidth="0.8" fill="none" opacity="0.13" />
-        <circle cx="30"  cy="410" r="125" stroke="white" strokeWidth="1"   fill="none" opacity="0.15" />
-        <ellipse cx="160" cy="220" rx="55" ry="140" stroke="white" strokeWidth="1.5" fill="none" opacity="0.1" transform="rotate(-12 160 220)" />
-        <ellipse cx="160" cy="220" rx="55" ry="140" stroke="white" strokeWidth="1.5" fill="none" opacity="0.1" transform="rotate(12 160 220)"  />
-      </svg>
-      {/* Monogram */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-        <div className="w-24 h-24 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.2)', border: '2px solid rgba(255,255,255,0.4)' }}>
-          <span className="font-display text-5xl font-light text-white">ג</span>
-        </div>
-        <div className="text-center">
-          <div className="text-white font-medium text-sm tracking-widest">גאולה אלון</div>
-          <div className="text-xs mt-1 tracking-wider" style={{ color: 'rgba(255,255,255,0.7)' }}>מטפלת ומאבחנת</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function FounderAbout() {
-  return (
-    <div className="relative w-full h-full overflow-hidden" style={{ background: 'linear-gradient(135deg, #DAE9D7 0%, #A4C4A7 60%, #7AA080 100%)' }}>
-      <svg
-        className="absolute inset-0 w-full h-full"
-        viewBox="0 0 480 480"
-        preserveAspectRatio="xMidYMid slice"
-        aria-hidden="true"
-      >
-        <circle cx="80"  cy="80"  r="220" stroke="#3A5B42" strokeWidth="1.5" fill="none" opacity="0.12" />
-        <circle cx="400" cy="400" r="200" stroke="#3A5B42" strokeWidth="1.5" fill="none" opacity="0.09" />
-        <ellipse cx="240" cy="240" rx="90" ry="220" stroke="#3A5B42" strokeWidth="2" fill="none" opacity="0.09" transform="rotate(-18 240 240)" />
-        <ellipse cx="240" cy="240" rx="90" ry="220" stroke="#3A5B42" strokeWidth="2" fill="none" opacity="0.09" transform="rotate(18 240 240)"  />
-        <line x1="0" y1="480" x2="480" y2="0"   stroke="#3A5B42" strokeWidth="0.6" opacity="0.07" />
-        <line x1="0" y1="380" x2="380" y2="0"   stroke="#3A5B42" strokeWidth="0.4" opacity="0.05" />
-      </svg>
-      <div className="absolute bottom-7 right-7 text-right">
-        <div className="font-display text-sm font-light" style={{ color: 'rgba(30,40,30,0.55)' }}>
-          מעל 20 שנות ניסיון קליני
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ======================
 // SECTION LABEL
@@ -225,7 +171,7 @@ export default function Home() {
           style={{ backgroundColor: '#C8DCC5', opacity: 0.15, filter: 'blur(64px)' }}
         />
 
-        <div className="max-w-6xl mx-auto px-6 py-36 md:py-48 flex flex-col md:flex-row items-center gap-16">
+        <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 flex flex-col md:flex-row items-center gap-10">
 
           {/* Text */}
           <div className="flex-1 text-right">
@@ -233,7 +179,7 @@ export default function Home() {
             <h1 className="font-display text-6xl md:text-8xl font-light leading-[1.05] mb-6" style={{ color: '#292E27' }}>
               כנפיים<br />לעוף
             </h1>
-            <p className="text-xl md:text-2xl font-light leading-relaxed mb-14" style={{ color: '#56645A', maxWidth: '26rem', marginRight: 0, marginLeft: 'auto' }}>
+            <p className="text-xl md:text-2xl font-light leading-relaxed mb-8" style={{ color: '#56645A', maxWidth: '26rem', marginRight: 0, marginLeft: 'auto' }}>
               ליווי לצמיחה, חיזוק וחיבור עצמי<br className="hidden md:block" />
               לילדים, נערות ונשים
             </p>
@@ -259,11 +205,11 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Portrait placeholder */}
+          {/* Portrait */}
           <div className="flex-shrink-0">
             <div className="relative">
               <div className="relative w-72 h-96 md:w-80 md:h-[440px] rounded-3xl overflow-hidden shadow-2xl">
-                <FounderPortrait />
+                <img src="/founder-portrait.jpg" alt="גאולה אלון" className="w-full h-full object-cover object-top" />
               </div>
               {/* Decorative frames */}
               <div
@@ -285,16 +231,20 @@ export default function Home() {
       </div>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-6 py-32">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+      <section id="about" className="max-w-6xl mx-auto px-6 py-16">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
 
-          {/* About image placeholder */}
+          {/* About images */}
           <div className="relative order-2 md:order-1">
-            <div className="relative w-full h-[480px] rounded-3xl overflow-hidden shadow-lg">
-              <FounderAbout />
+            <div className="relative w-full h-[380px] rounded-3xl overflow-hidden shadow-lg">
+              <img src="/founder-about.jpg" alt="גאולה אלון" className="w-full h-full object-cover object-top" />
+            </div>
+            {/* Lecture photo inset */}
+            <div className="absolute -bottom-6 -left-4 w-44 h-28 rounded-2xl overflow-hidden shadow-xl border-2" style={{ borderColor: '#FFFFFF' }}>
+              <img src="/lecture.jpg" alt="הרצאה" className="w-full h-full object-cover object-top" />
             </div>
             <div
-              className="absolute -bottom-6 -right-6 w-36 h-36 rounded-2xl -z-10 border"
+              className="absolute -bottom-6 -right-6 w-28 h-28 rounded-2xl -z-10 border"
               style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
             />
             <div
@@ -309,7 +259,7 @@ export default function Home() {
             <h2 className="font-display text-5xl font-light mb-2" style={{ color: '#292E27' }}>
               גאולה אלון
             </h2>
-            <div className="w-16 h-0.5 mt-4 mb-9" style={{ backgroundColor: '#8FAE95' }} />
+            <div className="w-16 h-0.5 mt-4 mb-6" style={{ backgroundColor: '#8FAE95' }} />
             <div className="space-y-5 font-light leading-loose text-[1.05rem]" style={{ color: '#56645A' }}>
               <p>
                 מעל עשרים שנה של עבודה קלינית ולימודית עם ילדים, נערות ונשים הם הבסיס
@@ -328,7 +278,7 @@ export default function Home() {
             </div>
 
             {/* Stats */}
-            <div className="mt-10 grid grid-cols-3 gap-4 text-center">
+            <div className="mt-6 grid grid-cols-3 gap-4 text-center">
               {[
                 { num: '+20', label: 'שנות ניסיון' },
                 { num: 'CBT',  label: 'טיפול קוגניטיבי' },
@@ -353,9 +303,9 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section id="services" className="py-32" style={{ backgroundColor: '#EDF3EB' }}>
+      <section id="services" className="py-16" style={{ backgroundColor: '#EDF3EB' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-16">
+          <div className="text-right mb-10">
             <SectionLabel text="תחומי טיפול" />
             <h2 className="font-display text-5xl font-light" style={{ color: '#292E27' }}>
               במה אני יכולה לעזור
@@ -366,7 +316,7 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`group relative rounded-3xl p-8 text-right border overflow-hidden transition-all duration-300 hover:shadow-lg ${
+                className={`group relative rounded-3xl p-6 text-right border overflow-hidden transition-all duration-300 hover:shadow-lg ${
                   i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
                 style={{ backgroundColor: '#FFFFFF', borderColor: '#D5E0D0' }}
@@ -404,8 +354,8 @@ export default function Home() {
       </section>
 
       {/* ===== APPROACH ===== */}
-      <section id="approach" className="max-w-6xl mx-auto px-6 py-32">
-        <div className="text-right mb-16">
+      <section id="approach" className="max-w-6xl mx-auto px-6 py-16">
+        <div className="text-right mb-10">
           <SectionLabel text="הגישה שלי" />
           <h2 className="font-display text-5xl font-light" style={{ color: '#292E27' }}>
             מה מייחד את המרכז
@@ -446,9 +396,9 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-32" style={{ backgroundColor: '#EDF3EB' }}>
+      <section id="contact" className="py-16" style={{ backgroundColor: '#EDF3EB' }}>
         <div className="max-w-5xl mx-auto px-6">
-          <div className="grid md:grid-cols-5 gap-16 items-start">
+          <div className="grid md:grid-cols-5 gap-10 items-start">
 
             {/* Contact info */}
             <div className="md:col-span-2 text-right">
