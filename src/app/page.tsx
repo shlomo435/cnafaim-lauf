@@ -88,75 +88,6 @@ const C = {
 // BRAND SVG COMPONENTS
 // ======================
 
-/**
- * Butterfly icon drawn in brand pink/purple with opacity layering.
- * No SVG gradient IDs are used so multiple instances never conflict.
- */
-function ButterflyIcon({
-  className = '',
-  style,
-  size = 32,
-}: {
-  className?: string;
-  style?: React.CSSProperties;
-  size?: number;
-}) {
-  const w = size;
-  const h = size * 0.71;
-  return (
-    <svg
-      viewBox="0 0 48 34"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={{ width: w, height: h, flexShrink: 0, ...style }}
-      aria-hidden="true"
-    >
-      {/* Left primary wing */}
-      <path
-        d="M24 17 C15 5, 1 4, 3 13 C5 22, 18 23, 24 17Z"
-        fill="#C91F82"
-        opacity="0.88"
-      />
-      {/* Right primary wing */}
-      <path
-        d="M24 17 C33 5, 47 4, 45 13 C43 22, 30 23, 24 17Z"
-        fill="#4B47BF"
-        opacity="0.65"
-      />
-      {/* Left secondary wing detail */}
-      <path
-        d="M24 17 C18 9, 7 7, 5 11 C3 15, 13 19, 24 17Z"
-        fill="#C91F82"
-        opacity="0.28"
-      />
-      {/* Right secondary wing detail */}
-      <path
-        d="M24 17 C30 9, 41 7, 43 11 C45 15, 35 19, 24 17Z"
-        fill="#4B47BF"
-        opacity="0.22"
-      />
-      {/* Lower tail left */}
-      <path
-        d="M24 17 C22 22, 19 29, 21 32 C22 29, 23 24, 24 17Z"
-        fill="#C91F82"
-        opacity="0.55"
-      />
-      {/* Lower tail right */}
-      <path
-        d="M24 17 C26 22, 29 29, 27 32 C26 29, 25 24, 24 17Z"
-        fill="#4B47BF"
-        opacity="0.42"
-      />
-      {/* Small sparkle circles on upper wings */}
-      <circle cx="9"  cy="9"  r="1.3" fill="#C91F82" opacity="0.45" />
-      <circle cx="39" cy="9"  r="1.3" fill="#4B47BF" opacity="0.45" />
-      {/* Tiny spiral dots */}
-      <circle cx="7"  cy="12" r="0.7" fill="#D4A853" opacity="0.6" />
-      <circle cx="41" cy="12" r="0.7" fill="#D4A853" opacity="0.6" />
-    </svg>
-  );
-}
 
 /** Four-pointed star sparkle (ניצוץ motif) */
 function SparkleIcon({
@@ -200,15 +131,19 @@ function SectionLabel({ text }: { text: string }) {
   );
 }
 
-/** Elegant butterfly ornament divider replacing generic line separators */
-function ButterflyDivider({ className = '' }: { className?: string }) {
+/** Organic concentric-circle section divider */
+function SectionDivider({ className = '' }: { className?: string }) {
   return (
     <div className={`flex items-center justify-center gap-3 py-1 ${className}`}>
       <div
         className="h-px flex-1 max-w-[110px]"
         style={{ background: `linear-gradient(to left, ${C.border}, transparent)` }}
       />
-      <ButterflyIcon size={20} />
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 16, height: 16 }} aria-hidden="true">
+        <circle cx="10" cy="10" r="2.2" fill={C.gold} opacity="0.55" />
+        <circle cx="10" cy="10" r="4.8" stroke={C.gold} strokeWidth="0.7" opacity="0.35" fill="none" />
+        <circle cx="10" cy="10" r="7.8" stroke={C.gold} strokeWidth="0.5" opacity="0.2"  fill="none" />
+      </svg>
       <div
         className="h-px flex-1 max-w-[110px]"
         style={{ background: `linear-gradient(to right, ${C.border}, transparent)` }}
@@ -360,10 +295,6 @@ export default function Home() {
                 <br />
                 לעוף
               </h1>
-              {/* Ghost butterfly behind the headline */}
-              <div className="absolute -top-6 -left-10 pointer-events-none" aria-hidden="true">
-                <ButterflyIcon size={56} style={{ opacity: 0.18 }} />
-              </div>
             </div>
 
             <p
@@ -411,7 +342,7 @@ export default function Home() {
               <img
                 src="/founder_portrait.jpg"
                 alt="גאולה אלון"
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-contain object-center"
               />
             </div>
             {/* Gold accent corner block */}
@@ -423,9 +354,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Butterfly ornament divider */}
+      {/* Section divider */}
       <div className="max-w-6xl mx-auto px-6">
-        <ButterflyDivider />
+        <SectionDivider />
       </div>
 
       {/* ===== ABOUT ===== */}
@@ -438,7 +369,7 @@ export default function Home() {
               <img
                 src="/founder_speaking.jpg"
                 alt="גאולה אלון בהרצאה"
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-contain object-center"
               />
             </div>
             {/* Inset audience thumbnail */}
@@ -449,7 +380,7 @@ export default function Home() {
               <img
                 src="/conference_audience.jpg"
                 alt="קהל בהרצאה"
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-contain object-center"
               />
             </div>
             {/* Accent blocks */}
@@ -566,9 +497,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Butterfly ornament divider */}
+      {/* Section divider */}
       <div className="max-w-6xl mx-auto px-6 py-3">
-        <ButterflyDivider />
+        <SectionDivider />
       </div>
 
       {/* ===== THERAPY CARDS ===== */}
@@ -691,9 +622,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Butterfly ornament divider */}
+      {/* Section divider */}
       <div className="max-w-6xl mx-auto px-6 py-3">
-        <ButterflyDivider />
+        <SectionDivider />
       </div>
 
       {/* ===== APPROACH ===== */}
@@ -802,9 +733,15 @@ export default function Home() {
                   </span>
                 </div>
               </div>
-              {/* Decorative butterfly */}
-              <div className="mt-12 flex justify-end">
-                <ButterflyIcon size={64} style={{ opacity: 0.15 }} />
+              {/* Abstract organic decoration */}
+              <div className="mt-12 flex justify-end" aria-hidden="true">
+                <svg viewBox="0 0 80 80" fill="none" style={{ width: 80, height: 80, opacity: 0.2 }}>
+                  <circle cx="40" cy="40" r="8"  fill={C.gold} opacity="0.5" />
+                  <circle cx="40" cy="40" r="20" stroke={C.gold} strokeWidth="0.8" opacity="0.35" fill="none" />
+                  <circle cx="40" cy="40" r="33" stroke={C.gold} strokeWidth="0.6" opacity="0.22" fill="none" />
+                  <path d="M40 32 Q43 24 48 18" stroke={C.pink} strokeWidth="0.8" opacity="0.25" fill="none" />
+                  <path d="M40 32 Q37 26 30 20" stroke={C.pink} strokeWidth="0.8" opacity="0.25" fill="none" />
+                </svg>
               </div>
             </div>
 
