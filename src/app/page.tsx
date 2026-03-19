@@ -116,7 +116,7 @@ function SparkleIcon({
 
 function SectionLabel({ text }: { text: string }) {
   return (
-    <div className="flex items-center gap-2 justify-end mb-4">
+    <div className="flex items-center gap-2 justify-center md:justify-end mb-3 md:mb-4">
       <p
         className="text-xs font-semibold tracking-[0.22em] uppercase"
         style={{ color: C.gold }}
@@ -148,10 +148,10 @@ function SectionDivider({ className = '' }: { className?: string }) {
   );
 }
 
-function GoldRule({ width = 'w-20' }: { width?: string }) {
+function GoldRule({ width = 'w-20', className = '' }: { width?: string; className?: string }) {
   return (
     <div
-      className={`${width} h-0.5 mt-3 mb-6`}
+      className={`${width} h-0.5 mt-3 mb-4 md:mb-6 ${className}`}
       style={{ background: `linear-gradient(to left, ${C.goldLight}, ${C.gold})` }}
     />
   );
@@ -162,11 +162,13 @@ function CtaButton({
   children,
   className = '',
   block = false,
+  onClick,
 }: {
   href: string;
   children: React.ReactNode;
   className?: string;
   block?: boolean;
+  onClick?: () => void;
 }) {
   const [over, setOver] = React.useState(false);
   return (
@@ -176,6 +178,7 @@ function CtaButton({
       style={{ background: over ? C.ctaGradHover : C.ctaGrad }}
       onMouseEnter={() => setOver(true)}
       onMouseLeave={() => setOver(false)}
+      onClick={onClick}
     >
       {children}
     </a>
@@ -418,6 +421,7 @@ export default function Home() {
   const [form, setForm] = useState({ name: '', phone: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useScrollReveal();
 
@@ -452,16 +456,18 @@ export default function Home() {
         className="sticky top-0 z-50 backdrop-blur-sm border-b"
         style={{ backgroundColor: 'rgba(250,248,245,0.97)', borderColor: C.borderLight }}
       >
-        <div className="max-w-6xl mx-auto px-6 h-[72px] flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 md:h-[72px] flex items-center justify-between">
+          {/* Logo - DOM first, rightmost position in RTL */}
           <a href="#" className="flex items-center flex-shrink-0">
             <img
               src="/logo.jpg"
               alt="כנפיים לעוף"
-              className="h-14 w-auto object-contain"
-              style={{ maxWidth: 168, mixBlendMode: 'multiply' }}
+              className="h-11 md:h-14 w-auto object-contain"
+              style={{ maxWidth: 148, mixBlendMode: 'multiply' }}
             />
           </a>
 
+          {/* Desktop navigation - hidden on mobile */}
           <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: C.textMid }}>
             {(['אודות', 'תחומי טיפול', 'קלפים טיפוליים', 'הגישה שלי', 'יצירת קשר'] as const).map(
               (label, i) => {
@@ -481,10 +487,64 @@ export default function Home() {
             )}
           </nav>
 
-          <CtaButton href="#contact" className="px-5 py-2 text-xs">
-            לתיאום פגישה
-          </CtaButton>
+          {/* Actions - DOM last, leftmost in RTL: desktop CTA + mobile hamburger */}
+          <div className="flex items-center gap-3">
+            <CtaButton href="#contact" className="hidden md:inline-block px-5 py-2 text-xs">
+              לתיאום פגישה
+            </CtaButton>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl transition-colors hover:bg-black/5 focus:outline-none"
+              style={{ color: C.textDark }}
+              aria-label={mobileMenuOpen ? 'סגור תפריט' : 'פתח תפריט'}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile dropdown menu */}
+        {mobileMenuOpen && (
+          <div
+            className="md:hidden border-t"
+            style={{ backgroundColor: 'rgba(250,248,245,0.99)', borderColor: C.borderLight }}
+          >
+            <nav className="max-w-6xl mx-auto px-4 py-2 flex flex-col text-right">
+              {(['אודות', 'תחומי טיפול', 'קלפים טיפוליים', 'הגישה שלי', 'יצירת קשר'] as const).map(
+                (label, i) => {
+                  const hrefs = ['#about', '#services', '#cards', '#approach', '#contact'];
+                  return (
+                    <a
+                      key={label}
+                      href={hrefs[i]}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="py-3 text-sm font-medium border-b last:border-b-0 transition-colors"
+                      style={{ color: C.textDark, borderColor: C.borderLight }}
+                      onMouseEnter={e => (e.currentTarget.style.color = C.pink)}
+                      onMouseLeave={e => (e.currentTarget.style.color = C.textDark)}
+                    >
+                      {label}
+                    </a>
+                  );
+                }
+              )}
+              <div className="pt-3 pb-2">
+                <CtaButton href="#contact" block onClick={() => setMobileMenuOpen(false)}>
+                  לתיאום פגישה
+                </CtaButton>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* ===== HERO ===== */}
@@ -530,15 +590,15 @@ export default function Home() {
           style={{ background: 'radial-gradient(circle, rgba(75,71,191,0.09) 0%, transparent 65%)' }}
         />
 
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center gap-12">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-24 flex flex-col md:flex-row items-center gap-6 md:gap-12">
 
           {/* Text block */}
-          <div className="flex-1 text-right">
+          <div className="flex-1 text-center md:text-right w-full">
             <SectionLabel text="מרכז טיפולי-לימודי" />
 
             <div className="relative inline-block mb-3">
               <h1
-                className="font-display text-[5.5rem] md:text-[8rem] font-light leading-[1.0]"
+                className="font-display text-[3.8rem] sm:text-[5rem] md:text-[5.5rem] lg:text-[8rem] font-light leading-[1.0]"
                 style={{ color: C.textDark }}
               >
                 כנפיים
@@ -553,15 +613,15 @@ export default function Home() {
             </div>
 
             <p
-              className="text-xl md:text-2xl font-light leading-relaxed mb-9"
-              style={{ color: C.textMid, maxWidth: '28rem', marginRight: 0, marginLeft: 'auto' }}
+              className="text-lg md:text-2xl font-light leading-relaxed mb-5 md:mb-9 mx-auto md:mx-0"
+              style={{ color: C.textMid, maxWidth: '28rem' }}
             >
               ליווי לצמיחה, חיזוק וחיבור עצמי
               <br className="hidden md:block" />
               לילדים, נערות ונשים
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-end">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-end">
               <CtaButton href="#contact">לתיאום שיחת היכרות</CtaButton>
               <a
                 href="#services"
@@ -583,7 +643,7 @@ export default function Home() {
             </div>
 
             {/* Trust / credential strip */}
-            <div className="mt-8 flex flex-wrap gap-2.5 justify-end">
+            <div className="mt-4 md:mt-8 flex flex-wrap gap-2 md:gap-2.5 justify-center md:justify-end">
               {['+20 שנות ניסיון', 'CBT מוסמכת', 'EMR מוסמכת', 'NLP מוסמכת'].map((label) => (
                 <div
                   key={label}
@@ -624,7 +684,7 @@ export default function Home() {
 
             {/* Portrait container with warm background */}
             <div
-              className="relative w-72 h-96 md:w-80 md:h-[440px] rounded-3xl overflow-hidden shadow-2xl"
+              className="relative w-60 h-[300px] sm:w-72 sm:h-96 md:w-80 md:h-[440px] rounded-3xl overflow-hidden shadow-2xl"
               style={{
                 background: `linear-gradient(160deg, ${C.creamDeep} 0%, ${C.creamAlt} 100%)`,
               }}
@@ -645,7 +705,7 @@ export default function Home() {
 
             {/* Floating years badge */}
             <div
-              className="absolute -bottom-2 -left-10 px-3.5 py-2.5 rounded-2xl text-center shadow-lg"
+              className="absolute -bottom-2 -left-4 md:-left-10 px-3.5 py-2.5 rounded-2xl text-center shadow-lg"
               style={{
                 background: C.ctaGrad,
                 color: 'white',
@@ -658,7 +718,7 @@ export default function Home() {
 
             {/* Floating credentials pill */}
             <div
-              className="absolute -top-4 -left-6 px-3 py-2 rounded-2xl border shadow-md"
+              className="absolute -top-3 -left-3 md:-top-4 md:-left-6 px-3 py-2 rounded-2xl border shadow-md"
               style={{
                 background: 'rgba(255,255,255,0.95)',
                 borderColor: C.border,
@@ -676,17 +736,17 @@ export default function Home() {
       </section>
 
       {/* Section divider */}
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
         <SectionDivider />
       </div>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-6 py-14">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-7 md:py-14">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center">
 
           {/* Images column */}
-          <div className="relative order-2 md:order-1 sr sr-d1">
-            <div className="relative w-full h-[360px] rounded-3xl overflow-hidden shadow-lg">
+          <div className="relative order-2 md:order-1 sr sr-d1 mb-6 md:mb-0">
+            <div className="relative w-full h-[260px] md:h-[360px] rounded-3xl overflow-hidden shadow-lg">
               <img
                 src="/founder_speaking.jpg"
                 alt="גאולה אלון בהרצאה"
@@ -694,7 +754,7 @@ export default function Home() {
               />
             </div>
             <div
-              className="absolute -bottom-6 -left-4 w-44 h-28 rounded-2xl overflow-hidden shadow-xl border-2"
+              className="hidden md:block absolute -bottom-6 -left-4 w-44 h-28 rounded-2xl overflow-hidden shadow-xl border-2"
               style={{ borderColor: '#FFFFFF' }}
             >
               <img
@@ -714,12 +774,12 @@ export default function Home() {
           </div>
 
           {/* Text column */}
-          <div className="text-right order-1 md:order-2 sr sr-d2">
+          <div className="text-center md:text-right order-1 md:order-2 sr sr-d2">
             <SectionLabel text="אודות" />
-            <h2 className="font-display text-5xl font-light" style={{ color: C.textDark }}>
+            <h2 className="font-display text-4xl md:text-5xl font-light" style={{ color: C.textDark }}>
               גאולה אלון
             </h2>
-            <GoldRule />
+            <GoldRule className="mx-auto md:mx-0" />
             <div className="space-y-4 font-light leading-loose text-[1.05rem]" style={{ color: C.textMid }}>
               <p>
                 מעל עשרים שנה של ניסיון קליני ולימודי עם ילדים, נערות ונשים הם הבסיס שממנו
@@ -737,7 +797,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-7 grid grid-cols-3 gap-4 text-center">
+            <div className="mt-5 md:mt-7 grid grid-cols-3 gap-3 md:gap-4 text-center">
               {[
                 { num: '+20', label: 'שנות ניסיון' },
                 { num: 'CBT',  label: 'טיפול קוגניטיבי' },
@@ -762,20 +822,20 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section id="services" className="py-14" style={{ backgroundColor: C.creamAlt }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-9 sr">
+      <section id="services" className="py-7 md:py-14" style={{ backgroundColor: C.creamAlt }}>
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center md:text-right mb-5 md:mb-9 sr">
             <SectionLabel text="תחומי טיפול" />
-            <h2 className="font-display text-5xl font-light" style={{ color: C.textDark }}>
+            <h2 className="font-display text-4xl md:text-5xl font-light" style={{ color: C.textDark }}>
               במה אני יכולה לעזור
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-3xl p-7 text-right border overflow-hidden transition-all duration-300 hover:shadow-xl ${
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-3xl p-5 md:p-7 text-right border overflow-hidden transition-all duration-300 hover:shadow-xl ${
                   i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
                 style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
@@ -814,25 +874,25 @@ export default function Home() {
       </section>
 
       {/* Section divider */}
-      <div className="max-w-6xl mx-auto px-6 py-3">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
         <SectionDivider />
       </div>
 
       {/* ===== THERAPY CARDS ===== */}
-      <section id="cards" className="py-16" style={{ backgroundColor: C.cream }}>
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="cards" className="py-8 md:py-16" style={{ backgroundColor: C.cream }}>
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
 
-          <div className="text-right mb-11 sr">
+          <div className="text-center md:text-right mb-5 md:mb-11 sr">
             <SectionLabel text="קלפים טיפוליים" />
             <h2
-              className="font-display text-5xl md:text-6xl font-light leading-snug"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-snug"
               style={{ color: C.textDark }}
             >
               קלפים שמדליקים אור בכל ילד!
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-14 items-center">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-14 items-center">
 
             {/* Cards product image */}
             <div className="relative flex justify-center order-2 md:order-1 sr sr-d1">
@@ -875,8 +935,8 @@ export default function Home() {
             </div>
 
             {/* Cards text */}
-            <div className="text-right order-1 md:order-2 sr sr-d2">
-              <GoldRule />
+            <div className="text-center md:text-right order-1 md:order-2 sr sr-d2">
+              <GoldRule className="mx-auto md:mx-0" />
               <div className="space-y-5 font-light leading-loose text-[1.05rem]" style={{ color: C.textMid }}>
                 <p>
                   קלפי "ניצוץ" נוצרו כדי לתת לכל ילד מרחב בטוח לביטוי עצמי. כל קלף
@@ -895,7 +955,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="mt-8 grid grid-cols-2 gap-3">
+              <div className="mt-5 md:mt-8 grid grid-cols-2 gap-2 md:gap-3">
                 {[
                   { title: 'ביטוי עצמי',    subtitle: 'מרחב בטוח לעיבוד רגשות' },
                   { title: 'קשר הורי',       subtitle: 'גשר תקשורת ואמון' },
@@ -919,7 +979,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="mt-8">
+              <div className="mt-5 md:mt-8 flex justify-center md:justify-start">
                 <CtaButton href="#contact">לפרטים ורכישה</CtaButton>
               </div>
             </div>
@@ -929,21 +989,21 @@ export default function Home() {
       </section>
 
       {/* Section divider */}
-      <div className="max-w-6xl mx-auto px-6 py-3">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
         <SectionDivider />
       </div>
 
       {/* ===== APPROACH ===== */}
-      <section id="approach" className="py-14" style={{ backgroundColor: C.creamAlt }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-9 sr">
+      <section id="approach" className="py-7 md:py-14" style={{ backgroundColor: C.creamAlt }}>
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center md:text-right mb-5 md:mb-9 sr">
             <SectionLabel text="הגישה שלי" />
-            <h2 className="font-display text-5xl font-light" style={{ color: C.textDark }}>
+            <h2 className="font-display text-4xl md:text-5xl font-light" style={{ color: C.textDark }}>
               מה מייחד את המרכז
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-5">
             {features.map((feature, i) => (
               <Link
                 key={feature.title}
@@ -983,22 +1043,22 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-14" style={{ backgroundColor: C.cream }}>
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid md:grid-cols-5 gap-10 items-start">
+      <section id="contact" className="py-7 md:py-14" style={{ backgroundColor: C.cream }}>
+        <div className="max-w-5xl mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-5 gap-5 md:gap-10 items-start">
 
             {/* Contact info */}
-            <div className="md:col-span-2 text-right sr sr-d1">
+            <div className="md:col-span-2 text-center md:text-right sr sr-d1">
               <SectionLabel text="יצירת קשר" />
-              <h2 className="font-display text-4xl font-light mb-5 leading-snug" style={{ color: C.textDark }}>
+              <h2 className="font-display text-3xl md:text-4xl font-light mb-3 md:mb-5 leading-snug" style={{ color: C.textDark }}>
                 מוזמנים לפנות
               </h2>
-              <p className="font-light leading-loose mb-8 text-[1.05rem]" style={{ color: C.textMid }}>
+              <p className="font-light leading-loose mb-5 md:mb-8 text-[1.05rem]" style={{ color: C.textMid }}>
                 לשאלות, מידע נוסף או תיאום שיחת היכרות,
                 אני כאן. כל פניה מטופלת בדיסקרטיות ובמהירות.
               </p>
-              <div className="space-y-5 text-sm">
-                <div className="flex flex-col text-right gap-1.5">
+              <div className="space-y-4 md:space-y-5 text-sm">
+                <div className="flex flex-col text-center md:text-right gap-1.5">
                   <span
                     className="text-xs font-semibold tracking-[0.18em] uppercase"
                     style={{ color: C.gold }}
@@ -1008,7 +1068,7 @@ export default function Home() {
                   <a
                     href="tel:0502961213"
                     className="font-light transition-colors"
-                    style={{ color: C.textDark, direction: 'ltr', textAlign: 'right' }}
+                    style={{ color: C.textDark, direction: 'ltr' }}
                     onMouseEnter={e => (e.currentTarget.style.color = C.pink)}
                     onMouseLeave={e => (e.currentTarget.style.color = C.textDark)}
                   >
@@ -1016,7 +1076,7 @@ export default function Home() {
                   </a>
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
-                <div className="flex flex-col text-right gap-1.5">
+                <div className="flex flex-col text-center md:text-right gap-1.5">
                   <span
                     className="text-xs font-semibold tracking-[0.18em] uppercase"
                     style={{ color: C.gold }}
@@ -1032,7 +1092,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
-                <div className="flex flex-col text-right gap-1.5">
+                <div className="flex flex-col text-center md:text-right gap-1.5">
                   <span
                     className="text-xs font-semibold tracking-[0.18em] uppercase"
                     style={{ color: C.gold }}
@@ -1044,7 +1104,7 @@ export default function Home() {
                   </span>
                 </div>
               </div>
-              <div className="mt-12 flex justify-end" aria-hidden="true">
+              <div className="mt-6 md:mt-12 hidden md:flex justify-end" aria-hidden="true">
                 <svg viewBox="0 0 80 80" fill="none" style={{ width: 80, height: 80, opacity: 0.2 }}>
                   <circle cx="40" cy="40" r="8"  fill={C.gold} opacity="0.5" />
                   <circle cx="40" cy="40" r="20" stroke={C.gold} strokeWidth="0.8" opacity="0.35" fill="none" />
@@ -1057,7 +1117,7 @@ export default function Home() {
 
             {/* Form card */}
             <div
-              className="md:col-span-3 rounded-3xl p-7 border shadow-sm sr sr-d2"
+              className="md:col-span-3 rounded-3xl p-5 md:p-7 border shadow-sm sr sr-d2"
               style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
             >
               {submitted ? (
@@ -1168,8 +1228,8 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="py-10" style={{ backgroundColor: '#15101E', color: '#9A8EAA' }}>
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-right">
+      <footer className="py-6 md:py-10" style={{ backgroundColor: '#15101E', color: '#9A8EAA' }}>
+        <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 text-center md:text-right">
           <a href="#" className="flex items-center gap-4 flex-shrink-0">
             <img
               src="/logo.jpg"
