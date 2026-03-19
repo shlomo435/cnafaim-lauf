@@ -58,32 +58,192 @@ const features = [
 ];
 
 // ======================
-// SUB-COMPONENTS
+// BRAND TOKENS
+// ======================
+const C = {
+  pink:         '#C91F82',
+  pinkLight:    '#E535A0',
+  purple:       '#4B47BF',
+  gold:         '#B8956A',
+  goldLight:    '#D4A853',
+  textDark:     '#1C1826',
+  textMid:      '#574D6A',
+  textLight:    '#8A7A9A',
+  cream:        '#FAF8F5',
+  creamAlt:     '#F5EFE6',
+  creamDeep:    '#EDE3D6',
+  border:       '#E5D8C8',
+  borderLight:  '#EDE6DC',
+  ctaGrad:      'linear-gradient(135deg, #E84778 0%, #F0724A 100%)',
+  ctaGradHover: 'linear-gradient(135deg, #D03868 0%, #E0623A 100%)',
+};
+
+// ======================
+// BRAND SVG COMPONENTS
 // ======================
 
-function WingsLogo({ className = '', style }: { className?: string; style?: React.CSSProperties }) {
+/**
+ * Butterfly icon drawn in brand pink/purple with opacity layering.
+ * No SVG gradient IDs are used so multiple instances never conflict.
+ */
+function ButterflyIcon({
+  className = '',
+  style,
+  size = 32,
+}: {
+  className?: string;
+  style?: React.CSSProperties;
+  size?: number;
+}) {
+  const w = size;
+  const h = size * 0.71;
   return (
     <svg
       viewBox="0 0 48 34"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      style={style}
+      style={{ width: w, height: h, flexShrink: 0, ...style }}
       aria-hidden="true"
     >
-      <path d="M24 17 C19 7, 3 5, 3 15 C3 25, 17 27, 24 17Z" fill="currentColor" />
-      <path d="M24 17 C29 7, 45 5, 45 15 C45 25, 31 27, 24 17Z" fill="currentColor" opacity="0.65" />
-      <path d="M24 17 C22 24, 15 30, 17 33 C19 31, 22 27, 24 17Z" fill="currentColor" opacity="0.5" />
-      <path d="M24 17 C26 24, 33 30, 31 33 C29 31, 26 27, 24 17Z" fill="currentColor" opacity="0.35" />
+      {/* Left primary wing */}
+      <path
+        d="M24 17 C15 5, 1 4, 3 13 C5 22, 18 23, 24 17Z"
+        fill="#C91F82"
+        opacity="0.88"
+      />
+      {/* Right primary wing */}
+      <path
+        d="M24 17 C33 5, 47 4, 45 13 C43 22, 30 23, 24 17Z"
+        fill="#4B47BF"
+        opacity="0.65"
+      />
+      {/* Left secondary wing detail */}
+      <path
+        d="M24 17 C18 9, 7 7, 5 11 C3 15, 13 19, 24 17Z"
+        fill="#C91F82"
+        opacity="0.28"
+      />
+      {/* Right secondary wing detail */}
+      <path
+        d="M24 17 C30 9, 41 7, 43 11 C45 15, 35 19, 24 17Z"
+        fill="#4B47BF"
+        opacity="0.22"
+      />
+      {/* Lower tail left */}
+      <path
+        d="M24 17 C22 22, 19 29, 21 32 C22 29, 23 24, 24 17Z"
+        fill="#C91F82"
+        opacity="0.55"
+      />
+      {/* Lower tail right */}
+      <path
+        d="M24 17 C26 22, 29 29, 27 32 C26 29, 25 24, 24 17Z"
+        fill="#4B47BF"
+        opacity="0.42"
+      />
+      {/* Small sparkle circles on upper wings */}
+      <circle cx="9"  cy="9"  r="1.3" fill="#C91F82" opacity="0.45" />
+      <circle cx="39" cy="9"  r="1.3" fill="#4B47BF" opacity="0.45" />
+      {/* Tiny spiral dots */}
+      <circle cx="7"  cy="12" r="0.7" fill="#D4A853" opacity="0.6" />
+      <circle cx="41" cy="12" r="0.7" fill="#D4A853" opacity="0.6" />
     </svg>
   );
 }
 
+/** Four-pointed star sparkle (ניצוץ motif) */
+function SparkleIcon({
+  size = 12,
+  className = '',
+  style,
+}: {
+  size?: number;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      style={{ width: size, height: size, flexShrink: 0, ...style }}
+      aria-hidden="true"
+    >
+      <path
+        d="M10 1 L11.6 8.4 L19 10 L11.6 11.6 L10 19 L8.4 11.6 L1 10 L8.4 8.4 Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+/** Section label with a trailing sparkle */
 function SectionLabel({ text }: { text: string }) {
   return (
-    <p className="text-xs font-semibold tracking-[0.22em] uppercase mb-3" style={{ color: '#8FAE95' }}>
-      {text}
-    </p>
+    <div className="flex items-center gap-2 justify-end mb-4">
+      <p
+        className="text-xs font-semibold tracking-[0.22em] uppercase"
+        style={{ color: C.gold }}
+      >
+        {text}
+      </p>
+      <SparkleIcon size={9} style={{ color: C.goldLight }} />
+    </div>
+  );
+}
+
+/** Elegant butterfly ornament divider replacing generic line separators */
+function ButterflyDivider({ className = '' }: { className?: string }) {
+  return (
+    <div className={`flex items-center justify-center gap-3 py-1 ${className}`}>
+      <div
+        className="h-px flex-1 max-w-[110px]"
+        style={{ background: `linear-gradient(to left, ${C.border}, transparent)` }}
+      />
+      <ButterflyIcon size={20} />
+      <div
+        className="h-px flex-1 max-w-[110px]"
+        style={{ background: `linear-gradient(to right, ${C.border}, transparent)` }}
+      />
+    </div>
+  );
+}
+
+/** Gold accent rule used under headings */
+function GoldRule({ width = 'w-20' }: { width?: string }) {
+  return (
+    <div
+      className={`${width} h-0.5 mt-3 mb-6`}
+      style={{ background: `linear-gradient(to left, ${C.goldLight}, ${C.gold})` }}
+    />
+  );
+}
+
+/** Primary CTA button with pink-to-orange gradient */
+function CtaButton({
+  href,
+  children,
+  className = '',
+  block = false,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  block?: boolean;
+}) {
+  const [over, setOver] = React.useState(false);
+  return (
+    <a
+      href={href}
+      className={`text-sm font-medium text-center text-white rounded-full transition-all shadow-md hover:shadow-lg ${block ? 'block w-full py-3.5' : 'inline-block px-8 py-3.5'} ${className}`}
+      style={{ background: over ? C.ctaGradHover : C.ctaGrad }}
+      onMouseEnter={() => setOver(true)}
+      onMouseLeave={() => setOver(false)}
+    >
+      {children}
+    </a>
   );
 }
 
@@ -95,116 +255,178 @@ export default function Home() {
   const [form, setForm] = useState({ name: '', phone: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  function handleSubmit(e: React.SyntheticEvent) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
+  const focusStyle = {
+    onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      e.target.style.borderColor = C.pink;
+      e.target.style.boxShadow = `0 0 0 3px rgba(201,31,130,0.1)`;
+    },
+    onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      e.target.style.borderColor = C.border;
+      e.target.style.boxShadow = 'none';
+    },
+  };
+
+  const inputBase: React.CSSProperties = {
+    backgroundColor: C.creamAlt,
+    borderColor: C.border,
+    color: C.textDark,
+  };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F8F5F0', color: '#292E27' }}>
+    <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
 
       {/* ===== HEADER ===== */}
-      <header className="sticky top-0 z-50 backdrop-blur-sm border-b" style={{ backgroundColor: 'rgba(248,245,240,0.96)', borderColor: '#D5E0D0' }}>
-        <div className="max-w-6xl mx-auto px-6 h-18 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <WingsLogo className="w-9 h-7" style={{ color: '#4A6B50' } as React.CSSProperties} />
-            <span className="font-display text-xl font-medium" style={{ color: '#4A6B50' }}>
-              כנפיים לעוף
-            </span>
-          </div>
+      <header
+        className="sticky top-0 z-50 backdrop-blur-sm border-b"
+        style={{ backgroundColor: 'rgba(250,248,245,0.97)', borderColor: C.borderLight }}
+      >
+        <div className="max-w-6xl mx-auto px-6 h-[72px] flex items-center justify-between">
 
-          <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: '#56645A' }}>
-            <a href="#about"    className="transition-colors hover:text-[#4A6B50]">אודות</a>
-            <a href="#services" className="transition-colors hover:text-[#4A6B50]">תחומי טיפול</a>
-            <a href="#cards"    className="transition-colors hover:text-[#4A6B50]">קלפים טיפוליים</a>
-            <a href="#approach" className="transition-colors hover:text-[#4A6B50]">הגישה שלי</a>
-            <a href="#contact"  className="transition-colors hover:text-[#4A6B50]">יצירת קשר</a>
+          {/* Logo image with mix-blend-mode so white bg blends into header */}
+          <a href="#" className="flex items-center flex-shrink-0">
+            <img
+              src="/logo.jpg"
+              alt="כנפיים לעוף"
+              className="h-14 w-auto object-contain"
+              style={{ maxWidth: 168, mixBlendMode: 'multiply' }}
+            />
+          </a>
+
+          <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: C.textMid }}>
+            {(['אודות', 'תחומי טיפול', 'קלפים טיפוליים', 'הגישה שלי', 'יצירת קשר'] as const).map(
+              (label, i) => {
+                const hrefs = ['#about', '#services', '#cards', '#approach', '#contact'];
+                return (
+                  <a
+                    key={label}
+                    href={hrefs[i]}
+                    className="transition-colors duration-200"
+                    onMouseEnter={e => (e.currentTarget.style.color = C.pink)}
+                    onMouseLeave={e => (e.currentTarget.style.color = C.textMid)}
+                  >
+                    {label}
+                  </a>
+                );
+              }
+            )}
           </nav>
 
-          <a
-            href="#contact"
-            className="text-sm font-medium px-6 py-2.5 rounded-full text-white transition-all shadow-sm hover:shadow-md"
-            style={{ backgroundColor: '#4A6B50' }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3A5B40')}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4A6B50')}
-          >
+          <CtaButton href="#contact" className="px-5 py-2 text-xs">
             לתיאום פגישה
-          </a>
+          </CtaButton>
         </div>
       </header>
 
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden">
+        {/* Diagonal warm cream panel on the portrait side */}
         <div
-          className="absolute top-0 left-0 h-full -z-10 rounded-r-[100px]"
-          style={{ width: '38%', backgroundColor: '#EDF3EB', opacity: 0.6 }}
+          className="absolute top-0 right-0 h-full -z-10"
+          style={{
+            width: '50%',
+            background: `linear-gradient(160deg, ${C.creamAlt} 0%, ${C.creamDeep} 100%)`,
+            clipPath: 'polygon(14% 0%, 100% 0%, 100% 100%, 0% 100%)',
+          }}
         />
+        {/* Pink radial glow top-right */}
         <div
-          className="absolute top-20 left-20 w-96 h-96 rounded-full -z-10"
-          style={{ backgroundColor: '#C8DCC5', opacity: 0.15, filter: 'blur(64px)' }}
+          className="absolute -top-24 right-8 w-96 h-96 rounded-full -z-10"
+          style={{ background: 'radial-gradient(circle, rgba(201,31,130,0.09) 0%, transparent 68%)' }}
+        />
+        {/* Purple glow bottom-left */}
+        <div
+          className="absolute bottom-0 -left-16 w-72 h-72 rounded-full -z-10"
+          style={{ background: 'radial-gradient(circle, rgba(75,71,191,0.07) 0%, transparent 65%)' }}
         />
 
-        <div className="max-w-6xl mx-auto px-6 py-12 md:py-16 flex flex-col md:flex-row items-center gap-10">
+        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center gap-12">
+
+          {/* Text block */}
           <div className="flex-1 text-right">
             <SectionLabel text="מרכז טיפולי-לימודי" />
-            <h1 className="font-display text-6xl md:text-8xl font-light leading-[1.05] mb-5" style={{ color: '#292E27' }}>
-              כנפיים<br />לעוף
-            </h1>
-            <p className="text-xl md:text-2xl font-light leading-relaxed mb-7" style={{ color: '#56645A', maxWidth: '26rem', marginRight: 0, marginLeft: 'auto' }}>
-              ליווי לצמיחה, חיזוק וחיבור עצמי<br className="hidden md:block" />
+
+            <div className="relative inline-block mb-6">
+              <h1
+                className="font-display text-[5.5rem] md:text-[8rem] font-light leading-[1.0]"
+                style={{ color: C.textDark }}
+              >
+                כנפיים
+                <br />
+                לעוף
+              </h1>
+              {/* Ghost butterfly behind the headline */}
+              <div className="absolute -top-6 -left-10 pointer-events-none" aria-hidden="true">
+                <ButterflyIcon size={56} style={{ opacity: 0.18 }} />
+              </div>
+            </div>
+
+            <p
+              className="text-xl md:text-2xl font-light leading-relaxed mb-9"
+              style={{ color: C.textMid, maxWidth: '28rem', marginRight: 0, marginLeft: 'auto' }}
+            >
+              ליווי לצמיחה, חיזוק וחיבור עצמי
+              <br className="hidden md:block" />
               לילדים, נערות ונשים
             </p>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-end">
-              <a
-                href="#contact"
-                className="px-9 py-4 rounded-full text-white text-sm font-medium text-center transition-all shadow-md hover:shadow-lg"
-                style={{ backgroundColor: '#4A6B50' }}
-                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3A5B40')}
-                onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4A6B50')}
-              >
-                לתיאום שיחת היכרות
-              </a>
+              <CtaButton href="#contact">לתיאום שיחת היכרות</CtaButton>
               <a
                 href="#services"
-                className="px-9 py-4 rounded-full text-sm font-medium text-center transition-colors border"
-                style={{ borderColor: '#BFCFB8', color: '#4A6B50', backgroundColor: 'transparent' }}
-                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#EDF3EB')}
-                onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
+                className="px-9 py-3.5 rounded-full text-sm font-medium text-center transition-all border"
+                style={{ borderColor: C.border, color: C.textMid, backgroundColor: 'transparent' }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = C.creamAlt;
+                  e.currentTarget.style.borderColor = C.gold;
+                  e.currentTarget.style.color = C.textDark;
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.color = C.textMid;
+                }}
               >
                 תחומי הטיפול
               </a>
             </div>
           </div>
 
-          {/* Hero image: founder portrait */}
-          <div className="flex-shrink-0">
-            <div className="relative">
-              <div className="relative w-72 h-96 md:w-80 md:h-[430px] rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="/founder_portrait.jpg"
-                  alt="גאולה אלון"
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-              <div
-                className="absolute -bottom-4 -left-4 w-20 h-20 rounded-2xl -z-10 border"
-                style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
+          {/* Portrait */}
+          <div className="flex-shrink-0 relative">
+            {/* Pink glow halo behind portrait */}
+            <div
+              className="absolute inset-0 -z-10 rounded-3xl"
+              style={{
+                background: 'radial-gradient(ellipse at 60% 40%, rgba(201,31,130,0.14) 0%, transparent 68%)',
+                transform: 'scale(1.35)',
+              }}
+            />
+            <div className="relative w-72 h-96 md:w-80 md:h-[440px] rounded-3xl overflow-hidden shadow-2xl">
+              <img
+                src="/founder_portrait.jpg"
+                alt="גאולה אלון"
+                className="w-full h-full object-cover object-top"
               />
             </div>
+            {/* Gold accent corner block */}
+            <div
+              className="absolute -bottom-4 -right-4 w-20 h-20 rounded-2xl -z-10 border-2"
+              style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
+            />
           </div>
         </div>
       </section>
 
-      {/* Divider */}
+      {/* Butterfly ornament divider */}
       <div className="max-w-6xl mx-auto px-6">
-        <div className="h-px" style={{ background: 'linear-gradient(to left, transparent, #C0D4B8, transparent)' }} />
+        <ButterflyDivider />
       </div>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-6 py-10">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+      <section id="about" className="max-w-6xl mx-auto px-6 py-14">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
 
-          {/* About images */}
+          {/* Images column */}
           <div className="relative order-2 md:order-1">
             <div className="relative w-full h-[360px] rounded-3xl overflow-hidden shadow-lg">
               <img
@@ -213,7 +435,7 @@ export default function Home() {
                 className="w-full h-full object-cover object-top"
               />
             </div>
-            {/* Inset: audience / conference photo */}
+            {/* Inset audience thumbnail */}
             <div
               className="absolute -bottom-6 -left-4 w-44 h-28 rounded-2xl overflow-hidden shadow-xl border-2"
               style={{ borderColor: '#FFFFFF' }}
@@ -224,24 +446,25 @@ export default function Home() {
                 className="w-full h-full object-cover object-center"
               />
             </div>
+            {/* Accent blocks */}
             <div
               className="absolute -bottom-6 -right-6 w-28 h-28 rounded-2xl -z-10 border"
-              style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
+              style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
             />
             <div
-              className="absolute -top-4 -left-4 w-16 h-16 rounded-full -z-10"
-              style={{ backgroundColor: '#D5E8D5', opacity: 0.7 }}
+              className="absolute -top-5 -left-5 w-16 h-16 rounded-full -z-10 opacity-35"
+              style={{ backgroundColor: C.pinkLight, filter: 'blur(22px)' }}
             />
           </div>
 
-          {/* About text */}
+          {/* Text column */}
           <div className="text-right order-1 md:order-2">
             <SectionLabel text="אודות" />
-            <h2 className="font-display text-5xl font-light mb-2" style={{ color: '#292E27' }}>
+            <h2 className="font-display text-5xl font-light" style={{ color: C.textDark }}>
               גאולה אלון
             </h2>
-            <div className="w-16 h-0.5 mt-3 mb-5" style={{ backgroundColor: '#8FAE95' }} />
-            <div className="space-y-4 font-light leading-loose text-[1.05rem]" style={{ color: '#56645A' }}>
+            <GoldRule />
+            <div className="space-y-4 font-light leading-loose text-[1.05rem]" style={{ color: C.textMid }}>
               <p>
                 מעל עשרים שנה של ניסיון קליני ולימודי עם ילדים, נערות ונשים הם הבסיס שממנו
                 צמח המרכז. הדרך לשינוי אמיתי עוברת דרך הבנה עמוקה ומכילה של הצרכים
@@ -258,8 +481,8 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Stats */}
-            <div className="mt-5 grid grid-cols-3 gap-4 text-center">
+            {/* Stats tiles */}
+            <div className="mt-7 grid grid-cols-3 gap-4 text-center">
               {[
                 { num: '+20', label: 'שנות ניסיון' },
                 { num: 'CBT',  label: 'טיפול קוגניטיבי' },
@@ -268,12 +491,12 @@ export default function Home() {
                 <div
                   key={stat.label}
                   className="rounded-2xl py-4 px-2 border"
-                  style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
+                  style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
                 >
-                  <div className="font-display text-2xl font-semibold" style={{ color: '#4A6B50' }}>
+                  <div className="font-display text-2xl font-semibold" style={{ color: C.pink }}>
                     {stat.num}
                   </div>
-                  <div className="text-xs mt-1 font-light" style={{ color: '#8A9888' }}>
+                  <div className="text-xs mt-1 font-light" style={{ color: C.textLight }}>
                     {stat.label}
                   </div>
                 </div>
@@ -284,11 +507,11 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section id="services" className="py-10" style={{ backgroundColor: '#EDF3EB' }}>
+      <section id="services" className="py-14" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-6">
+          <div className="text-right mb-9">
             <SectionLabel text="תחומי טיפול" />
-            <h2 className="font-display text-5xl font-light" style={{ color: '#292E27' }}>
+            <h2 className="font-display text-5xl font-light" style={{ color: C.textDark }}>
               במה אני יכולה לעזור
             </h2>
           </div>
@@ -297,29 +520,37 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`group relative rounded-3xl p-6 text-right border overflow-hidden transition-all duration-300 hover:shadow-lg ${
+                className={`group relative rounded-3xl p-7 text-right border overflow-hidden transition-all duration-300 hover:shadow-xl ${
                   i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
-                style={{ backgroundColor: '#FFFFFF', borderColor: '#D5E0D0' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#8FAE95'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#D5E0D0'; }}
+                style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = C.pinkLight;
+                  e.currentTarget.style.boxShadow = `0 8px 36px rgba(201,31,130,0.09)`;
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
+                {/* Ghost number watermark in brand pink */}
                 <div
-                  className="font-display absolute top-3 left-4 text-8xl font-bold leading-none select-none pointer-events-none"
-                  style={{ color: '#EBF3E8' }}
+                  className="font-display absolute top-2 left-4 text-[5.5rem] font-bold leading-none select-none pointer-events-none"
+                  style={{ color: 'rgba(201,31,130,0.045)' }}
                   aria-hidden="true"
                 >
                   {String(i + 1).padStart(2, '0')}
                 </div>
                 <div className="relative">
+                  {/* Gold accent rule */}
                   <div
                     className="w-10 h-0.5 mb-5 transition-all duration-300 group-hover:w-16"
-                    style={{ backgroundColor: '#8FAE95' }}
+                    style={{ background: `linear-gradient(to left, ${C.goldLight}, ${C.gold})` }}
                   />
-                  <h3 className="font-display text-xl font-medium mb-2.5" style={{ color: '#292E27' }}>
+                  <h3 className="font-display text-xl font-medium mb-2.5" style={{ color: C.textDark }}>
                     {service.title}
                   </h3>
-                  <p className="text-sm leading-relaxed font-light" style={{ color: '#6A7870' }}>
+                  <p className="text-sm leading-relaxed font-light" style={{ color: C.textMid }}>
                     {service.description}
                   </p>
                 </div>
@@ -329,60 +560,76 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Butterfly ornament divider */}
+      <div className="max-w-6xl mx-auto px-6 py-3">
+        <ButterflyDivider />
+      </div>
+
       {/* ===== THERAPY CARDS ===== */}
-      <section id="cards" className="py-12" style={{ backgroundColor: '#FDFAF6' }}>
+      <section id="cards" className="py-16" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-6">
+
           {/* Section heading */}
-          <div className="text-right mb-8">
+          <div className="text-right mb-11">
             <SectionLabel text="קלפים טיפוליים" />
-            <h2 className="font-display text-5xl md:text-6xl font-light leading-snug" style={{ color: '#292E27' }}>
+            <h2
+              className="font-display text-5xl md:text-6xl font-light leading-snug"
+              style={{ color: C.textDark }}
+            >
               קלפים שמדליקים אור בכל ילד!
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-14 items-center">
 
-            {/* Cards image */}
+            {/* Cards product image */}
             <div className="relative flex justify-center order-2 md:order-1">
               <div className="relative">
-                {/* Warm glow behind the box */}
+                {/* Warm gold + pink glow behind the box */}
                 <div
                   className="absolute inset-0 rounded-3xl -z-10"
                   style={{
-                    background: 'radial-gradient(ellipse at center, rgba(255,220,100,0.3) 0%, transparent 68%)',
-                    transform: 'scale(1.2)',
+                    background:
+                      'radial-gradient(ellipse at 40% 45%, rgba(212,168,83,0.28) 0%, rgba(201,31,130,0.09) 55%, transparent 72%)',
+                    transform: 'scale(1.28)',
                   }}
                 />
-                <div className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl">
+                <div className="relative w-full max-w-[340px] rounded-3xl overflow-hidden shadow-2xl">
                   <img
                     src="/therapy_cards_box.jpg"
                     alt="קלפי ניצוץ – קלפים שמדליקים אור בכל ילד"
                     className="w-full h-auto object-cover"
                   />
                 </div>
-                {/* Decorative accents */}
+                {/* Gold accent corner */}
                 <div
                   className="absolute -bottom-5 -right-5 w-24 h-24 rounded-2xl -z-10 border"
-                  style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
+                  style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
                 />
+                {/* Pink sparkle accent top-left */}
                 <div
-                  className="absolute -top-4 -left-4 w-16 h-16 rounded-full -z-10"
-                  style={{ backgroundColor: '#F5E9A0', opacity: 0.75 }}
+                  className="absolute -top-5 -left-5 w-16 h-16 rounded-full -z-10 opacity-45"
+                  style={{ backgroundColor: C.pinkLight, filter: 'blur(22px)' }}
                 />
-                {/* Floating label */}
+                {/* Floating brand pill */}
                 <div
-                  className="absolute top-4 right-4 px-4 py-2 rounded-full text-xs font-semibold shadow-md"
-                  style={{ backgroundColor: '#FFFFFF', color: '#4A6B50', border: '1px solid #D5E0D0' }}
+                  className="absolute top-4 right-4 flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold shadow-md"
+                  style={{
+                    background: 'rgba(255,255,255,0.93)',
+                    color: C.pink,
+                    border: `1px solid ${C.border}`,
+                  }}
                 >
-                  ניצוץ – קלפים שמדליקים אור בכל ילד!
+                  <SparkleIcon size={9} style={{ color: C.goldLight }} />
+                  ניצוץ
                 </div>
               </div>
             </div>
 
             {/* Cards text */}
             <div className="text-right order-1 md:order-2">
-              <div className="w-16 h-0.5 mb-6" style={{ backgroundColor: '#8FAE95' }} />
-              <div className="space-y-5 font-light leading-loose text-[1.05rem]" style={{ color: '#56645A' }}>
+              <GoldRule />
+              <div className="space-y-5 font-light leading-loose text-[1.05rem]" style={{ color: C.textMid }}>
                 <p>
                   קלפי "ניצוץ" נוצרו כדי לתת לכל ילד מרחב בטוח לביטוי עצמי. כל קלף
                   מזמין שיחה שמאפשרת לילד לבטא את עולמו הרגשי, להתחבר לכוחות הפנימיים
@@ -401,38 +648,36 @@ export default function Home() {
               </div>
 
               {/* Highlights grid */}
-              <div className="mt-7 grid grid-cols-2 gap-3">
+              <div className="mt-8 grid grid-cols-2 gap-3">
                 {[
-                  { title: 'ביטוי עצמי', subtitle: 'מרחב בטוח לעיבוד רגשות' },
-                  { title: 'קשר הורי', subtitle: 'גשר תקשורת ואמון' },
-                  { title: 'דיאלוג פתוח', subtitle: 'שיחות משמעותיות בבית' },
-                  { title: 'עמידות רגשית', subtitle: 'ביטחון עצמי וחוסן' },
+                  { title: 'ביטוי עצמי',    subtitle: 'מרחב בטוח לעיבוד רגשות' },
+                  { title: 'קשר הורי',       subtitle: 'גשר תקשורת ואמון' },
+                  { title: 'דיאלוג פתוח',   subtitle: 'שיחות משמעותיות בבית' },
+                  { title: 'עמידות רגשית',  subtitle: 'ביטחון עצמי וחוסן' },
                 ].map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-2xl p-4 text-right border"
-                    style={{ backgroundColor: '#FFFFFF', borderColor: '#D5E0D0' }}
+                    className="rounded-2xl p-4 text-right border transition-all hover:shadow-md"
+                    style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = C.pinkLight;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = C.border;
+                    }}
                   >
-                    <div className="font-display text-lg font-semibold mb-0.5" style={{ color: '#4A6B50' }}>
+                    <div className="font-display text-lg font-semibold mb-0.5" style={{ color: C.pink }}>
                       {item.title}
                     </div>
-                    <div className="text-xs font-light" style={{ color: '#8A9888' }}>
+                    <div className="text-xs font-light" style={{ color: C.textLight }}>
                       {item.subtitle}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-7">
-                <a
-                  href="#contact"
-                  className="inline-block px-8 py-3.5 rounded-full text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
-                  style={{ backgroundColor: '#4A6B50' }}
-                  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3A5B40')}
-                  onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4A6B50')}
-                >
-                  לפרטים ורכישה
-                </a>
+              <div className="mt-8">
+                <CtaButton href="#contact">לפרטים ורכישה</CtaButton>
               </div>
             </div>
 
@@ -440,46 +685,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="h-px" style={{ background: 'linear-gradient(to left, transparent, #C0D4B8, transparent)' }} />
+      {/* Butterfly ornament divider */}
+      <div className="max-w-6xl mx-auto px-6 py-3">
+        <ButterflyDivider />
       </div>
 
       {/* ===== APPROACH ===== */}
-      <section id="approach" className="py-10" style={{ backgroundColor: '#EDF3EB' }}>
+      <section id="approach" className="py-14" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-6">
+          <div className="text-right mb-9">
             <SectionLabel text="הגישה שלי" />
-            <h2 className="font-display text-5xl font-light" style={{ color: '#292E27' }}>
+            <h2 className="font-display text-5xl font-light" style={{ color: C.textDark }}>
               מה מייחד את המרכז
             </h2>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
-            {features.map((feature) => (
+            {features.map((feature, i) => (
               <div
                 key={feature.title}
-                className="group rounded-2xl p-5 text-right border transition-all duration-300 hover:shadow-md"
-                style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0' }}
+                className="group rounded-2xl p-5 text-right border transition-all duration-300"
+                style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.backgroundColor = '#EDF3EB';
-                  e.currentTarget.style.borderColor = '#8FAE95';
+                  e.currentTarget.style.backgroundColor = C.cream;
+                  e.currentTarget.style.borderColor = C.gold;
+                  e.currentTarget.style.boxShadow = `0 4px 20px rgba(184,149,106,0.15)`;
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.backgroundColor = '#F8F5F0';
-                  e.currentTarget.style.borderColor = '#D5E0D0';
+                  e.currentTarget.style.backgroundColor = '#FFFFFF';
+                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.boxShadow = 'none';
                 }}
               >
+                {/* Sparkle icon badge */}
                 <div
-                  className="w-9 h-9 rounded-full mb-4 flex items-center justify-center border transition-colors"
-                  style={{ backgroundColor: '#EDF3EB', borderColor: '#C8D8C0' }}
+                  className="w-9 h-9 rounded-full mb-4 flex items-center justify-center border"
+                  style={{ backgroundColor: C.creamAlt, borderColor: C.borderLight }}
                 >
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#8FAE95' }} />
+                  <SparkleIcon size={12} style={{ color: i % 2 === 0 ? C.pink : C.gold }} />
                 </div>
-                <h3 className="font-display text-base font-semibold mb-2" style={{ color: '#292E27' }}>
+                <h3 className="font-display text-base font-semibold mb-2" style={{ color: C.textDark }}>
                   {feature.title}
                 </h3>
-                <p className="text-xs leading-relaxed font-light" style={{ color: '#6A7870' }}>
+                <p className="text-xs leading-relaxed font-light" style={{ color: C.textMid }}>
                   {feature.description}
                 </p>
               </div>
@@ -489,91 +737,101 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-10" style={{ backgroundColor: '#F8F5F0' }}>
+      <section id="contact" className="py-14" style={{ backgroundColor: C.cream }}>
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid md:grid-cols-5 gap-10 items-start">
 
             {/* Contact info */}
             <div className="md:col-span-2 text-right">
               <SectionLabel text="יצירת קשר" />
-              <h2 className="font-display text-4xl font-light mb-5 leading-snug" style={{ color: '#292E27' }}>
+              <h2 className="font-display text-4xl font-light mb-5 leading-snug" style={{ color: C.textDark }}>
                 מוזמנים לפנות
               </h2>
-              <p className="font-light leading-loose mb-8 text-[1.05rem]" style={{ color: '#56645A' }}>
+              <p className="font-light leading-loose mb-8 text-[1.05rem]" style={{ color: C.textMid }}>
                 לשאלות, מידע נוסף או תיאום שיחת היכרות,
                 אני כאן. כל פניה מטופלת בדיסקרטיות ובמהירות.
               </p>
               <div className="space-y-5 text-sm">
                 <div className="flex flex-col text-right gap-1.5">
-                  <span className="text-xs font-semibold tracking-[0.18em] uppercase" style={{ color: '#8A9888' }}>
+                  <span
+                    className="text-xs font-semibold tracking-[0.18em] uppercase"
+                    style={{ color: C.gold }}
+                  >
                     מיקום
                   </span>
-                  <span className="font-light" style={{ color: '#3A4438' }}>ישראל</span>
+                  <span className="font-light" style={{ color: C.textDark }}>ישראל</span>
                 </div>
-                <div className="h-px" style={{ backgroundColor: '#C8D8C0' }} />
+                <div className="h-px" style={{ backgroundColor: C.border }} />
                 <div className="flex flex-col text-right gap-1.5">
-                  <span className="text-xs font-semibold tracking-[0.18em] uppercase" style={{ color: '#8A9888' }}>
+                  <span
+                    className="text-xs font-semibold tracking-[0.18em] uppercase"
+                    style={{ color: C.gold }}
+                  >
                     שעות פעילות
                   </span>
-                  <span className="font-light" style={{ color: '#3A4438' }}>ראשון עד חמישי, 09:00 עד 18:00</span>
+                  <span className="font-light" style={{ color: C.textDark }}>
+                    ראשון עד חמישי, 09:00 עד 18:00
+                  </span>
                 </div>
+              </div>
+              {/* Decorative butterfly */}
+              <div className="mt-12 flex justify-end">
+                <ButterflyIcon size={64} style={{ opacity: 0.15 }} />
               </div>
             </div>
 
-            {/* Form */}
+            {/* Form card */}
             <div
               className="md:col-span-3 rounded-3xl p-7 border shadow-sm"
-              style={{ backgroundColor: '#FFFFFF', borderColor: '#D5E0D0' }}
+              style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
             >
               {submitted ? (
                 <div className="py-14 text-center">
                   <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 border"
-                    style={{ backgroundColor: '#EDF3EB', borderColor: '#C8D8C0' }}
+                    className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
+                    style={{ background: C.ctaGrad }}
                   >
-                    <svg className="w-6 h-6" style={{ color: '#4A6B50' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="font-display text-2xl font-light mb-2" style={{ color: '#292E27' }}>
+                  <h3 className="font-display text-2xl font-light mb-2" style={{ color: C.textDark }}>
                     ההודעה נשלחה
                   </h3>
-                  <p className="text-sm font-light" style={{ color: '#6A7870' }}>
+                  <p className="text-sm font-light" style={{ color: C.textMid }}>
                     אחזור אליך בהקדם. תודה על הפנייה.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5 text-right">
-                      <label className="text-xs font-semibold tracking-wide" style={{ color: '#56645A' }}>
+                      <label className="text-xs font-semibold tracking-wide" style={{ color: C.textMid }}>
                         שם מלא
                       </label>
                       <input
                         type="text"
                         required
                         value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        onChange={e => setForm({ ...form, name: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl text-sm text-right focus:outline-none transition-all border"
-                        style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0', color: '#292E27' }}
-                        onFocus={e => { e.target.style.borderColor = '#8FAE95'; e.target.style.boxShadow = '0 0 0 3px rgba(143,174,149,0.15)'; }}
-                        onBlur={e =>  { e.target.style.borderColor = '#D5E0D0'; e.target.style.boxShadow = 'none'; }}
+                        style={inputBase}
+                        {...focusStyle}
                         placeholder="שם מלא"
                       />
                     </div>
                     <div className="flex flex-col gap-1.5 text-right">
-                      <label className="text-xs font-semibold tracking-wide" style={{ color: '#56645A' }}>
+                      <label className="text-xs font-semibold tracking-wide" style={{ color: C.textMid }}>
                         טלפון
                       </label>
                       <input
                         type="tel"
                         required
                         value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        onChange={e => setForm({ ...form, phone: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all border"
-                        style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0', color: '#292E27' }}
-                        onFocus={e => { e.target.style.borderColor = '#8FAE95'; e.target.style.boxShadow = '0 0 0 3px rgba(143,174,149,0.15)'; }}
-                        onBlur={e =>  { e.target.style.borderColor = '#D5E0D0'; e.target.style.boxShadow = 'none'; }}
+                        style={inputBase}
+                        {...focusStyle}
                         placeholder="05X-XXXXXXX"
                         dir="ltr"
                       />
@@ -581,17 +839,16 @@ export default function Home() {
                   </div>
 
                   <div className="flex flex-col gap-1.5 text-right">
-                    <label className="text-xs font-semibold tracking-wide" style={{ color: '#56645A' }}>
+                    <label className="text-xs font-semibold tracking-wide" style={{ color: C.textMid }}>
                       נושא הפנייה
                     </label>
                     <select
                       required
                       value={form.subject}
-                      onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                      onChange={e => setForm({ ...form, subject: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl text-sm text-right appearance-none focus:outline-none transition-all border"
-                      style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0', color: '#292E27' }}
-                      onFocus={e => { e.target.style.borderColor = '#8FAE95'; e.target.style.boxShadow = '0 0 0 3px rgba(143,174,149,0.15)'; }}
-                      onBlur={e =>  { e.target.style.borderColor = '#D5E0D0'; e.target.style.boxShadow = 'none'; }}
+                      style={inputBase}
+                      {...focusStyle}
                     >
                       <option value="" disabled>בחרו נושא</option>
                       <option value="child">טיפול בילד / נערה</option>
@@ -604,18 +861,17 @@ export default function Home() {
                   </div>
 
                   <div className="flex flex-col gap-1.5 text-right">
-                    <label className="text-xs font-semibold tracking-wide" style={{ color: '#56645A' }}>
+                    <label className="text-xs font-semibold tracking-wide" style={{ color: C.textMid }}>
                       הודעה
                     </label>
                     <textarea
                       required
                       rows={4}
                       value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      onChange={e => setForm({ ...form, message: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl text-sm text-right resize-none focus:outline-none transition-all border"
-                      style={{ backgroundColor: '#F8F5F0', borderColor: '#D5E0D0', color: '#292E27' }}
-                      onFocus={e => { e.target.style.borderColor = '#8FAE95'; e.target.style.boxShadow = '0 0 0 3px rgba(143,174,149,0.15)'; }}
-                      onBlur={e =>  { e.target.style.borderColor = '#D5E0D0'; e.target.style.boxShadow = 'none'; }}
+                      style={inputBase}
+                      {...focusStyle}
                       placeholder="ספרו לי במה אוכל לעזור..."
                     />
                   </div>
@@ -623,9 +879,9 @@ export default function Home() {
                   <button
                     type="submit"
                     className="w-full py-3.5 rounded-xl text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
-                    style={{ backgroundColor: '#4A6B50' }}
-                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3A5B40')}
-                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4A6B50')}
+                    style={{ background: C.ctaGrad }}
+                    onMouseEnter={e => (e.currentTarget.style.background = C.ctaGradHover)}
+                    onMouseLeave={e => (e.currentTarget.style.background = C.ctaGrad)}
                   >
                     שלחו הודעה
                   </button>
@@ -637,20 +893,20 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="py-10" style={{ backgroundColor: '#1A2419', color: '#A8BCA0' }}>
+      <footer className="py-10" style={{ backgroundColor: '#15101E', color: '#9A8EAA' }}>
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
           <div className="flex items-center gap-3">
-            <WingsLogo className="w-8 h-6" style={{ color: '#6B8F71' } as React.CSSProperties} />
+            <ButterflyIcon size={30} style={{ opacity: 0.65 }} />
             <div>
               <div className="font-display text-base font-medium" style={{ color: '#FFFFFF' }}>
                 כנפיים לעוף
               </div>
-              <div className="text-xs mt-0.5 font-light" style={{ color: '#6B8F71' }}>
+              <div className="text-xs mt-0.5 font-light" style={{ color: '#6B5E7A' }}>
                 מרכז טיפולי-לימודי | גאולה אלון
               </div>
             </div>
           </div>
-          <div className="text-xs font-light" style={{ color: '#4E6450' }}>
+          <div className="text-xs font-light" style={{ color: '#4A3E5A' }}>
             כל הזכויות שמורות &copy; {new Date().getFullYear()}
           </div>
         </div>
