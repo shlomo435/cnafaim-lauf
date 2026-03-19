@@ -144,7 +144,7 @@ export default function Home() {
           style={{ backgroundColor: '#C8DCC5', opacity: 0.15, filter: 'blur(64px)' }}
         />
 
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-22 flex flex-col md:flex-row items-center gap-10">
+        <div className="max-w-6xl mx-auto px-6 py-12 md:py-16 flex flex-col md:flex-row items-center gap-10">
           <div className="flex-1 text-right">
             <SectionLabel text="מרכז טיפולי-לימודי" />
             <h1 className="font-display text-6xl md:text-8xl font-light leading-[1.05] mb-5" style={{ color: '#292E27' }}>
@@ -190,10 +190,6 @@ export default function Home() {
                 className="absolute -bottom-4 -left-4 w-20 h-20 rounded-2xl -z-10 border"
                 style={{ backgroundColor: '#EDF3EB', borderColor: '#D5E0D0' }}
               />
-              <div
-                className="absolute -top-3 -right-3 w-11 h-11 rounded-full"
-                style={{ backgroundColor: '#C8DCC5', opacity: 0.65 }}
-              />
             </div>
           </div>
         </div>
@@ -205,7 +201,7 @@ export default function Home() {
       </div>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-6 py-12">
+      <section id="about" className="max-w-6xl mx-auto px-6 py-10">
         <div className="grid md:grid-cols-2 gap-10 items-center">
 
           {/* About images */}
@@ -288,9 +284,9 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section id="services" className="py-12" style={{ backgroundColor: '#EDF3EB' }}>
+      <section id="services" className="py-10" style={{ backgroundColor: '#EDF3EB' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-8">
+          <div className="text-right mb-6">
             <SectionLabel text="תחומי טיפול" />
             <h2 className="font-display text-5xl font-light" style={{ color: '#292E27' }}>
               במה אני יכולה לעזור
@@ -334,14 +330,13 @@ export default function Home() {
       </section>
 
       {/* ===== THERAPY CARDS ===== */}
-      <section id="cards" className="py-16" style={{ backgroundColor: '#FDFAF6' }}>
+      <section id="cards" className="py-12" style={{ backgroundColor: '#FDFAF6' }}>
         <div className="max-w-6xl mx-auto px-6">
           {/* Section heading */}
-          <div className="text-right mb-12">
+          <div className="text-right mb-8">
             <SectionLabel text="קלפים טיפוליים" />
             <h2 className="font-display text-5xl md:text-6xl font-light leading-snug" style={{ color: '#292E27' }}>
-              "ניצוץ" – קלפים<br />
-              להדלקת האור הפנימי
+              קלפים שמדליקים אור בכל ילד!
             </h2>
           </div>
 
@@ -451,9 +446,9 @@ export default function Home() {
       </div>
 
       {/* ===== APPROACH ===== */}
-      <section id="approach" className="py-12" style={{ backgroundColor: '#EDF3EB' }}>
+      <section id="approach" className="py-10" style={{ backgroundColor: '#EDF3EB' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-8">
+          <div className="text-right mb-6">
             <SectionLabel text="הגישה שלי" />
             <h2 className="font-display text-5xl font-light" style={{ color: '#292E27' }}>
               מה מייחד את המרכז
@@ -494,7 +489,7 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-12" style={{ backgroundColor: '#F8F5F0' }}>
+      <section id="contact" className="py-10" style={{ backgroundColor: '#F8F5F0' }}>
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid md:grid-cols-5 gap-10 items-start">
 
