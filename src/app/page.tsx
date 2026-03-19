@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 // ======================
 // DATA
@@ -38,22 +39,27 @@ const features = [
   {
     title: 'התאמה אישית',
     description: 'כל תהליך נבנה בהתאם לאישיות, לצרכים ולקצב הייחודי של כל מטופל.',
+    slug: 'personalization',
   },
   {
     title: 'מרחב בטוח',
     description: 'סביבה חמה, קבלה ולא שיפוטית המאפשרת פתיחות ועיבוד אמיתי.',
+    slug: 'safe-space',
   },
   {
     title: 'שילוב הורים',
     description: 'הורים הם שותפים מלאים בתהליך. מעורבותם מחזקת את השפעת הטיפול.',
+    slug: 'parent-involvement',
   },
   {
     title: 'תהליכים ממוקדים',
     description: 'עבודה שיטתית עם יעדים ברורים, מדידים וניתנים להשגה בזמן.',
+    slug: 'focused-processes',
   },
   {
     title: 'דיסקרטיות',
     description: 'שמירה מלאה על פרטיות המטופל ומשפחתו בכל שלב של הטיפול.',
+    slug: 'discretion',
   },
 ];
 
@@ -405,7 +411,7 @@ export default function Home() {
               <img
                 src="/founder_portrait.jpg"
                 alt="גאולה אלון"
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-cover object-center"
               />
             </div>
             {/* Gold accent corner block */}
@@ -432,7 +438,7 @@ export default function Home() {
               <img
                 src="/founder_speaking.jpg"
                 alt="גאולה אלון בהרצאה"
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-cover object-center"
               />
             </div>
             {/* Inset audience thumbnail */}
@@ -598,7 +604,7 @@ export default function Home() {
                   <img
                     src="/therapy_cards_box.jpg"
                     alt="קלפי ניצוץ – קלפים שמדליקים אור בכל ילד"
-                    className="w-full h-auto object-cover"
+                    className="w-full h-auto object-contain object-center"
                   />
                 </div>
                 {/* Gold accent corner */}
@@ -702,10 +708,11 @@ export default function Home() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {features.map((feature, i) => (
-              <div
+              <Link
                 key={feature.title}
-                className="group rounded-2xl p-5 text-right border transition-all duration-300"
-                style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
+                href={`/features/${feature.slug}`}
+                className="group rounded-2xl p-5 text-right border transition-all duration-300 block"
+                style={{ backgroundColor: '#FFFFFF', borderColor: C.border, textDecoration: 'none' }}
                 onMouseEnter={e => {
                   e.currentTarget.style.backgroundColor = C.cream;
                   e.currentTarget.style.borderColor = C.gold;
@@ -730,7 +737,10 @@ export default function Home() {
                 <p className="text-xs leading-relaxed font-light" style={{ color: C.textMid }}>
                   {feature.description}
                 </p>
-              </div>
+                <p className="text-xs mt-3 font-medium" style={{ color: C.pink }}>
+                  קראו עוד &larr;
+                </p>
+              </Link>
             ))}
           </div>
         </div>
@@ -752,6 +762,24 @@ export default function Home() {
                 אני כאן. כל פניה מטופלת בדיסקרטיות ובמהירות.
               </p>
               <div className="space-y-5 text-sm">
+                <div className="flex flex-col text-right gap-1.5">
+                  <span
+                    className="text-xs font-semibold tracking-[0.18em] uppercase"
+                    style={{ color: C.gold }}
+                  >
+                    טלפון
+                  </span>
+                  <a
+                    href="tel:0502961213"
+                    className="font-light transition-colors"
+                    style={{ color: C.textDark, direction: 'ltr', textAlign: 'right' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = C.pink)}
+                    onMouseLeave={e => (e.currentTarget.style.color = C.textDark)}
+                  >
+                    050-296-1213
+                  </a>
+                </div>
+                <div className="h-px" style={{ backgroundColor: C.border }} />
                 <div className="flex flex-col text-right gap-1.5">
                   <span
                     className="text-xs font-semibold tracking-[0.18em] uppercase"
@@ -894,20 +922,22 @@ export default function Home() {
 
       {/* ===== FOOTER ===== */}
       <footer className="py-10" style={{ backgroundColor: '#15101E', color: '#9A8EAA' }}>
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
-          <div className="flex items-center gap-3">
-            <ButterflyIcon size={30} style={{ opacity: 0.65 }} />
-            <div>
-              <div className="font-display text-base font-medium" style={{ color: '#FFFFFF' }}>
-                כנפיים לעוף
-              </div>
-              <div className="text-xs mt-0.5 font-light" style={{ color: '#6B5E7A' }}>
-                מרכז טיפולי-לימודי | גאולה אלון
-              </div>
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-right">
+          <a href="#" className="flex items-center gap-4 flex-shrink-0">
+            <img
+              src="/logo.jpg"
+              alt="כנפיים לעוף"
+              className="h-14 w-auto object-contain"
+              style={{ maxWidth: 160, mixBlendMode: 'screen', opacity: 0.88 }}
+            />
+          </a>
+          <div className="flex flex-col items-center md:items-end gap-1">
+            <div className="text-xs font-light" style={{ color: '#6B5E7A' }}>
+              מרכז טיפולי-לימודי | גאולה אלון
             </div>
-          </div>
-          <div className="text-xs font-light" style={{ color: '#4A3E5A' }}>
-            כל הזכויות שמורות &copy; {new Date().getFullYear()}
+            <div className="text-xs font-light" style={{ color: '#4A3E5A' }}>
+              כל הזכויות שמורות &copy; {new Date().getFullYear()}
+            </div>
           </div>
         </div>
       </footer>
