@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 // ======================
@@ -88,8 +88,6 @@ const C = {
 // BRAND SVG COMPONENTS
 // ======================
 
-
-/** Four-pointed star sparkle (ניצוץ motif) */
 function SparkleIcon({
   size = 12,
   className = '',
@@ -116,7 +114,6 @@ function SparkleIcon({
   );
 }
 
-/** Section label with a trailing sparkle */
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-2 justify-end mb-4">
@@ -131,7 +128,6 @@ function SectionLabel({ text }: { text: string }) {
   );
 }
 
-/** Organic concentric-circle section divider */
 function SectionDivider({ className = '' }: { className?: string }) {
   return (
     <div className={`flex items-center justify-center gap-3 py-1 ${className}`}>
@@ -152,7 +148,6 @@ function SectionDivider({ className = '' }: { className?: string }) {
   );
 }
 
-/** Gold accent rule used under headings */
 function GoldRule({ width = 'w-20' }: { width?: string }) {
   return (
     <div
@@ -162,7 +157,6 @@ function GoldRule({ width = 'w-20' }: { width?: string }) {
   );
 }
 
-/** Primary CTA button with pink-to-orange gradient */
 function CtaButton({
   href,
   children,
@@ -189,12 +183,243 @@ function CtaButton({
 }
 
 // ======================
+// SCROLL REVEAL HOOK
+// ======================
+
+function useScrollReveal() {
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add('sr-visible');
+        }),
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+    document.querySelectorAll('.sr').forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+}
+
+// ======================
+// FLOATING CONTACT BUTTON
+// ======================
+
+function FloatingContactButton({ onClick }: { onClick: () => void }) {
+  const [hovered, setHovered] = React.useState(false);
+  return (
+    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
+      {hovered && (
+        <div
+          className="px-3.5 py-1.5 rounded-full text-xs font-medium text-white shadow-lg"
+          style={{ background: C.ctaGrad, whiteSpace: 'nowrap' }}
+        >
+          יצירת קשר מהירה
+        </div>
+      )}
+      <button
+        onClick={onClick}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="contact-pulse relative w-14 h-14 rounded-full text-white shadow-xl flex items-center justify-center transition-transform duration-200 hover:scale-110 focus:outline-none"
+        style={{ background: C.ctaGrad }}
+        aria-label="פתח טופס יצירת קשר"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          className="w-6 h-6"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 6z"
+          />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+// ======================
+// SIDE DRAWER
+// ======================
+
+function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [form, setForm] = useState({ name: '', phone: '', message: '' });
+  const [sent, setSent] = useState(false);
+
+  if (!isOpen) return null;
+
+  const inputStyle: React.CSSProperties = {
+    backgroundColor: C.creamAlt,
+    borderColor: C.border,
+    color: C.textDark,
+  };
+  const focusIn = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.target.style.borderColor = C.pink;
+    e.target.style.boxShadow = `0 0 0 3px rgba(201,31,130,0.1)`;
+  };
+  const focusOut = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.target.style.borderColor = C.border;
+    e.target.style.boxShadow = 'none';
+  };
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+        style={{ animation: 'fadeInOverlay 0.2s ease forwards' }}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Panel */}
+      <aside
+        className="fixed top-0 right-0 h-full w-80 z-50 flex flex-col text-right"
+        dir="rtl"
+        style={{
+          backgroundColor: C.cream,
+          borderLeft: `1px solid ${C.border}`,
+          boxShadow: '-14px 0 56px rgba(0,0,0,0.13)',
+          animation: 'slideInFromRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        }}
+      >
+        {/* Drawer header */}
+        <div
+          className="flex items-center justify-between px-5 py-4 border-b"
+          style={{ borderColor: C.border }}
+        >
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+            style={{ color: C.textMid }}
+            aria-label="סגור"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <div>
+            <h3 className="font-display text-lg font-medium" style={{ color: C.textDark }}>
+              צרו קשר מהיר
+            </h3>
+            <p className="text-xs font-light" style={{ color: C.textLight }}>
+              אשוב אליכם בהקדם האפשרי
+            </p>
+          </div>
+        </div>
+
+        {/* Drawer body */}
+        <div className="flex-1 overflow-y-auto px-5 py-6">
+          <div
+            className="w-12 h-0.5 mb-6"
+            style={{ background: `linear-gradient(to left, ${C.goldLight}, ${C.gold})` }}
+          />
+
+          {sent ? (
+            <div className="text-center py-10">
+              <div
+                className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4"
+                style={{ background: C.ctaGrad }}
+              >
+                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p className="font-display text-xl mb-1" style={{ color: C.textDark }}>
+                ההודעה נשלחה!
+              </p>
+              <p className="text-sm font-light" style={{ color: C.textMid }}>
+                אחזור אליך בהקדם.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-4">
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-semibold" style={{ color: C.textMid }}>שם מלא</label>
+                <input
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="שמכם"
+                  className="w-full px-4 py-2.5 rounded-xl text-sm text-right focus:outline-none border transition-all"
+                  style={inputStyle}
+                  onFocus={focusIn}
+                  onBlur={focusOut}
+                />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-semibold" style={{ color: C.textMid }}>טלפון</label>
+                <input
+                  type="tel"
+                  required
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  placeholder="05X-XXXXXXX"
+                  dir="ltr"
+                  className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none border transition-all"
+                  style={inputStyle}
+                  onFocus={focusIn}
+                  onBlur={focusOut}
+                />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-semibold" style={{ color: C.textMid }}>הודעה קצרה</label>
+                <textarea
+                  rows={3}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  placeholder="במה אוכל לעזור?"
+                  className="w-full px-4 py-2.5 rounded-xl text-sm text-right resize-none focus:outline-none border transition-all"
+                  style={inputStyle}
+                  onFocus={focusIn}
+                  onBlur={focusOut}
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3 rounded-xl text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
+                style={{ background: C.ctaGrad }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = C.ctaGradHover)}
+                onMouseLeave={(e) => (e.currentTarget.style.background = C.ctaGrad)}
+              >
+                שלחו הודעה
+              </button>
+            </form>
+          )}
+        </div>
+
+        {/* Drawer footer */}
+        <div className="px-5 py-4 border-t text-center" style={{ borderColor: C.border }}>
+          <a
+            href="tel:0502961213"
+            className="text-sm font-medium transition-colors"
+            style={{ color: C.pink, direction: 'ltr' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = C.pinkLight)}
+            onMouseLeave={(e) => (e.currentTarget.style.color = C.pink)}
+          >
+            050-296-1213
+          </a>
+        </div>
+      </aside>
+    </>
+  );
+}
+
+// ======================
 // MAIN PAGE
 // ======================
 
 export default function Home() {
   const [form, setForm] = useState({ name: '', phone: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useScrollReveal();
 
   const focusStyle = {
     onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -216,14 +441,18 @@ export default function Home() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
 
+      {/* ===== FLOATING CONTACT BUTTON ===== */}
+      <FloatingContactButton onClick={() => setDrawerOpen(true)} />
+
+      {/* ===== SIDE DRAWER ===== */}
+      <SideDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+
       {/* ===== HEADER ===== */}
       <header
         className="sticky top-0 z-50 backdrop-blur-sm border-b"
         style={{ backgroundColor: 'rgba(250,248,245,0.97)', borderColor: C.borderLight }}
       >
         <div className="max-w-6xl mx-auto px-6 h-[72px] flex items-center justify-between">
-
-          {/* Logo image with mix-blend-mode so white bg blends into header */}
           <a href="#" className="flex items-center flex-shrink-0">
             <img
               src="/logo.jpg"
@@ -260,6 +489,7 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden">
+
         {/* Diagonal warm cream panel on the portrait side */}
         <div
           className="absolute top-0 right-0 h-full -z-10"
@@ -269,15 +499,35 @@ export default function Home() {
             clipPath: 'polygon(14% 0%, 100% 0%, 100% 100%, 0% 100%)',
           }}
         />
-        {/* Pink radial glow top-right */}
+
+        {/* Dot-grid texture overlay */}
+        <svg
+          className="absolute inset-0 w-full h-full -z-10"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <defs>
+            <pattern id="hero-dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+              <circle cx="1.5" cy="1.5" r="1" fill={C.gold} opacity="0.18" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hero-dots)" />
+        </svg>
+
+        {/* Pink radial glow top-right — stronger */}
         <div
-          className="absolute -top-24 right-8 w-96 h-96 rounded-full -z-10"
-          style={{ background: 'radial-gradient(circle, rgba(201,31,130,0.09) 0%, transparent 68%)' }}
+          className="absolute -top-24 right-8 w-[500px] h-[500px] rounded-full -z-10"
+          style={{ background: 'radial-gradient(circle, rgba(201,31,130,0.14) 0%, transparent 65%)' }}
+        />
+        {/* Gold warm glow center-right */}
+        <div
+          className="absolute top-1/3 right-1/4 w-80 h-80 rounded-full -z-10"
+          style={{ background: 'radial-gradient(circle, rgba(212,168,83,0.13) 0%, transparent 65%)' }}
         />
         {/* Purple glow bottom-left */}
         <div
-          className="absolute bottom-0 -left-16 w-72 h-72 rounded-full -z-10"
-          style={{ background: 'radial-gradient(circle, rgba(75,71,191,0.07) 0%, transparent 65%)' }}
+          className="absolute bottom-0 -left-16 w-80 h-80 rounded-full -z-10"
+          style={{ background: 'radial-gradient(circle, rgba(75,71,191,0.09) 0%, transparent 65%)' }}
         />
 
         <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center gap-12">
@@ -286,7 +536,7 @@ export default function Home() {
           <div className="flex-1 text-right">
             <SectionLabel text="מרכז טיפולי-לימודי" />
 
-            <div className="relative inline-block mb-6">
+            <div className="relative inline-block mb-3">
               <h1
                 className="font-display text-[5.5rem] md:text-[8rem] font-light leading-[1.0]"
                 style={{ color: C.textDark }}
@@ -295,6 +545,11 @@ export default function Home() {
                 <br />
                 לעוף
               </h1>
+              {/* Decorative gold arc behind the headline */}
+              <div
+                className="absolute -bottom-3 right-0 left-0 h-1 rounded-full opacity-40"
+                style={{ background: `linear-gradient(to left, ${C.gold}, transparent)` }}
+              />
             </div>
 
             <p
@@ -326,30 +581,96 @@ export default function Home() {
                 תחומי הטיפול
               </a>
             </div>
+
+            {/* Trust / credential strip */}
+            <div className="mt-8 flex flex-wrap gap-2.5 justify-end">
+              {['+20 שנות ניסיון', 'CBT מוסמכת', 'EMR מוסמכת', 'NLP מוסמכת'].map((label) => (
+                <div
+                  key={label}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs border"
+                  style={{
+                    borderColor: C.borderLight,
+                    color: C.textMid,
+                    backgroundColor: 'rgba(255,255,255,0.65)',
+                    backdropFilter: 'blur(4px)',
+                  }}
+                >
+                  <SparkleIcon size={7} style={{ color: C.goldLight }} />
+                  {label}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Portrait */}
           <div className="flex-shrink-0 relative">
+            {/* Decorative rotated frame ring behind portrait */}
+            <div
+              className="absolute -inset-3 rounded-3xl border-2 -z-10"
+              style={{
+                borderColor: C.gold,
+                opacity: 0.22,
+                transform: 'rotate(3deg)',
+              }}
+            />
             {/* Pink glow halo behind portrait */}
             <div
               className="absolute inset-0 -z-10 rounded-3xl"
               style={{
-                background: 'radial-gradient(ellipse at 60% 40%, rgba(201,31,130,0.14) 0%, transparent 68%)',
+                background: 'radial-gradient(ellipse at 60% 40%, rgba(201,31,130,0.18) 0%, transparent 68%)',
                 transform: 'scale(1.35)',
               }}
             />
-            <div className="relative w-72 h-96 md:w-80 md:h-[440px] rounded-3xl overflow-hidden shadow-2xl">
+
+            {/* Portrait container with warm background */}
+            <div
+              className="relative w-72 h-96 md:w-80 md:h-[440px] rounded-3xl overflow-hidden shadow-2xl"
+              style={{
+                background: `linear-gradient(160deg, ${C.creamDeep} 0%, ${C.creamAlt} 100%)`,
+              }}
+            >
               <img
                 src="/founder_portrait.jpg"
                 alt="גאולה אלון"
-                className="w-full h-full object-contain object-center"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: 'top center' }}
               />
             </div>
+
             {/* Gold accent corner block */}
             <div
               className="absolute -bottom-4 -right-4 w-20 h-20 rounded-2xl -z-10 border-2"
               style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
             />
+
+            {/* Floating years badge */}
+            <div
+              className="absolute -bottom-2 -left-10 px-3.5 py-2.5 rounded-2xl text-center shadow-lg"
+              style={{
+                background: C.ctaGrad,
+                color: 'white',
+                boxShadow: '0 6px 24px rgba(232,71,120,0.35)',
+              }}
+            >
+              <div className="font-display text-2xl font-semibold leading-none">+20</div>
+              <div className="text-[0.6rem] font-light opacity-90 mt-0.5">שנות ניסיון</div>
+            </div>
+
+            {/* Floating credentials pill */}
+            <div
+              className="absolute -top-4 -left-6 px-3 py-2 rounded-2xl border shadow-md"
+              style={{
+                background: 'rgba(255,255,255,0.95)',
+                borderColor: C.border,
+              }}
+            >
+              <div className="text-[0.6rem] font-light mb-0.5" style={{ color: C.textLight }}>
+                מוסמכת ב
+              </div>
+              <div className="text-xs font-semibold" style={{ color: C.textDark }}>
+                CBT · EMR · NLP
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -364,7 +685,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
 
           {/* Images column */}
-          <div className="relative order-2 md:order-1">
+          <div className="relative order-2 md:order-1 sr sr-d1">
             <div className="relative w-full h-[360px] rounded-3xl overflow-hidden shadow-lg">
               <img
                 src="/founder_speaking.jpg"
@@ -372,7 +693,6 @@ export default function Home() {
                 className="w-full h-full object-contain object-center"
               />
             </div>
-            {/* Inset audience thumbnail */}
             <div
               className="absolute -bottom-6 -left-4 w-44 h-28 rounded-2xl overflow-hidden shadow-xl border-2"
               style={{ borderColor: '#FFFFFF' }}
@@ -383,7 +703,6 @@ export default function Home() {
                 className="w-full h-full object-contain object-center"
               />
             </div>
-            {/* Accent blocks */}
             <div
               className="absolute -bottom-6 -right-6 w-28 h-28 rounded-2xl -z-10 border"
               style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
@@ -395,7 +714,7 @@ export default function Home() {
           </div>
 
           {/* Text column */}
-          <div className="text-right order-1 md:order-2">
+          <div className="text-right order-1 md:order-2 sr sr-d2">
             <SectionLabel text="אודות" />
             <h2 className="font-display text-5xl font-light" style={{ color: C.textDark }}>
               גאולה אלון
@@ -418,7 +737,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Stats tiles */}
             <div className="mt-7 grid grid-cols-3 gap-4 text-center">
               {[
                 { num: '+20', label: 'שנות ניסיון' },
@@ -446,7 +764,7 @@ export default function Home() {
       {/* ===== SERVICES ===== */}
       <section id="services" className="py-14" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-9">
+          <div className="text-right mb-9 sr">
             <SectionLabel text="תחומי טיפול" />
             <h2 className="font-display text-5xl font-light" style={{ color: C.textDark }}>
               במה אני יכולה לעזור
@@ -457,7 +775,7 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`group relative rounded-3xl p-7 text-right border overflow-hidden transition-all duration-300 hover:shadow-xl ${
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-3xl p-7 text-right border overflow-hidden transition-all duration-300 hover:shadow-xl ${
                   i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
                 style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
@@ -470,7 +788,6 @@ export default function Home() {
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                {/* Ghost number watermark in brand pink */}
                 <div
                   className="font-display absolute top-2 left-4 text-[5.5rem] font-bold leading-none select-none pointer-events-none"
                   style={{ color: 'rgba(201,31,130,0.045)' }}
@@ -479,7 +796,6 @@ export default function Home() {
                   {String(i + 1).padStart(2, '0')}
                 </div>
                 <div className="relative">
-                  {/* Gold accent rule */}
                   <div
                     className="w-10 h-0.5 mb-5 transition-all duration-300 group-hover:w-16"
                     style={{ background: `linear-gradient(to left, ${C.goldLight}, ${C.gold})` }}
@@ -506,8 +822,7 @@ export default function Home() {
       <section id="cards" className="py-16" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-6">
 
-          {/* Section heading */}
-          <div className="text-right mb-11">
+          <div className="text-right mb-11 sr">
             <SectionLabel text="קלפים טיפוליים" />
             <h2
               className="font-display text-5xl md:text-6xl font-light leading-snug"
@@ -520,9 +835,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-14 items-center">
 
             {/* Cards product image */}
-            <div className="relative flex justify-center order-2 md:order-1">
+            <div className="relative flex justify-center order-2 md:order-1 sr sr-d1">
               <div className="relative">
-                {/* Warm gold + pink glow behind the box */}
                 <div
                   className="absolute inset-0 rounded-3xl -z-10"
                   style={{
@@ -534,21 +848,18 @@ export default function Home() {
                 <div className="relative w-full max-w-[340px] rounded-3xl overflow-hidden shadow-2xl">
                   <img
                     src="/therapy_cards_box.jpg"
-                    alt="קלפי ניצוץ – קלפים שמדליקים אור בכל ילד"
+                    alt="קלפי ניצוץ"
                     className="w-full h-auto object-contain object-center"
                   />
                 </div>
-                {/* Gold accent corner */}
                 <div
                   className="absolute -bottom-5 -right-5 w-24 h-24 rounded-2xl -z-10 border"
                   style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
                 />
-                {/* Pink sparkle accent top-left */}
                 <div
                   className="absolute -top-5 -left-5 w-16 h-16 rounded-full -z-10 opacity-45"
                   style={{ backgroundColor: C.pinkLight, filter: 'blur(22px)' }}
                 />
-                {/* Floating brand pill */}
                 <div
                   className="absolute top-4 right-4 flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold shadow-md"
                   style={{
@@ -564,7 +875,7 @@ export default function Home() {
             </div>
 
             {/* Cards text */}
-            <div className="text-right order-1 md:order-2">
+            <div className="text-right order-1 md:order-2 sr sr-d2">
               <GoldRule />
               <div className="space-y-5 font-light leading-loose text-[1.05rem]" style={{ color: C.textMid }}>
                 <p>
@@ -584,7 +895,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Highlights grid */}
               <div className="mt-8 grid grid-cols-2 gap-3">
                 {[
                   { title: 'ביטוי עצמי',    subtitle: 'מרחב בטוח לעיבוד רגשות' },
@@ -596,12 +906,8 @@ export default function Home() {
                     key={item.title}
                     className="rounded-2xl p-4 text-right border transition-all hover:shadow-md"
                     style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.borderColor = C.pinkLight;
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.borderColor = C.border;
-                    }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = C.pinkLight; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; }}
                   >
                     <div className="font-display text-lg font-semibold mb-0.5" style={{ color: C.pink }}>
                       {item.title}
@@ -630,7 +936,7 @@ export default function Home() {
       {/* ===== APPROACH ===== */}
       <section id="approach" className="py-14" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-right mb-9">
+          <div className="text-right mb-9 sr">
             <SectionLabel text="הגישה שלי" />
             <h2 className="font-display text-5xl font-light" style={{ color: C.textDark }}>
               מה מייחד את המרכז
@@ -642,7 +948,7 @@ export default function Home() {
               <Link
                 key={feature.title}
                 href={`/features/${feature.slug}`}
-                className="group rounded-2xl p-5 text-right border transition-all duration-300 block"
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-2xl p-5 text-right border transition-all duration-300 block`}
                 style={{ backgroundColor: '#FFFFFF', borderColor: C.border, textDecoration: 'none' }}
                 onMouseEnter={e => {
                   e.currentTarget.style.backgroundColor = C.cream;
@@ -655,7 +961,6 @@ export default function Home() {
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                {/* Sparkle icon badge */}
                 <div
                   className="w-9 h-9 rounded-full mb-4 flex items-center justify-center border"
                   style={{ backgroundColor: C.creamAlt, borderColor: C.borderLight }}
@@ -683,7 +988,7 @@ export default function Home() {
           <div className="grid md:grid-cols-5 gap-10 items-start">
 
             {/* Contact info */}
-            <div className="md:col-span-2 text-right">
+            <div className="md:col-span-2 text-right sr sr-d1">
               <SectionLabel text="יצירת קשר" />
               <h2 className="font-display text-4xl font-light mb-5 leading-snug" style={{ color: C.textDark }}>
                 מוזמנים לפנות
@@ -719,6 +1024,12 @@ export default function Home() {
                     מיקום
                   </span>
                   <span className="font-light" style={{ color: C.textDark }}>ישראל</span>
+                  <span
+                    className="text-sm font-medium leading-relaxed mt-1"
+                    style={{ color: C.pink }}
+                  >
+                    קיימת אפשרות לטיפולים מרחוק / מהבית באמצעות פגישות Zoom.
+                  </span>
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
                 <div className="flex flex-col text-right gap-1.5">
@@ -733,7 +1044,6 @@ export default function Home() {
                   </span>
                 </div>
               </div>
-              {/* Abstract organic decoration */}
               <div className="mt-12 flex justify-end" aria-hidden="true">
                 <svg viewBox="0 0 80 80" fill="none" style={{ width: 80, height: 80, opacity: 0.2 }}>
                   <circle cx="40" cy="40" r="8"  fill={C.gold} opacity="0.5" />
@@ -747,7 +1057,7 @@ export default function Home() {
 
             {/* Form card */}
             <div
-              className="md:col-span-3 rounded-3xl p-7 border shadow-sm"
+              className="md:col-span-3 rounded-3xl p-7 border shadow-sm sr sr-d2"
               style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
             >
               {submitted ? (
