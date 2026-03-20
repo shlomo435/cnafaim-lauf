@@ -204,6 +204,127 @@ function useScrollReveal() {
 }
 
 // ======================
+// ACCESSIBILITY WIDGET
+// ======================
+
+function AccessibilityWidget() {
+  const [open, setOpen] = React.useState(false);
+  const [fontSize, setFontSize] = React.useState(100);
+  const [highContrast, setHighContrast] = React.useState(false);
+
+  React.useEffect(() => {
+    document.documentElement.style.fontSize = `${fontSize}%`;
+  }, [fontSize]);
+
+  React.useEffect(() => {
+    document.documentElement.classList.toggle('a11y-high-contrast', highContrast);
+  }, [highContrast]);
+
+  return (
+    <div className="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-2">
+      {open && (
+        <div
+          role="dialog"
+          aria-label="תפריט נגישות"
+          aria-modal="false"
+          className="rounded-2xl border shadow-2xl p-4 w-56 text-right"
+          style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
+        >
+          <div className="flex items-center justify-between mb-4">
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="סגור תפריט נגישות"
+              className="w-7 h-7 rounded-full flex items-center justify-center hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-[#4B47BF]"
+              style={{ color: C.textMid }}
+            >
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <h3 className="text-sm font-semibold" style={{ color: C.textDark }}>כלי נגישות</h3>
+          </div>
+
+          <div className="space-y-3">
+            <div>
+              <p className="text-[0.65rem] font-semibold tracking-widest uppercase mb-2" style={{ color: C.gold }}>
+                גודל טקסט
+              </p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setFontSize(f => Math.max(80, f - 10))}
+                  aria-label="הקטן גופן"
+                  disabled={fontSize <= 80}
+                  className="flex-1 py-2.5 rounded-xl text-sm font-bold border transition-all focus:outline-none focus:ring-2 focus:ring-[#4B47BF] focus:ring-offset-1 disabled:opacity-40"
+                  style={{ borderColor: C.border, color: C.textMid, backgroundColor: C.creamAlt }}
+                >
+                  A-
+                </button>
+                <button
+                  onClick={() => setFontSize(f => Math.min(140, f + 10))}
+                  aria-label="הגדל גופן"
+                  disabled={fontSize >= 140}
+                  className="flex-1 py-2.5 rounded-xl text-base font-bold border transition-all focus:outline-none focus:ring-2 focus:ring-[#4B47BF] focus:ring-offset-1 disabled:opacity-40"
+                  style={{ borderColor: C.border, color: C.textMid, backgroundColor: C.creamAlt }}
+                >
+                  A+
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-[0.65rem] font-semibold tracking-widest uppercase mb-2" style={{ color: C.gold }}>
+                תצוגה
+              </p>
+              <button
+                onClick={() => setHighContrast(c => !c)}
+                aria-label={highContrast ? 'בטל ניגודיות גבוהה' : 'הפעל ניגודיות גבוהה'}
+                aria-pressed={highContrast}
+                className="w-full py-2.5 rounded-xl text-xs font-medium text-right border transition-all focus:outline-none focus:ring-2 focus:ring-[#4B47BF] focus:ring-offset-1 px-3"
+                style={{
+                  borderColor: highContrast ? C.purple : C.border,
+                  color: highContrast ? C.purple : C.textMid,
+                  backgroundColor: highContrast ? 'rgba(75,71,191,0.07)' : C.creamAlt,
+                }}
+              >
+                {highContrast ? 'ניגודיות גבוהה: פעיל' : 'הפעל ניגודיות גבוהה'}
+              </button>
+            </div>
+
+            <button
+              onClick={() => { setFontSize(100); setHighContrast(false); }}
+              aria-label="אפס כל הגדרות נגישות"
+              className="w-full py-2 rounded-xl text-xs text-right px-3 transition-all focus:outline-none focus:ring-2 focus:ring-[#4B47BF] focus:ring-offset-1 border"
+              style={{ color: C.textLight, backgroundColor: 'transparent', borderColor: C.borderLight }}
+            >
+              אפס הגדרות
+            </button>
+          </div>
+        </div>
+      )}
+
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-label={open ? 'סגור תפריט נגישות' : 'פתח תפריט נגישות'}
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        tabIndex={0}
+        title="כלי נגישות"
+        className="w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#4B47BF] border-2"
+        style={{
+          backgroundColor: '#FFFFFF',
+          borderColor: C.purple,
+          color: C.purple,
+        }}
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" aria-hidden="true">
+          <path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-1 5.5c-.55 0-1 .45-1 1v3.5l-2.36 4.72A1 1 0 0 0 8.55 18c.45 0 .87-.27 1.06-.69L11 14.5h2l1.39 2.81c.19.42.61.69 1.06.69a1 1 0 0 0 .91-1.42L14 11V8.5c0-.55-.45-1-1-1h-2z"/>
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+// ======================
 // FLOATING CONTACT BUTTON
 // ======================
 
@@ -453,6 +574,9 @@ export default function Home() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
 
+      {/* ===== ACCESSIBILITY WIDGET ===== */}
+      <AccessibilityWidget />
+
       {/* ===== FLOATING CONTACT BUTTON ===== */}
       <FloatingContactButton onClick={() => setDrawerOpen(true)} />
 
@@ -502,10 +626,11 @@ export default function Home() {
             </CtaButton>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl transition-colors hover:bg-black/5 focus:outline-none"
+              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#C91F82]"
               style={{ color: C.textDark }}
               aria-label={mobileMenuOpen ? 'סגור תפריט' : 'פתח תפריט'}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav"
             >
               {mobileMenuOpen ? (
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
@@ -523,6 +648,7 @@ export default function Home() {
         {/* Mobile dropdown menu */}
         {mobileMenuOpen && (
           <div
+            id="mobile-nav"
             className="md:hidden border-t"
             style={{ backgroundColor: 'rgba(250,248,245,0.99)', borderColor: C.borderLight }}
           >
@@ -602,7 +728,6 @@ export default function Home() {
 
           {/* Text block */}
           <div className="flex-1 text-center md:text-right w-full">
-            <SectionLabel text="מרכז טיפולי-לימודי" />
 
             <div className="relative inline-block mb-3">
               <h1
@@ -624,9 +749,8 @@ export default function Home() {
               className="text-lg md:text-2xl font-light leading-relaxed mb-5 md:mb-9 mx-auto md:mx-0"
               style={{ color: C.textMid, maxWidth: '28rem' }}
             >
-              ליווי לצמיחה, חיזוק וחיבור עצמי
-              <br className="hidden md:block" />
-              לילדים, נערות ונשים
+              <span className="block">ליווי לצמיחה, חיזוק וחיבור עצמי</span>
+              <span className="block mt-3 md:mt-4">לילדים, נערות ונשים</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-end">
@@ -672,15 +796,6 @@ export default function Home() {
 
           {/* Portrait */}
           <div className="flex-shrink-0 relative">
-            {/* Decorative rotated frame ring behind portrait */}
-            <div
-              className="absolute -inset-3 rounded-3xl border-2 -z-10"
-              style={{
-                borderColor: C.gold,
-                opacity: 0.22,
-                transform: 'rotate(3deg)',
-              }}
-            />
             {/* Pink glow halo behind portrait */}
             <div
               className="absolute inset-0 -z-10 rounded-3xl"
@@ -765,10 +880,6 @@ export default function Home() {
                 className="w-full h-full object-contain object-center"
               />
             </div>
-            <div
-              className="absolute -bottom-6 -right-6 w-28 h-28 rounded-2xl -z-10 border"
-              style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
-            />
             <div
               className="absolute -top-5 -left-5 w-16 h-16 rounded-full -z-10 opacity-35"
               style={{ backgroundColor: C.pinkLight, filter: 'blur(22px)' }}
@@ -914,10 +1025,6 @@ export default function Home() {
                     className="w-full h-auto object-contain object-center"
                   />
                 </div>
-                <div
-                  className="absolute -bottom-5 -right-5 w-24 h-24 rounded-2xl -z-10 border"
-                  style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
-                />
                 <div
                   className="absolute -top-5 -left-5 w-16 h-16 rounded-full -z-10 opacity-45"
                   style={{ backgroundColor: C.pinkLight, filter: 'blur(22px)' }}

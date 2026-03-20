@@ -49,3 +49,14 @@ body {
 .contact-pulse {
   animation: contactPulse 2.6s ease-out infinite;
 }
+
+/* ── Accessibility: High Contrast Mode ─────────────────── */
+html.a11y-high-contrast {
+  filter: contrast(1.45) saturate(1.1);
+}
+
+/* ── Accessibility: Focus Visible Global ───────────────── */
+:focus-visible {
+  outline: 2px solid #4B47BF;
+  outline-offset: 2px;
+}
