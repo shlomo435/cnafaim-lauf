@@ -50,9 +50,29 @@ body {
   animation: contactPulse 2.6s ease-out infinite;
 }
 
-/* ── Accessibility: High Contrast Mode ─────────────────── */
+/* ── Accessibility: Readable Font Mode ─────────────────── */
+html.a11y-readable-font body {
+  font-size: 1.06rem;
+  line-height: 1.85;
+  letter-spacing: 0.012em;
+  word-spacing: 0.04em;
+  font-weight: 400;
+}
+
+/* ── Accessibility: High Contrast Mode (legacy) ─────────── */
 html.a11y-high-contrast {
   filter: contrast(1.45) saturate(1.1);
+}
+
+/* ── Accessibility: Contrast Levels (slider) ────────────── */
+html.a11y-contrast-1 {
+  filter: contrast(1.2) saturate(1.05);
+}
+html.a11y-contrast-2 {
+  filter: contrast(1.45) saturate(1.1);
+}
+html.a11y-contrast-3 {
+  filter: contrast(1.8) saturate(1.2) brightness(0.94);
 }
 
 /* ── Accessibility: Focus Visible Global ───────────────── */

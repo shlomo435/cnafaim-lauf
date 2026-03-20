@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Assistant, Frank_Ruhl_Libre } from "next/font/google";
 import "./globals.css";
+import AccessibilityMenu from "../components/AccessibilityMenu";
 
 const assistant = Assistant({
   subsets: ["hebrew", "latin"],
@@ -33,7 +34,10 @@ export default function RootLayout({
       dir="rtl"
       className={`${assistant.variable} ${frankRuhl.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <AccessibilityMenu />
+      </body>
     </html>
   );
 }
