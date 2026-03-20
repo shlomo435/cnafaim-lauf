@@ -210,7 +210,7 @@ export default async function FeaturePage({
             <Link
               href="/#contact"
               className="inline-block px-8 py-3.5 rounded-full text-sm font-medium text-white shadow-md hover:shadow-lg transition-all"
-              style={{ background: 'linear-gradient(135deg, #E84778 0%, #F0724A 100%)' }}
+              style={{ background: 'linear-gradient(135deg, #D4A853 0%, #C91F82 100%)' }}
             >
               לתיאום שיחת היכרות
             </Link>

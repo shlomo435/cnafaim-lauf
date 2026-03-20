@@ -42,9 +42,9 @@ body {
 
 /* ── Floating Button Pulse ─────────────────────────────── */
 @keyframes contactPulse {
-  0%   { box-shadow: 0 0 0 0   rgba(232, 71, 120, 0.50); }
-  70%  { box-shadow: 0 0 0 14px rgba(232, 71, 120, 0);   }
-  100% { box-shadow: 0 0 0 0   rgba(232, 71, 120, 0);    }
+  0%   { box-shadow: 0 0 0 0   rgba(123, 158, 135, 0.55); }
+  70%  { box-shadow: 0 0 0 14px rgba(123, 158, 135, 0);   }
+  100% { box-shadow: 0 0 0 0   rgba(123, 158, 135, 0);    }
 }
 .contact-pulse {
   animation: contactPulse 2.6s ease-out infinite;

@@ -80,8 +80,8 @@ const C = {
   creamDeep:    '#EDE3D6',
   border:       '#E5D8C8',
   borderLight:  '#EDE6DC',
-  ctaGrad:      'linear-gradient(135deg, #E84778 0%, #F0724A 100%)',
-  ctaGradHover: 'linear-gradient(135deg, #D03868 0%, #E0623A 100%)',
+  ctaGrad:      'linear-gradient(135deg, #D4A853 0%, #C91F82 100%)',
+  ctaGradHover: 'linear-gradient(135deg, #B8956A 0%, #A01668 100%)',
 };
 
 // ======================
@@ -207,6 +207,9 @@ function useScrollReveal() {
 // FLOATING CONTACT BUTTON
 // ======================
 
+const SAGE = '#7B9E87';
+const SAGE_HOVER = '#5E8A72';
+
 function FloatingContactButton({ onClick }: { onClick: () => void }) {
   const [hovered, setHovered] = React.useState(false);
   return (
@@ -214,18 +217,23 @@ function FloatingContactButton({ onClick }: { onClick: () => void }) {
       {hovered && (
         <div
           className="px-3.5 py-1.5 rounded-full text-xs font-medium text-white shadow-lg"
-          style={{ background: C.ctaGrad, whiteSpace: 'nowrap' }}
+          style={{ background: SAGE, whiteSpace: 'nowrap' }}
         >
           יצירת קשר מהירה
         </div>
       )}
       <button
+        id="floating-contact-btn"
         onClick={onClick}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="contact-pulse relative w-14 h-14 rounded-full text-white shadow-xl flex items-center justify-center transition-transform duration-200 hover:scale-110 focus:outline-none"
-        style={{ background: C.ctaGrad }}
+        onFocus={() => setHovered(true)}
+        onBlur={() => setHovered(false)}
+        className="contact-pulse relative w-14 h-14 rounded-full text-white shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#7B9E87]"
+        style={{ background: hovered ? SAGE_HOVER : SAGE }}
         aria-label="פתח טופס יצירת קשר"
+        title="יצירת קשר מהירה"
+        tabIndex={0}
       >
         <svg
           viewBox="0 0 24 24"
@@ -697,12 +705,6 @@ export default function Home() {
               />
             </div>
 
-            {/* Gold accent corner block */}
-            <div
-              className="absolute -bottom-4 -right-4 w-20 h-20 rounded-2xl -z-10 border-2"
-              style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
-            />
-
             {/* Floating years badge */}
             <div
               className="absolute -bottom-2 -left-4 md:-left-10 px-3.5 py-2.5 rounded-2xl text-center shadow-lg"
@@ -741,7 +743,7 @@ export default function Home() {
       </div>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-7 md:py-14">
+      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-16">
         <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center">
 
           {/* Images column */}
@@ -822,7 +824,7 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section id="services" className="py-7 md:py-14" style={{ backgroundColor: C.creamAlt }}>
+      <section id="services" className="py-10 md:py-16" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center md:text-right mb-5 md:mb-9 sr">
             <SectionLabel text="תחומי טיפול" />
@@ -879,7 +881,7 @@ export default function Home() {
       </div>
 
       {/* ===== THERAPY CARDS ===== */}
-      <section id="cards" className="py-8 md:py-16" style={{ backgroundColor: C.cream }}>
+      <section id="cards" className="py-10 md:py-16" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
           <div className="text-center md:text-right mb-5 md:mb-11 sr">
@@ -994,7 +996,7 @@ export default function Home() {
       </div>
 
       {/* ===== APPROACH ===== */}
-      <section id="approach" className="py-7 md:py-14" style={{ backgroundColor: C.creamAlt }}>
+      <section id="approach" className="py-10 md:py-16" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center md:text-right mb-5 md:mb-9 sr">
             <SectionLabel text="הגישה שלי" />
@@ -1043,7 +1045,7 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-7 md:py-14" style={{ backgroundColor: C.cream }}>
+      <section id="contact" className="py-10 md:py-16" style={{ backgroundColor: C.cream }}>
         <div className="max-w-5xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-5 gap-5 md:gap-10 items-start">
 
