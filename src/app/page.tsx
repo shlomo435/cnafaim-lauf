@@ -139,9 +139,9 @@ function CtaButton({
       className={`text-sm font-medium text-center text-white transition-colors duration-200 rounded-md ${
         block ? 'block w-full py-3.5' : 'inline-block px-8 py-3.5'
       } ${className}`}
-      style={{ backgroundColor: C.plum }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.plumHover)}
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.plum)}
+      style={{ backgroundColor: C.rose }}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#b5144f')}
+      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.rose)}
       onClick={onClick}
     >
       {children}
@@ -171,30 +171,29 @@ function useScrollReveal() {
 // FLOATING CONTACT BUTTON
 // ======================
 
-function FloatingContactButton({ onClick }: { onClick: () => void }) {
+function FloatingContactButton() {
   const [hovered, setHovered] = React.useState(false);
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
       {hovered && (
         <div
           className="px-3 py-1.5 rounded-md text-xs font-medium text-white shadow-md"
-          style={{ backgroundColor: C.plum, whiteSpace: 'nowrap' }}
+          style={{ backgroundColor: '#25D366', whiteSpace: 'nowrap' }}
         >
-          יצירת קשר מהירה
+          התקשרו עכשיו
         </div>
       )}
-      <button
+      <a
+        href="tel:0502961213"
         id="floating-contact-btn"
-        onClick={onClick}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onFocus={() => setHovered(true)}
         onBlur={() => setHovered(false)}
-        className="relative w-12 h-12 rounded-full text-white shadow-lg flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4A2C40]"
-        style={{ backgroundColor: hovered ? C.plumHover : C.plum }}
-        aria-label="פתח טופס יצירת קשר"
-        title="יצירת קשר מהירה"
-        tabIndex={0}
+        className="relative w-12 h-12 rounded-full text-white shadow-lg flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#25D366]"
+        style={{ backgroundColor: hovered ? '#1ebe5d' : '#25D366' }}
+        aria-label="התקשרו ישירות"
+        title="התקשרו עכשיו"
       >
         <svg
           viewBox="0 0 24 24"
@@ -209,7 +208,7 @@ function FloatingContactButton({ onClick }: { onClick: () => void }) {
             d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 6z"
           />
         </svg>
-      </button>
+      </a>
     </div>
   );
 }
@@ -348,9 +347,9 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               <button
                 type="submit"
                 className="w-full py-3 rounded-md text-white text-sm font-medium transition-colors duration-200"
-                style={{ backgroundColor: C.plum }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.plumHover)}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.plum)}
+                style={{ backgroundColor: C.rose }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#b5144f')}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.rose)}
               >
                 שלחו הודעה
               </button>
@@ -410,7 +409,7 @@ export default function Home() {
       <IntroAnimation />
 
       {/* ===== FLOATING CONTACT BUTTON ===== */}
-      <FloatingContactButton onClick={() => setDrawerOpen(true)} />
+      <FloatingContactButton />
 
       {/* ===== SIDE DRAWER ===== */}
       <SideDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
@@ -524,7 +523,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-36 md:pb-52 flex flex-col md:flex-row items-center gap-10 md:gap-16">
 
           {/* Text block */}
-          <div className="flex-1 text-center md:text-right w-full">
+          <div className="flex-1 text-center md:text-right w-full relative" style={{ zIndex: 10 }}>
             <p
               className="text-xs font-semibold tracking-[0.22em] uppercase mb-5"
               style={{ color: C.rose }}
@@ -594,7 +593,7 @@ export default function Home() {
           </div>
 
           {/* Portrait */}
-          <div className="flex-shrink-0 relative" style={{ marginTop: '-3.5rem' }}>
+          <div className="flex-shrink-0 relative" style={{ marginTop: '2rem' }}>
             <div
               className="relative w-60 h-[320px] sm:w-72 sm:h-[400px] md:w-80 md:h-[460px] rounded-2xl overflow-hidden"
               style={{
@@ -961,7 +960,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
             {/* Cards image */}
-            <div className="relative flex justify-center order-2 md:order-1 sr sr-d1">
+            <div className="relative flex flex-col items-center gap-6 order-2 md:order-1 sr sr-d1">
               <div
                 className="relative w-full max-w-[340px] rounded-2xl overflow-hidden"
                 style={{
@@ -975,6 +974,7 @@ export default function Home() {
                   className="w-full h-auto object-cover object-top"
                 />
               </div>
+              <CtaButton href="#contact">לפרטים ורכישה</CtaButton>
             </div>
 
             {/* Cards text */}
@@ -1020,9 +1020,6 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="mt-6 md:mt-8 flex justify-center md:justify-start">
-                <CtaButton href="#contact">לפרטים ורכישה</CtaButton>
-              </div>
             </div>
           </div>
         </div>
