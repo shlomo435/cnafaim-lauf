@@ -57,8 +57,8 @@ const articles: Record<string, { title: string; subtitle: string; paragraphs: st
 // BRAND TOKENS (duplicated for isolation)
 // ======================
 const C = {
-  pink:        '#C91F82',
-  pinkLight:   '#E535A0',
+  pink:        '#d81b60',
+  pinkLight:   '#e91e63',
   gold:        '#B8956A',
   goldLight:   '#D4A853',
   textDark:    '#1C1826',
@@ -210,7 +210,7 @@ export default async function FeaturePage({
             <Link
               href="/#contact"
               className="inline-block px-8 py-3.5 rounded-full text-sm font-medium text-white shadow-md hover:shadow-lg transition-all"
-              style={{ background: 'linear-gradient(135deg, #D4A853 0%, #C91F82 100%)' }}
+              style={{ background: '#d81b60' }}
             >
               לתיאום שיחת היכרות
             </Link>

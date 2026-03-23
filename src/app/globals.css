@@ -6,6 +6,11 @@
 
 body {
   font-family: var(--font-assistant), sans-serif;
+  line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
 }
 
 .font-display {
@@ -40,28 +45,13 @@ body {
   to   { opacity: 1; }
 }
 
-/* ── Floating Button Pulse ─────────────────────────────── */
-@keyframes contactPulse {
-  0%   { box-shadow: 0 0 0 0   rgba(123, 158, 135, 0.55); }
-  70%  { box-shadow: 0 0 0 14px rgba(123, 158, 135, 0);   }
-  100% { box-shadow: 0 0 0 0   rgba(123, 158, 135, 0);    }
-}
-.contact-pulse {
-  animation: contactPulse 2.6s ease-out infinite;
-}
-
 /* ── Accessibility: Readable Font Mode ─────────────────── */
 html.a11y-readable-font body {
   font-size: 1.06rem;
-  line-height: 1.85;
+  line-height: 1.9;
   letter-spacing: 0.012em;
   word-spacing: 0.04em;
   font-weight: 400;
-}
-
-/* ── Accessibility: High Contrast Mode (legacy) ─────────── */
-html.a11y-high-contrast {
-  filter: contrast(1.45) saturate(1.1);
 }
 
 /* ── Accessibility: Contrast Levels (slider) ────────────── */
@@ -77,6 +67,45 @@ html.a11y-contrast-3 {
 
 /* ── Accessibility: Focus Visible Global ───────────────── */
 :focus-visible {
-  outline: 2px solid #4B47BF;
+  outline: 2px solid #D81B60;
   outline-offset: 2px;
+}
+
+/* ── Intro Animation ────────────────────────────────────── */
+@keyframes introWingLeft {
+  from { transform: translateX(-110vw); }
+  to   { transform: translateX(0); }
+}
+@keyframes introWingRight {
+  from { transform: translateX(110vw); }
+  to   { transform: translateX(0); }
+}
+@keyframes introTextUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.intro-wing-left {
+  position:  absolute;
+  inset:     0;
+  clip-path: inset(0 50% 0 0);
+  animation: introWingLeft 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+.intro-wing-right {
+  position:  absolute;
+  inset:     0;
+  clip-path: inset(0 0 0 50%);
+  animation: introWingRight 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+.intro-title-anim {
+  opacity:   0;
+  animation: introTextUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.7s both;
+}
+.intro-subtitle-anim {
+  opacity:   0;
+  animation: introTextUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 2.25s both;
+}
+.intro-skip-hint {
+  opacity:   0;
+  animation: introTextUp 0.6s ease 2.8s both;
 }

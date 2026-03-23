@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import IntroAnimation from '../components/IntroAnimation';
 
 // ======================
 // DATA
@@ -64,95 +65,57 @@ const features = [
 ];
 
 // ======================
-// BRAND TOKENS
+// BRAND TOKENS — 60/30/10
 // ======================
 const C = {
-  pink:         '#C91F82',
-  pinkLight:    '#E535A0',
-  purple:       '#4B47BF',
-  gold:         '#B8956A',
-  goldLight:    '#D4A853',
-  textDark:     '#1C1826',
-  textMid:      '#574D6A',
-  textLight:    '#8A7A9A',
-  cream:        '#FAF8F5',
-  creamAlt:     '#F5EFE6',
-  creamDeep:    '#EDE3D6',
-  border:       '#E5D8C8',
-  borderLight:  '#EDE6DC',
-  ctaGrad:      'linear-gradient(135deg, #D4A853 0%, #C91F82 100%)',
-  ctaGradHover: 'linear-gradient(135deg, #B8956A 0%, #A01668 100%)',
+  // 60% — Warm Alabaster (primary background)
+  cream:       '#FDF8F5',
+  creamAlt:    '#F7F0EB',
+  creamDeep:   '#EDE3D6',
+  // 30% — Deep Plum (headlines, buttons, footer)
+  plum:        '#4A2C40',
+  plumHover:   '#3D2235',
+  // 10% — Muted Rose (icons, active links, accents only)
+  rose:        '#D81B60',
+  // Supporting text
+  textDark:    '#4A2C40',
+  textMid:     '#7A5A6A',
+  textLight:   '#9A7A8A',
+  // Structural
+  border:      '#E5D5D0',
+  borderLight: '#EDE6DC',
 };
 
 // ======================
-// BRAND SVG COMPONENTS
+// SHARED COMPONENTS
 // ======================
-
-function SparkleIcon({
-  size = 12,
-  className = '',
-  style,
-}: {
-  size?: number;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={{ width: size, height: size, flexShrink: 0, ...style }}
-      aria-hidden="true"
-    >
-      <path
-        d="M10 1 L11.6 8.4 L19 10 L11.6 11.6 L10 19 L8.4 11.6 L1 10 L8.4 8.4 Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
 
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-2 justify-center md:justify-end mb-3 md:mb-4">
-      <p
-        className="text-xs font-semibold tracking-[0.22em] uppercase"
-        style={{ color: C.gold }}
-      >
+      <p className="text-xs font-semibold tracking-[0.22em] uppercase" style={{ color: C.rose }}>
         {text}
       </p>
-      <SparkleIcon size={9} style={{ color: C.goldLight }} />
+      <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.rose, opacity: 0.45 }} />
     </div>
   );
 }
 
 function SectionDivider({ className = '' }: { className?: string }) {
   return (
-    <div className={`flex items-center justify-center gap-3 py-1 ${className}`}>
-      <div
-        className="h-px flex-1 max-w-[110px]"
-        style={{ background: `linear-gradient(to left, ${C.border}, transparent)` }}
-      />
-      <svg viewBox="0 0 20 20" fill="none" style={{ width: 16, height: 16 }} aria-hidden="true">
-        <circle cx="10" cy="10" r="2.2" fill={C.gold} opacity="0.55" />
-        <circle cx="10" cy="10" r="4.8" stroke={C.gold} strokeWidth="0.7" opacity="0.35" fill="none" />
-        <circle cx="10" cy="10" r="7.8" stroke={C.gold} strokeWidth="0.5" opacity="0.2"  fill="none" />
-      </svg>
-      <div
-        className="h-px flex-1 max-w-[110px]"
-        style={{ background: `linear-gradient(to right, ${C.border}, transparent)` }}
-      />
+    <div className={`flex items-center justify-center gap-3 py-2 ${className}`}>
+      <div className="h-px flex-1 max-w-[120px]" style={{ backgroundColor: C.border }} />
+      <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.rose, opacity: 0.4 }} />
+      <div className="h-px flex-1 max-w-[120px]" style={{ backgroundColor: C.border }} />
     </div>
   );
 }
 
-function GoldRule({ width = 'w-20', className = '' }: { width?: string; className?: string }) {
+function Rule({ className = '' }: { className?: string }) {
   return (
     <div
-      className={`${width} h-0.5 mt-3 mb-4 md:mb-6 ${className}`}
-      style={{ background: `linear-gradient(to left, ${C.goldLight}, ${C.gold})` }}
+      className={`w-12 h-px mt-4 mb-6 ${className}`}
+      style={{ backgroundColor: C.border }}
     />
   );
 }
@@ -170,14 +133,15 @@ function CtaButton({
   block?: boolean;
   onClick?: () => void;
 }) {
-  const [over, setOver] = React.useState(false);
   return (
     <a
       href={href}
-      className={`text-sm font-medium text-center text-white rounded-full transition-all shadow-md hover:shadow-lg ${block ? 'block w-full py-3.5' : 'inline-block px-8 py-3.5'} ${className}`}
-      style={{ background: over ? C.ctaGradHover : C.ctaGrad }}
-      onMouseEnter={() => setOver(true)}
-      onMouseLeave={() => setOver(false)}
+      className={`text-sm font-medium text-center text-white transition-colors duration-200 rounded-md ${
+        block ? 'block w-full py-3.5' : 'inline-block px-8 py-3.5'
+      } ${className}`}
+      style={{ backgroundColor: C.plum }}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.plumHover)}
+      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.plum)}
       onClick={onClick}
     >
       {children}
@@ -204,132 +168,8 @@ function useScrollReveal() {
 }
 
 // ======================
-// ACCESSIBILITY WIDGET
-// ======================
-
-function AccessibilityWidget() {
-  const [open, setOpen] = React.useState(false);
-  const [fontSize, setFontSize] = React.useState(100);
-  const [highContrast, setHighContrast] = React.useState(false);
-
-  React.useEffect(() => {
-    document.documentElement.style.fontSize = `${fontSize}%`;
-  }, [fontSize]);
-
-  React.useEffect(() => {
-    document.documentElement.classList.toggle('a11y-high-contrast', highContrast);
-  }, [highContrast]);
-
-  return (
-    <div className="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-2">
-      {open && (
-        <div
-          role="dialog"
-          aria-label="תפריט נגישות"
-          aria-modal="false"
-          className="rounded-2xl border shadow-2xl p-4 w-56 text-right"
-          style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
-        >
-          <div className="flex items-center justify-between mb-4">
-            <button
-              onClick={() => setOpen(false)}
-              aria-label="סגור תפריט נגישות"
-              className="w-7 h-7 rounded-full flex items-center justify-center hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-[#4B47BF]"
-              style={{ color: C.textMid }}
-            >
-              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <h3 className="text-sm font-semibold" style={{ color: C.textDark }}>כלי נגישות</h3>
-          </div>
-
-          <div className="space-y-3">
-            <div>
-              <p className="text-[0.65rem] font-semibold tracking-widest uppercase mb-2" style={{ color: C.gold }}>
-                גודל טקסט
-              </p>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setFontSize(f => Math.max(80, f - 10))}
-                  aria-label="הקטן גופן"
-                  disabled={fontSize <= 80}
-                  className="flex-1 py-2.5 rounded-xl text-sm font-bold border transition-all focus:outline-none focus:ring-2 focus:ring-[#4B47BF] focus:ring-offset-1 disabled:opacity-40"
-                  style={{ borderColor: C.border, color: C.textMid, backgroundColor: C.creamAlt }}
-                >
-                  A-
-                </button>
-                <button
-                  onClick={() => setFontSize(f => Math.min(140, f + 10))}
-                  aria-label="הגדל גופן"
-                  disabled={fontSize >= 140}
-                  className="flex-1 py-2.5 rounded-xl text-base font-bold border transition-all focus:outline-none focus:ring-2 focus:ring-[#4B47BF] focus:ring-offset-1 disabled:opacity-40"
-                  style={{ borderColor: C.border, color: C.textMid, backgroundColor: C.creamAlt }}
-                >
-                  A+
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <p className="text-[0.65rem] font-semibold tracking-widest uppercase mb-2" style={{ color: C.gold }}>
-                תצוגה
-              </p>
-              <button
-                onClick={() => setHighContrast(c => !c)}
-                aria-label={highContrast ? 'בטל ניגודיות גבוהה' : 'הפעל ניגודיות גבוהה'}
-                aria-pressed={highContrast}
-                className="w-full py-2.5 rounded-xl text-xs font-medium text-right border transition-all focus:outline-none focus:ring-2 focus:ring-[#4B47BF] focus:ring-offset-1 px-3"
-                style={{
-                  borderColor: highContrast ? C.purple : C.border,
-                  color: highContrast ? C.purple : C.textMid,
-                  backgroundColor: highContrast ? 'rgba(75,71,191,0.07)' : C.creamAlt,
-                }}
-              >
-                {highContrast ? 'ניגודיות גבוהה: פעיל' : 'הפעל ניגודיות גבוהה'}
-              </button>
-            </div>
-
-            <button
-              onClick={() => { setFontSize(100); setHighContrast(false); }}
-              aria-label="אפס כל הגדרות נגישות"
-              className="w-full py-2 rounded-xl text-xs text-right px-3 transition-all focus:outline-none focus:ring-2 focus:ring-[#4B47BF] focus:ring-offset-1 border"
-              style={{ color: C.textLight, backgroundColor: 'transparent', borderColor: C.borderLight }}
-            >
-              אפס הגדרות
-            </button>
-          </div>
-        </div>
-      )}
-
-      <button
-        onClick={() => setOpen(o => !o)}
-        aria-label={open ? 'סגור תפריט נגישות' : 'פתח תפריט נגישות'}
-        aria-expanded={open}
-        aria-haspopup="dialog"
-        tabIndex={0}
-        title="כלי נגישות"
-        className="w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#4B47BF] border-2"
-        style={{
-          backgroundColor: '#FFFFFF',
-          borderColor: C.purple,
-          color: C.purple,
-        }}
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" aria-hidden="true">
-          <path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-1 5.5c-.55 0-1 .45-1 1v3.5l-2.36 4.72A1 1 0 0 0 8.55 18c.45 0 .87-.27 1.06-.69L11 14.5h2l1.39 2.81c.19.42.61.69 1.06.69a1 1 0 0 0 .91-1.42L14 11V8.5c0-.55-.45-1-1-1h-2z"/>
-        </svg>
-      </button>
-    </div>
-  );
-}
-
-// ======================
 // FLOATING CONTACT BUTTON
 // ======================
-
-const SAGE = '#7B9E87';
-const SAGE_HOVER = '#5E8A72';
 
 function FloatingContactButton({ onClick }: { onClick: () => void }) {
   const [hovered, setHovered] = React.useState(false);
@@ -337,8 +177,8 @@ function FloatingContactButton({ onClick }: { onClick: () => void }) {
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
       {hovered && (
         <div
-          className="px-3.5 py-1.5 rounded-full text-xs font-medium text-white shadow-lg"
-          style={{ background: SAGE, whiteSpace: 'nowrap' }}
+          className="px-3 py-1.5 rounded-md text-xs font-medium text-white shadow-md"
+          style={{ backgroundColor: C.plum, whiteSpace: 'nowrap' }}
         >
           יצירת קשר מהירה
         </div>
@@ -350,8 +190,8 @@ function FloatingContactButton({ onClick }: { onClick: () => void }) {
         onMouseLeave={() => setHovered(false)}
         onFocus={() => setHovered(true)}
         onBlur={() => setHovered(false)}
-        className="contact-pulse relative w-14 h-14 rounded-full text-white shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#7B9E87]"
-        style={{ background: hovered ? SAGE_HOVER : SAGE }}
+        className="relative w-12 h-12 rounded-full text-white shadow-lg flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4A2C40]"
+        style={{ backgroundColor: hovered ? C.plumHover : C.plum }}
         aria-label="פתח טופס יצירת קשר"
         title="יצירת קשר מהירה"
         tabIndex={0}
@@ -359,7 +199,7 @@ function FloatingContactButton({ onClick }: { onClick: () => void }) {
         <svg
           viewBox="0 0 24 24"
           fill="none"
-          className="w-6 h-6"
+          className="w-5 h-5"
           stroke="currentColor"
           strokeWidth={1.8}
         >
@@ -390,8 +230,8 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     color: C.textDark,
   };
   const focusIn = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.target.style.borderColor = C.pink;
-    e.target.style.boxShadow = `0 0 0 3px rgba(201,31,130,0.1)`;
+    e.target.style.borderColor = C.rose;
+    e.target.style.boxShadow = `0 0 0 3px rgba(216,27,96,0.1)`;
   };
   const focusOut = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.target.style.borderColor = C.border;
@@ -400,7 +240,6 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 
   return (
     <>
-      {/* Backdrop */}
       <div
         className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
         style={{ animation: 'fadeInOverlay 0.2s ease forwards' }}
@@ -408,18 +247,16 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         aria-hidden="true"
       />
 
-      {/* Panel */}
       <aside
         className="fixed top-0 right-0 h-full w-80 z-50 flex flex-col text-right"
         dir="rtl"
         style={{
           backgroundColor: C.cream,
           borderLeft: `1px solid ${C.border}`,
-          boxShadow: '-14px 0 56px rgba(0,0,0,0.13)',
+          boxShadow: '-12px 0 48px rgba(74,44,64,0.12)',
           animation: 'slideInFromRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         }}
       >
-        {/* Drawer header */}
         <div
           className="flex items-center justify-between px-5 py-4 border-b"
           style={{ borderColor: C.border }}
@@ -444,18 +281,14 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
           </div>
         </div>
 
-        {/* Drawer body */}
         <div className="flex-1 overflow-y-auto px-5 py-6">
-          <div
-            className="w-12 h-0.5 mb-6"
-            style={{ background: `linear-gradient(to left, ${C.goldLight}, ${C.gold})` }}
-          />
+          <div className="w-10 h-px mb-6" style={{ backgroundColor: C.border }} />
 
           {sent ? (
             <div className="text-center py-10">
               <div
                 className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4"
-                style={{ background: C.ctaGrad }}
+                style={{ backgroundColor: C.plum }}
               >
                 <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
@@ -478,7 +311,7 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="שמכם"
-                  className="w-full px-4 py-2.5 rounded-xl text-sm text-right focus:outline-none border transition-all"
+                  className="w-full px-4 py-2.5 rounded-md text-sm text-right focus:outline-none border transition-all"
                   style={inputStyle}
                   onFocus={focusIn}
                   onBlur={focusOut}
@@ -493,7 +326,7 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="05X-XXXXXXX"
                   dir="ltr"
-                  className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none border transition-all"
+                  className="w-full px-4 py-2.5 rounded-md text-sm focus:outline-none border transition-all"
                   style={inputStyle}
                   onFocus={focusIn}
                   onBlur={focusOut}
@@ -506,7 +339,7 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="במה אוכל לעזור?"
-                  className="w-full px-4 py-2.5 rounded-xl text-sm text-right resize-none focus:outline-none border transition-all"
+                  className="w-full px-4 py-2.5 rounded-md text-sm text-right resize-none focus:outline-none border transition-all"
                   style={inputStyle}
                   onFocus={focusIn}
                   onBlur={focusOut}
@@ -514,10 +347,10 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               </div>
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
-                style={{ background: C.ctaGrad }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = C.ctaGradHover)}
-                onMouseLeave={(e) => (e.currentTarget.style.background = C.ctaGrad)}
+                className="w-full py-3 rounded-md text-white text-sm font-medium transition-colors duration-200"
+                style={{ backgroundColor: C.plum }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.plumHover)}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.plum)}
               >
                 שלחו הודעה
               </button>
@@ -525,14 +358,13 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
           )}
         </div>
 
-        {/* Drawer footer */}
         <div className="px-5 py-4 border-t text-center" style={{ borderColor: C.border }}>
           <a
             href="tel:0502961213"
             className="text-sm font-medium transition-colors"
-            style={{ color: C.pink, direction: 'ltr' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = C.pinkLight)}
-            onMouseLeave={(e) => (e.currentTarget.style.color = C.pink)}
+            style={{ color: C.rose, direction: 'ltr' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = C.plum)}
+            onMouseLeave={(e) => (e.currentTarget.style.color = C.rose)}
           >
             050-296-1213
           </a>
@@ -556,8 +388,8 @@ export default function Home() {
 
   const focusStyle = {
     onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      e.target.style.borderColor = C.pink;
-      e.target.style.boxShadow = `0 0 0 3px rgba(201,31,130,0.1)`;
+      e.target.style.borderColor = C.rose;
+      e.target.style.boxShadow = `0 0 0 3px rgba(216,27,96,0.1)`;
     },
     onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       e.target.style.borderColor = C.border;
@@ -574,8 +406,8 @@ export default function Home() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
 
-      {/* ===== ACCESSIBILITY WIDGET ===== */}
-      <AccessibilityWidget />
+      {/* ===== INTRO ANIMATION ===== */}
+      <IntroAnimation />
 
       {/* ===== FLOATING CONTACT BUTTON ===== */}
       <FloatingContactButton onClick={() => setDrawerOpen(true)} />
@@ -586,10 +418,9 @@ export default function Home() {
       {/* ===== HEADER ===== */}
       <header
         className="sticky top-0 z-50 backdrop-blur-sm border-b"
-        style={{ backgroundColor: 'rgba(250,248,245,0.97)', borderColor: C.borderLight }}
+        style={{ backgroundColor: 'rgba(253,248,245,0.97)', borderColor: C.borderLight }}
       >
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 md:h-[72px] flex items-center justify-between">
-          {/* Logo - DOM first, rightmost position in RTL */}
           <a href="#" className="flex items-center flex-shrink-0">
             <img
               src="/logo.jpg"
@@ -599,7 +430,6 @@ export default function Home() {
             />
           </a>
 
-          {/* Desktop navigation - hidden on mobile */}
           <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: C.textMid }}>
             {(['אודות', 'תחומי טיפול', 'קלפים טיפוליים', 'הגישה שלי', 'יצירת קשר'] as const).map(
               (label, i) => {
@@ -609,8 +439,8 @@ export default function Home() {
                     key={label}
                     href={hrefs[i]}
                     className="transition-colors duration-200"
-                    onMouseEnter={e => (e.currentTarget.style.color = C.pink)}
-                    onMouseLeave={e => (e.currentTarget.style.color = C.textMid)}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = C.rose)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = C.textMid)}
                   >
                     {label}
                   </a>
@@ -619,14 +449,13 @@ export default function Home() {
             )}
           </nav>
 
-          {/* Actions - DOM last, leftmost in RTL: desktop CTA + mobile hamburger */}
           <div className="flex items-center gap-3">
             <CtaButton href="#contact" className="hidden md:inline-block px-5 py-2 text-xs">
               לתיאום פגישה
             </CtaButton>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#C91F82]"
+              className="md:hidden w-10 h-10 flex items-center justify-center rounded-md transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#D81B60]"
               style={{ color: C.textDark }}
               aria-label={mobileMenuOpen ? 'סגור תפריט' : 'פתח תפריט'}
               aria-expanded={mobileMenuOpen}
@@ -645,12 +474,11 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile dropdown menu */}
         {mobileMenuOpen && (
           <div
             id="mobile-nav"
             className="md:hidden border-t"
-            style={{ backgroundColor: 'rgba(250,248,245,0.99)', borderColor: C.borderLight }}
+            style={{ backgroundColor: 'rgba(253,248,245,0.99)', borderColor: C.borderLight }}
           >
             <nav className="max-w-6xl mx-auto px-4 py-2 flex flex-col text-right">
               {(['אודות', 'תחומי טיפול', 'קלפים טיפוליים', 'הגישה שלי', 'יצירת קשר'] as const).map(
@@ -663,8 +491,8 @@ export default function Home() {
                       onClick={() => setMobileMenuOpen(false)}
                       className="py-3 text-sm font-medium border-b last:border-b-0 transition-colors"
                       style={{ color: C.textDark, borderColor: C.borderLight }}
-                      onMouseEnter={e => (e.currentTarget.style.color = C.pink)}
-                      onMouseLeave={e => (e.currentTarget.style.color = C.textDark)}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = C.rose)}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = C.textDark)}
                     >
                       {label}
                     </a>
@@ -683,88 +511,58 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden">
-
-        {/* Diagonal warm cream panel on the portrait side */}
+        {/* Subtle warm panel on the portrait side */}
         <div
           className="absolute top-0 right-0 h-full -z-10"
           style={{
-            width: '50%',
-            background: `linear-gradient(160deg, ${C.creamAlt} 0%, ${C.creamDeep} 100%)`,
-            clipPath: 'polygon(14% 0%, 100% 0%, 100% 100%, 0% 100%)',
+            width: '48%',
+            backgroundColor: C.creamAlt,
+            clipPath: 'polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%)',
           }}
         />
 
-        {/* Dot-grid texture overlay */}
-        <svg
-          className="absolute inset-0 w-full h-full -z-10"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <defs>
-            <pattern id="hero-dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
-              <circle cx="1.5" cy="1.5" r="1" fill={C.gold} opacity="0.18" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hero-dots)" />
-        </svg>
-
-        {/* Pink radial glow top-right — stronger */}
-        <div
-          className="absolute -top-24 right-8 w-[500px] h-[500px] rounded-full -z-10"
-          style={{ background: 'radial-gradient(circle, rgba(201,31,130,0.14) 0%, transparent 65%)' }}
-        />
-        {/* Gold warm glow center-right */}
-        <div
-          className="absolute top-1/3 right-1/4 w-80 h-80 rounded-full -z-10"
-          style={{ background: 'radial-gradient(circle, rgba(212,168,83,0.13) 0%, transparent 65%)' }}
-        />
-        {/* Purple glow bottom-left */}
-        <div
-          className="absolute bottom-0 -left-16 w-80 h-80 rounded-full -z-10"
-          style={{ background: 'radial-gradient(circle, rgba(75,71,191,0.09) 0%, transparent 65%)' }}
-        />
-
-        <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-24 flex flex-col md:flex-row items-center gap-6 md:gap-12">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-36 md:pb-52 flex flex-col md:flex-row items-center gap-10 md:gap-16">
 
           {/* Text block */}
           <div className="flex-1 text-center md:text-right w-full">
+            <p
+              className="text-xs font-semibold tracking-[0.22em] uppercase mb-5"
+              style={{ color: C.rose }}
+            >
+              מרכז טיפולי-לימודי
+            </p>
 
-            <div className="relative inline-block mb-3">
-              <h1
-                className="font-display text-[3.8rem] sm:text-[5rem] md:text-[5.5rem] lg:text-[8rem] font-light leading-[1.0]"
-                style={{ color: C.textDark }}
-              >
-                כנפיים
-                <br />
-                לעוף
-              </h1>
-              {/* Decorative gold arc behind the headline */}
-              <div
-                className="absolute -bottom-3 right-0 left-0 h-1 rounded-full opacity-40"
-                style={{ background: `linear-gradient(to left, ${C.gold}, transparent)` }}
-              />
-            </div>
+            <h1
+              className="font-display text-[3.6rem] sm:text-[4.8rem] md:text-[6rem] lg:text-[7.5rem] font-light leading-[1.0]"
+              style={{ color: C.plum, letterSpacing: '-0.02em' }}
+            >
+              כנפיים
+              <br />
+              לעוף
+            </h1>
+
+            <div className="w-16 h-px my-6 mx-auto md:mx-0" style={{ backgroundColor: C.border }} />
 
             <p
-              className="text-lg md:text-2xl font-light leading-relaxed mb-5 md:mb-9 mx-auto md:mx-0"
+              className="text-lg md:text-xl font-light leading-[1.8] mb-8 md:mb-10 mx-auto md:mx-0"
               style={{ color: C.textMid, maxWidth: '28rem' }}
             >
               <span className="block">ליווי לצמיחה, חיזוק וחיבור עצמי</span>
-              <span className="block mt-3 md:mt-4">לילדים, נערות ונשים</span>
+              <span className="block">לילדים, נערות ונשים</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-end">
               <CtaButton href="#contact">לתיאום שיחת היכרות</CtaButton>
               <a
                 href="#services"
-                className="px-9 py-3.5 rounded-full text-sm font-medium text-center transition-all border"
+                className="px-8 py-3.5 rounded-md text-sm font-medium text-center transition-all border"
                 style={{ borderColor: C.border, color: C.textMid, backgroundColor: 'transparent' }}
-                onMouseEnter={e => {
+                onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = C.creamAlt;
-                  e.currentTarget.style.borderColor = C.gold;
-                  e.currentTarget.style.color = C.textDark;
+                  e.currentTarget.style.borderColor = C.plum;
+                  e.currentTarget.style.color = C.plum;
                 }}
-                onMouseLeave={e => {
+                onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = 'transparent';
                   e.currentTarget.style.borderColor = C.border;
                   e.currentTarget.style.color = C.textMid;
@@ -774,154 +572,145 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Trust / credential strip */}
-            <div className="mt-4 md:mt-8 flex flex-wrap gap-2 md:gap-2.5 justify-center md:justify-end">
-              {['+20 שנות ניסיון', 'CBT מוסמכת', 'EMR מוסמכת', 'NLP מוסמכת'].map((label) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs border"
-                  style={{
-                    borderColor: C.borderLight,
-                    color: C.textMid,
-                    backgroundColor: 'rgba(255,255,255,0.65)',
-                    backdropFilter: 'blur(4px)',
-                  }}
-                >
-                  <SparkleIcon size={7} style={{ color: C.goldLight }} />
-                  {label}
-                </div>
-              ))}
+            {/* Trust strip */}
+            <div className="mt-8 md:mt-10 flex flex-wrap gap-2 justify-center md:justify-end">
+              {['+20 שנות ניסיון', 'CBT מוסמכת', 'EMR מוסמכת', 'NLP מוסמכת', 'בעלת תואר שני בחינוך'].map(
+                (label) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs border"
+                    style={{
+                      borderColor: C.borderLight,
+                      color: C.textMid,
+                      backgroundColor: 'rgba(255,255,255,0.7)',
+                    }}
+                  >
+                    <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.rose }} />
+                    {label}
+                  </div>
+                )
+              )}
             </div>
           </div>
 
           {/* Portrait */}
-          <div className="flex-shrink-0 relative">
-            {/* Pink glow halo behind portrait */}
+          <div className="flex-shrink-0 relative" style={{ marginTop: '-3.5rem' }}>
             <div
-              className="absolute inset-0 -z-10 rounded-3xl"
+              className="relative w-60 h-[320px] sm:w-72 sm:h-[400px] md:w-80 md:h-[460px] rounded-2xl overflow-hidden"
               style={{
-                background: 'radial-gradient(ellipse at 60% 40%, rgba(201,31,130,0.18) 0%, transparent 68%)',
-                transform: 'scale(1.35)',
-              }}
-            />
-
-            {/* Portrait container with warm background */}
-            <div
-              className="relative w-60 h-[300px] sm:w-72 sm:h-96 md:w-80 md:h-[440px] rounded-3xl overflow-hidden shadow-2xl"
-              style={{
-                background: `linear-gradient(160deg, ${C.creamDeep} 0%, ${C.creamAlt} 100%)`,
+                border: `1px solid ${C.borderLight}`,
+                boxShadow: '0 4px 32px rgba(74,44,64,0.1), 0 1px 4px rgba(74,44,64,0.05)',
               }}
             >
               <img
                 src="/founder_portrait.jpg"
                 alt="גאולה אלון"
-                className="w-full h-full object-cover"
-                style={{ objectPosition: 'top center' }}
+                className="w-full h-full object-cover object-top"
               />
             </div>
 
-            {/* Floating years badge */}
+            {/* Credentials pill — top left */}
             <div
-              className="absolute -bottom-2 -left-4 md:-left-10 px-3.5 py-2.5 rounded-2xl text-center shadow-lg"
-              style={{
-                background: C.ctaGrad,
-                color: 'white',
-                boxShadow: '0 6px 24px rgba(232,71,120,0.35)',
-              }}
-            >
-              <div className="font-display text-2xl font-semibold leading-none">+20</div>
-              <div className="text-[0.6rem] font-light opacity-90 mt-0.5">שנות ניסיון</div>
-            </div>
-
-            {/* Floating credentials pill */}
-            <div
-              className="absolute -top-3 -left-3 md:-top-4 md:-left-6 px-3 py-2 rounded-2xl border shadow-md"
-              style={{
-                background: 'rgba(255,255,255,0.95)',
-                borderColor: C.border,
-              }}
+              className="absolute -top-3 -left-3 md:-top-4 md:-left-5 px-3.5 py-2 rounded-md border shadow-sm"
+              style={{ backgroundColor: C.cream, borderColor: C.border }}
             >
               <div className="text-[0.6rem] font-light mb-0.5" style={{ color: C.textLight }}>
                 מוסמכת ב
               </div>
-              <div className="text-xs font-semibold" style={{ color: C.textDark }}>
+              <div className="text-xs font-semibold" style={{ color: C.plum }}>
                 CBT · EMR · NLP
               </div>
+            </div>
+
+            {/* Years badge — bottom left */}
+            <div
+              className="absolute -bottom-3 -left-3 md:-left-8 px-4 py-3 rounded-md text-center"
+              style={{
+                backgroundColor: C.plum,
+                color: 'white',
+                boxShadow: '0 4px 20px rgba(74,44,64,0.3)',
+              }}
+            >
+              <div className="font-display text-2xl font-semibold leading-none">+20</div>
+              <div className="text-[0.6rem] font-light opacity-80 mt-0.5">שנות ניסיון</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section divider */}
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         <SectionDivider />
       </div>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-16">
-        <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center">
+      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-16 md:py-24">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
           {/* Images column */}
-          <div className="relative order-2 md:order-1 sr sr-d1 mb-6 md:mb-0">
-            <div className="relative w-full h-[260px] md:h-[360px] rounded-3xl overflow-hidden shadow-lg">
+          <div className="relative order-2 md:order-1 sr sr-d1">
+            <div
+              className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden"
+              style={{ boxShadow: '0 2px 20px rgba(74,44,64,0.08)' }}
+            >
               <img
                 src="/founder_speaking.jpg"
                 alt="גאולה אלון בהרצאה"
-                className="w-full h-full object-contain object-center"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <div
-              className="hidden md:block absolute -bottom-6 -left-4 w-44 h-28 rounded-2xl overflow-hidden shadow-xl border-2"
-              style={{ borderColor: '#FFFFFF' }}
+              className="hidden md:block absolute -bottom-6 -left-4 w-44 aspect-video rounded-xl overflow-hidden border-2"
+              style={{
+                borderColor: C.cream,
+                boxShadow: '0 4px 20px rgba(74,44,64,0.12)',
+              }}
             >
               <img
                 src="/conference_audience.jpg"
                 alt="קהל בהרצאה"
-                className="w-full h-full object-contain object-center"
+                className="w-full h-full object-cover object-top"
               />
             </div>
-            <div
-              className="absolute -top-5 -left-5 w-16 h-16 rounded-full -z-10 opacity-35"
-              style={{ backgroundColor: C.pinkLight, filter: 'blur(22px)' }}
-            />
           </div>
 
           {/* Text column */}
           <div className="text-center md:text-right order-1 md:order-2 sr sr-d2">
             <SectionLabel text="אודות" />
-            <h2 className="font-display text-4xl md:text-5xl font-light" style={{ color: C.textDark }}>
+            <h2
+              className="font-display text-4xl md:text-5xl font-light"
+              style={{ color: C.plum, letterSpacing: '-0.02em' }}
+            >
               גאולה אלון
             </h2>
-            <GoldRule className="mx-auto md:mx-0" />
-            <div className="space-y-4 font-light leading-loose text-[1.05rem]" style={{ color: C.textMid }}>
+            <Rule className="mx-auto md:mx-0" />
+            <div className="space-y-4 font-light leading-[1.8] text-[1.05rem]" style={{ color: C.textMid }}>
               <p>
-                מעל עשרים שנה של ניסיון קליני ולימודי עם ילדים, נערות ונשים הם הבסיס שממנו
-                צמח המרכז. הדרך לשינוי אמיתי עוברת דרך הבנה עמוקה ומכילה של הצרכים
-                הייחודיים של כל אדם, ומתוך מרחב שמרגיש כמו בית.
+                בעלת תואר שני בחינוך ומעל עשרים שנה של ניסיון קליני ולימודי עם ילדים, נערות ונשים.
+                הדרך לשינוי אמיתי עוברת דרך הבנה עמוקה ומכילה של הצרכים הייחודיים של כל אדם,
+                ומתוך מרחב שמרגיש כמו בית.
               </p>
               <p>
                 הגישה הטיפולית הוליסטית משלבת שיטות מוכחות: טיפול קוגניטיבי-התנהגותי (CBT),
-                EMR, NLP ולימוד מתקן (Remedial Teaching), כולן מותאמות אישית לפי הצורך
-                הספציפי של כל מטופל, בכל שלב בדרך.
+                EMR ו-NLP, כולן מותאמות אישית לפי הצורך הספציפי של כל מטופל, בכל שלב בדרך.
               </p>
               <p>
                 אני מאמינה שכל אדם נושא בתוכו משאבים ויכולות. תפקידי הוא לעזור לך לגלות
-                אותם, לחזק אותם ולהשתמש בהם כדי לצמוח, להתפתח ולחיות חיים מלאים ומשמעותיים.
+                אותם, לחזק אותם ולהשתמש בהם כדי לצמוח ולחיות חיים מלאים ומשמעותיים.
               </p>
             </div>
 
-            <div className="mt-5 md:mt-7 grid grid-cols-3 gap-3 md:gap-4 text-center">
+            <div className="mt-6 md:mt-8 grid grid-cols-3 gap-3 text-center">
               {[
                 { num: '+20', label: 'שנות ניסיון' },
-                { num: 'CBT',  label: 'טיפול קוגניטיבי' },
-                { num: 'NLP',  label: 'נוירו-לשוני' },
+                { num: 'CBT', label: 'טיפול קוגניטיבי' },
+                { num: 'NLP', label: 'נוירו-לשוני' },
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl py-4 px-2 border"
+                  className="rounded-md py-4 px-2 border"
                   style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
                 >
-                  <div className="font-display text-2xl font-semibold" style={{ color: C.pink }}>
+                  <div className="font-display text-2xl font-semibold" style={{ color: C.plum }}>
                     {stat.num}
                   </div>
                   <div className="text-xs mt-1 font-light" style={{ color: C.textLight }}>
@@ -934,151 +723,294 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== SERVICES ===== */}
-      <section id="services" className="py-10 md:py-16" style={{ backgroundColor: C.creamAlt }}>
+      {/* ===== METHODS & EXPERTISE ===== */}
+      <section id="methods" className="py-16 md:py-20" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="text-center md:text-right mb-5 md:mb-9 sr">
+          <div className="text-center md:text-right mb-10 sr">
+            <SectionLabel text="גישה טיפולית" />
+            <h2
+              className="font-display text-4xl md:text-5xl font-light"
+              style={{ color: C.plum, letterSpacing: '-0.02em' }}
+            >
+              הגישה הטיפולית ותחומי המומחיות
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 md:gap-14">
+
+            {/* Methods column */}
+            <div className="text-right sr sr-d1">
+              <Rule className="mx-auto md:mx-0" />
+              <p className="text-[1.05rem] font-light leading-[1.8] mb-5" style={{ color: C.textMid }}>
+                במסגרת הטיפול, המטופל מקבל שילוב מדויק של מגוון כלים מתקדמים, המותאמים אישית לתוצאה האפקטיבית ביותר:
+              </p>
+              <div className="space-y-3">
+                {[
+                  {
+                    method: 'CBT',
+                    desc: 'טיפול קוגניטיבי-התנהגותי המסייע לזהות ולשנות דפוסי חשיבה והתנהגות שליליים המגבילים את איכות החיים.',
+                  },
+                  {
+                    method: 'EMR',
+                    desc: 'שיטה המשלבת עיבוד רגשי ותנועות עיניים לטיפול בטראומה, בחרדות ובמצוקה רגשית עמוקה.',
+                  },
+                  {
+                    method: 'NLP',
+                    desc: 'תכנות נוירו-לשוני המאפשר שינוי דפוסים מנטליים ורגשיים לשיפור יכולות, ביטחון עצמי ותקשורת.',
+                  },
+                ].map(({ method, desc }) => (
+                  <div
+                    key={method}
+                    className="rounded-md p-4 border text-right"
+                    style={{ backgroundColor: C.cream, borderColor: C.border }}
+                  >
+                    <span className="text-sm font-bold" style={{ color: C.plum }}>{method}: </span>
+                    <span className="text-sm font-light leading-[1.8]" style={{ color: C.textMid }}>{desc}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Expertise column */}
+            <div className="text-right sr sr-d2">
+              <Rule className="mx-auto md:mx-0" />
+              <p className="text-[1.05rem] font-light leading-[1.8] mb-5" style={{ color: C.textMid }}>
+                ניסיון רב ומוכח בתחומים הבאים:
+              </p>
+              <div className="space-y-2.5">
+                {[
+                  'ויסות רגשי וחרדות',
+                  'חיזוק ביטחון ודימוי עצמי',
+                  'התמודדות עם מצבי משבר, שינוי וטראומה',
+                  'קשיים חברתיים ורגשיים',
+                  'קשיי למידה, קריאה, כתיבה וקשב',
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-3 rounded-md px-4 py-3 border"
+                    style={{ backgroundColor: C.cream, borderColor: C.border }}
+                  >
+                    <div
+                      className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: C.rose }}
+                    />
+                    <span className="text-sm font-light" style={{ color: C.textMid }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="mt-8 md:mt-10 rounded-md p-6 md:p-8 text-right border sr"
+            style={{ backgroundColor: C.cream, borderColor: C.border }}
+          >
+            <p className="text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
+              המרכז שם דגש על עבודה בשיתוף ההורים, הקשבה עמוקה, בניית אמון, ומתן כלים פרקטיים ליום-יום — כדי שהשינוי לא יישאר רק בחדר הטיפול, אלא ילווה גם את החיים עצמם.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SERVICES ===== */}
+      <section id="services" className="py-16 md:py-20" style={{ backgroundColor: C.cream }}>
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center md:text-right mb-8 md:mb-12 sr">
             <SectionLabel text="תחומי טיפול" />
-            <h2 className="font-display text-4xl md:text-5xl font-light" style={{ color: C.textDark }}>
+            <h2
+              className="font-display text-4xl md:text-5xl font-light"
+              style={{ color: C.plum, letterSpacing: '-0.02em' }}
+            >
               במה אני יכולה לעזור
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-3xl p-5 md:p-7 text-right border overflow-hidden transition-all duration-300 hover:shadow-xl ${
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-md p-6 md:p-8 text-right border transition-all duration-200 ${
                   i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
                 style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = C.pinkLight;
-                  e.currentTarget.style.boxShadow = `0 8px 36px rgba(201,31,130,0.09)`;
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = C.plum;
+                  e.currentTarget.style.boxShadow = '0 2px 16px rgba(74,44,64,0.08)';
                 }}
-                onMouseLeave={e => {
+                onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = C.border;
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
                 <div
-                  className="font-display absolute top-2 left-4 text-[5.5rem] font-bold leading-none select-none pointer-events-none"
-                  style={{ color: 'rgba(201,31,130,0.045)' }}
-                  aria-hidden="true"
+                  className="w-8 h-px mb-5 transition-all duration-300 group-hover:w-14"
+                  style={{ backgroundColor: C.rose, opacity: 0.5 }}
+                />
+                <h3
+                  className="font-display text-xl font-medium mb-2.5"
+                  style={{ color: C.plum, letterSpacing: '-0.02em' }}
                 >
-                  {String(i + 1).padStart(2, '0')}
-                </div>
-                <div className="relative">
-                  <div
-                    className="w-10 h-0.5 mb-5 transition-all duration-300 group-hover:w-16"
-                    style={{ background: `linear-gradient(to left, ${C.goldLight}, ${C.gold})` }}
-                  />
-                  <h3 className="font-display text-xl font-medium mb-2.5" style={{ color: C.textDark }}>
-                    {service.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed font-light" style={{ color: C.textMid }}>
-                    {service.description}
-                  </p>
-                </div>
+                  {service.title}
+                </h3>
+                <p className="text-sm leading-[1.8] font-light" style={{ color: C.textMid }}>
+                  {service.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Section divider */}
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        <SectionDivider />
+      </div>
+
+      {/* ===== LECTURES & TRAINING ===== */}
+      <section id="lectures" className="py-16 md:py-20" style={{ backgroundColor: C.cream }}>
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+
+            {/* Image column */}
+            <div className="relative order-2 md:order-1 sr sr-d1">
+              <div
+                className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden"
+                style={{ boxShadow: '0 2px 20px rgba(74,44,64,0.08)' }}
+              >
+                <img
+                  src="/conference_audience.jpg"
+                  alt="הרצאות והדרכות"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+            </div>
+
+            {/* Text column */}
+            <div className="text-center md:text-right order-1 md:order-2 sr sr-d2">
+              <SectionLabel text="הרצאות והדרכות" />
+              <h2
+                className="font-display text-3xl md:text-4xl font-light leading-snug"
+                style={{ color: C.plum, letterSpacing: '-0.02em' }}
+              >
+                הרצאות והדרכות להורים, צוותי חינוך וקהילה
+              </h2>
+              <Rule className="mx-auto md:mx-0" />
+              <div className="space-y-4 font-light leading-[1.8] text-[1.05rem]" style={{ color: C.textMid }}>
+                <p>
+                  הרצאות מקצועיות וחווייתיות בנושאים רגשיים, חינוכיים ולימודיים, המיועדות להורים,
+                  צוותי חינוך, בתי ספר, גנים וקהילות.
+                </p>
+                <p>
+                  ההרצאות משלבות ידע מקצועי מעולמות הטיפול הרגשי, CBT והעבודה החינוכית, לצד
+                  כלים פרקטיים שניתן לקחת מיד לחיי היום-יום.
+                </p>
+              </div>
+
+              <div className="mt-6 md:mt-8">
+                <p
+                  className="text-sm font-semibold mb-4 text-center md:text-right"
+                  style={{ color: C.plum }}
+                >
+                  בין נושאי ההרצאות:
+                </p>
+                <ul className="space-y-2.5">
+                  {[
+                    'חיזוק ביטחון עצמי אצל ילדים',
+                    'ויסות רגשי והתמודדות עם חרדות',
+                    'פיתוח מיומנויות חברתיות',
+                    'הצבת גבולות וחיזוק הקשר בין הורים לילדים',
+                    'הבנת הקשר בין קושי רגשי לקשיי למידה',
+                    'כלים מעשיים לתקשורת מקרבת בבית ובמסגרת החינוכית',
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-3 justify-center md:justify-end">
+                      <span className="text-sm font-light text-right" style={{ color: C.textMid }}>{item}</span>
+                      <div
+                        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: C.rose, opacity: 0.55 }}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-6 md:mt-8 flex justify-center md:justify-end">
+                <CtaButton href="#contact">לפרטים ותיאום הרצאה</CtaButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
         <SectionDivider />
       </div>
 
       {/* ===== THERAPY CARDS ===== */}
-      <section id="cards" className="py-10 md:py-16" style={{ backgroundColor: C.cream }}>
+      <section id="cards" className="py-16 md:py-20" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
-          <div className="text-center md:text-right mb-5 md:mb-11 sr">
+          <div className="text-center md:text-right mb-8 md:mb-12 sr">
             <SectionLabel text="קלפים טיפוליים" />
             <h2
-              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-snug"
-              style={{ color: C.textDark }}
+              className="font-display text-3xl sm:text-4xl md:text-5xl font-light leading-snug"
+              style={{ color: C.plum, letterSpacing: '-0.02em' }}
             >
-              קלפים שמדליקים אור בכל ילד!
+              קלפים שמדליקים אור בכל ילד
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-14 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
-            {/* Cards product image */}
+            {/* Cards image */}
             <div className="relative flex justify-center order-2 md:order-1 sr sr-d1">
-              <div className="relative">
-                <div
-                  className="absolute inset-0 rounded-3xl -z-10"
-                  style={{
-                    background:
-                      'radial-gradient(ellipse at 40% 45%, rgba(212,168,83,0.28) 0%, rgba(201,31,130,0.09) 55%, transparent 72%)',
-                    transform: 'scale(1.28)',
-                  }}
+              <div
+                className="relative w-full max-w-[340px] rounded-2xl overflow-hidden"
+                style={{
+                  border: `1px solid ${C.borderLight}`,
+                  boxShadow: '0 4px 28px rgba(74,44,64,0.08)',
+                }}
+              >
+                <img
+                  src="/therapy_cards_box.jpg"
+                  alt="קלפי ניצוץ"
+                  className="w-full h-auto object-cover object-top"
                 />
-                <div className="relative w-full max-w-[340px] rounded-3xl overflow-hidden shadow-2xl">
-                  <img
-                    src="/therapy_cards_box.jpg"
-                    alt="קלפי ניצוץ"
-                    className="w-full h-auto object-contain object-center"
-                  />
-                </div>
-                <div
-                  className="absolute -top-5 -left-5 w-16 h-16 rounded-full -z-10 opacity-45"
-                  style={{ backgroundColor: C.pinkLight, filter: 'blur(22px)' }}
-                />
-                <div
-                  className="absolute top-4 right-4 flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold shadow-md"
-                  style={{
-                    background: 'rgba(255,255,255,0.93)',
-                    color: C.pink,
-                    border: `1px solid ${C.border}`,
-                  }}
-                >
-                  <SparkleIcon size={9} style={{ color: C.goldLight }} />
-                  ניצוץ
-                </div>
               </div>
             </div>
 
             {/* Cards text */}
             <div className="text-center md:text-right order-1 md:order-2 sr sr-d2">
-              <GoldRule className="mx-auto md:mx-0" />
-              <div className="space-y-5 font-light leading-loose text-[1.05rem]" style={{ color: C.textMid }}>
+              <Rule className="mx-auto md:mx-0" />
+              <div className="space-y-5 font-light leading-[1.8] text-[1.05rem]" style={{ color: C.textMid }}>
                 <p>
                   קלפי "ניצוץ" נוצרו כדי לתת לכל ילד מרחב בטוח לביטוי עצמי. כל קלף
                   מזמין שיחה שמאפשרת לילד לבטא את עולמו הרגשי, להתחבר לכוחות הפנימיים
-                  שלו, ולחוות שהוא נראה, נשמע ומוקדש.
+                  שלו, ולחוות שהוא נראה, נשמע ומוקדד.
                 </p>
                 <p>
                   הקלפים פועלים כגשר תקשורת בין הורים לילדים. הם יוצרים שפה משותפת
-                  שמחזקת ומעמיקה את הקשר, בונה אמון ופותחת דיאלוג פתוח ואמיתי. הורים
-                  מגלים בהם כלי רב-עוצמה לחיבור מחדש בשגרת היומיום.
+                  שמחזקת ומעמיקה את הקשר, בונה אמון ופותחת דיאלוג פתוח ואמיתי.
                 </p>
                 <p>
-                  לצד החיבור ההורי, קלפי "ניצוץ" תומכים בבניית ביטחון עצמי ועמידות
-                  רגשית. שימוש קבוע בהם מסייע לילדים לפתח חוסן, לזהות את חוזקותיהם
+                  שימוש קבוע בהם מסייע לילדים לפתח חוסן, לזהות את חוזקותיהם
                   ולהתמודד טוב יותר עם אתגרי החיים.
                 </p>
               </div>
 
-              <div className="mt-5 md:mt-8 grid grid-cols-2 gap-2 md:gap-3">
+              <div className="mt-6 md:mt-8 grid grid-cols-2 gap-3">
                 {[
-                  { title: 'ביטוי עצמי',    subtitle: 'מרחב בטוח לעיבוד רגשות' },
-                  { title: 'קשר הורי',       subtitle: 'גשר תקשורת ואמון' },
-                  { title: 'דיאלוג פתוח',   subtitle: 'שיחות משמעותיות בבית' },
-                  { title: 'עמידות רגשית',  subtitle: 'ביטחון עצמי וחוסן' },
+                  { title: 'ביטוי עצמי', subtitle: 'מרחב בטוח לעיבוד רגשות' },
+                  { title: 'קשר הורי', subtitle: 'גשר תקשורת ואמון' },
+                  { title: 'דיאלוג פתוח', subtitle: 'שיחות משמעותיות בבית' },
+                  { title: 'עמידות רגשית', subtitle: 'ביטחון עצמי וחוסן' },
                 ].map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-2xl p-4 text-right border transition-all hover:shadow-md"
-                    style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor = C.pinkLight; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; }}
+                    className="rounded-md p-4 text-right border transition-colors duration-200"
+                    style={{ backgroundColor: C.cream, borderColor: C.border }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.plum; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; }}
                   >
-                    <div className="font-display text-lg font-semibold mb-0.5" style={{ color: C.pink }}>
+                    <div className="text-base font-semibold mb-0.5" style={{ color: C.plum }}>
                       {item.title}
                     </div>
                     <div className="text-xs font-light" style={{ color: C.textLight }}>
@@ -1088,61 +1020,66 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="mt-5 md:mt-8 flex justify-center md:justify-start">
+              <div className="mt-6 md:mt-8 flex justify-center md:justify-start">
                 <CtaButton href="#contact">לפרטים ורכישה</CtaButton>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* Section divider */}
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
         <SectionDivider />
       </div>
 
       {/* ===== APPROACH ===== */}
-      <section id="approach" className="py-10 md:py-16" style={{ backgroundColor: C.creamAlt }}>
+      <section id="approach" className="py-16 md:py-20" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="text-center md:text-right mb-5 md:mb-9 sr">
+          <div className="text-center md:text-right mb-8 md:mb-12 sr">
             <SectionLabel text="הגישה שלי" />
-            <h2 className="font-display text-4xl md:text-5xl font-light" style={{ color: C.textDark }}>
+            <h2
+              className="font-display text-4xl md:text-5xl font-light"
+              style={{ color: C.plum, letterSpacing: '-0.02em' }}
+            >
               מה מייחד את המרכז
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {features.map((feature, i) => (
               <Link
                 key={feature.title}
                 href={`/features/${feature.slug}`}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-2xl p-5 text-right border transition-all duration-300 block`}
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-md p-5 text-right border transition-all duration-200 block`}
                 style={{ backgroundColor: '#FFFFFF', borderColor: C.border, textDecoration: 'none' }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.backgroundColor = C.cream;
-                  e.currentTarget.style.borderColor = C.gold;
-                  e.currentTarget.style.boxShadow = `0 4px 20px rgba(184,149,106,0.15)`;
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = C.plum;
+                  e.currentTarget.style.boxShadow = '0 2px 16px rgba(74,44,64,0.08)';
                 }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.backgroundColor = '#FFFFFF';
+                onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = C.border;
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
                 <div
-                  className="w-9 h-9 rounded-full mb-4 flex items-center justify-center border"
-                  style={{ backgroundColor: C.creamAlt, borderColor: C.borderLight }}
+                  className="w-8 h-8 rounded-full mb-4 flex items-center justify-center"
+                  style={{ backgroundColor: C.creamAlt, border: `1px solid ${C.border}` }}
                 >
-                  <SparkleIcon size={12} style={{ color: i % 2 === 0 ? C.pink : C.gold }} />
+                  <div
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: i % 2 === 0 ? C.rose : C.plum }}
+                  />
                 </div>
-                <h3 className="font-display text-base font-semibold mb-2" style={{ color: C.textDark }}>
+                <h3
+                  className="font-display text-base font-semibold mb-2"
+                  style={{ color: C.plum, letterSpacing: '-0.01em' }}
+                >
                   {feature.title}
                 </h3>
-                <p className="text-xs leading-relaxed font-light" style={{ color: C.textMid }}>
+                <p className="text-xs leading-[1.8] font-light" style={{ color: C.textMid }}>
                   {feature.description}
                 </p>
-                <p className="text-xs mt-3 font-medium" style={{ color: C.pink }}>
+                <p className="text-xs mt-3 font-medium" style={{ color: C.rose }}>
                   קראו עוד &larr;
                 </p>
               </Link>
@@ -1152,17 +1089,20 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-10 md:py-16" style={{ backgroundColor: C.cream }}>
+      <section id="contact" className="py-16 md:py-20" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-5xl mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-5 gap-5 md:gap-10 items-start">
+          <div className="grid md:grid-cols-5 gap-6 md:gap-10 items-start">
 
             {/* Contact info */}
             <div className="md:col-span-2 text-center md:text-right sr sr-d1">
               <SectionLabel text="יצירת קשר" />
-              <h2 className="font-display text-3xl md:text-4xl font-light mb-3 md:mb-5 leading-snug" style={{ color: C.textDark }}>
+              <h2
+                className="font-display text-3xl md:text-4xl font-light mb-4 md:mb-6 leading-snug"
+                style={{ color: C.plum, letterSpacing: '-0.02em' }}
+              >
                 מוזמנים לפנות
               </h2>
-              <p className="font-light leading-loose mb-5 md:mb-8 text-[1.05rem]" style={{ color: C.textMid }}>
+              <p className="font-light leading-[1.8] mb-6 md:mb-8 text-[1.05rem]" style={{ color: C.textMid }}>
                 לשאלות, מידע נוסף או תיאום שיחת היכרות,
                 אני כאן. כל פניה מטופלת בדיסקרטיות ובמהירות.
               </p>
@@ -1170,7 +1110,7 @@ export default function Home() {
                 <div className="flex flex-col text-center md:text-right gap-1.5">
                   <span
                     className="text-xs font-semibold tracking-[0.18em] uppercase"
-                    style={{ color: C.gold }}
+                    style={{ color: C.rose }}
                   >
                     טלפון
                   </span>
@@ -1178,8 +1118,8 @@ export default function Home() {
                     href="tel:0502961213"
                     className="font-light transition-colors"
                     style={{ color: C.textDark, direction: 'ltr' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = C.pink)}
-                    onMouseLeave={e => (e.currentTarget.style.color = C.textDark)}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = C.rose)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = C.textDark)}
                   >
                     050-296-1213
                   </a>
@@ -1188,23 +1128,20 @@ export default function Home() {
                 <div className="flex flex-col text-center md:text-right gap-1.5">
                   <span
                     className="text-xs font-semibold tracking-[0.18em] uppercase"
-                    style={{ color: C.gold }}
+                    style={{ color: C.rose }}
                   >
                     מיקום
                   </span>
                   <span className="font-light" style={{ color: C.textDark }}>ישראל</span>
-                  <span
-                    className="text-sm font-medium leading-relaxed mt-1"
-                    style={{ color: C.pink }}
-                  >
-                    קיימת אפשרות לטיפולים מרחוק / מהבית באמצעות פגישות Zoom.
+                  <span className="text-sm font-medium leading-relaxed mt-1" style={{ color: C.plum }}>
+                    קיימת אפשרות לטיפולים מרחוק באמצעות פגישות Zoom.
                   </span>
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
                 <div className="flex flex-col text-center md:text-right gap-1.5">
                   <span
                     className="text-xs font-semibold tracking-[0.18em] uppercase"
-                    style={{ color: C.gold }}
+                    style={{ color: C.rose }}
                   >
                     שעות פעילות
                   </span>
@@ -1213,33 +1150,31 @@ export default function Home() {
                   </span>
                 </div>
               </div>
-              <div className="mt-6 md:mt-12 hidden md:flex justify-end" aria-hidden="true">
-                <svg viewBox="0 0 80 80" fill="none" style={{ width: 80, height: 80, opacity: 0.2 }}>
-                  <circle cx="40" cy="40" r="8"  fill={C.gold} opacity="0.5" />
-                  <circle cx="40" cy="40" r="20" stroke={C.gold} strokeWidth="0.8" opacity="0.35" fill="none" />
-                  <circle cx="40" cy="40" r="33" stroke={C.gold} strokeWidth="0.6" opacity="0.22" fill="none" />
-                  <path d="M40 32 Q43 24 48 18" stroke={C.pink} strokeWidth="0.8" opacity="0.25" fill="none" />
-                  <path d="M40 32 Q37 26 30 20" stroke={C.pink} strokeWidth="0.8" opacity="0.25" fill="none" />
-                </svg>
-              </div>
             </div>
 
             {/* Form card */}
             <div
-              className="md:col-span-3 rounded-3xl p-5 md:p-7 border shadow-sm sr sr-d2"
-              style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
+              className="md:col-span-3 rounded-md p-5 md:p-7 border sr sr-d2"
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderColor: C.border,
+                boxShadow: '0 1px 8px rgba(74,44,64,0.05)',
+              }}
             >
               {submitted ? (
                 <div className="py-14 text-center">
                   <div
                     className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
-                    style={{ background: C.ctaGrad }}
+                    style={{ backgroundColor: C.plum }}
                   >
                     <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="font-display text-2xl font-light mb-2" style={{ color: C.textDark }}>
+                  <h3
+                    className="font-display text-2xl font-light mb-2"
+                    style={{ color: C.plum, letterSpacing: '-0.02em' }}
+                  >
                     ההודעה נשלחה
                   </h3>
                   <p className="text-sm font-light" style={{ color: C.textMid }}>
@@ -1247,7 +1182,7 @@ export default function Home() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+                <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5 text-right">
                       <label className="text-xs font-semibold tracking-wide" style={{ color: C.textMid }}>
@@ -1257,8 +1192,8 @@ export default function Home() {
                         type="text"
                         required
                         value={form.name}
-                        onChange={e => setForm({ ...form, name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl text-sm text-right focus:outline-none transition-all border"
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-md text-sm text-right focus:outline-none transition-all border"
                         style={inputBase}
                         {...focusStyle}
                         placeholder="שם מלא"
@@ -1272,8 +1207,8 @@ export default function Home() {
                         type="tel"
                         required
                         value={form.phone}
-                        onChange={e => setForm({ ...form, phone: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all border"
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        className="w-full px-4 py-3 rounded-md text-sm focus:outline-none transition-all border"
                         style={inputBase}
                         {...focusStyle}
                         placeholder="05X-XXXXXXX"
@@ -1289,8 +1224,8 @@ export default function Home() {
                     <select
                       required
                       value={form.subject}
-                      onChange={e => setForm({ ...form, subject: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl text-sm text-right appearance-none focus:outline-none transition-all border"
+                      onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                      className="w-full px-4 py-3 rounded-md text-sm text-right appearance-none focus:outline-none transition-all border"
                       style={inputBase}
                       {...focusStyle}
                     >
@@ -1312,8 +1247,8 @@ export default function Home() {
                       required
                       rows={4}
                       value={form.message}
-                      onChange={e => setForm({ ...form, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl text-sm text-right resize-none focus:outline-none transition-all border"
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      className="w-full px-4 py-3 rounded-md text-sm text-right resize-none focus:outline-none transition-all border"
                       style={inputBase}
                       {...focusStyle}
                       placeholder="ספרו לי במה אוכל לעזור..."
@@ -1322,10 +1257,10 @@ export default function Home() {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-xl text-white text-sm font-medium transition-all shadow-md hover:shadow-lg"
-                    style={{ background: C.ctaGrad }}
-                    onMouseEnter={e => (e.currentTarget.style.background = C.ctaGradHover)}
-                    onMouseLeave={e => (e.currentTarget.style.background = C.ctaGrad)}
+                    className="w-full py-3.5 rounded-md text-white text-sm font-medium transition-colors duration-200"
+                    style={{ backgroundColor: C.plum }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.plumHover)}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.plum)}
                   >
                     שלחו הודעה
                   </button>
@@ -1337,21 +1272,21 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="py-6 md:py-10" style={{ backgroundColor: '#15101E', color: '#9A8EAA' }}>
+      <footer className="py-8 md:py-12" style={{ backgroundColor: C.plum }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 text-center md:text-right">
-          <a href="#" className="flex items-center gap-4 flex-shrink-0">
+          <a href="#" className="flex items-center flex-shrink-0">
             <img
               src="/logo.jpg"
               alt="כנפיים לעוף"
               className="h-14 w-auto object-contain"
-              style={{ maxWidth: 160, mixBlendMode: 'screen', opacity: 0.88 }}
+              style={{ maxWidth: 160, mixBlendMode: 'screen', opacity: 0.9 }}
             />
           </a>
-          <div className="flex flex-col items-center md:items-end gap-1">
-            <div className="text-xs font-light" style={{ color: '#6B5E7A' }}>
+          <div className="flex flex-col items-center md:items-end gap-1.5">
+            <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.65)' }}>
               מרכז טיפולי-לימודי | גאולה אלון
             </div>
-            <div className="text-xs font-light" style={{ color: '#4A3E5A' }}>
+            <div className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
               כל הזכויות שמורות &copy; {new Date().getFullYear()}
             </div>
           </div>

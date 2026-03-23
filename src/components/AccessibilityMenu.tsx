@@ -1,17 +1,16 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const BLUE = '#1A6FA8';
-const BLUE_DARK = '#145A8C';
-const BLUE_LIGHT = '#E8F3FC';
+const PLUM      = '#4A2C40';
+const PLUM_DARK = '#3D2235';
+const PLUM_LIGHT = '#F7F0EB';
 
 export default function AccessibilityMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [readableFont, setReadableFont] = useState(false);
   const [contrast, setContrast] = useState(0);
 
-  // Load saved preferences
   useEffect(() => {
     try {
       const savedFont = localStorage.getItem('a11y-readable-font') === 'true';
@@ -23,7 +22,6 @@ export default function AccessibilityMenu() {
     }
   }, []);
 
-  // Apply readable font class to html element
   useEffect(() => {
     const html = document.documentElement;
     if (readableFont) {
@@ -34,7 +32,6 @@ export default function AccessibilityMenu() {
     try { localStorage.setItem('a11y-readable-font', String(readableFont)); } catch { /* noop */ }
   }, [readableFont]);
 
-  // Apply contrast level class to html element
   useEffect(() => {
     const html = document.documentElement;
     html.classList.remove('a11y-contrast-1', 'a11y-contrast-2', 'a11y-contrast-3');
@@ -58,25 +55,20 @@ export default function AccessibilityMenu() {
           style={{
             width: 284,
             marginBottom: 12,
-            borderRadius: 16,
+            borderRadius: 12,
             overflow: 'hidden',
             background: '#fff',
-            border: '1px solid #dde9f5',
-            boxShadow: '0 8px 32px rgba(26,111,168,0.18)',
+            border: '1px solid #E5D5D0',
+            boxShadow: '0 8px 32px rgba(74,44,64,0.14)',
           }}
         >
           {/* Header */}
-          <div
-            style={{
-              background: BLUE,
-              padding: '16px 20px',
-            }}
-          >
+          <div style={{ background: PLUM, padding: '16px 20px' }}>
             <div
               style={{
                 color: '#fff',
                 fontWeight: 600,
-                fontSize: 16,
+                fontSize: 15,
                 fontFamily: 'var(--font-assistant), sans-serif',
               }}
             >
@@ -84,7 +76,7 @@ export default function AccessibilityMenu() {
             </div>
             <div
               style={{
-                color: 'rgba(255,255,255,0.75)',
+                color: 'rgba(255,255,255,0.65)',
                 fontSize: 12,
                 marginTop: 3,
                 fontFamily: 'var(--font-assistant), sans-serif',
@@ -100,14 +92,13 @@ export default function AccessibilityMenu() {
             {/* Readable Font Row */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                {/* Font Icon */}
                 <div
                   aria-hidden="true"
                   style={{
                     width: 38,
                     height: 38,
-                    borderRadius: 10,
-                    background: BLUE_LIGHT,
+                    borderRadius: 8,
+                    background: PLUM_LIGHT,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -120,20 +111,20 @@ export default function AccessibilityMenu() {
                       y="18"
                       fontSize="17"
                       fontWeight="700"
-                      fill={BLUE}
+                      fill={PLUM}
                       fontFamily="serif"
                     >
                       A
                     </text>
-                    <line x1="3" y1="21" x2="21" y2="21" stroke={BLUE} strokeWidth="1.5" strokeLinecap="round" />
-                    <line x1="3" y1="21" x2="9" y2="8" stroke={BLUE} strokeWidth="1.5" strokeLinecap="round" />
+                    <line x1="3" y1="21" x2="21" y2="21" stroke={PLUM} strokeWidth="1.5" strokeLinecap="round" />
+                    <line x1="3" y1="21" x2="9" y2="8" stroke={PLUM} strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </div>
                 <span
                   style={{
                     fontSize: 14,
                     fontWeight: 500,
-                    color: '#1a2a3a',
+                    color: '#3a1a2a',
                     fontFamily: 'var(--font-assistant), sans-serif',
                   }}
                 >
@@ -151,7 +142,7 @@ export default function AccessibilityMenu() {
                   width: 46,
                   height: 26,
                   borderRadius: 13,
-                  background: readableFont ? BLUE : '#D1D5DB',
+                  background: readableFont ? PLUM : '#D1D5DB',
                   border: 'none',
                   cursor: 'pointer',
                   position: 'relative',
@@ -170,7 +161,7 @@ export default function AccessibilityMenu() {
                     borderRadius: '50%',
                     background: '#fff',
                     transition: 'left 0.22s',
-                    boxShadow: '0 1px 4px rgba(0,0,0,0.22)',
+                    boxShadow: '0 1px 4px rgba(0,0,0,0.2)',
                   }}
                 />
               </button>
@@ -179,14 +170,13 @@ export default function AccessibilityMenu() {
             {/* Contrast Row */}
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-                {/* Contrast Icon */}
                 <div
                   aria-hidden="true"
                   style={{
                     width: 38,
                     height: 38,
-                    borderRadius: 10,
-                    background: BLUE_LIGHT,
+                    borderRadius: 8,
+                    background: PLUM_LIGHT,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -194,15 +184,15 @@ export default function AccessibilityMenu() {
                   }}
                 >
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" stroke={BLUE} strokeWidth="1.6" fill="none" />
-                    <path d="M12 3 A9 9 0 0 1 12 21 Z" fill={BLUE} />
+                    <circle cx="12" cy="12" r="9" stroke={PLUM} strokeWidth="1.6" fill="none" />
+                    <path d="M12 3 A9 9 0 0 1 12 21 Z" fill={PLUM} />
                   </svg>
                 </div>
                 <span
                   style={{
                     fontSize: 14,
                     fontWeight: 500,
-                    color: '#1a2a3a',
+                    color: '#3a1a2a',
                     fontFamily: 'var(--font-assistant), sans-serif',
                   }}
                 >
@@ -210,7 +200,6 @@ export default function AccessibilityMenu() {
                 </span>
               </div>
 
-              {/* Contrast Slider */}
               <input
                 type="range"
                 min={0}
@@ -224,7 +213,7 @@ export default function AccessibilityMenu() {
                 aria-valuenow={contrast}
                 style={{
                   width: '100%',
-                  accentColor: BLUE,
+                  accentColor: PLUM,
                   cursor: 'pointer',
                   height: 6,
                   borderRadius: 3,
@@ -256,41 +245,36 @@ export default function AccessibilityMenu() {
         aria-haspopup="dialog"
         aria-label="פתח תפריט נגישות"
         style={{
-          background: isOpen ? BLUE_DARK : BLUE,
+          background: isOpen ? PLUM_DARK : PLUM,
           borderRadius: 9999,
           border: 'none',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
-          padding: '10px 18px 10px 14px',
+          gap: 6,
+          padding: '7px 13px 7px 10px',
           color: '#fff',
-          fontSize: 14,
+          fontSize: 12,
           fontWeight: 600,
-          boxShadow: '0 4px 18px rgba(26,111,168,0.32)',
+          boxShadow: '0 3px 12px rgba(74,44,64,0.28)',
           transition: 'background 0.2s, box-shadow 0.2s',
           fontFamily: 'var(--font-assistant), sans-serif',
           userSelect: 'none',
         }}
       >
-        {/* Accessibility (WCAG) figure icon */}
+        {/* Accessibility figure icon */}
         <svg
-          width="22"
-          height="22"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
           fill="none"
           aria-hidden="true"
           focusable="false"
         >
-          {/* Head */}
           <circle cx="12" cy="4.5" r="2" fill="white" />
-          {/* Body */}
           <line x1="12" y1="7.5" x2="12" y2="14" stroke="white" strokeWidth="2" strokeLinecap="round" />
-          {/* Arms */}
           <line x1="5.5" y1="10.5" x2="18.5" y2="10.5" stroke="white" strokeWidth="2" strokeLinecap="round" />
-          {/* Left leg */}
           <line x1="12" y1="14" x2="8.5" y2="20" stroke="white" strokeWidth="2" strokeLinecap="round" />
-          {/* Right leg */}
           <line x1="12" y1="14" x2="15.5" y2="20" stroke="white" strokeWidth="2" strokeLinecap="round" />
         </svg>
         נגישות
