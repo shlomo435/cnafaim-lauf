@@ -120,6 +120,35 @@ function Rule({ className = '' }: { className?: string }) {
   );
 }
 
+function WavyDivider({ className = '' }: { className?: string }) {
+  return (
+    <div className={`w-full flex items-center justify-center py-4 ${className}`} aria-hidden="true">
+      <svg viewBox="0 0 480 24" className="w-full max-w-lg h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M0,12 C40,3 80,21 120,12 C160,3 200,21 240,12 C280,3 320,21 360,12 C400,3 440,17 480,12"
+          stroke="#E5D5D0"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function RoseDot({ opacity = 1 }: { opacity?: number }) {
+  return (
+    <svg
+      className="w-2 h-2 flex-shrink-0"
+      viewBox="0 0 8 8"
+      fill="none"
+      aria-hidden="true"
+      style={{ opacity }}
+    >
+      <path d="M4 0.8L7.2 4L4 7.2L0.8 4L4 0.8Z" fill="#D81B60" />
+    </svg>
+  );
+}
+
 function CtaButton({
   href,
   children,
@@ -180,33 +209,26 @@ function FloatingContactButton() {
           className="px-3 py-1.5 rounded-md text-xs font-medium text-white shadow-md"
           style={{ backgroundColor: '#25D366', whiteSpace: 'nowrap' }}
         >
-          התקשרו עכשיו
+          שלחו הודעה ב-WhatsApp
         </div>
       )}
       <a
-        href="tel:0502961213"
+        href="https://wa.me/972502961213"
         id="floating-contact-btn"
+        target="_blank"
+        rel="noopener noreferrer"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onFocus={() => setHovered(true)}
         onBlur={() => setHovered(false)}
         className="relative w-12 h-12 rounded-full text-white shadow-lg flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#25D366]"
         style={{ backgroundColor: hovered ? '#1ebe5d' : '#25D366' }}
-        aria-label="התקשרו ישירות"
-        title="התקשרו עכשיו"
+        aria-label="שלחו הודעה ב-WhatsApp"
+        title="שלחו הודעה ב-WhatsApp"
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          className="w-5 h-5"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 6z"
-          />
+        {/* WhatsApp icon */}
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
         </svg>
       </a>
     </div>
@@ -374,6 +396,107 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 }
 
 // ======================
+// MODAL
+// ======================
+
+function Modal({ onClose, children }: { onClose: () => void; children: React.ReactNode }) {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', handler);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handler);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  return (
+    <>
+      <div
+        className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 pointer-events-none">
+        <div
+          className="relative w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-2xl border pointer-events-auto"
+          dir="rtl"
+          role="dialog"
+          aria-modal="true"
+          style={{
+            backgroundColor: C.cream,
+            borderColor: C.border,
+            boxShadow: '0 24px 80px rgba(74,44,64,0.22)',
+          }}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/8 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#D81B60] z-10"
+            style={{ color: C.textMid }}
+            aria-label="סגור"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <div className="p-6 md:p-8 pt-10">{children}</div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function EmrModalContent() {
+  return (
+    <div className="text-right">
+      <h3 className="font-display text-2xl font-medium mb-5" style={{ color: C.plum, letterSpacing: '-0.02em' }}>
+        EMR — עיבוד תנועות עיניים
+      </h3>
+      <video controls className="w-full rounded-xl shadow-md mb-6" src="/emr_video1.mp4">
+        הדפדפן שלך אינו תומך בתג הווידאו.
+      </video>
+      <div className="space-y-4 text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
+        <p className="mb-4">
+          <strong style={{ color: C.plum }}>אז איך נראה מפגש טיפול בתנועות עיניים EMR?</strong>
+        </p>
+        <p className="mb-4">
+          <strong style={{ color: C.plum }}>במפגש EMR</strong> המטפל מוביל את המטופל בשיח טיפולי שבו המטופל משתף על אתגרים רגשיים או קונקרטיים בחייו.
+        </p>
+        <p className="mb-4">
+          במהלך השיחה המטפל מתבונן בתנועות העיניים ויודע לזהות מתי המטופל מתחבר למצוקה רגשית אמיתית, גם אם היא עדיין לא נאמרת במילים.
+        </p>
+        <p className="mb-4">
+          בשלב הזה <strong style={{ color: C.plum }}>המטפל יוביל</strong> את המטופל להתחבר לזיכרון מטריד או כואב, ויבצע תנועות עיניים שמאפשרות עיבוד ושחרור של הזיכרון.
+        </p>
+        <p className="mb-4">
+          תוך כדי התהליך עשויות <strong style={{ color: C.plum }}>לעלות התנגדויות</strong> הצפות רגשיות וזיכרונות נוספים. מטפל מיומן יודע לזהות את המתרחש בזמן אמת, לווסת, ולעבוד בצורה מדויקת ובטוחה.
+        </p>
+        <p className="mb-4">
+          <strong style={{ color: C.plum }}>אבל זה לא הכול.</strong>
+        </p>
+        <p className="mb-4">
+          <strong style={{ color: C.plum }}>מטפל EMR מיומן</strong> יודע להוביל את המטופל גם לשחרור של מנגנוני הגנה ודפוסי התנהגות שכבר אינם מועילים לו, דפוסים שנבנו בעבר מתוך צורך, חוסר אונים או הישרדות.
+        </p>
+        <img
+          src="/image_32.jpg"
+          alt="המחשה לתהליך EMR"
+          className="rounded-xl shadow-sm mb-6 max-w-full h-auto"
+        />
+        <p className="mb-4">
+          <strong style={{ color: C.plum }}>לדוגמה</strong>, ילדה שלא ראו אותה ולא קיבלה יחס רגשי למדה שכאשר היא כועסת היא מקבלת מענה. הכעס אמנם פוגע בהמשך במערכות יחסים, אבל בילדות זו הייתה אסטרטגיה שעבדה, ולכן היא נשמרה באופן לא מודע גם בבגרות.
+        </p>
+        <p className="mb-4">
+          <strong style={{ color: C.plum }}>בטיפול EMR</strong> ניתן להגיע במהירות לכאב הראשוני שבו נוצר הדפוס הזה, ולשחרר אותו באמצעות תנועות עיניים ותשאול מדויק. כאשר המקום הזה מתרפא, הצורך בדפוס ההגנתי פשוט נחלש או נעלם.
+        </p>
+        <p>
+          כך נוצר שינוי עמוק, לא דרך מאבק בהתנהגות, אלא דרך ריפוי המקום שממנו היא נולדה.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ======================
 // MAIN PAGE
 // ======================
 
@@ -382,6 +505,7 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState<string | null>(null);
 
   useScrollReveal();
 
@@ -413,6 +537,33 @@ export default function Home() {
 
       {/* ===== SIDE DRAWER ===== */}
       <SideDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+
+      {/* ===== EXPERTISE MODAL ===== */}
+      {activeModal && (
+        <Modal onClose={() => setActiveModal(null)}>
+          {activeModal === 'emr' && <EmrModalContent />}
+          {activeModal === 'cbt' && (
+            <div className="text-right">
+              <h3 className="font-display text-2xl font-medium mb-4" style={{ color: C.plum, letterSpacing: '-0.02em' }}>
+                CBT — טיפול קוגניטיבי-התנהגותי
+              </h3>
+              <p className="text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
+                טיפול קוגניטיבי-התנהגותי המסייע לזהות ולשנות דפוסי חשיבה והתנהגות שליליים המגבילים את איכות החיים.
+              </p>
+            </div>
+          )}
+          {activeModal === 'nlp' && (
+            <div className="text-right">
+              <h3 className="font-display text-2xl font-medium mb-4" style={{ color: C.plum, letterSpacing: '-0.02em' }}>
+                NLP — תכנות נוירו-לשוני
+              </h3>
+              <p className="text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
+                תכנות נוירו-לשוני המאפשר שינוי דפוסים מנטליים ורגשיים לשיפור יכולות, ביטחון עצמי ותקשורת.
+              </p>
+            </div>
+          )}
+        </Modal>
+      )}
 
       {/* ===== HEADER ===== */}
       <header
@@ -520,7 +671,7 @@ export default function Home() {
           }}
         />
 
-        <div className="max-w-6xl mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-36 md:pb-52 flex flex-col md:flex-row items-center gap-10 md:gap-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 pt-10 md:pt-14 pb-24 md:pb-36 flex flex-col md:flex-row items-center gap-8 md:gap-14">
 
           {/* Text block */}
           <div className="flex-1 text-center md:text-right w-full relative" style={{ zIndex: 10 }}>
@@ -577,14 +728,15 @@ export default function Home() {
                 (label) => (
                   <div
                     key={label}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs border"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-2xl text-xs border"
                     style={{
                       borderColor: C.borderLight,
                       color: C.textMid,
                       backgroundColor: 'rgba(255,255,255,0.7)',
+                      lineHeight: '1.6',
                     }}
                   >
-                    <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.rose }} />
+                    <RoseDot />
                     {label}
                   </div>
                 )
@@ -593,7 +745,7 @@ export default function Home() {
           </div>
 
           {/* Portrait */}
-          <div className="flex-shrink-0 relative" style={{ marginTop: '2rem' }}>
+          <div className="flex-shrink-0 relative mt-16 md:mt-0">
             <div
               className="relative w-60 h-[320px] sm:w-72 sm:h-[400px] md:w-80 md:h-[460px] rounded-2xl overflow-hidden"
               style={{
@@ -642,7 +794,7 @@ export default function Home() {
       </div>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-16 md:py-24">
+      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-12">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
           {/* Images column */}
@@ -722,8 +874,12 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        <WavyDivider />
+      </div>
+
       {/* ===== METHODS & EXPERTISE ===== */}
-      <section id="methods" className="py-16 md:py-20" style={{ backgroundColor: C.creamAlt }}>
+      <section id="methods" className="py-10 md:py-12" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center md:text-right mb-10 sr">
             <SectionLabel text="גישה טיפולית" />
@@ -743,28 +899,49 @@ export default function Home() {
               <p className="text-[1.05rem] font-light leading-[1.8] mb-5" style={{ color: C.textMid }}>
                 במסגרת הטיפול, המטופל מקבל שילוב מדויק של מגוון כלים מתקדמים, המותאמים אישית לתוצאה האפקטיבית ביותר:
               </p>
-              <div className="space-y-3">
+              <div className="grid grid-cols-3 gap-3">
                 {[
                   {
                     method: 'CBT',
-                    desc: 'טיפול קוגניטיבי-התנהגותי המסייע לזהות ולשנות דפוסי חשיבה והתנהגות שליליים המגבילים את איכות החיים.',
+                    label: 'קוגניטיבי-התנהגותי',
+                    desc: 'זיהוי ושינוי דפוסי חשיבה והתנהגות שליליים המגבילים את איכות החיים.',
+                    modalKey: 'cbt',
                   },
                   {
                     method: 'EMR',
-                    desc: 'שיטה המשלבת עיבוד רגשי ותנועות עיניים לטיפול בטראומה, בחרדות ובמצוקה רגשית עמוקה.',
+                    label: 'עיבוד תנועות עיניים',
+                    desc: 'עיבוד רגשי ותנועות עיניים לטיפול בטראומה, חרדות ומצוקה רגשית עמוקה.',
+                    modalKey: 'emr',
                   },
                   {
                     method: 'NLP',
-                    desc: 'תכנות נוירו-לשוני המאפשר שינוי דפוסים מנטליים ורגשיים לשיפור יכולות, ביטחון עצמי ותקשורת.',
+                    label: 'תכנות נוירו-לשוני',
+                    desc: 'שינוי דפוסים מנטליים ורגשיים לשיפור יכולות, ביטחון עצמי ותקשורת.',
+                    modalKey: 'nlp',
                   },
-                ].map(({ method, desc }) => (
+                ].map(({ method, label, desc, modalKey }) => (
                   <div
                     key={method}
-                    className="rounded-md p-4 border text-right"
+                    className="rounded-xl p-4 border text-right cursor-pointer transition-all duration-200 hover:scale-105 flex flex-col"
                     style={{ backgroundColor: C.cream, borderColor: C.border }}
+                    onClick={() => setActiveModal(modalKey)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setActiveModal(modalKey); }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = C.plum;
+                      e.currentTarget.style.boxShadow = '0 4px 20px rgba(74,44,64,0.12)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = C.border;
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                    aria-label={`פרטים על ${method}`}
                   >
-                    <span className="text-sm font-bold" style={{ color: C.plum }}>{method}: </span>
-                    <span className="text-sm font-light leading-[1.8]" style={{ color: C.textMid }}>{desc}</span>
+                    <div className="font-display text-2xl font-semibold mb-1" style={{ color: C.plum }}>{method}</div>
+                    <div className="text-[0.65rem] font-semibold tracking-wide uppercase mb-2.5" style={{ color: C.rose }}>{label}</div>
+                    <p className="text-xs leading-[1.7] font-light flex-1" style={{ color: C.textMid }}>{desc}</p>
+                    <div className="mt-3 text-xs font-medium" style={{ color: C.rose }}>לפרטים ←</div>
                   </div>
                 ))}
               </div>
@@ -786,14 +963,11 @@ export default function Home() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-3 rounded-md px-4 py-3 border"
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 border"
                     style={{ backgroundColor: C.cream, borderColor: C.border }}
                   >
-                    <div
-                      className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                      style={{ backgroundColor: C.rose }}
-                    />
-                    <span className="text-sm font-light" style={{ color: C.textMid }}>{item}</span>
+                    <RoseDot />
+                    <span className="text-sm font-light" style={{ color: C.textMid, lineHeight: '1.7' }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -812,7 +986,7 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section id="services" className="py-16 md:py-20" style={{ backgroundColor: C.cream }}>
+      <section id="services" className="py-10 md:py-12" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center md:text-right mb-8 md:mb-12 sr">
             <SectionLabel text="תחומי טיפול" />
@@ -831,7 +1005,7 @@ export default function Home() {
                 className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-md p-6 md:p-8 text-right border transition-all duration-200 ${
                   i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
-                style={{ backgroundColor: '#FFFFFF', borderColor: C.border }}
+                style={{ backgroundColor: C.cream, borderColor: C.border }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = C.plum;
                   e.currentTarget.style.boxShadow = '0 2px 16px rgba(74,44,64,0.08)';
@@ -865,7 +1039,7 @@ export default function Home() {
       </div>
 
       {/* ===== LECTURES & TRAINING ===== */}
-      <section id="lectures" className="py-16 md:py-20" style={{ backgroundColor: C.cream }}>
+      <section id="lectures" className="py-10 md:py-12" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
@@ -921,11 +1095,8 @@ export default function Home() {
                     'כלים מעשיים לתקשורת מקרבת בבית ובמסגרת החינוכית',
                   ].map((item) => (
                     <li key={item} className="flex items-center gap-3 justify-center md:justify-end">
-                      <span className="text-sm font-light text-right" style={{ color: C.textMid }}>{item}</span>
-                      <div
-                        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: C.rose, opacity: 0.55 }}
-                      />
+                      <span className="text-sm font-light text-right" style={{ color: C.textMid, lineHeight: '1.7' }}>{item}</span>
+                      <RoseDot opacity={0.65} />
                     </li>
                   ))}
                 </ul>
@@ -944,7 +1115,7 @@ export default function Home() {
       </div>
 
       {/* ===== THERAPY CARDS ===== */}
-      <section id="cards" className="py-16 md:py-20" style={{ backgroundColor: C.creamAlt }}>
+      <section id="cards" className="py-10 md:py-12" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
           <div className="text-center md:text-right mb-8 md:mb-12 sr">
@@ -1030,7 +1201,7 @@ export default function Home() {
       </div>
 
       {/* ===== APPROACH ===== */}
-      <section id="approach" className="py-16 md:py-20" style={{ backgroundColor: C.cream }}>
+      <section id="approach" className="py-10 md:py-12" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center md:text-right mb-8 md:mb-12 sr">
             <SectionLabel text="הגישה שלי" />
@@ -1048,7 +1219,7 @@ export default function Home() {
                 key={feature.title}
                 href={`/features/${feature.slug}`}
                 className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-md p-5 text-right border transition-all duration-200 block`}
-                style={{ backgroundColor: '#FFFFFF', borderColor: C.border, textDecoration: 'none' }}
+                style={{ backgroundColor: C.cream, borderColor: C.border, textDecoration: 'none' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = C.plum;
                   e.currentTarget.style.boxShadow = '0 2px 16px rgba(74,44,64,0.08)';
@@ -1086,7 +1257,7 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-16 md:py-20" style={{ backgroundColor: C.creamAlt }}>
+      <section id="contact" className="py-10 md:py-12" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-5xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-5 gap-6 md:gap-10 items-start">
 
@@ -1127,6 +1298,24 @@ export default function Home() {
                     className="text-xs font-semibold tracking-[0.18em] uppercase"
                     style={{ color: C.rose }}
                   >
+                    אימייל
+                  </span>
+                  <a
+                    href="mailto:gehulaa@gmail.com"
+                    className="font-light transition-colors"
+                    style={{ color: C.textDark, direction: 'ltr' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = C.rose)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = C.textDark)}
+                  >
+                    gehulaa@gmail.com
+                  </a>
+                </div>
+                <div className="h-px" style={{ backgroundColor: C.border }} />
+                <div className="flex flex-col text-center md:text-right gap-1.5">
+                  <span
+                    className="text-xs font-semibold tracking-[0.18em] uppercase"
+                    style={{ color: C.rose }}
+                  >
                     מיקום
                   </span>
                   <span className="font-light" style={{ color: C.textDark }}>ישראל</span>
@@ -1153,7 +1342,7 @@ export default function Home() {
             <div
               className="md:col-span-3 rounded-md p-5 md:p-7 border sr sr-d2"
               style={{
-                backgroundColor: '#FFFFFF',
+                backgroundColor: C.cream,
                 borderColor: C.border,
                 boxShadow: '0 1px 8px rgba(74,44,64,0.05)',
               }}
@@ -1269,7 +1458,7 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="py-8 md:py-12" style={{ backgroundColor: C.plum }}>
+      <footer className="py-6 md:py-8" style={{ backgroundColor: C.plum }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 text-center md:text-right">
           <a href="#" className="flex items-center flex-shrink-0">
             <img
