@@ -57,18 +57,18 @@ const articles: Record<string, { title: string; subtitle: string; paragraphs: st
 // BRAND TOKENS (duplicated for isolation)
 // ======================
 const C = {
-  pink:        '#d81b60',
-  pinkLight:   '#e91e63',
-  gold:        '#B8956A',
-  goldLight:   '#D4A853',
-  textDark:    '#1C1826',
-  textMid:     '#574D6A',
-  textLight:   '#8A7A9A',
-  cream:       '#FAF8F5',
-  creamAlt:    '#F5EFE6',
-  creamDeep:   '#EDE3D6',
-  border:      '#E5D8C8',
-  borderLight: '#EDE6DC',
+  pink:        '#2DD4BF',
+  pinkLight:   '#5EEAD4',
+  gold:        '#2DD4BF',
+  goldLight:   '#5EEAD4',
+  textDark:    '#134E4A',
+  textMid:     '#0F766E',
+  textLight:   '#0D9488',
+  cream:       '#F0FDFA',
+  creamAlt:    '#E6FFFA',
+  creamDeep:   '#CCFBF1',
+  border:      '#CCFBF1',
+  borderLight: '#E6FFFA',
 };
 
 // ======================
@@ -131,7 +131,7 @@ export default async function FeaturePage({
       {/* HEADER */}
       <header
         className="sticky top-0 z-50 backdrop-blur-sm border-b"
-        style={{ backgroundColor: 'rgba(250,248,245,0.97)', borderColor: C.borderLight }}
+        style={{ backgroundColor: 'rgba(240,253,250,0.97)', borderColor: C.borderLight }}
       >
         <div className="max-w-4xl mx-auto px-6 h-[72px] flex items-center justify-between">
           <Link href="/" className="flex items-center flex-shrink-0">
@@ -153,7 +153,7 @@ export default async function FeaturePage({
       </header>
 
       {/* ARTICLE */}
-      <main className="max-w-3xl mx-auto px-6 py-16 md:py-24">
+      <main className="max-w-3xl mx-auto px-6 py-10 md:py-14">
 
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs mb-10 justify-end" style={{ color: C.textLight }}>
@@ -175,7 +175,7 @@ export default async function FeaturePage({
         </p>
 
         <h1
-          className="font-display text-5xl md:text-6xl font-light leading-tight text-right mb-4"
+          className="font-display text-5xl md:text-6xl font-light leading-tight tracking-tighter text-right mb-4"
           style={{ color: C.textDark }}
         >
           {article.title}
@@ -209,14 +209,14 @@ export default async function FeaturePage({
           <div className="flex items-center gap-4 justify-end flex-wrap">
             <Link
               href="/#contact"
-              className="inline-block px-8 py-3.5 rounded-full text-sm font-medium text-white shadow-md hover:shadow-lg transition-all"
-              style={{ background: '#d81b60' }}
+              className="inline-block px-8 py-3.5 rounded-lg text-sm font-medium text-white transition-all duration-300 hover:-translate-y-1"
+              style={{ background: '#134E4A', boxShadow: '0 8px 30px rgba(19,78,74,0.12)' }}
             >
               לתיאום שיחת היכרות
             </Link>
             <Link
               href="/#approach"
-              className="inline-block px-6 py-3.5 rounded-full text-sm font-medium border transition-all"
+              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1"
               style={{ borderColor: C.border, color: C.textMid }}
             >
               חזרה לגישה שלי
@@ -226,7 +226,7 @@ export default async function FeaturePage({
       </main>
 
       {/* FOOTER */}
-      <footer className="py-10" style={{ backgroundColor: '#15101E', color: '#9A8EAA' }}>
+      <footer className="py-10" style={{ backgroundColor: '#134E4A', color: 'rgba(255,255,255,0.65)' }}>
         <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
           <Link href="/" className="flex items-center gap-3">
             <img
@@ -236,7 +236,7 @@ export default async function FeaturePage({
               style={{ maxWidth: 144, mixBlendMode: 'screen', opacity: 0.85 }}
             />
           </Link>
-          <div className="text-xs font-light" style={{ color: '#4A3E5A' }}>
+          <div className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
             כל הזכויות שמורות &copy; {new Date().getFullYear()}
           </div>
         </div>

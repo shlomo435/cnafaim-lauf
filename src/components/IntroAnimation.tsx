@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 
-const PINK      = '#d81b60';
-const PINK_DARK = '#880e4f';
-const CREAM     = '#FAF8F5';
+const PINK      = '#2DD4BF';
+const PINK_DARK = '#134E4A';
+const CREAM     = '#F0FDFA';
 
 // ─── Butterfly SVG (full, symmetric) ─────────────────────────────────────────
 function ButterflyMark() {
@@ -153,11 +153,11 @@ export default function IntroAnimation() {
           marginTop:   28,
           textAlign:   'center',
           fontFamily:  'var(--font-frank-ruhl), "Frank Ruhl Libre", serif',
-          fontSize:    '2.7rem',
-          fontWeight:  300,
-          color:       '#1C1826',
-          lineHeight:  1,
-          letterSpacing: '-0.01em',
+          fontSize:    '3rem',
+          fontWeight:  500,
+          color:       '#134E4A',
+          lineHeight:  1.05,
+          letterSpacing: '-0.04em',
           direction:   'rtl',
         }}
       >
@@ -173,7 +173,7 @@ export default function IntroAnimation() {
           fontFamily:    'var(--font-assistant), sans-serif',
           fontSize:      '0.88rem',
           fontWeight:    400,
-          color:         '#8A7A9A',
+          color:         '#0F766E',
           letterSpacing: '0.05em',
           direction:     'rtl',
         }}
@@ -188,7 +188,7 @@ export default function IntroAnimation() {
           position:      'absolute',
           bottom:        28,
           fontSize:      '0.7rem',
-          color:         '#B8A8C8',
+          color:         '#0D9488',
           fontFamily:    'var(--font-assistant), sans-serif',
           letterSpacing: '0.06em',
           direction:     'rtl',

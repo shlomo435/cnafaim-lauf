@@ -68,22 +68,22 @@ const features = [
 // BRAND TOKENS — 60/30/10
 // ======================
 const C = {
-  // 60% — Warm Alabaster (primary background)
-  cream:       '#FDF8F5',
-  creamAlt:    '#F7F0EB',
-  creamDeep:   '#EDE3D6',
-  // 30% — Deep Plum (headlines, buttons, footer)
-  plum:        '#4A2C40',
-  plumHover:   '#3D2235',
-  // 10% — Muted Rose (icons, active links, accents only)
-  rose:        '#D81B60',
+  // 60% — Soft Mint (primary background)
+  cream:       '#F0FDFA',
+  creamAlt:    '#E6FFFA',
+  creamDeep:   '#CCFBF1',
+  // 30% — Deep Teal (headlines, buttons, footer)
+  plum:        '#134E4A',
+  plumHover:   '#0F3D39',
+  // 10% — Gentle Turquoise (icons, active links, accents)
+  rose:        '#2DD4BF',
   // Supporting text
-  textDark:    '#4A2C40',
-  textMid:     '#7A5A6A',
-  textLight:   '#9A7A8A',
+  textDark:    '#134E4A',
+  textMid:     '#0F766E',
+  textLight:   '#0D9488',
   // Structural
-  border:      '#E5D5D0',
-  borderLight: '#EDE6DC',
+  border:      '#CCFBF1',
+  borderLight: '#E6FFFA',
 };
 
 // ======================
@@ -126,7 +126,7 @@ function WavyDivider({ className = '' }: { className?: string }) {
       <svg viewBox="0 0 480 24" className="w-full max-w-lg h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M0,12 C40,3 80,21 120,12 C160,3 200,21 240,12 C280,3 320,21 360,12 C400,3 440,17 480,12"
-          stroke="#E5D5D0"
+          stroke="#CCFBF1"
           strokeWidth="1.5"
           strokeLinecap="round"
         />
@@ -144,7 +144,7 @@ function RoseDot({ opacity = 1 }: { opacity?: number }) {
       aria-hidden="true"
       style={{ opacity }}
     >
-      <path d="M4 0.8L7.2 4L4 7.2L0.8 4L4 0.8Z" fill="#D81B60" />
+      <path d="M4 0.8L7.2 4L4 7.2L0.8 4L4 0.8Z" fill="#2DD4BF" />
     </svg>
   );
 }
@@ -165,11 +165,11 @@ function CtaButton({
   return (
     <a
       href={href}
-      className={`text-sm font-medium text-center text-white transition-colors duration-200 rounded-md ${
+      className={`text-sm font-medium text-center text-white transition-all duration-300 rounded-lg ${
         block ? 'block w-full py-3.5' : 'inline-block px-8 py-3.5'
       } ${className}`}
       style={{ backgroundColor: C.rose }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#b5144f')}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#14B8A6')}
       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.rose)}
       onClick={onClick}
     >
@@ -206,8 +206,8 @@ function FloatingContactButton() {
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
       {hovered && (
         <div
-          className="px-3 py-1.5 rounded-md text-xs font-medium text-white shadow-md"
-          style={{ backgroundColor: '#25D366', whiteSpace: 'nowrap' }}
+          className="px-3 py-1.5 rounded-lg text-xs font-medium text-white border border-[#1ebe5d]/30"
+          style={{ backgroundColor: '#25D366', whiteSpace: 'nowrap', boxShadow: '0 4px 12px rgba(37,211,102,0.15)' }}
         >
           שלחו הודעה ב-WhatsApp
         </div>
@@ -252,7 +252,7 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
   };
   const focusIn = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.target.style.borderColor = C.rose;
-    e.target.style.boxShadow = `0 0 0 3px rgba(216,27,96,0.1)`;
+    e.target.style.boxShadow = `0 0 0 3px rgba(45,212,191,0.15)`;
   };
   const focusOut = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.target.style.borderColor = C.border;
@@ -274,7 +274,7 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         style={{
           backgroundColor: C.cream,
           borderLeft: `1px solid ${C.border}`,
-          boxShadow: '-12px 0 48px rgba(74,44,64,0.12)',
+          boxShadow: '-12px 0 48px rgba(19,78,74,0.12)',
           animation: 'slideInFromRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         }}
       >
@@ -323,7 +323,13 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               </p>
             </div>
           ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-4">
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              const emailSubject = encodeURIComponent('פנייה מהאתר – כנפיים לעוף');
+              const emailBody = encodeURIComponent(`שם: ${form.name}\nטלפון: ${form.phone}\n\nהודעה:\n${form.message}`);
+              window.location.href = `mailto:gehulaa@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+              setSent(true);
+            }} className="space-y-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold" style={{ color: C.textMid }}>שם מלא</label>
                 <input
@@ -370,7 +376,7 @@ function SideDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                 type="submit"
                 className="w-full py-3 rounded-md text-white text-sm font-medium transition-colors duration-200"
                 style={{ backgroundColor: C.rose }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#b5144f')}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#14B8A6')}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.rose)}
               >
                 שלחו הודעה
@@ -426,12 +432,12 @@ function Modal({ onClose, children }: { onClose: () => void; children: React.Rea
           style={{
             backgroundColor: C.cream,
             borderColor: C.border,
-            boxShadow: '0 24px 80px rgba(74,44,64,0.22)',
+            boxShadow: '0 24px 80px rgba(19,78,74,0.22)',
           }}
         >
           <button
             onClick={onClose}
-            className="absolute top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/8 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#D81B60] z-10"
+            className="absolute top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/8 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#2DD4BF] z-10"
             style={{ color: C.textMid }}
             aria-label="סגור"
           >
@@ -452,7 +458,7 @@ function EmrModalContent() {
       <h3 className="font-display text-2xl font-medium mb-5" style={{ color: C.plum, letterSpacing: '-0.02em' }}>
         EMR — עיבוד תנועות עיניים
       </h3>
-      <video controls className="w-full rounded-xl shadow-md mb-6" src="/emr_video1.mp4">
+      <video controls className="w-full rounded-xl mb-6 border" style={{ borderColor: C.border }} src="/emr_video1.mp4">
         הדפדפן שלך אינו תומך בתג הווידאו.
       </video>
       <div className="space-y-4 text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
@@ -478,9 +484,10 @@ function EmrModalContent() {
           <strong style={{ color: C.plum }}>מטפל EMR מיומן</strong> יודע להוביל את המטופל גם לשחרור של מנגנוני הגנה ודפוסי התנהגות שכבר אינם מועילים לו, דפוסים שנבנו בעבר מתוך צורך, חוסר אונים או הישרדות.
         </p>
         <img
-          src="/image_32.jpg"
+          src="/emr_live.jpeg"
           alt="המחשה לתהליך EMR"
-          className="rounded-xl shadow-sm mb-6 max-w-full h-auto"
+          className="rounded-xl mb-6 max-w-full h-auto"
+          style={{ border: `1px solid ${C.border}` }}
         />
         <p className="mb-4">
           <strong style={{ color: C.plum }}>לדוגמה</strong>, ילדה שלא ראו אותה ולא קיבלה יחס רגשי למדה שכאשר היא כועסת היא מקבלת מענה. הכעס אמנם פוגע בהמשך במערכות יחסים, אבל בילדות זו הייתה אסטרטגיה שעבדה, ולכן היא נשמרה באופן לא מודע גם בבגרות.
@@ -490,6 +497,73 @@ function EmrModalContent() {
         </p>
         <p>
           כך נוצר שינוי עמוק, לא דרך מאבק בהתנהגות, אלא דרך ריפוי המקום שממנו היא נולדה.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function CbtModalContent() {
+  return (
+    <div className="text-right">
+      <h3 className="font-display text-2xl font-medium mb-5" style={{ color: C.plum, letterSpacing: '-0.02em' }}>
+        CBT — טיפול קוגניטיבי-התנהגותי
+      </h3>
+      <img
+        src="/founder_speaking.jpg"
+        alt="CBT Therapy"
+        className="w-full h-auto rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] mb-6 object-cover"
+      />
+      <div className="space-y-4 text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          <strong className="text-[#134E4A]">אז איך נראה טיפול קוגניטיבי-התנהגותי (CBT)?</strong>
+        </p>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          טיפול CBT מבוסס על ההבנה ש<strong className="text-[#134E4A]">המחשבות שלנו משפיעות על הרגשות שלנו, והרגשות משפיעים על ההתנהגות</strong>.
+        </p>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          במפגש, המטופל משתף בקושי מרכזי שהוא חווה (למשל: חרדה חברתית, קשיי ויסות, או דימוי עצמי נמוך). המטפל עוזר לו <strong className="text-[#134E4A]">לזהות את &quot;מלכודות החשיבה&quot;</strong> – אותן מחשבות אוטומטיות ושליליות שמזינות את הקושי (כמו &quot;אף אחד לא ירצה להיות חבר שלי&quot;).
+        </p>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          השלב הבא הוא <strong className="text-[#134E4A]">אתגור המחשבות</strong>. המטופל לומד לבחון את המציאות בצורה מאוזנת יותר ולהחליף את המחשבות המעכבות במחשבות מקדמות ומציאותיות.
+        </p>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          אבל השינוי לא נשאר רק בראש. טיפול CBT הוא <strong className="text-[#134E4A]">טיפול אקטיבי</strong>. המטופל והמטפל בונים יחד תוכנית פעולה הדרגתית (&quot;חשיפות&quot; או משימות התנהגותיות) שבה המטופל מתנסה במצבים שמהם נמנע בעבר, וצובר <strong className="text-[#134E4A]">הצלחות קטנות שבונות ביטחון עצמי</strong>.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function NlpModalContent() {
+  return (
+    <div className="text-right">
+      <h3 className="font-display text-2xl font-medium mb-5" style={{ color: C.plum, letterSpacing: '-0.02em' }}>
+        NLP — תכנות נוירו-לשוני
+      </h3>
+      <img
+        src="/conference_audience.jpg"
+        alt="NLP Therapy"
+        className="w-full h-auto rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] mb-6 object-cover"
+      />
+      <div className="space-y-4 text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          <strong className="text-[#134E4A]">אז איך נראה טיפול NLP (ניתוב לשוני פיזיולוגי)?</strong>
+        </p>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          שיטת ה-NLP עובדת עם <strong className="text-[#134E4A]">התת-מודע שלנו</strong>. היא מבוססת על הרעיון שכל חוויה שחווינו מקודדת במוח שלנו דרך החושים, ויוצרת &quot;תבניות&quot; של רגש והתנהגות.
+        </p>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          במפגש NLP, אנחנו לא רק מדברים על הבעיה, אלא <strong className="text-[#134E4A]">משנים את הדרך שבה המוח זוכר ומפרש אותה</strong>.
+        </p>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          למשל, ילד שחווה כישלון צורב בלימודים, עשוי &quot;לראות&quot; את הכישלון הזה כתמונה ענקית ושחורה בכל פעם שהוא ניגש למבחן. בעזרת טכניקות של NLP (כמו דמיון מודרך, שינוי מרכיבי חושים, ועוגנים), המטפל <strong className="text-[#134E4A]">מוביל את המטופל לשנות את הייצוג הפנימי של החוויה</strong>. התמונה &quot;השחורה&quot; מוקטנת ומוחלפת בתמונה מעצימה.
+        </p>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          <strong className="text-[#134E4A]">שינוי השפה הפנימית:</strong> הטיפול עובד חזק על המילים שהמטופל אומר לעצמו. נזהה מילים מחלישות (&quot;אני תמיד נכשל&quot;) ונלמד את המוח להשתמש בשפה חדשה, מדויקת ומעצימה שמייצרת <strong className="text-[#134E4A]">מוטיבציה ואמונה עצמית</strong>.
+        </p>
+        <p className="mb-4 text-[#134E4A]/92 leading-relaxed">
+          זהו כלי מהיר ועוצמתי לשחרור חסמים רגשיים, שינוי הרגלים, ויצירת <strong className="text-[#134E4A]">חוסן מנטלי אמיתי</strong>.
         </p>
       </div>
     </div>
@@ -512,7 +586,7 @@ export default function Home() {
   const focusStyle = {
     onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       e.target.style.borderColor = C.rose;
-      e.target.style.boxShadow = `0 0 0 3px rgba(216,27,96,0.1)`;
+      e.target.style.boxShadow = `0 0 0 3px rgba(45,212,191,0.15)`;
     },
     onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       e.target.style.borderColor = C.border;
@@ -542,33 +616,15 @@ export default function Home() {
       {activeModal && (
         <Modal onClose={() => setActiveModal(null)}>
           {activeModal === 'emr' && <EmrModalContent />}
-          {activeModal === 'cbt' && (
-            <div className="text-right">
-              <h3 className="font-display text-2xl font-medium mb-4" style={{ color: C.plum, letterSpacing: '-0.02em' }}>
-                CBT — טיפול קוגניטיבי-התנהגותי
-              </h3>
-              <p className="text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
-                טיפול קוגניטיבי-התנהגותי המסייע לזהות ולשנות דפוסי חשיבה והתנהגות שליליים המגבילים את איכות החיים.
-              </p>
-            </div>
-          )}
-          {activeModal === 'nlp' && (
-            <div className="text-right">
-              <h3 className="font-display text-2xl font-medium mb-4" style={{ color: C.plum, letterSpacing: '-0.02em' }}>
-                NLP — תכנות נוירו-לשוני
-              </h3>
-              <p className="text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
-                תכנות נוירו-לשוני המאפשר שינוי דפוסים מנטליים ורגשיים לשיפור יכולות, ביטחון עצמי ותקשורת.
-              </p>
-            </div>
-          )}
+          {activeModal === 'cbt' && <CbtModalContent />}
+          {activeModal === 'nlp' && <NlpModalContent />}
         </Modal>
       )}
 
       {/* ===== HEADER ===== */}
       <header
         className="sticky top-0 z-50 backdrop-blur-sm border-b"
-        style={{ backgroundColor: 'rgba(253,248,245,0.97)', borderColor: C.borderLight }}
+        style={{ backgroundColor: 'rgba(240,253,250,0.97)', borderColor: C.borderLight }}
       >
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 md:h-[72px] flex items-center justify-between">
           <a href="#" className="flex items-center flex-shrink-0">
@@ -605,7 +661,7 @@ export default function Home() {
             </CtaButton>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-md transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#D81B60]"
+              className="md:hidden w-10 h-10 flex items-center justify-center rounded-md transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#2DD4BF]"
               style={{ color: C.textDark }}
               aria-label={mobileMenuOpen ? 'סגור תפריט' : 'פתח תפריט'}
               aria-expanded={mobileMenuOpen}
@@ -628,7 +684,7 @@ export default function Home() {
           <div
             id="mobile-nav"
             className="md:hidden border-t"
-            style={{ backgroundColor: 'rgba(253,248,245,0.99)', borderColor: C.borderLight }}
+            style={{ backgroundColor: 'rgba(240,253,250,0.99)', borderColor: C.borderLight }}
           >
             <nav className="max-w-6xl mx-auto px-4 py-2 flex flex-col text-right">
               {(['אודות', 'תחומי טיפול', 'קלפים טיפוליים', 'הגישה שלי', 'יצירת קשר'] as const).map(
@@ -683,8 +739,8 @@ export default function Home() {
             </p>
 
             <h1
-              className="font-display text-[3.6rem] sm:text-[4.8rem] md:text-[6rem] lg:text-[7.5rem] font-light leading-[1.0]"
-              style={{ color: C.plum, letterSpacing: '-0.02em' }}
+              className="font-display text-[3.6rem] sm:text-[4.8rem] md:text-[6rem] lg:text-[7.5rem] font-light leading-[1.0] tracking-tighter"
+              style={{ color: C.plum }}
             >
               כנפיים
               <br />
@@ -705,7 +761,7 @@ export default function Home() {
               <CtaButton href="#contact">לתיאום שיחת היכרות</CtaButton>
               <a
                 href="#services"
-                className="px-8 py-3.5 rounded-md text-sm font-medium text-center transition-all border"
+                className="px-8 py-3.5 rounded-lg text-sm font-medium text-center transition-all duration-300 border"
                 style={{ borderColor: C.border, color: C.textMid, backgroundColor: 'transparent' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = C.creamAlt;
@@ -750,7 +806,7 @@ export default function Home() {
               className="relative w-60 h-[320px] sm:w-72 sm:h-[400px] md:w-80 md:h-[460px] rounded-2xl overflow-hidden"
               style={{
                 border: `1px solid ${C.borderLight}`,
-                boxShadow: '0 4px 32px rgba(74,44,64,0.1), 0 1px 4px rgba(74,44,64,0.05)',
+                boxShadow: '0 8px 40px rgba(0,0,0,0.04)',
               }}
             >
               <img
@@ -779,7 +835,7 @@ export default function Home() {
               style={{
                 backgroundColor: C.plum,
                 color: 'white',
-                boxShadow: '0 4px 20px rgba(74,44,64,0.3)',
+                boxShadow: '0 8px 30px rgba(19,78,74,0.18)',
               }}
             >
               <div className="font-display text-2xl font-semibold leading-none">+20</div>
@@ -801,7 +857,7 @@ export default function Home() {
           <div className="relative order-2 md:order-1 sr sr-d1">
             <div
               className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden"
-              style={{ boxShadow: '0 2px 20px rgba(74,44,64,0.08)' }}
+              style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}
             >
               <img
                 src="/founder_speaking.jpg"
@@ -813,7 +869,7 @@ export default function Home() {
               className="hidden md:block absolute -bottom-6 -left-4 w-44 aspect-video rounded-xl overflow-hidden border-2"
               style={{
                 borderColor: C.cream,
-                boxShadow: '0 4px 20px rgba(74,44,64,0.12)',
+                boxShadow: '0 8px 30px rgba(0,0,0,0.04)',
               }}
             >
               <img
@@ -858,7 +914,7 @@ export default function Home() {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-md py-4 px-2 border"
+                  className="rounded-xl py-4 px-2 border"
                   style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
                 >
                   <div className="font-display text-2xl font-semibold" style={{ color: C.plum }}>
@@ -922,7 +978,7 @@ export default function Home() {
                 ].map(({ method, label, desc, modalKey }) => (
                   <div
                     key={method}
-                    className="rounded-xl p-4 border text-right cursor-pointer transition-all duration-200 hover:scale-105 flex flex-col"
+                    className="rounded-xl p-4 border text-right cursor-pointer transition-all duration-300 flex flex-col"
                     style={{ backgroundColor: C.cream, borderColor: C.border }}
                     onClick={() => setActiveModal(modalKey)}
                     role="button"
@@ -930,11 +986,13 @@ export default function Home() {
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setActiveModal(modalKey); }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = C.plum;
-                      e.currentTarget.style.boxShadow = '0 4px 20px rgba(74,44,64,0.12)';
+                      e.currentTarget.style.boxShadow = '0 8px 30px rgba(19,78,74,0.07)';
+                      e.currentTarget.style.transform = 'translateY(-4px)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor = C.border;
                       e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.transform = 'translateY(0)';
                     }}
                     aria-label={`פרטים על ${method}`}
                   >
@@ -1002,17 +1060,19 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-md p-6 md:p-8 text-right border transition-all duration-200 ${
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-xl p-6 md:p-8 text-right border transition-all duration-300 ${
                   i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
                 style={{ backgroundColor: C.cream, borderColor: C.border }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = C.plum;
-                  e.currentTarget.style.boxShadow = '0 2px 16px rgba(74,44,64,0.08)';
+                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.04)';
+                  e.currentTarget.style.transform = 'translateY(-4px)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = C.border;
                   e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 <div
@@ -1047,7 +1107,7 @@ export default function Home() {
             <div className="relative order-2 md:order-1 sr sr-d1">
               <div
                 className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden"
-                style={{ boxShadow: '0 2px 20px rgba(74,44,64,0.08)' }}
+                style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}
               >
                 <img
                   src="/conference_audience.jpg"
@@ -1136,7 +1196,7 @@ export default function Home() {
                 className="relative w-full max-w-[340px] rounded-2xl overflow-hidden"
                 style={{
                   border: `1px solid ${C.borderLight}`,
-                  boxShadow: '0 4px 28px rgba(74,44,64,0.08)',
+                  boxShadow: '0 4px 28px rgba(19,78,74,0.08)',
                 }}
               >
                 <img
@@ -1176,10 +1236,18 @@ export default function Home() {
                 ].map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-md p-4 text-right border transition-colors duration-200"
+                    className="rounded-xl p-4 text-right border transition-all duration-300"
                     style={{ backgroundColor: C.cream, borderColor: C.border }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.plum; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = C.plum;
+                      e.currentTarget.style.transform = 'translateY(-3px)';
+                      e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.04)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = C.border;
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
                   >
                     <div className="text-base font-semibold mb-0.5" style={{ color: C.plum }}>
                       {item.title}
@@ -1218,15 +1286,17 @@ export default function Home() {
               <Link
                 key={feature.title}
                 href={`/features/${feature.slug}`}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-md p-5 text-right border transition-all duration-200 block`}
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-xl p-5 text-right border transition-all duration-300 block`}
                 style={{ backgroundColor: C.cream, borderColor: C.border, textDecoration: 'none' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = C.plum;
-                  e.currentTarget.style.boxShadow = '0 2px 16px rgba(74,44,64,0.08)';
+                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.04)';
+                  e.currentTarget.style.transform = 'translateY(-4px)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = C.border;
                   e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 <div
@@ -1340,11 +1410,11 @@ export default function Home() {
 
             {/* Form card */}
             <div
-              className="md:col-span-3 rounded-md p-5 md:p-7 border sr sr-d2"
+              className="md:col-span-3 rounded-xl p-5 md:p-7 border sr sr-d2"
               style={{
                 backgroundColor: C.cream,
                 borderColor: C.border,
-                boxShadow: '0 1px 8px rgba(74,44,64,0.05)',
+                boxShadow: '0 1px 8px rgba(19,78,74,0.05)',
               }}
             >
               {submitted ? (
@@ -1368,7 +1438,22 @@ export default function Home() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  const subjectLabels: Record<string, string> = {
+                    child: 'טיפול בילד / נערה',
+                    adult: 'טיפול למבוגרת',
+                    learning: 'קשיי למידה',
+                    anxiety: 'חרדה ורגש',
+                    cards: 'קלפים טיפוליים',
+                    info: 'מידע כללי',
+                  };
+                  const subjectLabel = subjectLabels[form.subject] || form.subject;
+                  const emailSubject = encodeURIComponent(`פנייה מהאתר – ${subjectLabel}`);
+                  const emailBody = encodeURIComponent(`שם: ${form.name}\nטלפון: ${form.phone}\nנושא: ${subjectLabel}\n\nהודעה:\n${form.message}`);
+                  window.location.href = `mailto:gehulaa@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+                  setSubmitted(true);
+                }} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5 text-right">
                       <label className="text-xs font-semibold tracking-wide" style={{ color: C.textMid }}>

@@ -9,8 +9,15 @@ body {
   line-height: 1.8;
 }
 
+/* Tighten heading tracking for a polished, logo-like feel */
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  opacity: 1;
+}
+
+/* Soften body paragraphs so text doesn't feel laser-sharp against the background */
+p {
+  opacity: 0.92;
 }
 
 .font-display {
@@ -67,7 +74,7 @@ html.a11y-contrast-3 {
 
 /* ── Accessibility: Focus Visible Global ───────────────── */
 :focus-visible {
-  outline: 2px solid #D81B60;
+  outline: 2px solid #2DD4BF;
   outline-offset: 2px;
 }
 
