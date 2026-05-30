@@ -2,6 +2,12 @@
   command = "npm run build"
   publish = "out"
 
+# Disable Netlify's auto-installed Next.js plugin.
+# It converts Next.js apps to SSR functions, which strips static OG meta tags
+# and ignores output:'export'. We want plain static file serving from out/.
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
 [[headers]]
   for = "/*"
   [headers.values]
