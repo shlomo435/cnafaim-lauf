@@ -31,26 +31,32 @@ const assistant = Assistant({
   display: 'swap',
 });
 
-const DESCRIPTION =
-  'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים. גאולה אלון, מטפלת ומאבחנת עם מעל 20 שנות ניסיון.';
-
 export const metadata: Metadata = {
-  metadataBase: new URL('https://cnafaimlauf.netlify.app'),
+  metadataBase: new URL('https://cnafaim-lauf.netlify.app'),
   title: 'כנפיים לעוף | מרכז טיפולי-לימודי',
-  description: DESCRIPTION,
+  description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים. גאולה אלון, מטפלת ומאבחנת עם מעל 20 שנות ניסיון.',
   openGraph: {
     title: 'כנפיים לעוף | מרכז טיפולי-לימודי',
-    description: DESCRIPTION,
+    description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים.',
+    url: 'https://cnafaim-lauf.netlify.app',
     siteName: 'כנפיים לעוף',
     // Social sharing image — shown on WhatsApp, Facebook, LinkedIn
-    images: [{ url: '/1234.jpg', width: 1200, height: 630, alt: 'כנפיים לעוף' }],
+    images: [
+      {
+        url: '/1234.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'כנפיים לעוף',
+      },
+    ],
     locale: 'he_IL',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'כנפיים לעוף | מרכז טיפולי-לימודי',
-    description: DESCRIPTION,
+    description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים.',
+    images: ['/1234.jpg'],
   },
 };
 
