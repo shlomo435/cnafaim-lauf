@@ -2,19 +2,5 @@
   command = "npm run build"
   publish = "out"
 
-# Disable Netlify's auto-installed Next.js plugin.
-# It converts Next.js apps to SSR functions, which strips static OG meta tags
-# and ignores output:'export'. We want plain static file serving from out/.
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    X-XSS-Protection = "1; mode=block"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none';"
