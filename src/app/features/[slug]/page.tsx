@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
+import { C } from '../../../lib/tokens';
 
 // ======================
 // ARTICLE DATA
@@ -54,24 +56,6 @@ const articles: Record<string, { title: string; subtitle: string; paragraphs: st
 };
 
 // ======================
-// BRAND TOKENS (duplicated for isolation)
-// ======================
-const C = {
-  pink:        '#2DD4BF',
-  pinkLight:   '#5EEAD4',
-  gold:        '#2DD4BF',
-  goldLight:   '#5EEAD4',
-  textDark:    '#134E4A',
-  textMid:     '#0F766E',
-  textLight:   '#0D9488',
-  cream:       '#F0FDFA',
-  creamAlt:    '#E6FFFA',
-  creamDeep:   '#CCFBF1',
-  border:      '#CCFBF1',
-  borderLight: '#E6FFFA',
-};
-
-// ======================
 // METADATA
 // ======================
 
@@ -114,11 +98,7 @@ export default async function FeaturePage({
         <p className="text-2xl font-light mb-6" style={{ color: C.textMid }}>
           הדף לא נמצא
         </p>
-        <Link
-          href="/"
-          className="text-sm font-medium underline"
-          style={{ color: C.pink }}
-        >
+        <Link href="/" className="text-sm font-medium underline" style={{ color: C.rose }}>
           חזרה לדף הבית
         </Link>
       </div>
@@ -135,19 +115,23 @@ export default async function FeaturePage({
       >
         <div className="max-w-4xl mx-auto px-6 h-[72px] flex items-center justify-between">
           <Link href="/" className="flex items-center flex-shrink-0">
-            <img
+            <Image
               src="/logo.jpg"
               alt="כנפיים לעוף"
+              width={168}
+              height={56}
               className="h-14 w-auto object-contain"
               style={{ maxWidth: 168, mixBlendMode: 'multiply' }}
+              priority
             />
           </Link>
+          {/* Fix 12: back navigation uses ← */}
           <Link
             href="/#approach"
-            className="text-sm font-light transition-colors"
+            className="text-sm font-light transition-colors hover:text-[#2DD4BF]"
             style={{ color: C.textMid }}
           >
-            חזרה לגישה שלי
+            ← חזרה לגישה שלי
           </Link>
         </div>
       </header>
@@ -156,21 +140,21 @@ export default async function FeaturePage({
       <main className="max-w-3xl mx-auto px-6 py-10 md:py-14">
 
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs mb-10 justify-end" style={{ color: C.textLight }}>
-          <Link href="/" className="hover:underline" style={{ color: C.gold }}>בית</Link>
+        <nav className="flex items-center gap-2 text-xs mb-10 justify-end" style={{ color: C.textLight }} aria-label="נתיב ניווט">
+          <Link href="/" className="hover:underline" style={{ color: C.rose }}>בית</Link>
           <span>/</span>
-          <Link href="/#approach" className="hover:underline" style={{ color: C.gold }}>הגישה שלי</Link>
+          <Link href="/#approach" className="hover:underline" style={{ color: C.rose }}>הגישה שלי</Link>
           <span>/</span>
           <span>{article.title}</span>
         </nav>
 
-        {/* Gold accent rule */}
+        {/* Accent rule */}
         <div
           className="w-16 h-0.5 mb-5 mr-auto"
-          style={{ background: `linear-gradient(to left, ${C.goldLight}, ${C.gold})` }}
+          style={{ background: `linear-gradient(to left, ${C.rose}66, ${C.rose})` }}
         />
 
-        <p className="text-sm font-semibold tracking-[0.2em] uppercase mb-3 text-right" style={{ color: C.gold }}>
+        <p className="text-sm font-semibold tracking-[0.2em] mb-3 text-right" style={{ color: C.rose }}>
           מה מייחד את המרכז
         </p>
 
@@ -181,10 +165,7 @@ export default async function FeaturePage({
           {article.title}
         </h1>
 
-        <p
-          className="text-xl font-light leading-relaxed text-right mb-12"
-          style={{ color: C.textMid }}
-        >
+        <p className="text-xl font-light leading-relaxed text-right mb-12" style={{ color: C.textMid }}>
           {article.subtitle}
         </p>
 
@@ -210,34 +191,37 @@ export default async function FeaturePage({
             <Link
               href="/#contact"
               className="inline-block px-8 py-3.5 rounded-lg text-sm font-medium text-white transition-all duration-300 hover:-translate-y-1"
-              style={{ background: '#134E4A', boxShadow: '0 8px 30px rgba(19,78,74,0.12)' }}
+              style={{ background: C.plum, boxShadow: '0 8px 30px rgba(19,78,74,0.12)' }}
             >
               לתיאום שיחת היכרות
             </Link>
+            {/* Fix 12: back = ← */}
             <Link
               href="/#approach"
-              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1"
+              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#134E4A]"
               style={{ borderColor: C.border, color: C.textMid }}
             >
-              חזרה לגישה שלי
+              ← חזרה לגישה שלי
             </Link>
           </div>
         </div>
       </main>
 
       {/* FOOTER */}
-      <footer className="py-10" style={{ backgroundColor: '#134E4A', color: 'rgba(255,255,255,0.65)' }}>
+      <footer className="py-10" style={{ backgroundColor: C.plum, color: 'rgba(255,255,255,0.65)' }}>
         <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
-          <Link href="/" className="flex items-center gap-3">
-            <img
+          <Link href="/" className="flex items-center gap-3" aria-label="כנפיים לעוף — דף הבית">
+            <Image
               src="/logo.jpg"
               alt="כנפיים לעוף"
+              width={144}
+              height={48}
               className="h-12 w-auto object-contain"
               style={{ maxWidth: 144, mixBlendMode: 'screen', opacity: 0.85 }}
             />
           </Link>
           <div className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            כל הזכויות שמורות &copy; {new Date().getFullYear()}
+            כל הזכויות שמורות &copy; 2025 {/* Update annually */}
           </div>
         </div>
       </footer>

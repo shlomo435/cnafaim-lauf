@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# כנפיים לעוף — מרכז טיפולי-לימודי
 
-## Getting Started
+Next.js 16 static-export site deployed on Netlify.
 
-First, run the development server:
+## Before You Deploy
+
+### 1. Netlify Environment Variable (REQUIRED)
+
+Go to: **Netlify Dashboard → Your Site → Site Settings → Environment Variables**
+
+Add the following variable:
+
+| Key | Value |
+|-----|-------|
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | your Web3Forms access key (found in `.env.local`) |
+
+Without this, the contact forms will silently fail in production.
+
+### 2. OG Image (REQUIRED for social sharing)
+
+Place a **1200×630** image at `public/og-image.jpg`.
+
+This image appears when someone shares the site on WhatsApp, Facebook, LinkedIn, etc.
+Use [Canva](https://canva.com) (free) to create it — include the site name and logo.
+
+A temporary placeholder (`founder_portrait.jpg` cropped) is currently at `public/og-image.jpg`.
+Replace it before launch.
+
+### 3. Final build check
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Confirm the `out/` directory is generated with no errors.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Local Development
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework**: Next.js 16 (App Router, static export)
+- **Styling**: Tailwind CSS v4
+- **Fonts**: Heebo, Rubik, Frank Ruhl Libre, Assistant (Google Fonts, Hebrew subsets)
+- **Forms**: [Web3Forms](https://web3forms.com) (no backend required)
+- **Hosting**: Netlify (`out/` published directory)
 
-## Deploy on Vercel
+## Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | Web3Forms access key for contact forms | Yes |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Copy `.env.local.example` → `.env.local` and fill in the value, or set directly in Netlify dashboard.

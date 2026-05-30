@@ -1,26 +1,57 @@
-import type { Metadata } from "next";
-import { Assistant, Frank_Ruhl_Libre } from "next/font/google";
-import "./globals.css";
-import AccessibilityMenu from "../components/AccessibilityMenu";
+import type { Metadata } from 'next';
+import { Heebo, Rubik, Frank_Ruhl_Libre, Assistant } from 'next/font/google';
+import './globals.css';
+import AccessibilityMenu from '../components/AccessibilityMenu';
 
-const assistant = Assistant({
-  subsets: ["hebrew", "latin"],
-  variable: "--font-assistant",
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
+const heebo = Heebo({
+  subsets: ['hebrew'],
+  variable: '--font-heebo',
+  weight: ['300', '400', '500', '700'],
+  display: 'swap',
+});
+
+const rubik = Rubik({
+  subsets: ['hebrew'],
+  variable: '--font-rubik',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
 });
 
 const frankRuhl = Frank_Ruhl_Libre({
-  subsets: ["hebrew", "latin"],
-  variable: "--font-frank-ruhl",
-  weight: ["300", "400", "500", "700"],
-  display: "swap",
+  subsets: ['hebrew'],
+  variable: '--font-frank-ruhl',
+  weight: ['400', '500'],
+  display: 'swap',
 });
 
+const assistant = Assistant({
+  subsets: ['hebrew'],
+  variable: '--font-assistant',
+  weight: ['400', '600'],
+  display: 'swap',
+});
+
+const DESCRIPTION =
+  'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים. גאולה אלון, מטפלת ומאבחנת עם מעל 20 שנות ניסיון.';
+
 export const metadata: Metadata = {
-  title: "כנפיים לעוף | מרכז טיפולי-לימודי",
-  description:
-    "ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים. גאולה אלון, מטפלת ומאבחנת עם מעל 20 שנות ניסיון.",
+  metadataBase: new URL('https://cnafaimlauf.netlify.app'),
+  title: 'כנפיים לעוף | מרכז טיפולי-לימודי',
+  description: DESCRIPTION,
+  openGraph: {
+    title: 'כנפיים לעוף | מרכז טיפולי-לימודי',
+    description: DESCRIPTION,
+    siteName: 'כנפיים לעוף',
+    // Social sharing image — shown on WhatsApp, Facebook, LinkedIn
+    images: [{ url: '/1234.jpg', width: 1200, height: 630, alt: 'כנפיים לעוף' }],
+    locale: 'he_IL',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'כנפיים לעוף | מרכז טיפולי-לימודי',
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -32,9 +63,12 @@ export default function RootLayout({
     <html
       lang="he"
       dir="rtl"
-      className={`${assistant.variable} ${frankRuhl.variable}`}
+      className={`${heebo.variable} ${rubik.variable} ${frankRuhl.variable} ${assistant.variable}`}
     >
       <body className="antialiased">
+        <noscript>
+          <style>{'.sr { opacity: 1 !important; transform: none !important; }'}</style>
+        </noscript>
         {children}
         <AccessibilityMenu />
       </body>

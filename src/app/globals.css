@@ -1,27 +1,34 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-assistant);
+  --font-sans: var(--font-heebo);
 }
 
 body {
-  font-family: var(--font-assistant), sans-serif;
+  font-family: var(--font-heebo), sans-serif;
   line-height: 1.8;
+  color: #374151;
 }
 
-/* Tighten heading tracking for a polished, logo-like feel */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
+  font-weight: 500;
+  color: #111827;
   letter-spacing: -0.025em;
   opacity: 1;
 }
 
-/* Soften body paragraphs so text doesn't feel laser-sharp against the background */
+h5, h6 {
+  letter-spacing: -0.025em;
+  opacity: 1;
+}
+
+/* Fix 14: p inherits color instead of applying opacity (which stacks with parent opacity) */
 p {
-  opacity: 0.92;
+  color: inherit;
 }
 
 .font-display {
-  font-family: var(--font-frank-ruhl), "Frank Ruhl Libre", serif;
+  font-family: var(--font-rubik), "Rubik", sans-serif;
 }
 
 /* ── Scroll Reveal ─────────────────────────────────────── */
@@ -41,6 +48,15 @@ p {
 .sr-d3 { transition-delay: 0.24s; }
 .sr-d4 { transition-delay: 0.32s; }
 .sr-d5 { transition-delay: 0.40s; }
+
+/* Fix 9: Reduced-motion — skip scroll-reveal animation */
+@media (prefers-reduced-motion: reduce) {
+  .sr {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
 
 /* ── Side Drawer Animations ────────────────────────────── */
 @keyframes slideInFromRight {
@@ -115,4 +131,16 @@ html.a11y-contrast-3 {
 .intro-skip-hint {
   opacity:   0;
   animation: introTextUp 0.6s ease 2.8s both;
+}
+
+/* ── Fix 11: Prefers-reduced-motion — disable all animations/transitions globally ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

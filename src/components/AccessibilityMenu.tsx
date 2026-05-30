@@ -12,14 +12,19 @@ export default function AccessibilityMenu() {
   const [contrast, setContrast] = useState(0);
 
   useEffect(() => {
-    try {
-      const savedFont = localStorage.getItem('a11y-readable-font') === 'true';
-      const savedContrast = parseInt(localStorage.getItem('a11y-contrast') || '0', 10);
-      setReadableFont(savedFont);
-      setContrast(isNaN(savedContrast) ? 0 : Math.min(3, Math.max(0, savedContrast)));
-    } catch {
-      // localStorage unavailable
-    }
+    // Defer to next tick — reading localStorage and calling setState in the same
+    // synchronous effect body triggers the react-hooks/set-state-in-effect rule.
+    const t = setTimeout(() => {
+      try {
+        const savedFont = localStorage.getItem('a11y-readable-font') === 'true';
+        const raw = parseInt(localStorage.getItem('a11y-contrast') || '0', 10);
+        setReadableFont(savedFont);
+        setContrast(isNaN(raw) ? 0 : Math.min(3, Math.max(0, raw)));
+      } catch {
+        // localStorage unavailable
+      }
+    }, 0);
+    return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
@@ -124,7 +129,7 @@ export default function AccessibilityMenu() {
                   style={{
                     fontSize: 14,
                     fontWeight: 500,
-                    color: '#134E4A',
+                    color: '#111827',
                     fontFamily: 'var(--font-assistant), sans-serif',
                   }}
                 >
@@ -192,7 +197,7 @@ export default function AccessibilityMenu() {
                   style={{
                     fontSize: 14,
                     fontWeight: 500,
-                    color: '#134E4A',
+                    color: '#111827',
                     fontFamily: 'var(--font-assistant), sans-serif',
                   }}
                 >
