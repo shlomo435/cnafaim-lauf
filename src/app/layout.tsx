@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     // Social sharing image — shown on WhatsApp, Facebook, LinkedIn
     images: [
       {
-        url: '/1234.jpg',
+        url: 'https://cnafaim-lauf.netlify.app/logo.jpg',
         width: 1200,
         height: 630,
         alt: 'כנפיים לעוף',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'כנפיים לעוף | מרכז טיפולי-לימודי',
     description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים.',
-    images: ['/1234.jpg'],
+    images: ['https://cnafaim-lauf.netlify.app/logo.jpg'],
   },
 };
 

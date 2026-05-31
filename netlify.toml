@@ -4,3 +4,10 @@
 
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NEXT_SKIP_MIDDLEWARE_COMPILATION = "1"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
