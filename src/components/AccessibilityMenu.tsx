@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 
@@ -12,7 +12,7 @@ export default function AccessibilityMenu() {
   const [contrast, setContrast] = useState(0);
 
   useEffect(() => {
-    // Defer to next tick — reading localStorage and calling setState in the same
+    // Defer to next tick - reading localStorage and calling setState in the same
     // synchronous effect body triggers the react-hooks/set-state-in-effect rule.
     const t = setTimeout(() => {
       try {

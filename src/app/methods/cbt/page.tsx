@@ -1,10 +1,10 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 
 export const metadata: Metadata = {
-  title: 'CBT — טיפול קוגניטיבי-התנהגותי | כנפיים לעוף',
+  title: 'CBT - טיפול קוגניטיבי-התנהגותי | כנפיים לעוף',
   description:
     'טיפול CBT מבוסס על ההבנה שהמחשבות שלנו משפיעות על הרגשות שלנו, והרגשות משפיעים על ההתנהגות. גלו כיצד CBT יכול לעזור לכם.',
 };
@@ -81,7 +81,7 @@ export default function CbtPage() {
         >
           <Image
             src="/founder_speaking.jpg"
-            alt="טיפול CBT — גאולה אלון"
+            alt="טיפול CBT - גאולה אלון"
             width={1200}
             height={800}
             className="w-full h-auto object-cover object-top"
@@ -193,7 +193,7 @@ export default function CbtPage() {
       {/* FOOTER */}
       <footer className="py-10" style={{ backgroundColor: C.plum, color: 'rgba(255,255,255,0.65)' }}>
         <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
-          <Link href="/" className="flex items-center gap-3" aria-label="כנפיים לעוף — דף הבית">
+          <Link href="/" className="flex items-center gap-3" aria-label="כנפיים לעוף - דף הבית">
             <Image
               src="/logo.jpg"
               alt="כנפיים לעוף"

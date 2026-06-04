@@ -210,7 +210,7 @@ export default async function FeaturePage({
       {/* FOOTER */}
       <footer className="py-10" style={{ backgroundColor: C.plum, color: 'rgba(255,255,255,0.65)' }}>
         <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
-          <Link href="/" className="flex items-center gap-3" aria-label="כנפיים לעוף — דף הבית">
+          <Link href="/" className="flex items-center gap-3" aria-label="כנפיים לעוף - דף הבית">
             <Image
               src="/logo.jpg"
               alt="כנפיים לעוף"

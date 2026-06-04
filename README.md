@@ -1,4 +1,4 @@
-# כנפיים לעוף — מרכז טיפולי-לימודי
+﻿# כנפיים לעוף - מרכז טיפולי-לימודי
 
 Next.js 16 static-export site deployed on Netlify.
 
@@ -21,7 +21,7 @@ Without this, the contact forms will silently fail in production.
 Place a **1200×630** image at `public/og-image.jpg`.
 
 This image appears when someone shares the site on WhatsApp, Facebook, LinkedIn, etc.
-Use [Canva](https://canva.com) (free) to create it — include the site name and logo.
+Use [Canva](https://canva.com) (free) to create it - include the site name and logo.
 
 A temporary placeholder (`founder_portrait.jpg` cropped) is currently at `public/og-image.jpg`.
 Replace it before launch.

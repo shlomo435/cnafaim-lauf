@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 @theme inline {
   --font-sans: var(--font-heebo);
@@ -49,7 +49,7 @@ p {
 .sr-d4 { transition-delay: 0.32s; }
 .sr-d5 { transition-delay: 0.40s; }
 
-/* Fix 9: Reduced-motion — skip scroll-reveal animation */
+/* Fix 9: Reduced-motion - skip scroll-reveal animation */
 @media (prefers-reduced-motion: reduce) {
   .sr {
     opacity: 1 !important;
@@ -133,7 +133,7 @@ html.a11y-contrast-3 {
   animation: introTextUp 0.6s ease 2.8s both;
 }
 
-/* ── Fix 11: Prefers-reduced-motion — disable all animations/transitions globally ── */
+/* ── Fix 11: Prefers-reduced-motion - disable all animations/transitions globally ── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

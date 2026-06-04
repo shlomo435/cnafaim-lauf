@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import { C } from '../lib/tokens';
@@ -90,7 +90,7 @@ export default function SideDrawerClient() {
 
   return (
     <>
-      {/* Floating trigger button — above the WhatsApp button */}
+      {/* Floating trigger button - above the WhatsApp button */}
       <div className="fixed bottom-24 right-6 z-[9998]">
         <button
           onClick={() => setIsOpen(true)}
@@ -107,7 +107,7 @@ export default function SideDrawerClient() {
         </button>
       </div>
 
-      {/* Fix 18: Overlay — always in DOM, shown/hidden via CSS opacity + pointer-events */}
+      {/* Fix 18: Overlay - always in DOM, shown/hidden via CSS opacity + pointer-events */}
       <div
         className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity duration-200 ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -116,7 +116,7 @@ export default function SideDrawerClient() {
         aria-hidden="true"
       />
 
-      {/* Fix 18: Drawer panel — always in DOM, slid in/out via CSS transform */}
+      {/* Fix 18: Drawer panel - always in DOM, slid in/out via CSS transform */}
       <aside
         id="side-drawer"
         ref={drawerRef}

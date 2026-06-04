@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { C } from '../lib/tokens';
@@ -16,7 +16,7 @@ export default function MobileMenuClient() {
 
   return (
     <>
-      {/* Hamburger button — only visible on mobile */}
+      {/* Hamburger button - only visible on mobile */}
       <button
         onClick={() => setOpen((v) => !v)}
         className="md:hidden w-10 h-10 flex items-center justify-center rounded-md transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF] focus-visible:ring-offset-1"
@@ -36,7 +36,7 @@ export default function MobileMenuClient() {
         )}
       </button>
 
-      {/* Dropdown — fixed below the header so it doesn't disrupt header layout */}
+      {/* Dropdown - fixed below the header so it doesn't disrupt header layout */}
       {open && (
         <div
           id="mobile-nav"

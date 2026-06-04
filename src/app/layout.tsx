@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Heebo, Rubik, Frank_Ruhl_Libre, Assistant } from 'next/font/google';
 import './globals.css';
 import AccessibilityMenu from '../components/AccessibilityMenu';
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים.',
     url: 'https://cnafaim-lauf.netlify.app',
     siteName: 'כנפיים לעוף',
-    // Social sharing image — shown on WhatsApp, Facebook, LinkedIn
+    // Social sharing image - shown on WhatsApp, Facebook, LinkedIn
     images: [
       {
         url: 'https://cnafaim-lauf.netlify.app/og-image.jpg',

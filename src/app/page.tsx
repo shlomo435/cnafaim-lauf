@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../lib/tokens';
@@ -122,7 +122,7 @@ function RoseDot({ opacity = 1 }: { opacity?: number }) {
   );
 }
 
-// Server-safe CTA button — hover handled via CSS, no JS event handlers
+// Server-safe CTA button - hover handled via CSS, no JS event handlers
 function CtaButton({
   href,
   children,
@@ -146,7 +146,7 @@ function CtaButton({
   );
 }
 
-// Floating WhatsApp button — CSS hover only, server-compatible
+// Floating WhatsApp button - CSS hover only, server-compatible
 function FloatingContactButton() {
   return (
     <div className="fixed bottom-6 right-6 z-[9999] pointer-events-none">
@@ -198,7 +198,7 @@ export default function Home() {
       >
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 md:h-[72px] flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center flex-shrink-0" aria-label="כנפיים לעוף — דף הבית">
+          <a href="#" className="flex items-center flex-shrink-0" aria-label="כנפיים לעוף - דף הבית">
             <Image
               src="/logo.jpg"
               alt="כנפיים לעוף"
@@ -528,7 +528,7 @@ export default function Home() {
             style={{ backgroundColor: C.cream }}
           >
             <p className="text-[1.05rem] font-light leading-[1.8] max-w-4xl ml-auto" style={{ color: C.textMid }}>
-              המרכז שם דגש על עבודה בשיתוף ההורים, הקשבה עמוקה, בניית אמון, ומתן כלים פרקטיים ליום-יום — כדי שהשינוי לא יישאר רק בחדר הטיפול, אלא ילווה גם את החיים עצמם.
+              המרכז שם דגש על עבודה בשיתוף ההורים, הקשבה עמוקה, בניית אמון, ומתן כלים פרקטיים ליום-יום - כדי שהשינוי לא יישאר רק בחדר הטיפול, אלא ילווה גם את החיים עצמם.
             </p>
           </div>
         </div>
@@ -827,7 +827,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Contact form — client island */}
+            {/* Contact form - client island */}
             <ContactFormClient />
           </div>
         </div>
@@ -836,7 +836,7 @@ export default function Home() {
       {/* ===== FOOTER ===== */}
       <footer className="py-6 md:py-10 lg:py-12" style={{ backgroundColor: C.plum }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 text-center md:text-right">
-          <a href="#" aria-label="כנפיים לעוף — דף הבית" className="flex items-center flex-shrink-0">
+          <a href="#" aria-label="כנפיים לעוף - דף הבית" className="flex items-center flex-shrink-0">
             <Image
               src="/logo.jpg"
               alt="כנפיים לעוף"
