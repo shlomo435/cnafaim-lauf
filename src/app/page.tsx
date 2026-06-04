@@ -358,38 +358,10 @@ export default function Home() {
 
       {/* ===== ABOUT ===== */}
       <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-14 lg:py-16">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-center">
-
-          {/* Images column */}
-          <div className="relative order-2 md:order-1 sr sr-d1">
-            <div
-              className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden"
-              style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}
-            >
-              <Image
-                src="/founder_speaking.jpg"
-                alt="גאולה אלון בהרצאה"
-                fill
-                className="object-cover object-top"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-            <div
-              className="hidden md:block absolute -bottom-6 -left-4 w-44 rounded-xl overflow-hidden border-2"
-              style={{ borderColor: C.cream, boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}
-            >
-              <Image
-                src="/conference_audience.jpg"
-                alt="קהל בהרצאה"
-                width={176}
-                height={132}
-                className="w-full h-auto block object-cover"
-              />
-            </div>
-          </div>
+        <div className="max-w-3xl mx-auto md:mx-0 md:mr-auto">
 
           {/* Text column */}
-          <div className="text-center md:text-right order-1 md:order-2 sr sr-d2">
+          <div className="text-center md:text-right sr">
             <SectionLabel text="אודות" />
             <h2
               className="font-display text-4xl md:text-5xl font-medium"

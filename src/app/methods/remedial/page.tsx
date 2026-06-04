@@ -4,91 +4,113 @@ import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 
 export const metadata: Metadata = {
-  title: 'הוראה מתקנת - חיזוק מיומנויות למידה | כנפיים לעוף',
+  title: 'הוראה מתקנת | כנפיים לעוף - מרכז רגשי לימודי',
   description:
     'הוראה מתקנת לילדים המתקשים בקריאה, כתיבה, שטף, דיוק, הבנת הנקרא ותחושת מסוגלות בלמידה. תהליך מותאם אישית המשלב תנועה, תרגילי מוח וכלים מעשיים.',
 };
 
 export default function RemedialPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
+    <div className="min-h-screen" style={{ backgroundColor: C.creamAlt, color: C.textDark }}>
 
-      {/* HEADER */}
-      <header
-        className="sticky top-0 z-50 backdrop-blur-sm border-b"
-        style={{ backgroundColor: 'rgba(240,253,250,0.97)', borderColor: C.borderLight }}
+      {/* X close button — fixed top-left */}
+      <Link
+        href="/#methods"
+        aria-label="סגור וחזור לאתר"
+        className="fixed top-4 left-4 z-50 w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 hover:-translate-y-0.5"
+        style={{
+          backgroundColor: 'rgba(255,255,255,0.92)',
+          border: `1px solid ${C.border}`,
+          color: C.textMid,
+          boxShadow: '0 2px 14px rgba(19,78,74,0.12)',
+        }}
       >
-        <div className="max-w-4xl mx-auto px-6 h-[72px] flex items-center justify-between">
-          <Link href="/" className="flex items-center flex-shrink-0">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+          <path d="M11.5 3.5L3.5 11.5M3.5 3.5l8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+        </svg>
+      </Link>
+
+      {/* ① LOGO + SUBTITLE */}
+      <section className="pt-14 pb-6 px-6 flex flex-col items-center text-center">
+        <Link href="/" className="inline-block">
+          <Image
+            src="/logo.jpg"
+            alt="כנפיים לעוף"
+            width={240}
+            height={80}
+            className="h-16 md:h-20 w-auto object-contain"
+            style={{ maxWidth: 240, mixBlendMode: 'multiply' }}
+            priority
+          />
+        </Link>
+        <p
+          className="mt-3 text-sm md:text-[0.95rem] font-light tracking-[0.18em] uppercase"
+          style={{ color: C.textLight }}
+        >
+          מרכז רגשי לימודי
+        </p>
+      </section>
+
+      {/* ② HERO IMAGE + TAGLINE PANEL */}
+      <section className="px-4 sm:px-6 md:px-10 max-w-5xl mx-auto">
+        <div
+          className="w-full overflow-hidden rounded-t-3xl"
+          style={{ boxShadow: '0 16px 48px rgba(19,78,74,0.13)' }}
+        >
+          {/* subtle teal gradient overlay at the bottom of the image */}
+          <div className="relative w-full">
             <Image
-              src="/logo.jpg"
-              alt="כנפיים לעוף"
-              width={168}
-              height={56}
-              className="h-14 w-auto object-contain"
-              style={{ maxWidth: 168, mixBlendMode: 'multiply' }}
+              src="/founder_speaking.jpg"
+              alt="גאולה אלון - מרכז כנפיים לעוף"
+              width={1400}
+              height={950}
+              className="w-full h-auto object-cover object-top block"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1000px"
               priority
             />
-          </Link>
-          <Link
-            href="/#methods"
-            className="text-sm font-light transition-colors hover:text-[#2DD4BF]"
+            <div
+              className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+              style={{ background: `linear-gradient(to bottom, transparent, ${C.creamDeep}CC)` }}
+            />
+          </div>
+        </div>
+
+        {/* ③ TEXT PANEL below image */}
+        <div
+          className="rounded-b-3xl px-6 md:px-14 py-7 md:py-9 text-center"
+          style={{ backgroundColor: C.creamDeep }}
+        >
+          <p
+            className="text-base md:text-lg font-medium leading-loose"
+            style={{ color: C.textDark }}
+          >
+            הוראה מתקנת&nbsp;&nbsp;/&nbsp;&nbsp;טיפולים רגשיים&nbsp;&nbsp;/&nbsp;&nbsp;אבחונים תפקודיים לימודיים&nbsp;&nbsp;/&nbsp;&nbsp;הדרכת הורים
+          </p>
+          <p
+            className="mt-3 text-sm md:text-[0.95rem] font-light italic leading-relaxed"
             style={{ color: C.textMid }}
           >
-            ← חזרה לשיטות הטיפול
-          </Link>
+            מקום שמעניק לילדים כלים, ביטחון וכנפיים לצמוח, להתמודד ולהאמין בעצמם
+          </p>
         </div>
-      </header>
+      </section>
 
-      {/* MAIN */}
-      <main className="max-w-3xl mx-auto px-6 py-10 md:py-14">
-
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs mb-10 justify-end" style={{ color: C.textLight }} aria-label="נתיב ניווט">
-          <Link href="/" className="hover:underline" style={{ color: C.rose }}>בית</Link>
-          <span>/</span>
-          <Link href="/#methods" className="hover:underline" style={{ color: C.rose }}>שיטות הטיפול</Link>
-          <span>/</span>
-          <span>הוראה מתקנת</span>
-        </nav>
+      {/* ④ CONTENT */}
+      <main className="max-w-3xl mx-auto px-6 py-12 md:py-16">
 
         {/* Accent rule */}
         <div
-          className="w-16 h-0.5 mb-5 mr-auto"
-          style={{ background: `linear-gradient(to left, ${C.rose}66, ${C.rose})` }}
+          className="w-16 h-0.5 mb-6 mr-auto"
+          style={{ background: `linear-gradient(to left, ${C.rose}55, ${C.rose})` }}
         />
 
-        <p className="text-sm font-semibold tracking-[0.2em] mb-3 text-right" style={{ color: C.rose }}>
-          גישה לימודית
-        </p>
-
         <h1
-          className="font-display text-5xl md:text-6xl font-light leading-tight tracking-tighter text-right mb-4"
-          style={{ color: C.textDark }}
+          className="font-display text-4xl md:text-5xl font-medium text-right mb-8 leading-tight"
+          style={{ color: C.textDark, letterSpacing: '-0.02em' }}
         >
           הוראה מתקנת
         </h1>
 
-        <p className="text-xl font-light leading-relaxed text-right mb-10" style={{ color: C.textMid }}>
-          חיזוק מיומנויות למידה דרך תנועה ותרגילי מוח
-        </p>
-
-        {/* Hero image */}
-        <div
-          className="w-full rounded-2xl overflow-hidden mb-10 border"
-          style={{ borderColor: C.border, boxShadow: '0 8px 30px rgba(19,78,74,0.07)' }}
-        >
-          <Image
-            src="/therapy_cards_box.jpg"
-            alt="הוראה מתקנת - כנפיים לעוף"
-            width={1200}
-            height={800}
-            className="w-full h-auto object-cover object-top"
-            sizes="(max-width: 768px) 100vw, 768px"
-          />
-        </div>
-
-        {/* Article body */}
         <div className="space-y-6 text-right">
           <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
             במרכז &quot;כנפיים לעוף&quot; ניתנת הוראה מתקנת לילדים המתקשים ב
@@ -119,7 +141,7 @@ export default function RemedialPage() {
           </p>
 
           <blockquote
-            className="text-xl font-light leading-relaxed text-right pr-5 border-r-4"
+            className="text-xl md:text-2xl font-light leading-relaxed text-right pr-5 border-r-4 py-2 my-2"
             style={{ color: C.textDark, borderColor: C.rose }}
           >
             &quot;אני מסוגל. אני מתקדם. אני יכול להצליח.&quot;
@@ -149,11 +171,11 @@ export default function RemedialPage() {
             <div
               key={card.title}
               className="rounded-xl p-5 border text-right"
-              style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
+              style={{ backgroundColor: C.cream, borderColor: C.border }}
             >
               <div
                 className="w-7 h-7 rounded-full flex items-center justify-center mb-3"
-                style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
+                style={{ backgroundColor: C.creamDeep, border: `1px solid ${C.border}` }}
               >
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: C.rose }} />
               </div>
@@ -190,25 +212,6 @@ export default function RemedialPage() {
           </div>
         </div>
       </main>
-
-      {/* FOOTER */}
-      <footer className="py-10" style={{ backgroundColor: C.plum, color: 'rgba(255,255,255,0.65)' }}>
-        <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
-          <Link href="/" className="flex items-center gap-3" aria-label="כנפיים לעוף - דף הבית">
-            <Image
-              src="/logo.jpg"
-              alt="כנפיים לעוף"
-              width={144}
-              height={48}
-              className="h-12 w-auto object-contain"
-              style={{ maxWidth: 144, mixBlendMode: 'screen', opacity: 0.85 }}
-            />
-          </Link>
-          <div className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            כל הזכויות שמורות &copy; 2025
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
