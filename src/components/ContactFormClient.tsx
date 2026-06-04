@@ -13,7 +13,7 @@ const SUBJECT_LABELS: Record<string, string> = {
 };
 
 const inputClass =
-  'w-full px-4 py-3 rounded-md text-sm text-right border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C2185B] focus-visible:ring-offset-1';
+  'w-full px-4 py-3 rounded-md text-sm text-right border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D81B8C] focus-visible:ring-offset-1';
 
 const inputStyle = {
   backgroundColor: C.creamAlt,
@@ -63,7 +63,7 @@ export default function ContactFormClient() {
       style={{
         backgroundColor: C.cream,
         borderColor:     C.border,
-        boxShadow:       '0 1px 8px rgba(26,35,126,0.05)',
+        boxShadow:       '0 1px 8px rgba(57,73,171,0.05)',
       }}
     >
       {submitted ? (
@@ -171,7 +171,7 @@ export default function ContactFormClient() {
           <button
             type="submit"
             disabled={sending}
-            className="w-full py-3.5 rounded-md text-white text-sm font-medium transition-colors duration-200 bg-[#1A237E] hover:bg-[#0D1757] disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full py-3.5 rounded-md text-white text-sm font-medium transition-colors duration-200 bg-[#3949AB] hover:bg-[#3949AB] disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {sending ? 'שולח...' : 'שלחו הודעה'}
           </button>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const TEAL      = '#9C27B0';
-const TEAL_DARK = '#1A237E';
+const TEAL_DARK = '#3949AB';
 const CREAM     = '#FFF0F5';
 
 function ButterflyMark() {
@@ -120,7 +120,7 @@ export default function IntroAnimation() {
           fontFamily:    'var(--font-frank-ruhl), "Frank Ruhl Libre", serif',
           fontSize:      '3rem',
           fontWeight:    500,
-          color:         '#1A237E',
+          color:         '#3949AB',
           lineHeight:    1.05,
           letterSpacing: '-0.04em',
           direction:     'rtl',

@@ -10,13 +10,13 @@ html {
 
 body {
   font-family: var(--font-heebo), sans-serif;
-  line-height: 1.8;
-  color: #5C4A6E;
+  line-height: 1.9;
+  color: #4A3F5C;
 }
 
 h1, h2, h3, h4 {
   font-weight: 500;
-  color: #1A237E;
+  color: #3949AB;
   letter-spacing: -0.025em;
   opacity: 1;
 }
@@ -94,7 +94,7 @@ html.a11y-contrast-3 {
 
 /* ── Accessibility: Focus Visible Global ───────────────── */
 :focus-visible {
-  outline: 2px solid #C2185B;
+  outline: 2px solid #D81B8C;
   outline-offset: 2px;
 }
 

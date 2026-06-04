@@ -33,7 +33,7 @@ export default function CbtPage() {
           {/* Fix 12: back navigation uses ← */}
           <Link
             href="/#methods"
-            className="text-sm font-light transition-colors hover:text-[#C2185B]"
+            className="text-sm font-light transition-colors hover:text-[#D81B8C]"
             style={{ color: C.textMid }}
           >
             ← חזרה לשיטות הטיפול
@@ -77,7 +77,7 @@ export default function CbtPage() {
         {/* Hero image */}
         <div
           className="w-full rounded-2xl overflow-hidden mb-10 border"
-          style={{ borderColor: C.border, boxShadow: '0 8px 30px rgba(26,35,126,0.07)' }}
+          style={{ borderColor: C.border, boxShadow: '0 8px 30px rgba(57,73,171,0.07)' }}
         >
           <Image
             src="/founder_speaking.jpg"
@@ -174,14 +174,14 @@ export default function CbtPage() {
             <Link
               href="/#contact"
               className="inline-block px-8 py-3.5 rounded-lg text-sm font-medium text-white transition-all duration-300 hover:-translate-y-1"
-              style={{ background: C.plum, boxShadow: '0 8px 30px rgba(26,35,126,0.12)' }}
+              style={{ background: C.plum, boxShadow: '0 8px 30px rgba(57,73,171,0.12)' }}
             >
               לתיאום שיחת היכרות
             </Link>
             {/* Fix 12: back = ← */}
             <Link
               href="/#methods"
-              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#1A237E]"
+              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#3949AB]"
               style={{ borderColor: C.border, color: C.textMid }}
             >
               ← חזרה לשיטות הטיפול

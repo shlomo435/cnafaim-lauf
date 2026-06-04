@@ -105,7 +105,7 @@ function WavyDivider({ className = '' }: { className?: string }) {
       <svg viewBox="0 0 480 24" className="w-full max-w-lg h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M0,12 C40,3 80,21 120,12 C160,3 200,21 240,12 C280,3 320,21 360,12 C400,3 440,17 480,12"
-          stroke="#C2185B"
+          stroke="#D81B8C"
           strokeWidth="1.5"
           strokeLinecap="round"
         />
@@ -117,7 +117,7 @@ function WavyDivider({ className = '' }: { className?: string }) {
 function RoseDot({ opacity = 1 }: { opacity?: number }) {
   return (
     <svg className="w-2 h-2 flex-shrink-0" viewBox="0 0 8 8" fill="none" aria-hidden="true" style={{ opacity }}>
-      <path d="M4 0.8L7.2 4L4 7.2L0.8 4L4 0.8Z" fill="#C2185B" />
+      <path d="M4 0.8L7.2 4L4 7.2L0.8 4L4 0.8Z" fill="#D81B8C" />
     </svg>
   );
 }
@@ -137,7 +137,7 @@ function CtaButton({
   return (
     <a
       href={href}
-      className={`text-sm font-medium text-center text-white transition-all duration-300 rounded-lg bg-[#C2185B] hover:bg-[#880E4F] ${
+      className={`text-sm font-medium text-center text-white transition-all duration-300 rounded-lg bg-[#D81B8C] hover:bg-[#AD1457] ${
         block ? 'block w-full py-3.5' : 'inline-block px-8 py-3.5'
       } ${className}`}
     >
@@ -213,7 +213,7 @@ export default function Home() {
                 <a
                   key={label}
                   href={href}
-                  className="transition-colors duration-200 hover:text-[#C2185B]"
+                  className="transition-colors duration-200 hover:text-[#D81B8C]"
                   style={{ color: C.textMid }}
                 >
                   {label}
@@ -250,19 +250,28 @@ export default function Home() {
       {/* ===== HERO ===== */}
       <section
         className="relative min-h-screen flex flex-col"
-        style={{ background: 'linear-gradient(160deg, #FFF0F5 0%, #F3E5F5 100%)' }}
+        style={{ background: 'linear-gradient(160deg, #FFF0F5 0%, #FCE4EF 100%)' }}
       >
-        {/* ① Title + subtitle */}
-        <div className="text-center px-6 pt-10 pb-6">
-          <h1
-            className="font-display font-medium leading-tight tracking-tighter"
-            style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: C.rose }}
-          >
-            כנפיים לעוף
-          </h1>
+        {/* ① Logo hero + subtitle */}
+        <div className="text-center px-4 pt-8 pb-5">
+          <div className="flex justify-center">
+            <Image
+              src="/logo.jpg"
+              alt="כנפיים לעוף"
+              width={420}
+              height={140}
+              className="w-auto object-contain"
+              style={{
+                maxWidth: 'min(420px, 85vw)',
+                height: 'auto',
+                mixBlendMode: 'multiply',
+              }}
+              priority
+            />
+          </div>
           <p
-            className="mt-3 text-xl md:text-2xl font-light tracking-wide"
-            style={{ color: C.plum }}
+            className="mt-3 text-lg md:text-2xl font-light tracking-widest"
+            style={{ color: C.plum, letterSpacing: '0.12em' }}
           >
             מרכז רגשי לימודי
           </p>
@@ -280,30 +289,30 @@ export default function Home() {
           />
           <div
             className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
-            style={{ background: 'linear-gradient(to top, rgba(194,24,91,0.15), transparent)' }}
+            style={{ background: 'linear-gradient(to top, rgba(216,27,140,0.15), transparent)' }}
           />
         </div>
 
         {/* ③ Services strip */}
-        <div className="py-4 px-4 text-center" style={{ backgroundColor: C.plum }}>
-          <p className="text-sm md:text-base font-light tracking-wide text-white leading-loose">
+        <div className="py-5 px-4 text-center" style={{ backgroundColor: C.plum }}>
+          <p className="text-xs sm:text-sm md:text-base font-light tracking-wide text-white leading-[2]">
             הוראה מתקנת &nbsp;/&nbsp; טיפולים רגשיים &nbsp;/&nbsp; אבחונים תפקודיים לימודיים &nbsp;/&nbsp; הדרכת הורים
           </p>
         </div>
 
         {/* ④ Tagline + CTAs + trust strip */}
-        <div className="text-center px-6 py-8 md:py-10" style={{ backgroundColor: C.cream }}>
+        <div className="text-center px-5 py-8 md:py-10" style={{ backgroundColor: C.cream }}>
           <p
-            className="text-lg md:text-xl font-light italic leading-relaxed mb-8"
+            className="text-base md:text-xl font-light italic leading-relaxed mb-8 max-w-lg mx-auto"
             style={{ color: C.rose }}
           >
             מקום שמעניק לילדים כלים, ביטחון וכנפיים לצמוח, להתמודד ולהאמין בעצמם
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
-            <CtaButton href="#contact">לתיאום שיחת היכרות</CtaButton>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <CtaButton href="#contact" className="w-full sm:w-auto px-8 py-4 text-base">לתיאום שיחת היכרות</CtaButton>
             <a
               href="#methods"
-              className="px-8 py-3.5 rounded-lg text-sm font-medium text-center transition-all duration-300 border hover:-translate-y-0.5"
+              className="w-full sm:w-auto px-8 py-4 rounded-lg text-base font-medium text-center transition-all duration-300 border hover:-translate-y-0.5"
               style={{ borderColor: C.rose, color: C.rose }}
             >
               תחומי הטיפול
@@ -440,7 +449,7 @@ export default function Home() {
                   <Link
                     key={method}
                     href={href}
-                    className="rounded-xl p-4 border border-[#E1BEE7] text-right transition-all duration-300 flex flex-col hover:border-[#1A237E] hover:shadow-[0_8px_30px_rgba(26,35,126,0.07)] hover:-translate-y-1"
+                    className="rounded-xl p-4 border border-[#F8BBD9] text-right transition-all duration-300 flex flex-col hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(57,73,171,0.07)] hover:-translate-y-1"
                     style={{ backgroundColor: C.cream }}
                   >
                     <div className="font-display text-2xl font-semibold mb-1" style={{ color: C.textHeading }}>{method}</div>
@@ -469,7 +478,7 @@ export default function Home() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-3 rounded-xl px-4 py-3 border border-[#E1BEE7]"
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 border border-[#F8BBD9]"
                     style={{ backgroundColor: C.cream }}
                   >
                     <RoseDot />
@@ -481,7 +490,7 @@ export default function Home() {
           </div>
 
           <div
-            className="mt-8 md:mt-10 rounded-md p-6 md:p-8 text-right border border-[#E1BEE7] sr"
+            className="mt-8 md:mt-10 rounded-md p-6 md:p-8 text-right border border-[#F8BBD9] sr"
             style={{ backgroundColor: C.cream }}
           >
             <p className="text-[1.05rem] font-light leading-[1.8] max-w-4xl ml-auto" style={{ color: C.textMid }}>
@@ -508,7 +517,7 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-xl p-6 md:p-8 text-right border border-[#E1BEE7] transition-all duration-300 hover:border-[#1A237E] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 ${
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-xl p-6 md:p-8 text-right border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 ${
                   i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
                 style={{ backgroundColor: C.cream }}
@@ -622,7 +631,7 @@ export default function Home() {
             <div className="relative flex flex-col items-center gap-6 order-2 md:order-1 sr sr-d1">
               <div
                 className="relative w-full max-w-[340px] rounded-2xl overflow-hidden"
-                style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 4px 28px rgba(26,35,126,0.08)' }}
+                style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 4px 28px rgba(57,73,171,0.08)' }}
               >
                 <Image
                   src="/therapy_cards_box.jpg"
@@ -664,7 +673,7 @@ export default function Home() {
                 ].map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-xl p-4 text-right border border-[#E1BEE7] transition-all duration-300 hover:border-[#1A237E] hover:-translate-y-[3px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
+                    className="rounded-xl p-4 text-right border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:-translate-y-[3px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
                     style={{ backgroundColor: C.cream }}
                   >
                     <div className="text-base font-semibold mb-0.5" style={{ color: C.textHeading }}>{item.title}</div>
@@ -699,7 +708,7 @@ export default function Home() {
               <Link
                 key={feature.title}
                 href={`/features/${feature.slug}`}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-xl p-5 text-right border border-[#E1BEE7] transition-all duration-300 hover:border-[#1A237E] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1`}
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-xl p-5 text-right border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1`}
                 style={{ backgroundColor: C.cream }}
               >
                 <div
@@ -751,7 +760,7 @@ export default function Home() {
                   <span className="text-xs font-semibold tracking-[0.18em]" style={{ color: C.rose }}>טלפון</span>
                   <a
                     href="tel:0502961213"
-                    className="font-light transition-colors text-[#1A237E] hover:text-[#C2185B]"
+                    className="font-light transition-colors text-[#3949AB] hover:text-[#D81B8C]"
                     style={{ direction: 'ltr' }}
                   >
                     050-296-1213
@@ -762,7 +771,7 @@ export default function Home() {
                   <span className="text-xs font-semibold tracking-[0.18em]" style={{ color: C.rose }}>אימייל</span>
                   <a
                     href="mailto:gehulaa@gmail.com"
-                    className="font-light transition-colors text-[#1A237E] hover:text-[#C2185B]"
+                    className="font-light transition-colors text-[#3949AB] hover:text-[#D81B8C]"
                     style={{ direction: 'ltr' }}
                   >
                     gehulaa@gmail.com
