@@ -459,7 +459,7 @@ export default function Home() {
               <p className="text-[1.05rem] font-light leading-[1.8] mb-5" style={{ color: C.textMid }}>
                 במסגרת הטיפול, המטופל מקבל שילוב מדויק של מגוון כלים מתקדמים, המותאמים אישית לתוצאה האפקטיבית ביותר:
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
                   {
                     method: 'CBT',
@@ -478,6 +478,12 @@ export default function Home() {
                     label: 'תכנות נוירו-לשוני',
                     desc: 'שינוי דפוסים מנטליים ורגשיים לשיפור יכולות, ביטחון עצמי ותקשורת.',
                     href: '/methods/nlp',
+                  },
+                  {
+                    method: 'הוראה מתקנת',
+                    label: 'חיזוק מיומנויות למידה דרך תנועה ותרגילי מוח',
+                    desc: 'עבודה ממוקדת ומותאמת אישית לחיזוק הקריאה, הכתיבה, הבנת הנקרא והביטחון הלימודי - בשילוב תנועה, תרגילי מוח וכלים מעשיים שמקדמים הצלחה.',
+                    href: '/methods/remedial',
                   },
                 ].map(({ method, label, desc, href }) => (
                   <Link
