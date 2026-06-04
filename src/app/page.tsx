@@ -38,6 +38,11 @@ const services = [
     description:
       'אבחון והתאמת כלים פדגוגיים לסגנון הלמידה הייחודי של כל ילד ונערה, תוך חיזוק הביטחון העצמי.',
   },
+  {
+    title: 'הוראה מתקנת',
+    description:
+      'עבודה ממוקדת ומותאמת אישית לחיזוק הקריאה, הכתיבה, הבנת הנקרא והביטחון הלימודי — בשילוב תנועה, תרגילי מוח וכלים מעשיים שמקדמים הצלחה.',
+  },
 ];
 
 const features = [
@@ -229,7 +234,7 @@ export default function Home() {
                   alt="כנפיים לעוף"
                   width={200}
                   height={67}
-                  className="h-14 md:h-16 w-auto object-contain"
+                  className="h-10 md:h-16 w-auto object-contain"
                   style={{ maxWidth: 200, mixBlendMode: 'multiply' }}
                   priority
                 />
@@ -248,95 +253,86 @@ export default function Home() {
       </header>
 
       {/* ===== HERO ===== */}
-      <section
-        className="relative min-h-screen flex flex-col"
-        style={{ background: 'linear-gradient(160deg, #FFF0F5 0%, #FCE4EF 100%)' }}
-      >
-        {/* ① Logo hero + subtitle */}
-        <div className="text-center px-4 pt-8 pb-5">
-          <div className="flex justify-center">
-            <Image
-              src="/logo.jpg"
-              alt="כנפיים לעוף"
-              width={420}
-              height={140}
-              className="w-auto object-contain"
-              style={{
-                maxWidth: 'min(420px, 85vw)',
-                height: 'auto',
-                mixBlendMode: 'multiply',
-              }}
-              priority
-            />
-          </div>
-          <p
-            className="mt-3 text-lg md:text-2xl font-light tracking-widest"
-            style={{ color: C.plum, letterSpacing: '0.12em' }}
-          >
-            מרכז רגשי לימודי
-          </p>
-        </div>
+      <section className="flex flex-col" style={{ backgroundColor: '#FFF0F6', minHeight: '100svh' }}>
 
-        {/* ② Full-width hero image */}
-        <div className="relative flex-1 min-h-[55vh] md:min-h-[65vh] w-full overflow-hidden">
-          <Image
-            src="/founder_speaking.jpg"
-            alt="גאולה אלון"
-            fill
-            className="object-cover object-top"
-            priority
-            sizes="100vw"
-          />
-          <div
-            className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
-            style={{ background: 'linear-gradient(to top, rgba(216,27,140,0.15), transparent)' }}
-          />
-        </div>
+        {/* Main hero: text + image */}
+        <div className="flex flex-col md:flex-row flex-1">
 
-        {/* ③ Services strip */}
-        <div className="py-5 px-4 text-center" style={{ backgroundColor: C.plum }}>
-          <p className="text-xs sm:text-sm md:text-base font-light tracking-wide text-white leading-[2]">
-            הוראה מתקנת &nbsp;/&nbsp; טיפולים רגשיים &nbsp;/&nbsp; אבחונים תפקודיים לימודיים &nbsp;/&nbsp; הדרכת הורים
-          </p>
-        </div>
-
-        {/* ④ Tagline + CTAs + trust strip */}
-        <div className="text-center px-5 py-8 md:py-10" style={{ backgroundColor: C.cream }}>
-          <p
-            className="text-base md:text-xl font-light italic leading-relaxed mb-8 max-w-lg mx-auto"
-            style={{ color: C.rose }}
-          >
-            מקום שמעניק לילדים כלים, ביטחון וכנפיים לצמוח, להתמודד ולהאמין בעצמם
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <CtaButton href="#contact" className="w-full sm:w-auto px-8 py-4 text-base">לתיאום שיחת היכרות</CtaButton>
-            <a
-              href="#methods"
-              className="w-full sm:w-auto px-8 py-4 rounded-lg text-base font-medium text-center transition-all duration-300 border hover:-translate-y-0.5"
-              style={{ borderColor: C.rose, color: C.rose }}
+          {/* Text block — top on mobile, right side (RTL start) on desktop */}
+          <div className="flex flex-col justify-center text-right px-5 md:px-10 lg:px-16 pt-4 pb-6 md:py-20 md:w-[48%] lg:w-[45%]">
+            <p className="text-xs font-semibold tracking-[0.22em] mb-3" style={{ color: C.rose }}>
+              מרכז טיפולי-לימודי
+            </p>
+            <h1
+              className="font-display font-medium leading-snug tracking-tight mb-4"
+              style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.6rem)', color: C.textDark }}
             >
-              תחומי הטיפול
-            </a>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-2 justify-center">
-            {['+20 שנות ניסיון', 'מוסמכת CBT', 'מוסמכת EMR', 'מוסמכת NLP', 'בעלת תואר שני בחינוך'].map(
-              (label) => (
+              <span style={{ color: C.rose }}>מרכז</span>{' '}
+              <span style={{ color: C.rose }}>רגשי</span>{' '}
+              <span>לימודי</span>
+              <br />
+              <span className="text-[0.65em] font-light" style={{ color: C.plum }}>
+                לילדים, נערות ונשים
+              </span>
+            </h1>
+            <p className="text-sm md:text-base font-light mb-7 leading-relaxed" style={{ color: C.textMid }}>
+              גאולה אלון &nbsp;|&nbsp; CBT &nbsp;/&nbsp; EMR &nbsp;/&nbsp; הוראה מתקנת
+            </p>
+            <div className="flex justify-end">
+              <CtaButton href="#contact" className="px-7 py-3.5 text-base">
+                לתיאום שיחת היכרות
+              </CtaButton>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2 justify-end">
+              {['+20 שנות ניסיון', 'מוסמכת CBT', 'מוסמכת EMR', 'בעלת תואר שני בחינוך'].map((label) => (
                 <div
                   key={label}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-2xl text-xs border"
-                  style={{
-                    borderColor: C.borderLight,
-                    color: C.textMid,
-                    backgroundColor: 'rgba(255,255,255,0.7)',
-                    lineHeight: '1.6',
-                  }}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl text-xs border"
+                  style={{ borderColor: C.borderLight, color: C.textMid, backgroundColor: 'rgba(255,255,255,0.7)' }}
                 >
                   <RoseDot />
                   {label}
                 </div>
-              )
-            )}
+              ))}
+            </div>
           </div>
+
+          {/* Image — bottom on mobile (full-width), left side (RTL end) on desktop */}
+          <div className="relative w-full md:flex-1 overflow-hidden" style={{ minHeight: 'clamp(280px, 65vw, 680px)' }}>
+            <Image
+              src="/founder_portrait.jpg"
+              alt="גאולה אלון"
+              fill
+              className="object-cover object-top"
+              priority
+              sizes="(max-width: 768px) 100vw, 55vw"
+            />
+            {/* Soft gradient fade on the right edge (desktop) into the pink bg */}
+            <div
+              className="hidden md:block absolute inset-y-0 right-0 w-24 pointer-events-none"
+              style={{ background: 'linear-gradient(to left, #FFF0F6, transparent)' }}
+            />
+          </div>
+        </div>
+
+        {/* Services strip — below the hero pair */}
+        <div className="px-5 py-5 md:py-6" style={{ backgroundColor: 'rgba(255,255,255,0.85)', borderTop: `1px solid ${C.borderLight}` }}>
+          {/* Mobile: one per line / Desktop: all inline with bullet separators */}
+          <div className="max-w-4xl mx-auto text-center md:flex md:flex-wrap md:justify-center md:gap-x-1 md:gap-y-1">
+            {['הוראה מתקנת', 'טיפולים רגשיים', 'אבחונים תפקודיים לימודיים', 'הדרכת הורים'].map((item, i, arr) => (
+              <React.Fragment key={item}>
+                <span className="block md:inline text-base font-light" style={{ color: C.textMid }}>
+                  {item}
+                </span>
+                {i < arr.length - 1 && (
+                  <span className="hidden md:inline text-base mx-2" style={{ color: C.rose }}>•</span>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+          <p className="mt-3 text-sm font-light italic text-center" style={{ color: C.rose }}>
+            מקום שמעניק לילדים כלים, ביטחון וכנפיים לצמוח, להתמודד ולהאמין בעצמם
+          </p>
         </div>
       </section>
 
@@ -517,12 +513,20 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-xl p-6 md:p-8 text-right border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 ${
-                  i === 4 ? 'md:col-span-2 lg:col-span-1' : ''
-                }`}
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-xl p-6 md:p-8 text-right border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1`}
                 style={{ backgroundColor: C.cream }}
               >
-                <div className="w-8 h-px mb-5 transition-all duration-300 group-hover:w-14" style={{ backgroundColor: C.rose, opacity: 0.5 }} />
+                {service.title === 'הוראה מתקנת' ? (
+                  <div className="mb-5 flex justify-end">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
+                      <path d="M2 17l10 5 10-5" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
+                      <path d="M2 12l10 5 10-5" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                ) : (
+                  <div className="w-8 h-px mb-5 transition-all duration-300 group-hover:w-14" style={{ backgroundColor: C.rose, opacity: 0.5 }} />
+                )}
                 <h3 className="font-display text-xl font-medium mb-2.5" style={{ color: C.textHeading, letterSpacing: '-0.02em' }}>
                   {service.title}
                 </h3>
