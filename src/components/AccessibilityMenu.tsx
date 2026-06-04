@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 
-const PLUM      = '#134E4A';
-const PLUM_DARK = '#0F3D39';
-const PLUM_LIGHT = '#E6FFFA';
+const PLUM      = '#1A237E';
+const PLUM_DARK = '#0D1757';
+const PLUM_LIGHT = '#F3E5F5';
 
 export default function AccessibilityMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,8 +63,8 @@ export default function AccessibilityMenu() {
             borderRadius: 12,
             overflow: 'hidden',
             background: '#fff',
-            border: '1px solid #CCFBF1',
-            boxShadow: '0 8px 32px rgba(19,78,74,0.14)',
+            border: '1px solid #E1BEE7',
+            boxShadow: '0 8px 32px rgba(26,35,126,0.14)',
           }}
         >
           {/* Header */}
@@ -129,7 +129,7 @@ export default function AccessibilityMenu() {
                   style={{
                     fontSize: 14,
                     fontWeight: 500,
-                    color: '#111827',
+                    color: '#1A237E',
                     fontFamily: 'var(--font-assistant), sans-serif',
                   }}
                 >
@@ -197,7 +197,7 @@ export default function AccessibilityMenu() {
                   style={{
                     fontSize: 14,
                     fontWeight: 500,
-                    color: '#111827',
+                    color: '#1A237E',
                     fontFamily: 'var(--font-assistant), sans-serif',
                   }}
                 >
@@ -261,7 +261,7 @@ export default function AccessibilityMenu() {
           color: '#fff',
           fontSize: 12,
           fontWeight: 600,
-          boxShadow: '0 3px 12px rgba(19,78,74,0.28)',
+          boxShadow: '0 3px 12px rgba(26,35,126,0.28)',
           transition: 'background 0.2s, box-shadow 0.2s',
           fontFamily: 'var(--font-assistant), sans-serif',
           userSelect: 'none',

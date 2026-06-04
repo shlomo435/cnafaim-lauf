@@ -1,22 +1,23 @@
-﻿// Brand design tokens - single source of truth for all color values.
-// 60/30/10 palette: Soft Mint / Deep Teal / Gentle Turquoise
+// Brand design tokens - single source of truth for all color values.
 export const C = {
-  // 60% - Soft Mint backgrounds
-  cream:       '#F0FDFA',
-  creamAlt:    '#E6FFFA',
-  creamDeep:   '#CCFBF1',
-  // 30% - Deep Teal (headlines, buttons, footer)
-  plum:        '#134E4A',
-  plumHover:   '#0F3D39',
-  // 10% - Gentle Turquoise (icons, active links, accents)
-  rose:        '#2DD4BF',
-  roseHover:   '#14B8A6',
+  // Backgrounds
+  cream:       '#FFF0F5',  // soft pink - main bg
+  creamAlt:    '#F3E5F5',  // light purple - alt section bg
+  creamDeep:   '#E1BEE7',  // medium purple - accent bg
+  // Primary brand colors
+  plum:        '#1A237E',  // navy blue - footer, buttons, headings
+  plumHover:   '#0D1757',  // darker navy
+  // Accent / CTA
+  rose:        '#C2185B',  // deep magenta - CTAs, accents
+  roseHover:   '#880E4F',  // darker magenta - hover
+  accent:      '#9C27B0',  // purple - butterfly/decorative
+  gold:        '#8D6E63',  // warm brown-gold - dividers
   // Text
-  textHeading: '#111827',
-  textDark:    '#111827',
-  textMid:     '#374151',
-  textLight:   '#6B7280',
+  textHeading: '#1A237E',  // navy
+  textDark:    '#1A237E',  // navy
+  textMid:     '#5C4A6E',  // soft purple-gray
+  textLight:   '#8D6E63',  // warm gold
   // Structural
-  border:      '#CCFBF1',
-  borderLight: '#E6FFFA',
+  border:      '#E1BEE7',  // light purple border
+  borderLight: '#F3E5F5',  // lightest purple border
 } as const;

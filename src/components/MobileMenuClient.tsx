@@ -19,7 +19,7 @@ export default function MobileMenuClient() {
       {/* Hamburger button - only visible on mobile */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="md:hidden w-10 h-10 flex items-center justify-center rounded-md transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF] focus-visible:ring-offset-1"
+        className="md:hidden w-10 h-10 flex items-center justify-center rounded-md transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C2185B] focus-visible:ring-offset-1"
         style={{ color: C.textDark }}
         aria-label={open ? 'סגור תפריט' : 'פתח תפריט'}
         aria-expanded={open}
@@ -41,7 +41,7 @@ export default function MobileMenuClient() {
         <div
           id="mobile-nav"
           className="fixed top-16 inset-x-0 z-40 border-t shadow-lg md:hidden"
-          style={{ backgroundColor: 'rgba(240,253,250,0.99)', borderColor: C.borderLight }}
+          style={{ backgroundColor: 'rgba(255,240,245,0.99)', borderColor: C.borderLight }}
         >
           <nav className="max-w-6xl mx-auto px-4 py-2 flex flex-col text-right">
             {NAV_LINKS.map(({ label, href }) => (
@@ -49,7 +49,7 @@ export default function MobileMenuClient() {
                 key={label}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="py-3 text-sm font-medium border-b last:border-b-0 transition-colors text-[#111827] hover:text-[#2DD4BF]"
+                className="py-3 text-sm font-medium border-b last:border-b-0 transition-colors text-[#1A237E] hover:text-[#C2185B]"
                 style={{ borderColor: C.borderLight }}
               >
                 {label}
@@ -59,7 +59,7 @@ export default function MobileMenuClient() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="block w-full py-3.5 text-sm font-medium text-center text-white rounded-lg bg-[#2DD4BF] hover:bg-[#14B8A6] transition-colors duration-300"
+                className="block w-full py-3.5 text-sm font-medium text-center text-white rounded-lg bg-[#C2185B] hover:bg-[#880E4F] transition-colors duration-300"
               >
                 לתיאום פגישה
               </a>

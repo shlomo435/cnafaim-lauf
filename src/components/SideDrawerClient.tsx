@@ -98,7 +98,7 @@ export default function SideDrawerClient() {
           aria-expanded={isOpen}
           aria-controls="side-drawer"
           title="צרו קשר מהיר"
-          className="w-12 h-12 rounded-full text-white shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2DD4BF]"
+          className="w-12 h-12 rounded-full text-white shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#C2185B]"
           style={{ backgroundColor: C.plum }}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5" aria-hidden="true">
@@ -133,14 +133,14 @@ export default function SideDrawerClient() {
         style={{
           backgroundColor: C.cream,
           borderLeft:      `1px solid ${C.border}`,
-          boxShadow:       '-12px 0 48px rgba(19,78,74,0.12)',
+          boxShadow:       '-12px 0 48px rgba(26,35,126,0.12)',
         }}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: C.border }}>
           <button
             onClick={() => setIsOpen(false)}
-            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]"
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C2185B]"
             style={{ color: C.textMid }}
             aria-label="סגור"
           >
@@ -180,7 +180,7 @@ export default function SideDrawerClient() {
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="שמכם"
-                  className="w-full px-4 py-2.5 rounded-md text-sm text-right border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF] focus-visible:ring-offset-1"
+                  className="w-full px-4 py-2.5 rounded-md text-sm text-right border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C2185B] focus-visible:ring-offset-1"
                   style={{ backgroundColor: C.creamAlt, borderColor: C.border, color: C.textDark }}
                 />
               </div>
@@ -194,7 +194,7 @@ export default function SideDrawerClient() {
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="05X-XXXXXXX"
                   dir="ltr"
-                  className="w-full px-4 py-2.5 rounded-md text-sm border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF] focus-visible:ring-offset-1"
+                  className="w-full px-4 py-2.5 rounded-md text-sm border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C2185B] focus-visible:ring-offset-1"
                   style={{ backgroundColor: C.creamAlt, borderColor: C.border, color: C.textDark }}
                 />
               </div>
@@ -206,7 +206,7 @@ export default function SideDrawerClient() {
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="במה אוכל לעזור?"
-                  className="w-full px-4 py-2.5 rounded-md text-sm text-right resize-none border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF] focus-visible:ring-offset-1"
+                  className="w-full px-4 py-2.5 rounded-md text-sm text-right resize-none border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C2185B] focus-visible:ring-offset-1"
                   style={{ backgroundColor: C.creamAlt, borderColor: C.border, color: C.textDark }}
                 />
               </div>
@@ -214,7 +214,7 @@ export default function SideDrawerClient() {
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full py-3 rounded-md text-white text-sm font-medium transition-colors duration-200 bg-[#2DD4BF] hover:bg-[#14B8A6] disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full py-3 rounded-md text-white text-sm font-medium transition-colors duration-200 bg-[#C2185B] hover:bg-[#880E4F] disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {sending ? 'שולח...' : 'שלחו הודעה'}
               </button>
@@ -226,7 +226,7 @@ export default function SideDrawerClient() {
         <div className="px-5 py-4 border-t text-center" style={{ borderColor: C.border }}>
           <a
             href="tel:0502961213"
-            className="text-sm font-medium transition-colors text-[#2DD4BF] hover:text-[#111827]"
+            className="text-sm font-medium transition-colors text-[#C2185B] hover:text-[#1A237E]"
             style={{ direction: 'ltr' }}
           >
             050-296-1213

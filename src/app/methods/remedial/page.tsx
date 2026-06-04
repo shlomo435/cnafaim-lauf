@@ -22,7 +22,7 @@ export default function RemedialPage() {
           backgroundColor: 'rgba(255,255,255,0.92)',
           border: `1px solid ${C.border}`,
           color: C.textMid,
-          boxShadow: '0 2px 14px rgba(19,78,74,0.12)',
+          boxShadow: '0 2px 14px rgba(26,35,126,0.12)',
         }}
       >
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
@@ -55,7 +55,7 @@ export default function RemedialPage() {
       <section className="px-4 sm:px-6 md:px-10 max-w-5xl mx-auto">
         <div
           className="w-full overflow-hidden rounded-t-3xl"
-          style={{ boxShadow: '0 16px 48px rgba(19,78,74,0.13)' }}
+          style={{ boxShadow: '0 16px 48px rgba(26,35,126,0.13)' }}
         >
           {/* subtle teal gradient overlay at the bottom of the image */}
           <div className="relative w-full">
@@ -198,13 +198,13 @@ export default function RemedialPage() {
             <Link
               href="/#contact"
               className="inline-block px-8 py-3.5 rounded-lg text-sm font-medium text-white transition-all duration-300 hover:-translate-y-1"
-              style={{ background: C.plum, boxShadow: '0 8px 30px rgba(19,78,74,0.12)' }}
+              style={{ background: C.plum, boxShadow: '0 8px 30px rgba(26,35,126,0.12)' }}
             >
               לתיאום שיחת היכרות
             </Link>
             <Link
               href="/#methods"
-              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#134E4A]"
+              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#1A237E]"
               style={{ borderColor: C.border, color: C.textMid }}
             >
               ← חזרה לשיטות הטיפול

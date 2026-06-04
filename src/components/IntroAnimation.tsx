@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-const TEAL      = '#2DD4BF';
-const TEAL_DARK = '#134E4A';
-const CREAM     = '#F0FDFA';
+const TEAL      = '#9C27B0';
+const TEAL_DARK = '#1A237E';
+const CREAM     = '#FFF0F5';
 
 function ButterflyMark() {
   return (
@@ -120,7 +120,7 @@ export default function IntroAnimation() {
           fontFamily:    'var(--font-frank-ruhl), "Frank Ruhl Libre", serif',
           fontSize:      '3rem',
           fontWeight:    500,
-          color:         '#111827',
+          color:         '#1A237E',
           lineHeight:    1.05,
           letterSpacing: '-0.04em',
           direction:     'rtl',
@@ -137,7 +137,7 @@ export default function IntroAnimation() {
           fontFamily:    'var(--font-assistant), sans-serif',
           fontSize:      '0.88rem',
           fontWeight:    400,
-          color:         '#111827',
+          color:         '#5C4A6E',
           letterSpacing: '0.05em',
           direction:     'rtl',
         }}
@@ -151,7 +151,7 @@ export default function IntroAnimation() {
           position:      'absolute',
           bottom:        28,
           fontSize:      '0.7rem',
-          color:         '#6B7280',
+          color:         '#8D6E63',
           fontFamily:    'var(--font-assistant), sans-serif',
           letterSpacing: '0.06em',
           direction:     'rtl',

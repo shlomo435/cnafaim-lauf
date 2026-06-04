@@ -111,7 +111,7 @@ export default async function FeaturePage({
       {/* HEADER */}
       <header
         className="sticky top-0 z-50 backdrop-blur-sm border-b"
-        style={{ backgroundColor: 'rgba(240,253,250,0.97)', borderColor: C.borderLight }}
+        style={{ backgroundColor: 'rgba(255,240,245,0.97)', borderColor: C.borderLight }}
       >
         <div className="max-w-4xl mx-auto px-6 h-[72px] flex items-center justify-between">
           <Link href="/" className="flex items-center flex-shrink-0">
@@ -128,7 +128,7 @@ export default async function FeaturePage({
           {/* Fix 12: back navigation uses ← */}
           <Link
             href="/#approach"
-            className="text-sm font-light transition-colors hover:text-[#2DD4BF]"
+            className="text-sm font-light transition-colors hover:text-[#C2185B]"
             style={{ color: C.textMid }}
           >
             ← חזרה לגישה שלי
@@ -191,14 +191,14 @@ export default async function FeaturePage({
             <Link
               href="/#contact"
               className="inline-block px-8 py-3.5 rounded-lg text-sm font-medium text-white transition-all duration-300 hover:-translate-y-1"
-              style={{ background: C.plum, boxShadow: '0 8px 30px rgba(19,78,74,0.12)' }}
+              style={{ background: C.plum, boxShadow: '0 8px 30px rgba(26,35,126,0.12)' }}
             >
               לתיאום שיחת היכרות
             </Link>
             {/* Fix 12: back = ← */}
             <Link
               href="/#approach"
-              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#134E4A]"
+              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#1A237E]"
               style={{ borderColor: C.border, color: C.textMid }}
             >
               ← חזרה לגישה שלי

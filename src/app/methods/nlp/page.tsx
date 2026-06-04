@@ -16,7 +16,7 @@ export default function NlpPage() {
       {/* HEADER */}
       <header
         className="sticky top-0 z-50 backdrop-blur-sm border-b"
-        style={{ backgroundColor: 'rgba(240,253,250,0.97)', borderColor: C.borderLight }}
+        style={{ backgroundColor: 'rgba(255,240,245,0.97)', borderColor: C.borderLight }}
       >
         <div className="max-w-4xl mx-auto px-6 h-[72px] flex items-center justify-between">
           <Link href="/" className="flex items-center flex-shrink-0">
@@ -33,7 +33,7 @@ export default function NlpPage() {
           {/* Fix 12: back = ← */}
           <Link
             href="/#methods"
-            className="text-sm font-light transition-colors hover:text-[#2DD4BF]"
+            className="text-sm font-light transition-colors hover:text-[#C2185B]"
             style={{ color: C.textMid }}
           >
             ← חזרה לשיטות הטיפול
@@ -77,7 +77,7 @@ export default function NlpPage() {
         {/* Hero image */}
         <div
           className="w-full rounded-2xl overflow-hidden mb-10 border"
-          style={{ borderColor: C.border, boxShadow: '0 8px 30px rgba(19,78,74,0.07)' }}
+          style={{ borderColor: C.border, boxShadow: '0 8px 30px rgba(26,35,126,0.07)' }}
         >
           <Image
             src="/conference_audience.jpg"
@@ -176,13 +176,13 @@ export default function NlpPage() {
             <Link
               href="/#contact"
               className="inline-block px-8 py-3.5 rounded-lg text-sm font-medium text-white transition-all duration-300 hover:-translate-y-1"
-              style={{ background: C.plum, boxShadow: '0 8px 30px rgba(19,78,74,0.12)' }}
+              style={{ background: C.plum, boxShadow: '0 8px 30px rgba(26,35,126,0.12)' }}
             >
               לתיאום שיחת היכרות
             </Link>
             <Link
               href="/#methods"
-              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#134E4A]"
+              className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#1A237E]"
               style={{ borderColor: C.border, color: C.textMid }}
             >
               ← חזרה לשיטות הטיפול
