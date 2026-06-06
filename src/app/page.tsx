@@ -241,11 +241,15 @@ export default function Home() {
               </a>
             </div>
 
-            {/* CTA + hamburger — left side in RTL (mr-auto pushes to end) */}
+            {/* CTA (desktop only) + hamburger — left side in RTL */}
             <div className="flex items-center gap-3 mr-auto">
-              <CtaButton href="#contact" className="hidden md:inline-block px-5 py-2.5 text-sm">
+              <a
+                href="#contact"
+                className="hidden md:inline-block px-5 py-2.5 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:-translate-y-0.5"
+                style={{ backgroundColor: C.rose }}
+              >
                 לתיאום פגישה
-              </CtaButton>
+              </a>
               <MobileMenuClient />
             </div>
           </div>
@@ -269,11 +273,11 @@ export default function Home() {
         />
 
         {/* Centered content column */}
-        <div className="relative z-10 flex flex-col items-center text-center px-5 pt-8">
+        <div className="relative z-10 flex flex-col items-center text-center px-5 pt-4">
 
           {/* Tag */}
           <p
-            className="text-xs font-semibold tracking-[0.24em] mb-5 uppercase"
+            className="text-xs font-semibold tracking-[0.24em] mb-2 uppercase"
             style={{ color: C.textMid }}
           >
             מרכז טיפולי-לימודי
@@ -281,7 +285,7 @@ export default function Home() {
 
           {/* H1 heading — highlighted keywords in rose */}
           <h1
-            className="font-display font-medium leading-snug tracking-tight mb-3"
+            className="font-display font-medium leading-snug tracking-tight mb-1"
             style={{ fontSize: 'clamp(2.1rem, 6vw, 4rem)' }}
           >
             <span style={{ color: C.textDark }}>מרכז </span>
@@ -293,14 +297,14 @@ export default function Home() {
             <span style={{ color: C.textDark }}> ונשים</span>
           </h1>
 
-          {/* Image — full-width mobile, max-480px desktop, tight margin */}
-          <div className="w-full md:max-w-[480px] mt-3 rounded-2xl overflow-hidden">
+          {/* Image — capped at 320px on mobile, natural height on desktop */}
+          <div className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[320px] md:h-auto">
             <Image
               src="/founder_speaking.jpg"
               alt="גאולה אלון"
               width={960}
               height={720}
-              className="w-full h-auto object-cover object-top block"
+              className="w-full h-full md:h-auto object-cover object-top block"
               priority
               sizes="(max-width: 768px) 100vw, 480px"
             />
@@ -351,7 +355,7 @@ export default function Home() {
       </div>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-14 lg:py-16">
+      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-14 lg:py-16">
         <div className="max-w-3xl mx-auto md:mx-0 md:mr-auto">
 
           {/* Text column */}
@@ -405,7 +409,7 @@ export default function Home() {
       </div>
 
       {/* ===== METHODS & EXPERTISE ===== */}
-      <section id="methods" className="py-12 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
+      <section id="methods" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center md:text-right mb-10 lg:mb-16 sr">
             <SectionLabel text="גישה טיפולית" />
@@ -507,7 +511,7 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section id="services" className="py-12 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
+      <section id="services" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center md:text-right mb-8 md:mb-12 lg:mb-16 sr">
             <SectionLabel text="תחומי טיפול" />
@@ -554,7 +558,7 @@ export default function Home() {
       </div>
 
       {/* ===== LECTURES & TRAINING ===== */}
-      <section id="lectures" className="py-12 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
+      <section id="lectures" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-center">
 
@@ -626,7 +630,7 @@ export default function Home() {
       </div>
 
       {/* ===== THERAPY CARDS ===== */}
-      <section id="cards" className="py-12 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
+      <section id="cards" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
           <div className="text-center md:text-right mb-8 md:mb-12 lg:mb-16 sr">
@@ -705,7 +709,7 @@ export default function Home() {
       </div>
 
       {/* ===== APPROACH ===== */}
-      <section id="approach" className="py-12 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
+      <section id="approach" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center md:text-right mb-8 md:mb-12 lg:mb-16 sr">
             <SectionLabel text="הגישה שלי" />
@@ -752,7 +756,7 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-12 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
+      <section id="contact" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-5xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-5 gap-6 md:gap-10 lg:gap-16 items-start">
 
