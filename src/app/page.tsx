@@ -318,7 +318,7 @@ export default function Home() {
 
           {/* Image — 240px on mobile, natural on desktop */}
           <div
-            className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden md:h-auto"
+            className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden md:h-auto h-[265px]"
             style={{ height: 'min(240px, 38dvh)' }}
           >
             <Image
