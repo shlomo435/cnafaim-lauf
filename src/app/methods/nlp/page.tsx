@@ -160,7 +160,7 @@ export default function NlpPage() {
               <h3 className="font-display text-base font-semibold mb-1.5" style={{ color: C.textDark }}>
                 {card.title}
               </h3>
-              <p className="text-xs font-light leading-[1.8]" style={{ color: C.textLight }}>
+              <p className="text-sm font-light leading-[1.8]" style={{ color: C.textLight }}>
                 {card.body}
               </p>
             </div>
@@ -204,7 +204,7 @@ export default function NlpPage() {
               style={{ maxWidth: 144, mixBlendMode: 'screen', opacity: 0.85 }}
             />
           </Link>
-          <div className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
             כל הזכויות שמורות &copy; 2025 {/* Update annually */}
           </div>
         </div>

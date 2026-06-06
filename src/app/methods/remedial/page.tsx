@@ -182,7 +182,7 @@ export default function RemedialPage() {
               <h3 className="font-display text-base font-semibold mb-1.5" style={{ color: C.textDark }}>
                 {card.title}
               </h3>
-              <p className="text-xs font-light leading-[1.8]" style={{ color: C.textLight }}>
+              <p className="text-sm font-light leading-[1.8]" style={{ color: C.textLight }}>
                 {card.body}
               </p>
             </div>

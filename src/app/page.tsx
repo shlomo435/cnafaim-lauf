@@ -80,7 +80,7 @@ const features = [
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-2 justify-center md:justify-end mb-3 md:mb-4">
-      <p className="text-xs font-semibold tracking-[0.22em]" style={{ color: C.rose }}>
+      <p className="text-sm font-semibold tracking-[0.18em]" style={{ color: C.rose }}>
         {text}
       </p>
       <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.rose, opacity: 0.45 }} />
@@ -396,7 +396,7 @@ export default function Home() {
                   style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
                 >
                   <div className="font-display text-2xl font-semibold" style={{ color: C.textHeading }}>{stat.num}</div>
-                  <div className="text-xs mt-1 font-light" style={{ color: C.textLight }}>{stat.label}</div>
+                  <div className="text-sm mt-1 font-light" style={{ color: C.textLight }}>{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -463,10 +463,10 @@ export default function Home() {
                     style={{ backgroundColor: C.cream }}
                   >
                     <div className="font-display text-2xl font-semibold mb-1" style={{ color: C.textHeading }}>{method}</div>
-                    <div className="text-[0.65rem] font-semibold tracking-wide mb-2.5" style={{ color: C.rose }}>{label}</div>
-                    <p className="text-xs leading-[1.7] font-light flex-1" style={{ color: C.textMid }}>{desc}</p>
+                    <div className="text-xs font-medium tracking-wide mb-2.5" style={{ color: C.rose }}>{label}</div>
+                    <p className="text-sm leading-[1.7] font-light flex-1" style={{ color: C.textMid }}>{desc}</p>
                     {/* Fix 12: forward arrow = → */}
-                    <div className="mt-3 text-xs font-medium" style={{ color: C.rose }}>לפרטים →</div>
+                    <div className="mt-3 text-sm font-medium" style={{ color: C.rose }}>לפרטים →</div>
                   </Link>
                 ))}
               </div>
@@ -695,7 +695,7 @@ export default function Home() {
                     style={{ backgroundColor: C.cream }}
                   >
                     <div className="text-base font-semibold mb-0.5" style={{ color: C.textHeading }}>{item.title}</div>
-                    <div className="text-xs font-light" style={{ color: C.textLight }}>{item.subtitle}</div>
+                    <div className="text-sm font-light" style={{ color: C.textLight }}>{item.subtitle}</div>
                   </div>
                 ))}
               </div>
@@ -744,7 +744,7 @@ export default function Home() {
                 >
                   {feature.title}
                 </h3>
-                <p className="text-xs leading-[1.8] font-light" style={{ color: C.textMid }}>
+                <p className="text-sm leading-[1.8] font-light" style={{ color: C.textMid }}>
                   {feature.description}
                 </p>
                 {/* Fix 12: forward = → */}
@@ -775,7 +775,7 @@ export default function Home() {
               </p>
               <div className="space-y-4 md:space-y-5 text-sm">
                 <div className="flex flex-col text-center md:text-right gap-1.5">
-                  <span className="text-xs font-semibold tracking-[0.18em]" style={{ color: C.rose }}>טלפון</span>
+                  <span className="text-sm font-semibold tracking-[0.14em]" style={{ color: C.rose }}>טלפון</span>
                   <a
                     href="tel:0502961213"
                     className="font-light transition-colors text-[#3949AB] hover:text-[#D81B8C]"
@@ -786,7 +786,7 @@ export default function Home() {
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
                 <div className="flex flex-col text-center md:text-right gap-1.5">
-                  <span className="text-xs font-semibold tracking-[0.18em]" style={{ color: C.rose }}>אימייל</span>
+                  <span className="text-sm font-semibold tracking-[0.14em]" style={{ color: C.rose }}>אימייל</span>
                   <a
                     href="mailto:gehulaa@gmail.com"
                     className="font-light transition-colors text-[#3949AB] hover:text-[#D81B8C]"
@@ -797,7 +797,7 @@ export default function Home() {
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
                 <div className="flex flex-col text-center md:text-right gap-1.5">
-                  <span className="text-xs font-semibold tracking-[0.18em]" style={{ color: C.rose }}>מיקום</span>
+                  <span className="text-sm font-semibold tracking-[0.14em]" style={{ color: C.rose }}>מיקום</span>
                   <span className="font-light" style={{ color: C.textDark }}>ישראל</span>
                   <span className="text-sm font-medium leading-relaxed mt-1" style={{ color: C.textHeading }}>
                     קיימת אפשרות לטיפולים מרחוק באמצעות פגישות Zoom.
@@ -805,7 +805,7 @@ export default function Home() {
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
                 <div className="flex flex-col text-center md:text-right gap-1.5">
-                  <span className="text-xs font-semibold tracking-[0.18em]" style={{ color: C.rose }}>שעות פעילות</span>
+                  <span className="text-sm font-semibold tracking-[0.14em]" style={{ color: C.rose }}>שעות פעילות</span>
                   <span className="font-light" style={{ color: C.textDark }}>ראשון עד חמישי, 09:00 עד 18:00</span>
                 </div>
               </div>
@@ -834,7 +834,7 @@ export default function Home() {
             <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.65)' }}>
               מרכז טיפולי-לימודי | גאולה אלון
             </div>
-            <div className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
+            <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
               כל הזכויות שמורות &copy; 2025 {/* Update annually */}
             </div>
           </div>

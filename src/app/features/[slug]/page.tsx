@@ -220,7 +220,7 @@ export default async function FeaturePage({
               style={{ maxWidth: 144, mixBlendMode: 'screen', opacity: 0.85 }}
             />
           </Link>
-          <div className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
             כל הזכויות שמורות &copy; 2025 {/* Update annually */}
           </div>
         </div>
