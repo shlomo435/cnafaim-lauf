@@ -79,7 +79,7 @@ const features = [
 
 function SectionLabel({ text }: { text: string }) {
   return (
-    <div className="flex items-center gap-2 justify-center md:justify-end mb-3 md:mb-4">
+    <div className="flex items-center gap-2 justify-center mb-3 md:mb-4">
       <p className="text-sm font-semibold tracking-[0.18em]" style={{ color: C.rose }}>
         {text}
       </p>
@@ -377,10 +377,10 @@ export default function Home() {
 
       {/* ===== ABOUT ===== */}
       <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-14 lg:py-16">
-        <div className="max-w-3xl mx-auto md:mx-0 md:mr-auto">
+        <div className="max-w-3xl mx-auto">
 
           {/* Text column */}
-          <div className="text-center md:text-right sr">
+          <div className="text-center sr">
             <SectionLabel text="אודות" />
             <h2
               className="font-display text-4xl md:text-5xl font-medium"
@@ -388,7 +388,7 @@ export default function Home() {
             >
               גאולה אלון
             </h2>
-            <Rule className="mx-auto md:mx-0" />
+            <Rule className="mx-auto" />
             <div className="space-y-4 font-light leading-[1.8] text-[1.05rem]" style={{ color: C.textMid }}>
               <p>
                 בעלת תואר שני בחינוך ומעל עשרים שנה של ניסיון קליני ולימודי עם ילדים, נערות ונשים.
@@ -432,7 +432,7 @@ export default function Home() {
       {/* ===== METHODS & EXPERTISE ===== */}
       <section id="methods" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="text-center md:text-right mb-10 lg:mb-16 sr">
+          <div className="text-center mb-10 lg:mb-16 sr">
             <SectionLabel text="גישה טיפולית" />
             <h2
               className="font-display text-4xl md:text-5xl font-medium"
@@ -534,7 +534,7 @@ export default function Home() {
       {/* ===== SERVICES ===== */}
       <section id="services" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="text-center md:text-right mb-8 md:mb-12 lg:mb-16 sr">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 sr">
             <SectionLabel text="תחומי טיפול" />
             <h2
               className="font-display text-4xl md:text-5xl font-medium"
@@ -597,7 +597,7 @@ export default function Home() {
             </div>
 
             {/* Text column */}
-            <div className="text-center md:text-right order-1 md:order-2 sr sr-d2">
+            <div className="text-center order-1 md:order-2 sr sr-d2">
               <SectionLabel text="הרצאות והדרכות" />
               <h2
                 className="font-display text-3xl md:text-4xl font-medium leading-snug"
@@ -605,7 +605,7 @@ export default function Home() {
               >
                 הרצאות והדרכות להורים, צוותי חינוך וקהילה
               </h2>
-              <Rule className="mx-auto md:mx-0" />
+              <Rule className="mx-auto" />
               <div className="space-y-4 font-light leading-[1.8] text-[1.05rem]" style={{ color: C.textMid }}>
                 <p>
                   הרצאות מקצועיות וחווייתיות בנושאים רגשיים, חינוכיים ולימודיים, המיועדות להורים,
@@ -618,7 +618,7 @@ export default function Home() {
               </div>
 
               <div className="mt-6 md:mt-8">
-                <p className="text-sm font-semibold mb-4 text-center md:text-right" style={{ color: C.textHeading }}>
+                <p className="text-sm font-semibold mb-4 text-center" style={{ color: C.textHeading }}>
                   בין נושאי ההרצאות:
                 </p>
                 <ul className="space-y-2.5">
@@ -638,7 +638,7 @@ export default function Home() {
                 </ul>
               </div>
 
-              <div className="mt-6 md:mt-8 flex justify-center md:justify-end">
+              <div className="mt-6 md:mt-8 flex justify-center">
                 <CtaButton href="#contact">לפרטים ותיאום הרצאה</CtaButton>
               </div>
             </div>
@@ -654,7 +654,7 @@ export default function Home() {
       <section id="cards" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
-          <div className="text-center md:text-right mb-8 md:mb-12 lg:mb-16 sr">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 sr">
             <SectionLabel text="קלפים טיפוליים" />
             <h2
               className="font-display text-3xl sm:text-4xl md:text-5xl font-medium leading-snug"
@@ -685,8 +685,8 @@ export default function Home() {
             </div>
 
             {/* Cards text */}
-            <div className="text-center md:text-right order-1 md:order-2 sr sr-d2">
-              <Rule className="mx-auto md:mx-0" />
+            <div className="text-center order-1 md:order-2 sr sr-d2">
+              <Rule className="mx-auto" />
               <div className="space-y-5 font-light leading-[1.8] text-[1.05rem]" style={{ color: C.textMid }}>
                 <p>
                   קלפי &quot;ניצוץ&quot; נוצרו כדי לתת לכל ילד מרחב בטוח לביטוי עצמי. כל קלף
@@ -732,7 +732,7 @@ export default function Home() {
       {/* ===== APPROACH ===== */}
       <section id="approach" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="text-center md:text-right mb-8 md:mb-12 lg:mb-16 sr">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 sr">
             <SectionLabel text="הגישה שלי" />
             <h2
               className="font-display text-4xl md:text-5xl font-medium"
@@ -782,7 +782,7 @@ export default function Home() {
           <div className="grid md:grid-cols-5 gap-6 md:gap-10 lg:gap-16 items-start">
 
             {/* Contact info */}
-            <div className="md:col-span-2 text-center md:text-right sr sr-d1">
+            <div className="md:col-span-2 text-center sr sr-d1">
               <SectionLabel text="יצירת קשר" />
               <h2
                 className="font-display text-3xl md:text-4xl font-medium mb-4 md:mb-6 leading-snug"
@@ -795,7 +795,7 @@ export default function Home() {
                 אני כאן. כל פניה מטופלת בדיסקרטיות ובמהירות.
               </p>
               <div className="space-y-4 md:space-y-5 text-sm">
-                <div className="flex flex-col text-center md:text-right gap-1.5">
+                <div className="flex flex-col text-center gap-1.5">
                   <span className="text-sm font-semibold tracking-[0.14em]" style={{ color: C.rose }}>טלפון</span>
                   <a
                     href="tel:0502961213"
@@ -806,7 +806,7 @@ export default function Home() {
                   </a>
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
-                <div className="flex flex-col text-center md:text-right gap-1.5">
+                <div className="flex flex-col text-center gap-1.5">
                   <span className="text-sm font-semibold tracking-[0.14em]" style={{ color: C.rose }}>אימייל</span>
                   <a
                     href="mailto:gehulaa@gmail.com"
@@ -817,7 +817,7 @@ export default function Home() {
                   </a>
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
-                <div className="flex flex-col text-center md:text-right gap-1.5">
+                <div className="flex flex-col text-center gap-1.5">
                   <span className="text-sm font-semibold tracking-[0.14em]" style={{ color: C.rose }}>מיקום</span>
                   <span className="font-light" style={{ color: C.textDark }}>ישראל</span>
                   <span className="text-sm font-medium leading-relaxed mt-1" style={{ color: C.textHeading }}>
@@ -825,7 +825,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="h-px" style={{ backgroundColor: C.border }} />
-                <div className="flex flex-col text-center md:text-right gap-1.5">
+                <div className="flex flex-col text-center gap-1.5">
                   <span className="text-sm font-semibold tracking-[0.14em]" style={{ color: C.rose }}>שעות פעילות</span>
                   <span className="font-light" style={{ color: C.textDark }}>ראשון עד חמישי, 09:00 עד 18:00</span>
                 </div>
@@ -840,7 +840,7 @@ export default function Home() {
 
       {/* ===== FOOTER ===== */}
       <footer className="py-6 md:py-10 lg:py-12" style={{ backgroundColor: C.plum }}>
-        <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 text-center md:text-right">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-center items-center gap-6 text-center">
           <a href="#" aria-label="כנפיים לעוף - דף הבית" className="flex items-center flex-shrink-0">
             <Image
               src="/logo.jpg"
@@ -851,7 +851,7 @@ export default function Home() {
               style={{ maxWidth: 160, mixBlendMode: 'screen', opacity: 0.9 }}
             />
           </a>
-          <div className="flex flex-col items-center md:items-end gap-1.5">
+          <div className="flex flex-col items-center gap-1.5">
             <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.65)' }}>
               מרכז טיפולי-לימודי | גאולה אלון
             </div>
