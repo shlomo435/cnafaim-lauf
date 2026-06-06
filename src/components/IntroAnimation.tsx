@@ -41,9 +41,9 @@ export default function IntroAnimation() {
   useEffect(() => {
     mountedRef.current = true;
 
-    // Skip animation for users who prefer reduced motion.
-    // Defer setDone to next tick to avoid synchronous setState inside an effect.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Skip if already played this session, or if user prefers reduced motion.
+    const alreadySeen = sessionStorage.getItem('intro-seen') === '1';
+    if (alreadySeen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.body.style.overflow = '';
       const t = setTimeout(() => { if (mountedRef.current) setDone(true); }, 0);
       return () => {
@@ -64,6 +64,7 @@ export default function IntroAnimation() {
       if (!mountedRef.current) return;
       setDone(true);
       document.body.style.overflow = '';
+      try { sessionStorage.setItem('intro-seen', '1'); } catch { /* private browsing */ }
     }, 3850);
 
     return () => {
@@ -77,6 +78,7 @@ export default function IntroAnimation() {
   const skip = () => {
     if (leaving || done) return;
     setLeaving(true);
+    try { sessionStorage.setItem('intro-seen', '1'); } catch { /* private browsing */ }
     setTimeout(() => {
       if (!mountedRef.current) return;
       setDone(true);

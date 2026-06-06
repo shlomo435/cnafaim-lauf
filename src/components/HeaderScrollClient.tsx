@@ -6,12 +6,22 @@ import { C } from '../lib/tokens';
 import MobileMenuClient from './MobileMenuClient';
 
 const NAV_LINKS = [
-  ['אודות',          '#about'],
-  ['תחומי טיפול',    '#services'],
-  ['קלפים טיפוליים', '#cards'],
-  ['הגישה שלי',      '#approach'],
-  ['יצירת קשר',      '#contact'],
+  ['אודות',            '#about'],
+  ['גישה טיפולית',     '#methods'],
+  ['תחומי טיפול',      '#services'],
+  ['הרצאות',           '#lectures'],
+  ['קלפים טיפוליים',   '#cards'],
+  ['הגישה שלי',        '#approach'],
+  ['יצירת קשר',        '#contact'],
 ] as const;
+
+function smoothScroll(href: string) {
+  if (href === '#') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 
 export default function HeaderScrollClient() {
   const [hidden, setHidden] = useState(false);
@@ -38,13 +48,14 @@ export default function HeaderScrollClient() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="relative h-20 md:h-24 flex items-center">
 
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-7 text-sm font-light" aria-label="ניווט ראשי">
+            {/* Desktop nav — smooth scroll on all links */}
+            <nav className="hidden md:flex items-center gap-3 text-sm font-light" aria-label="ניווט ראשי">
               {NAV_LINKS.map(([label, href]) => (
                 <a
                   key={label}
                   href={href}
-                  className="transition-colors duration-200 hover:text-[#D81B8C]"
+                  onClick={(e) => { e.preventDefault(); smoothScroll(href); }}
+                  className="transition-colors duration-200 hover:text-[#D81B8C] cursor-pointer"
                   style={{ color: C.textMid }}
                 >
                   {label}
@@ -52,9 +63,14 @@ export default function HeaderScrollClient() {
               ))}
             </nav>
 
-            {/* Logo — absolutely centered */}
+            {/* Logo — centered, clicks scroll to top */}
             <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-              <a href="#" className="pointer-events-auto" aria-label="כנפיים לעוף - דף הבית">
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); smoothScroll('#'); }}
+                className="pointer-events-auto"
+                aria-label="כנפיים לעוף - דף הבית"
+              >
                 <Image
                   src="/logo.jpg"
                   alt="כנפיים לעוף"
@@ -67,11 +83,12 @@ export default function HeaderScrollClient() {
               </a>
             </div>
 
-            {/* CTA — desktop only */}
+            {/* CTA — desktop only, smooth scroll */}
             <div className="mr-auto">
               <a
                 href="#contact"
-                className="hidden md:inline-block px-5 py-2.5 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:-translate-y-0.5"
+                onClick={(e) => { e.preventDefault(); smoothScroll('#contact'); }}
+                className="hidden md:inline-block px-5 py-2.5 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
                 style={{ backgroundColor: C.rose }}
               >
                 לתיאום פגישה
@@ -81,7 +98,7 @@ export default function HeaderScrollClient() {
         </div>
       </header>
 
-      {/* MobileMenuClient — hamburger is fixed, always visible */}
+      {/* MobileMenuClient — hamburger is fixed z-[9999], always above header z-50 */}
       <MobileMenuClient />
     </>
   );

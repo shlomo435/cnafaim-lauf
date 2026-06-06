@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { C } from '../lib/tokens';
 
 const NAV_LINKS = [
-  { label: 'אודות',         href: '#about' },
-  { label: 'תחומי טיפול',   href: '#services' },
-  { label: 'קלפים טיפוליים', href: '#cards' },
-  { label: 'הגישה שלי',     href: '#approach' },
-  { label: 'יצירת קשר',     href: '#contact' },
+  { label: 'אודות',           href: '#about' },
+  { label: 'גישה טיפולית',    href: '#methods' },
+  { label: 'תחומי טיפול',     href: '#services' },
+  { label: 'הרצאות',          href: '#lectures' },
+  { label: 'קלפים טיפוליים',  href: '#cards' },
+  { label: 'הגישה שלי',       href: '#approach' },
+  { label: 'יצירת קשר',       href: '#contact' },
 ];
 
 function smoothScrollTo(href: string) {

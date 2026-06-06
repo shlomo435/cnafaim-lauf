@@ -199,7 +199,7 @@ export default function Home() {
       {/* Fixed CTA — mobile only, centered between accessibility and WhatsApp buttons */}
       <a
         href="#contact"
-        className="fixed z-[9997] md:hidden flex items-center justify-center text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
+        className="fixed z-[9997] md:hidden flex items-center justify-center text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#D81B8C]"
         style={{
           bottom: '27px',
           left: '50%',
@@ -733,7 +733,7 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
+      <section id="contact" className="pt-7 pb-[88px] md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-5xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-5 gap-6 md:gap-10 lg:gap-16 items-start">
 
@@ -795,7 +795,7 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="py-6 md:py-10 lg:py-12" style={{ backgroundColor: C.plum }}>
+      <footer className="pt-6 pb-[88px] md:py-10 lg:py-12" style={{ backgroundColor: C.plum }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-center items-center gap-6 text-center">
           <a href="#" aria-label="כנפיים לעוף - דף הבית" className="flex items-center flex-shrink-0">
             <Image
