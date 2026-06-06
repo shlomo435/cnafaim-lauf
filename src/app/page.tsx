@@ -311,10 +311,6 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-4 md:px-6">
-        <SectionDivider />
-      </div>
-
       {/* ===== ABOUT ===== */}
       <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-14 lg:py-16">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
@@ -465,7 +461,7 @@ export default function Home() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-3 rounded-xl px-4 py-3 border border-[#F8BBD9]"
+                    className="flex items-center justify-center gap-3 rounded-xl px-4 py-3 border border-[#F8BBD9]"
                     style={{ backgroundColor: C.cream }}
                   >
                     <RoseDot />
@@ -480,7 +476,7 @@ export default function Home() {
             className="mt-8 md:mt-10 rounded-md p-6 md:p-8 text-center border border-[#F8BBD9] sr"
             style={{ backgroundColor: C.cream }}
           >
-            <p className="text-[1.05rem] font-light leading-[1.8] max-w-4xl ml-auto" style={{ color: C.textMid }}>
+            <p className="text-[1.05rem] font-light leading-[1.8] max-w-4xl mx-auto" style={{ color: C.textMid }}>
               המרכז שם דגש על עבודה בשיתוף ההורים, הקשבה עמוקה, בניית אמון, ומתן כלים פרקטיים ליום-יום - כדי שהשינוי לא יישאר רק בחדר הטיפול, אלא ילווה גם את החיים עצמם.
             </p>
           </div>
@@ -537,6 +533,18 @@ export default function Home() {
       {/* ===== LECTURES & TRAINING ===== */}
       <section id="lectures" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
+
+          {/* Section heading — mobile only (desktop heading is inside text column) */}
+          <div className="text-center mb-6 md:hidden sr">
+            <SectionLabel text="הרצאות והדרכות" />
+            <h2
+              className="font-display text-3xl font-medium leading-snug"
+              style={{ color: C.textHeading, letterSpacing: '-0.02em' }}
+            >
+              הרצאות והדרכות להורים, צוותי חינוך וקהילה
+            </h2>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-center">
 
             {/* Image column */}
@@ -698,7 +706,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
             {features.map((feature, i) => (
               <Link
                 key={feature.title}
@@ -795,25 +803,85 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="pt-6 pb-[88px] md:py-10 lg:py-12" style={{ backgroundColor: C.plum }}>
-        <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-center items-center gap-6 text-center">
-          <a href="#" aria-label="כנפיים לעוף - דף הבית" className="flex items-center flex-shrink-0">
-            <Image
-              src="/logo.jpg"
-              alt="כנפיים לעוף"
-              width={160}
-              height={56}
-              className="h-14 w-auto object-contain"
-              style={{ maxWidth: 160, mixBlendMode: 'screen', opacity: 0.9 }}
-            />
-          </a>
-          <div className="flex flex-col items-center gap-1.5">
-            <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.65)' }}>
-              מרכז טיפולי-לימודי | גאולה אלון
+      <footer className="pt-8 pb-[88px] md:pt-12 md:pb-10 lg:pb-12" style={{ backgroundColor: C.plum }}>
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+
+          {/* Main footer grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-right pb-8 border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+
+            {/* Logo + tagline */}
+            <div className="flex flex-col items-center md:items-end gap-3">
+              <a href="#" aria-label="כנפיים לעוף - דף הבית">
+                <Image
+                  src="/logo.jpg"
+                  alt="כנפיים לעוף"
+                  width={160}
+                  height={56}
+                  className="h-12 w-auto object-contain"
+                  style={{ maxWidth: 160, mixBlendMode: 'screen', opacity: 0.9 }}
+                />
+              </a>
+              <p className="text-sm font-light leading-relaxed max-w-[200px]" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                מרכז רגשי-לימודי לילדים, נערות ונשים
+              </p>
             </div>
-            <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
-              כל הזכויות שמורות &copy; 2025 {/* Update annually */}
+
+            {/* Quick nav */}
+            <div className="flex flex-col items-center md:items-end gap-2">
+              <p className="text-xs font-semibold tracking-[0.2em] mb-1" style={{ color: 'rgba(255,255,255,0.45)' }}>ניווט מהיר</p>
+              {[
+                ['אודות',        '#about'],
+                ['גישה טיפולית', '#methods'],
+                ['תחומי טיפול',  '#services'],
+                ['הרצאות',       '#lectures'],
+                ['יצירת קשר',    '#contact'],
+              ].map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="text-sm font-light transition-colors hover:text-white"
+                  style={{ color: 'rgba(255,255,255,0.6)' }}
+                >
+                  {label}
+                </a>
+              ))}
             </div>
+
+            {/* Contact info */}
+            <div className="flex flex-col items-center md:items-end gap-3">
+              <p className="text-xs font-semibold tracking-[0.2em]" style={{ color: 'rgba(255,255,255,0.45)' }}>יצירת קשר</p>
+              <a
+                href="tel:0502961213"
+                className="text-sm font-light transition-colors hover:text-white"
+                style={{ color: 'rgba(255,255,255,0.7)', direction: 'ltr' }}
+              >
+                050-296-1213
+              </a>
+              <a
+                href="mailto:gehulaa@gmail.com"
+                className="text-sm font-light transition-colors hover:text-white"
+                style={{ color: 'rgba(255,255,255,0.7)', direction: 'ltr' }}
+              >
+                gehulaa@gmail.com
+              </a>
+              <p className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                ראשון–חמישי, 09:00–18:00
+              </p>
+              <a
+                href="#contact"
+                className="mt-1 inline-block px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
+                style={{ backgroundColor: C.rose, color: 'white', boxShadow: '0 4px 16px rgba(216,27,140,0.25)' }}
+              >
+                לתיאום שיחת היכרות
+              </a>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="pt-6 text-center">
+            <p className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              כל הזכויות שמורות &copy; 2025 · כנפיים לעוף | גאולה אלון {/* Update annually */}
+            </p>
           </div>
         </div>
       </footer>
