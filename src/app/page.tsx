@@ -234,7 +234,7 @@ export default function Home() {
                   alt="כנפיים לעוף"
                   width={200}
                   height={67}
-                  className="h-10 md:h-16 w-auto object-contain"
+                  className="h-16 md:h-16 w-auto object-contain"
                   style={{ maxWidth: 200, mixBlendMode: 'multiply' }}
                   priority
                 />
@@ -258,7 +258,7 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section
-        className="relative overflow-hidden flex flex-col"
+        className="relative overflow-hidden flex flex-col min-h-[calc(100dvh-80px)] md:min-h-0"
         style={{ background: 'linear-gradient(to bottom, #FFF0F6 0%, #F3E8FF 100%)' }}
       >
         {/* Subtle dot texture */}
@@ -273,7 +273,7 @@ export default function Home() {
         />
 
         {/* Centered content column */}
-        <div className="relative z-10 flex flex-col items-center text-center px-5 pt-4">
+        <div className="relative z-10 flex flex-col items-center text-center px-5 pt-4 flex-1 justify-between md:justify-start">
 
           {/* Tag */}
           <p
@@ -298,7 +298,7 @@ export default function Home() {
           </h1>
 
           {/* Image — capped at 320px on mobile, natural height on desktop */}
-          <div className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[320px] md:h-auto">
+          <div className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[min(320px,45dvh)] md:h-auto flex-1 md:flex-none">
             <Image
               src="/founder_speaking.jpg"
               alt="גאולה אלון"
@@ -320,7 +320,7 @@ export default function Home() {
           {/* CTA button */}
           <a
             href="#contact"
-            className="inline-block mt-5 mb-8 px-8 py-3.5 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
+            className="inline-block mt-auto mb-6 px-8 py-3.5 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
             style={{ backgroundColor: C.rose, boxShadow: '0 6px 24px rgba(216,27,140,0.22)' }}
           >
             לתיאום שיחת היכרות ←
