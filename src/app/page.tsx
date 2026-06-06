@@ -220,7 +220,7 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section
-        className="relative overflow-hidden flex flex-col min-h-[calc(100dvh-80px)] md:min-h-0"
+        className="relative overflow-hidden flex flex-col min-h-[calc(100dvh-80px)] md:min-h-screen"
         style={{ background: 'linear-gradient(to bottom, #FFF0F6 0%, #F3E8FF 100%)' }}
       >
         {/* Subtle dot texture */}
@@ -234,8 +234,8 @@ export default function Home() {
           }}
         />
 
-        {/* Centered content column */}
-        <div className="relative z-10 flex flex-col items-center text-center px-5 pt-4 flex-1 justify-between md:justify-start">
+        {/* Centered content column — no justify-between so content never clips */}
+        <div className="relative z-10 flex flex-col items-center text-center px-5 pt-4 pb-4 md:justify-center md:flex-1">
 
           {/* Tag */}
           <p
@@ -245,10 +245,10 @@ export default function Home() {
             מרכז טיפולי-לימודי
           </p>
 
-          {/* H1 heading — highlighted keywords in rose */}
+          {/* H1 heading — clamp corrected: min 1.8rem so it never shrinks below readable */}
           <h1
             className="font-display font-medium leading-snug tracking-tight mb-1"
-            style={{ fontSize: 'clamp(2.1rem, 6vw, 4rem)' }}
+            style={{ fontSize: 'clamp(1.8rem, 7vw, 4rem)' }}
           >
             <span style={{ color: C.textDark }}>מרכז </span>
             <strong style={{ color: C.rose, fontWeight: 700 }}>רגשי</strong>
@@ -259,24 +259,21 @@ export default function Home() {
             <span style={{ color: C.textDark }}> ונשים</span>
           </h1>
 
-          {/* Image — 240px on mobile, natural on desktop */}
-          <div
-            className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden md:h-auto"
-            style={{ height: '265px' }}
-          >
+          {/* Image — fixed 265px mobile via class, auto height desktop */}
+          <div className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[265px] md:h-auto">
             <Image
               src="/founder_speaking.jpg"
-              alt="גאולה אלון"
+              alt="גאולה אלון, מטפלת רגשית ומנהלת המרכז, כנפיים לעוף"
               width={960}
               height={720}
-              className="w-full h-full object-cover object-top block"
+              className="w-full h-full md:h-auto object-cover object-top block"
               priority
               sizes="(max-width: 768px) 100vw, 480px"
             />
           </div>
 
           {/* Credits */}
-          <p className="mt-4 text-base md:text-base font-medium" style={{ color: C.textMid }}>
+          <p className="mt-4 text-base font-medium" style={{ color: C.textMid }}>
             <strong style={{ color: '#3949AB' }}>גאולה אלון</strong>
             {' | CBT · EMR · NLP · הוראה מתקנת'}
           </p>
@@ -284,7 +281,7 @@ export default function Home() {
           {/* CTA button — desktop only (mobile uses fixed bottom bar) */}
           <a
             href="#contact"
-            className="hidden md:inline-block mt-4 mb-4 px-8 py-3 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
+            className="hidden md:inline-block mt-5 mb-2 px-8 py-3 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
             style={{ backgroundColor: C.rose, boxShadow: '0 6px 24px rgba(216,27,140,0.22)' }}
           >
             לתיאום שיחת היכרות ←
@@ -320,10 +317,26 @@ export default function Home() {
 
       {/* ===== ABOUT ===== */}
       <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-14 lg:py-16">
-        <div className="max-w-3xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+
+          {/* Portrait — desktop only */}
+          <div className="hidden md:block relative sr sr-d1">
+            <div
+              className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden"
+              style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 8px 30px rgba(0,0,0,0.05)' }}
+            >
+              <Image
+                src="/founder_portrait.jpg"
+                alt="גאולה אלון, מנהלת מרכז כנפיים לעוף"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 50vw, 480px"
+              />
+            </div>
+          </div>
 
           {/* Text column */}
-          <div className="text-center sr">
+          <div className="text-center sr sr-d2">
             <SectionLabel text="אודות" />
             <h2
               className="font-display text-4xl md:text-5xl font-medium"
