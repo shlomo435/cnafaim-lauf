@@ -1,23 +1,28 @@
 // Brand design tokens - single source of truth for all color values.
+
+// Shared literal constants to avoid duplicating the same hex in multiple tokens.
+const INDIGO_600 = '#3949AB' as const;   // plumHover = textHeading = textDark
+const MAGENTA    = '#D81B8C' as const;   // rose (CTA, accents)
+
 export const C = {
   // Backgrounds — warm pink tones matching logo
-  cream:       '#FFF0F5',  // soft pink — main bg
-  creamAlt:    '#FCE4EF',  // lighter pink — alt section bg
-  creamDeep:   '#F8BBD9',  // medium pink — accent bg
-  // Primary brand — soft indigo (replaces harsh navy)
-  plum:        '#5C6BC0',  // soft indigo — footer, buttons
-  plumHover:   '#3949AB',  // deeper indigo — hover
-  // CTA / accent — vivid magenta matching logo
-  rose:        '#D81B8C',  // vibrant magenta — CTAs, accents, headings
-  roseHover:   '#AD1457',  // darker magenta — hover
-  accent:      '#9C27B0',  // purple — butterfly/decorative
-  gold:        '#8D6E63',  // warm brown-gold — dividers
-  // Text
-  textHeading: '#3949AB',  // indigo — headings (good contrast on white/pink)
-  textDark:    '#3949AB',  // indigo — primary text
-  textMid:     '#5C4A6E',  // soft purple-gray — secondary text
-  textLight:   '#8D6E63',  // warm gold — light labels
+  cream:       '#FFF0F5',
+  creamAlt:    '#FCE4EF',
+  creamDeep:   '#F8BBD9',
+  // Primary brand — soft indigo
+  plum:        '#5C6BC0',
+  plumHover:   INDIGO_600,
+  // CTA / accent — vivid magenta
+  rose:        MAGENTA,
+  roseHover:   '#AD1457',
+  accent:      '#9C27B0',
+  gold:        '#8D6E63',
+  // Text — all three map to the same indigo for consistent body/heading colour
+  textHeading: INDIGO_600,
+  textDark:    INDIGO_600,
+  textMid:     '#5C4A6E',
+  textLight:   '#8D6E63',
   // Structural
-  border:      '#F8BBD9',  // soft pink border
-  borderLight: '#FCE4EF',  // lightest pink border
+  border:      '#F8BBD9',
+  borderLight: '#FCE4EF',
 } as const;

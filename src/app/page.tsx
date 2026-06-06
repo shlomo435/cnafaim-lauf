@@ -1,7 +1,13 @@
 ﻿import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { twMerge } from 'tailwind-merge';
 import { C } from '../lib/tokens';
+
+// Explicit sr-delay class lookup — avoids dynamic string construction that
+// confuses static analysis tools (sr-d1…sr-d5 are defined in globals.css).
+const SR_DELAY = ['sr-d1', 'sr-d2', 'sr-d3', 'sr-d4', 'sr-d5'] as const;
+const srDelay = (i: number) => SR_DELAY[Math.min(i, 4)];
 import IntroAnimation from '../components/IntroAnimation';
 import ScrollRevealClient from '../components/ScrollRevealClient';
 import SideDrawerClient from '../components/SideDrawerClient';
@@ -110,7 +116,7 @@ function WavyDivider({ className = '' }: { className?: string }) {
       <svg viewBox="0 0 480 24" className="w-full max-w-lg h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M0,12 C40,3 80,21 120,12 C160,3 200,21 240,12 C280,3 320,21 360,12 C400,3 440,17 480,12"
-          stroke="#D81B8C"
+          stroke={C.rose}
           strokeWidth="1.5"
           strokeLinecap="round"
         />
@@ -142,9 +148,11 @@ function CtaButton({
   return (
     <a
       href={href}
-      className={`text-sm font-medium text-center text-white transition-all duration-300 rounded-lg bg-[#D81B8C] hover:bg-[#AD1457] ${
-        block ? 'block w-full py-3.5' : 'inline-block px-8 py-3.5'
-      } ${className}`}
+      className={twMerge(
+        'text-sm font-medium text-center text-white transition-all duration-300 rounded-lg bg-[#D81B8C] hover:bg-[#AD1457]',
+        block ? 'block w-full py-3.5' : 'inline-block px-8 py-3.5',
+        className,
+      )}
     >
       {children}
     </a>
@@ -438,7 +446,6 @@ export default function Home() {
                     <div className="font-display text-2xl font-semibold mb-1" style={{ color: C.textHeading }}>{method}</div>
                     <div className="text-xs font-medium tracking-wide mb-2.5" style={{ color: C.rose }}>{label}</div>
                     <p className="text-sm leading-[1.7] font-light flex-1" style={{ color: C.textMid }}>{desc}</p>
-                    {/* Fix 12: forward arrow = → */}
                     <div className="mt-3 text-sm font-medium" style={{ color: C.rose }}>לפרטים →</div>
                   </Link>
                 ))}
@@ -500,7 +507,7 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-xl p-6 md:p-8 text-center border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1`}
+                className={`sr ${srDelay(i)} group relative rounded-xl p-6 md:p-8 text-center border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1`}
                 style={{ backgroundColor: C.cream }}
               >
                 {service.title === 'הוראה מתקנת' ? (
@@ -711,7 +718,7 @@ export default function Home() {
               <Link
                 key={feature.title}
                 href={`/features/${feature.slug}`}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-xl p-5 text-center border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1`}
+                className={`sr ${srDelay(i)} group rounded-xl p-5 text-center border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1`}
                 style={{ backgroundColor: C.cream }}
               >
                 <div
@@ -732,7 +739,6 @@ export default function Home() {
                 <p className="text-sm leading-[1.8] font-light" style={{ color: C.textMid }}>
                   {feature.description}
                 </p>
-                {/* Fix 12: forward = → */}
                 <p className="text-xs mt-3 font-medium" style={{ color: C.rose }}>קראו עוד →</p>
               </Link>
             ))}
