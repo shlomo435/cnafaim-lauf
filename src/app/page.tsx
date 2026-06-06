@@ -297,30 +297,32 @@ export default function Home() {
             <span style={{ color: C.textDark }}> ונשים</span>
           </h1>
 
-          {/* Image — capped at 320px on mobile, natural height on desktop */}
-          <div className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[min(320px,45dvh)] md:h-auto flex-1 md:flex-none">
+          {/* Image — 240px on mobile, natural on desktop */}
+          <div
+            className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden md:h-auto"
+            style={{ height: 'min(240px, 38dvh)' }}
+          >
             <Image
               src="/founder_speaking.jpg"
               alt="גאולה אלון"
               width={960}
               height={720}
-              className="w-full h-full md:h-auto object-cover object-top block"
+              className="w-full h-full object-cover object-top block"
               priority
               sizes="(max-width: 768px) 100vw, 480px"
             />
           </div>
 
           {/* Credits */}
-          <p className="mt-5 text-sm md:text-base font-light" style={{ color: C.textMid }}>
-            <strong className="font-semibold" style={{ color: C.textDark }}>גאולה אלון</strong>
-            {' | '}
-            CBT · EMR · NLP · הוראה מתקנת
+          <p className="mt-4 text-base md:text-base font-medium" style={{ color: C.textMid }}>
+            <strong style={{ color: '#3949AB' }}>גאולה אלון</strong>
+            {' | CBT · EMR · NLP · הוראה מתקנת'}
           </p>
 
           {/* CTA button */}
           <a
             href="#contact"
-            className="inline-block mt-auto mb-6 px-8 py-3.5 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
+            className="inline-block mt-4 mb-4 px-8 py-3 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
             style={{ backgroundColor: C.rose, boxShadow: '0 6px 24px rgba(216,27,140,0.22)' }}
           >
             לתיאום שיחת היכרות ←
