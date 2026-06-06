@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { C } from '../lib/tokens';
@@ -11,15 +11,20 @@ const NAV_LINKS = [
   { label: 'יצירת קשר',     href: '#contact' },
 ];
 
+function smoothScrollTo(href: string) {
+  const target = document.querySelector(href);
+  target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 export default function MobileMenuClient() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      {/* Hamburger button - only visible on mobile */}
+      {/* Hamburger — fixed, always visible on mobile even when header hides */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="md:hidden w-10 h-10 flex items-center justify-center rounded-md transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D81B8C] focus-visible:ring-offset-1"
+        className="fixed top-4 right-4 z-[9999] md:hidden w-10 h-10 flex items-center justify-center rounded-md bg-white/80 backdrop-blur-sm shadow-sm transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D81B8C] focus-visible:ring-offset-1"
         style={{ color: C.textDark }}
         aria-label={open ? 'סגור תפריט' : 'פתח תפריט'}
         aria-expanded={open}
@@ -36,11 +41,11 @@ export default function MobileMenuClient() {
         )}
       </button>
 
-      {/* Dropdown — fixed below header (h-20 = 80px) */}
+      {/* Dropdown */}
       {open && (
         <div
           id="mobile-nav"
-          className="fixed top-20 inset-x-0 z-40 border-t shadow-lg md:hidden"
+          className="fixed top-16 inset-x-0 z-[9998] border-t shadow-lg md:hidden"
           style={{ backgroundColor: 'rgba(255,240,245,0.99)', borderColor: C.borderLight }}
         >
           <nav className="max-w-6xl mx-auto px-5 py-3 flex flex-col text-right">
@@ -48,7 +53,11 @@ export default function MobileMenuClient() {
               <a
                 key={label}
                 href={href}
-                onClick={() => setOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpen(false);
+                  setTimeout(() => smoothScrollTo(href), 300);
+                }}
                 className="py-4 text-base font-medium border-b last:border-b-0 transition-colors text-[#3949AB] hover:text-[#D81B8C]"
                 style={{ borderColor: C.borderLight }}
               >
@@ -58,7 +67,11 @@ export default function MobileMenuClient() {
             <div className="pt-4 pb-3">
               <a
                 href="#contact"
-                onClick={() => setOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpen(false);
+                  setTimeout(() => smoothScrollTo('#contact'), 300);
+                }}
                 className="block w-full py-4 text-base font-medium text-center text-white rounded-xl bg-[#D81B8C] hover:bg-[#AD1457] transition-colors duration-300"
               >
                 לתיאום פגישה

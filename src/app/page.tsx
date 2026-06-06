@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { C } from '../lib/tokens';
 import IntroAnimation from '../components/IntroAnimation';
 import ScrollRevealClient from '../components/ScrollRevealClient';
-import MobileMenuClient from '../components/MobileMenuClient';
 import SideDrawerClient from '../components/SideDrawerClient';
+import HeaderScrollClient from '../components/HeaderScrollClient';
 import ContactFormClient from '../components/ContactFormClient';
 
 // ======================
@@ -216,64 +216,7 @@ export default function Home() {
       </a>
 
       {/* ===== HEADER ===== */}
-      <header
-        className="sticky top-0 z-50 backdrop-blur-sm shadow-sm border-b"
-        style={{ backgroundColor: 'rgba(255,255,255,0.97)', borderColor: C.borderLight }}
-      >
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="relative h-20 md:h-24 flex items-center">
-
-            {/* Desktop nav — right side in RTL */}
-            <nav className="hidden md:flex items-center gap-7 text-sm font-light" aria-label="ניווט ראשי">
-              {(
-                [
-                  ['אודות',           '#about'],
-                  ['תחומי טיפול',     '#services'],
-                  ['קלפים טיפוליים',  '#cards'],
-                  ['הגישה שלי',       '#approach'],
-                  ['יצירת קשר',       '#contact'],
-                ] as const
-              ).map(([label, href]) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="transition-colors duration-200 hover:text-[#D81B8C]"
-                  style={{ color: C.textMid }}
-                >
-                  {label}
-                </a>
-              ))}
-            </nav>
-
-            {/* Logo — absolutely centered */}
-            <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-              <a href="#" className="pointer-events-auto" aria-label="כנפיים לעוף - דף הבית">
-                <Image
-                  src="/logo.jpg"
-                  alt="כנפיים לעוף"
-                  width={200}
-                  height={67}
-                  className="h-16 md:h-16 w-auto object-contain"
-                  style={{ maxWidth: 200, mixBlendMode: 'multiply' }}
-                  priority
-                />
-              </a>
-            </div>
-
-            {/* CTA (desktop only) + hamburger — left side in RTL */}
-            <div className="flex items-center gap-3 mr-auto">
-              <a
-                href="#contact"
-                className="hidden md:inline-block px-5 py-2.5 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:-translate-y-0.5"
-                style={{ backgroundColor: C.rose }}
-              >
-                לתיאום פגישה
-              </a>
-              <MobileMenuClient />
-            </div>
-          </div>
-        </div>
-      </header>
+      <HeaderScrollClient />
 
       {/* ===== HERO ===== */}
       <section
@@ -318,8 +261,8 @@ export default function Home() {
 
           {/* Image — 240px on mobile, natural on desktop */}
           <div
-            className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden md:h-auto h-[265px]"
-            style={{ height: 'min(240px, 38dvh)' }}
+            className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden md:h-auto"
+            style={{ height: '265px' }}
           >
             <Image
               src="/founder_speaking.jpg"
