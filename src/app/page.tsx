@@ -253,72 +253,82 @@ export default function Home() {
       </header>
 
       {/* ===== HERO ===== */}
-      <section className="flex flex-col" style={{ backgroundColor: '#FFF0F6', minHeight: '100svh' }}>
+      <section
+        className="relative overflow-hidden flex flex-col"
+        style={{ background: 'linear-gradient(to bottom, #FFF0F6 0%, #F3E8FF 100%)' }}
+      >
+        {/* Subtle dot texture */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(circle, #F8BBD9 1.5px, transparent 1.5px)',
+            backgroundSize: '28px 28px',
+            opacity: 0.4,
+          }}
+        />
 
-        {/* Main hero: text + image */}
-        <div className="flex flex-col md:flex-row flex-1">
+        {/* Centered content column */}
+        <div className="relative z-10 flex flex-col items-center text-center px-5 pt-8">
 
-          {/* Text block — top on mobile, right side (RTL start) on desktop */}
-          <div className="flex flex-col justify-center text-right px-5 md:px-10 lg:px-16 pt-4 pb-6 md:py-20 md:w-[48%] lg:w-[45%]">
-            <p className="text-xs font-semibold tracking-[0.22em] mb-3" style={{ color: C.rose }}>
-              מרכז טיפולי-לימודי
-            </p>
-            <h1
-              className="font-display font-medium leading-snug tracking-tight mb-4"
-              style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.6rem)', color: C.textDark }}
-            >
-              <span style={{ color: C.rose }}>מרכז</span>{' '}
-              <span style={{ color: C.rose }}>רגשי</span>{' '}
-              <span>לימודי</span>
-              <br />
-              <span className="text-[0.65em] font-light" style={{ color: C.plum }}>
-                לילדים, נערות ונשים
-              </span>
-            </h1>
-            <p className="text-sm md:text-base font-light mb-7 leading-relaxed" style={{ color: C.textMid }}>
-              גאולה אלון &nbsp;|&nbsp; CBT &nbsp;/&nbsp; EMR &nbsp;/&nbsp; הוראה מתקנת
-            </p>
-            <div className="flex justify-end">
-              <CtaButton href="#contact" className="px-7 py-3.5 text-base">
-                לתיאום שיחת היכרות
-              </CtaButton>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-2 justify-end">
-              {['+20 שנות ניסיון', 'מוסמכת CBT', 'מוסמכת EMR', 'בעלת תואר שני בחינוך'].map((label) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl text-xs border"
-                  style={{ borderColor: C.borderLight, color: C.textMid, backgroundColor: 'rgba(255,255,255,0.7)' }}
-                >
-                  <RoseDot />
-                  {label}
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Tag */}
+          <p
+            className="text-xs font-semibold tracking-[0.24em] mb-5 uppercase"
+            style={{ color: C.textMid }}
+          >
+            מרכז טיפולי-לימודי
+          </p>
 
-          {/* Image — bottom on mobile (full-width), left side (RTL end) on desktop */}
-          <div className="relative w-full md:flex-1 overflow-hidden" style={{ minHeight: 'clamp(280px, 65vw, 680px)' }}>
+          {/* H1 heading — highlighted keywords in rose */}
+          <h1
+            className="font-display font-medium leading-snug tracking-tight mb-3"
+            style={{ fontSize: 'clamp(2.1rem, 6vw, 4rem)' }}
+          >
+            <span style={{ color: C.textDark }}>מרכז </span>
+            <strong style={{ color: C.rose, fontWeight: 700 }}>רגשי</strong>
+            <span style={{ color: C.textDark }}> לימודי</span>
+            <br />
+            <span style={{ color: C.textDark }}>לילדים, </span>
+            <strong style={{ color: C.rose, fontWeight: 700 }}>נערות</strong>
+            <span style={{ color: C.textDark }}> ונשים</span>
+          </h1>
+
+          {/* Image — full-width mobile, max-480px desktop, tight margin */}
+          <div className="w-full md:max-w-[480px] mt-3 rounded-2xl overflow-hidden">
             <Image
-              src="/founder_portrait.jpg"
+              src="/founder_speaking.jpg"
               alt="גאולה אלון"
-              fill
-              className="object-cover object-top"
+              width={960}
+              height={720}
+              className="w-full h-auto object-cover object-top block"
               priority
-              sizes="(max-width: 768px) 100vw, 55vw"
-            />
-            {/* Soft gradient fade on the right edge (desktop) into the pink bg */}
-            <div
-              className="hidden md:block absolute inset-y-0 right-0 w-24 pointer-events-none"
-              style={{ background: 'linear-gradient(to left, #FFF0F6, transparent)' }}
+              sizes="(max-width: 768px) 100vw, 480px"
             />
           </div>
+
+          {/* Credits */}
+          <p className="mt-5 text-sm md:text-base font-light" style={{ color: C.textMid }}>
+            <strong className="font-semibold" style={{ color: C.textDark }}>גאולה אלון</strong>
+            {' | '}
+            CBT · EMR · NLP · הוראה מתקנת
+          </p>
+
+          {/* CTA button */}
+          <a
+            href="#contact"
+            className="inline-block mt-5 mb-8 px-8 py-3.5 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
+            style={{ backgroundColor: C.rose, boxShadow: '0 6px 24px rgba(216,27,140,0.22)' }}
+          >
+            לתיאום שיחת היכרות ←
+          </a>
         </div>
 
-        {/* Services strip — below the hero pair */}
-        <div className="px-5 py-5 md:py-6" style={{ backgroundColor: 'rgba(255,255,255,0.85)', borderTop: `1px solid ${C.borderLight}` }}>
-          {/* Mobile: one per line / Desktop: all inline with bullet separators */}
-          <div className="max-w-4xl mx-auto text-center md:flex md:flex-wrap md:justify-center md:gap-x-1 md:gap-y-1">
+        {/* Services strip */}
+        <div
+          className="relative z-10 px-5 py-5 md:py-6"
+          style={{ backgroundColor: 'rgba(255,255,255,0.85)', borderTop: `1px solid ${C.borderLight}` }}
+        >
+          <div className="max-w-4xl mx-auto text-center md:flex md:flex-wrap md:justify-center md:gap-x-1">
             {['הוראה מתקנת', 'טיפולים רגשיים', 'אבחונים תפקודיים לימודיים', 'הדרכת הורים'].map((item, i, arr) => (
               <React.Fragment key={item}>
                 <span className="block md:inline text-base font-light" style={{ color: C.textMid }}>
