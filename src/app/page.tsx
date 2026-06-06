@@ -424,8 +424,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-14 lg:gap-20">
 
             {/* Methods column */}
-            <div className="text-right sr sr-d1">
-              <Rule className="mx-auto md:mx-0" />
+            <div className="text-center sr sr-d1">
+              <Rule className="mx-auto" />
               <p className="text-[1.05rem] font-light leading-[1.8] mb-5" style={{ color: C.textMid }}>
                 במסגרת הטיפול, המטופל מקבל שילוב מדויק של מגוון כלים מתקדמים, המותאמים אישית לתוצאה האפקטיבית ביותר:
               </p>
@@ -459,7 +459,7 @@ export default function Home() {
                   <Link
                     key={method}
                     href={href}
-                    className="rounded-xl p-4 border border-[#F8BBD9] text-right transition-all duration-300 flex flex-col hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(57,73,171,0.07)] hover:-translate-y-1"
+                    className="rounded-xl p-4 border border-[#F8BBD9] text-center transition-all duration-300 flex flex-col hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(57,73,171,0.07)] hover:-translate-y-1"
                     style={{ backgroundColor: C.cream }}
                   >
                     <div className="font-display text-2xl font-semibold mb-1" style={{ color: C.textHeading }}>{method}</div>
@@ -473,8 +473,8 @@ export default function Home() {
             </div>
 
             {/* Expertise column */}
-            <div className="text-right sr sr-d2">
-              <Rule className="mx-auto md:mx-0" />
+            <div className="text-center sr sr-d2">
+              <Rule className="mx-auto" />
               <p className="text-[1.05rem] font-light leading-[1.8] mb-5" style={{ color: C.textMid }}>
                 ניסיון רב ומוכח בתחומים הבאים:
               </p>
@@ -500,7 +500,7 @@ export default function Home() {
           </div>
 
           <div
-            className="mt-8 md:mt-10 rounded-md p-6 md:p-8 text-right border border-[#F8BBD9] sr"
+            className="mt-8 md:mt-10 rounded-md p-6 md:p-8 text-center border border-[#F8BBD9] sr"
             style={{ backgroundColor: C.cream }}
           >
             <p className="text-[1.05rem] font-light leading-[1.8] max-w-4xl ml-auto" style={{ color: C.textMid }}>
@@ -527,11 +527,11 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={service.title}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-xl p-6 md:p-8 text-right border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1`}
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group relative rounded-xl p-6 md:p-8 text-center border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1`}
                 style={{ backgroundColor: C.cream }}
               >
                 {service.title === 'הוראה מתקנת' ? (
-                  <div className="mb-5 flex justify-end">
+                  <div className="mb-5 flex justify-center">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
                       <path d="M2 17l10 5 10-5" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
@@ -691,7 +691,7 @@ export default function Home() {
                 ].map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-xl p-4 text-right border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:-translate-y-[3px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
+                    className="rounded-xl p-4 text-center border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:-translate-y-[3px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
                     style={{ backgroundColor: C.cream }}
                   >
                     <div className="text-base font-semibold mb-0.5" style={{ color: C.textHeading }}>{item.title}</div>
@@ -726,7 +726,7 @@ export default function Home() {
               <Link
                 key={feature.title}
                 href={`/features/${feature.slug}`}
-                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-xl p-5 text-right border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1`}
+                className={`sr sr-d${Math.min(i + 1, 5) as 1|2|3|4|5} group rounded-xl p-5 text-center border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1`}
                 style={{ backgroundColor: C.cream }}
               >
                 <div
