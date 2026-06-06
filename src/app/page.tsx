@@ -196,6 +196,25 @@ export default function Home() {
       <FloatingContactButton />
       <SideDrawerClient />
 
+      {/* Fixed CTA — mobile only, centered between accessibility and WhatsApp buttons */}
+      <a
+        href="#contact"
+        className="fixed z-[9997] md:hidden flex items-center justify-center text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
+        style={{
+          bottom: '27px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: 'calc(100% - 180px)',
+          minWidth: '160px',
+          maxWidth: '220px',
+          height: '44px',
+          backgroundColor: '#D81B8C',
+          boxShadow: '0 4px 16px rgba(216,27,140,0.30)',
+        }}
+      >
+        לתיאום שיחת היכרות ←
+      </a>
+
       {/* ===== HEADER ===== */}
       <header
         className="sticky top-0 z-50 backdrop-blur-sm shadow-sm border-b"
@@ -319,10 +338,10 @@ export default function Home() {
             {' | CBT · EMR · NLP · הוראה מתקנת'}
           </p>
 
-          {/* CTA button */}
+          {/* CTA button — desktop only (mobile uses fixed bottom bar) */}
           <a
             href="#contact"
-            className="inline-block mt-4 mb-4 px-8 py-3 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
+            className="hidden md:inline-block mt-4 mb-4 px-8 py-3 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
             style={{ backgroundColor: C.rose, boxShadow: '0 6px 24px rgba(216,27,140,0.22)' }}
           >
             לתיאום שיחת היכרות ←
