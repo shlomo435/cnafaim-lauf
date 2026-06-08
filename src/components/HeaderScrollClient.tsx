@@ -48,7 +48,7 @@ export default function HeaderScrollClient() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="relative h-20 md:h-24 flex items-center">
 
-            {/* Desktop nav — smooth scroll on all links */}
+            {/* Desktop nav - smooth scroll on all links */}
             <nav className="hidden md:flex items-center gap-3 text-sm font-light" aria-label="ניווט ראשי">
               {NAV_LINKS.map(([label, href]) => (
                 <a
@@ -63,7 +63,7 @@ export default function HeaderScrollClient() {
               ))}
             </nav>
 
-            {/* Logo — centered, clicks scroll to top */}
+            {/* Logo - centered, clicks scroll to top */}
             <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
               <a
                 href="#"
@@ -83,7 +83,7 @@ export default function HeaderScrollClient() {
               </a>
             </div>
 
-            {/* CTA — desktop only, smooth scroll */}
+            {/* CTA - desktop only, smooth scroll */}
             <div className="mr-auto">
               <a
                 href="#contact"
@@ -98,7 +98,7 @@ export default function HeaderScrollClient() {
         </div>
       </header>
 
-      {/* MobileMenuClient — hamburger is fixed z-[9999], always above header z-50 */}
+      {/* MobileMenuClient - hamburger is fixed z-[9999], always above header z-50 */}
       <MobileMenuClient />
     </>
   );

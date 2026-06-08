@@ -27,7 +27,7 @@ export default function RemedialPage() {
     <div className="min-h-screen" style={{ backgroundColor: C.creamAlt, color: C.textDark }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* X close button — fixed top-left */}
+      {/* X close button - fixed top-left */}
       <Link
         href="/#methods"
         aria-label="סגור וחזור לאתר"

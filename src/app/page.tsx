@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Explicit sr-delay class lookup — avoids dynamic string construction that
+// Explicit sr-delay class lookup - avoids dynamic string construction that
 // confuses static analysis tools (sr-d1…sr-d5 are defined in globals.css).
 const SR_DELAY = ['sr-d1', 'sr-d2', 'sr-d3', 'sr-d4', 'sr-d5'] as const;
 const srDelay = (i: number) => SR_DELAY[Math.min(i, 4)];
@@ -54,7 +54,7 @@ const services = [
   {
     title: 'הוראה מתקנת',
     description:
-      'עבודה ממוקדת ומותאמת אישית לחיזוק הקריאה, הכתיבה, הבנת הנקרא והביטחון הלימודי — בשילוב תנועה, תרגילי מוח וכלים מעשיים שמקדמים הצלחה.',
+      'עבודה ממוקדת ומותאמת אישית לחיזוק הקריאה, הכתיבה, הבנת הנקרא והביטחון הלימודי - בשילוב תנועה, תרגילי מוח וכלים מעשיים שמקדמים הצלחה.',
   },
 ];
 
@@ -201,7 +201,7 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'MedicalBusiness',
   '@id': 'https://cnafaim-lauf.netlify.app/#organization',
-  name: 'כנפיים לעוף — מרכז טיפולי-לימודי',
+  name: 'כנפיים לעוף - מרכז טיפולי-לימודי',
   url: 'https://cnafaim-lauf.netlify.app',
   telephone: '+972-50-296-1213',
   email: 'gehulaa@gmail.com',
@@ -226,7 +226,7 @@ const personSchema = {
   ],
   worksFor: {
     '@type': 'Organization',
-    name: 'כנפיים לעוף — מרכז טיפולי-לימודי',
+    name: 'כנפיים לעוף - מרכז טיפולי-לימודי',
   },
   telephone: '+972-50-296-1213',
   email: 'gehulaa@gmail.com',
@@ -252,7 +252,7 @@ export default function Home() {
       <FloatingContactButton />
       <SideDrawerClient />
 
-      {/* Fixed CTA — mobile only, centered between accessibility and WhatsApp buttons */}
+      {/* Fixed CTA - mobile only, centered between accessibility and WhatsApp buttons */}
       <a
         href="#contact"
         className="fixed z-[9997] md:hidden flex items-center justify-center text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#D81B8C]"
@@ -290,7 +290,7 @@ export default function Home() {
           }}
         />
 
-        {/* Centered content column — no justify-between so content never clips */}
+        {/* Centered content column - no justify-between so content never clips */}
         <div className="relative z-10 flex flex-col items-center text-center px-5 pt-4 pb-4 md:justify-center md:flex-1">
 
           {/* Tag */}
@@ -301,7 +301,7 @@ export default function Home() {
             מרכז טיפולי-לימודי
           </p>
 
-          {/* H1 heading — clamp corrected: min 1.8rem so it never shrinks below readable */}
+          {/* H1 heading - clamp corrected: min 1.8rem so it never shrinks below readable */}
           <h1
             className="font-display font-medium leading-snug tracking-tight mb-1"
             style={{ fontSize: 'clamp(1.8rem, 7vw, 4rem)' }}
@@ -316,7 +316,7 @@ export default function Home() {
             <span style={{ color: C.textDark }}> ונשים</span>
           </h1>
 
-          {/* Image — fixed 265px mobile via class, auto height desktop */}
+          {/* Image - fixed 265px mobile via class, auto height desktop */}
           <div className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[265px] md:h-auto">
             <Image
               src="/founder_speaking.jpg"
@@ -335,7 +335,7 @@ export default function Home() {
             {' | CBT · EMR · NLP · הוראה מתקנת'}
           </p>
 
-          {/* CTA button — desktop only (mobile uses fixed bottom bar) */}
+          {/* CTA button - desktop only (mobile uses fixed bottom bar) */}
           <a
             href="#contact"
             className="hidden md:inline-block mt-5 mb-2 px-8 py-3 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
@@ -372,7 +372,7 @@ export default function Home() {
       <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-14 lg:py-16">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
-          {/* Portrait — desktop only */}
+          {/* Portrait - desktop only */}
           <div className="hidden md:block relative sr sr-d1">
             <div
               className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden"
@@ -590,7 +590,7 @@ export default function Home() {
       <section id="lectures" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
-          {/* Section heading — mobile only (desktop heading is inside text column) */}
+          {/* Section heading - mobile only (desktop heading is inside text column) */}
           <div className="text-center mb-6 md:hidden sr">
             <SectionLabel text="הרצאות והדרכות" />
             <h2

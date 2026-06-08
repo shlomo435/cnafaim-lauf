@@ -192,7 +192,7 @@ export default async function BlogPostPage({
     },
     publisher: {
       '@type': 'Organization',
-      name: 'כנפיים לעוף — מרכז טיפולי-לימודי',
+      name: 'כנפיים לעוף - מרכז טיפולי-לימודי',
       url: 'https://cnafaim-lauf.netlify.app',
     },
     datePublished: post.date,
@@ -323,7 +323,7 @@ export default async function BlogPostPage({
               style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
             >
               <p className="text-base font-light" style={{ color: C.textLight }}>
-                הכתבה בהכנה — חזרו בקרוב.
+                הכתבה בהכנה - חזרו בקרוב.
               </p>
             </div>
           )}

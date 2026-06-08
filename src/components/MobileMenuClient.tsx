@@ -23,7 +23,7 @@ export default function MobileMenuClient() {
 
   return (
     <>
-      {/* Hamburger — fixed, always visible on mobile even when header hides */}
+      {/* Hamburger - fixed, always visible on mobile even when header hides */}
       <button
         onClick={() => setOpen((v) => !v)}
         className="fixed top-4 right-4 z-[9999] md:hidden w-10 h-10 flex items-center justify-center rounded-md bg-white/80 backdrop-blur-sm shadow-sm transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D81B8C] focus-visible:ring-offset-1"

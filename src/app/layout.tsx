@@ -45,7 +45,7 @@ export const metadata: Metadata = {
         url: 'https://cnafaim-lauf.netlify.app/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'כנפיים לעוף — מרכז טיפולי-לימודי',
+        alt: 'כנפיים לעוף - מרכז טיפולי-לימודי',
       },
     ],
     locale: 'he_IL',

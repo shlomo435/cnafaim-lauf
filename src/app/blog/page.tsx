@@ -123,7 +123,7 @@ export default function BlogArchivePage() {
             className="text-[1.05rem] font-light leading-[1.8] max-w-2xl mx-auto"
             style={{ color: C.textMid }}
           >
-            כל הכתבות נכתבות על ידי גאולה אלון — מתוך ניסיון של מעל 20 שנה עם ילדים, נערות
+            כל הכתבות נכתבות על ידי גאולה אלון - מתוך ניסיון של מעל 20 שנה עם ילדים, נערות
             ונשים. לא ז׳רגון. רק מה שעוזר.
           </p>
           <div className="w-16 h-px mt-6 mx-auto" style={{ backgroundColor: C.border }} />
