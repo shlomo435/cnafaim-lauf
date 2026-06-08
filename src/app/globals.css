@@ -94,7 +94,7 @@ html.a11y-contrast-3 {
 
 /* ── Accessibility: Focus Visible Global ───────────────── */
 :focus-visible {
-  outline: 2px solid #D81B8C;
+  outline: 2px solid #C01880;
   outline-offset: 2px;
 }
 

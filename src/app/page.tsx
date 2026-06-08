@@ -1,8 +1,15 @@
 ﻿import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import { twMerge } from 'tailwind-merge';
 import { C } from '../lib/tokens';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://cnafaim-lauf.netlify.app/',
+  },
+};
 
 // Explicit sr-delay class lookup — avoids dynamic string construction that
 // confuses static analysis tools (sr-d1…sr-d5 are defined in globals.css).
@@ -187,12 +194,53 @@ function FloatingContactButton() {
 }
 
 // ======================
+// STRUCTURED DATA
+// ======================
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalBusiness',
+  '@id': 'https://cnafaim-lauf.netlify.app/#organization',
+  name: 'כנפיים לעוף — מרכז טיפולי-לימודי',
+  url: 'https://cnafaim-lauf.netlify.app',
+  telephone: '+972-50-296-1213',
+  email: 'gehulaa@gmail.com',
+  areaServed: { '@type': 'Country', name: 'Israel' },
+  openingHours: ['Su-Th 09:00-18:00'],
+  founder: {
+    '@type': 'Person',
+    name: 'גאולה אלון',
+  },
+};
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'גאולה אלון',
+  jobTitle: 'מטפלת רגשית ומאבחנת לימודית',
+  knowsAbout: [
+    'CBT טיפול קוגניטיבי-התנהגותי',
+    'NLP תכנות נוירו-לשוני',
+    'EMR עיבוד תנועות עיניים',
+    'הוראה מתקנת',
+  ],
+  worksFor: {
+    '@type': 'Organization',
+    name: 'כנפיים לעוף — מרכז טיפולי-לימודי',
+  },
+  telephone: '+972-50-296-1213',
+  email: 'gehulaa@gmail.com',
+};
+
+// ======================
 // MAIN PAGE (Server Component)
 // ======================
 
 export default function Home() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
 
       {/* Client scroll-reveal side-effect */}
       <ScrollRevealClient />
@@ -257,6 +305,7 @@ export default function Home() {
           <h1
             className="font-display font-medium leading-snug tracking-tight mb-1"
             style={{ fontSize: 'clamp(1.8rem, 7vw, 4rem)' }}
+            aria-label="מרכז רגשי לימודי לילדים, נערות ונשים"
           >
             <span style={{ color: C.textDark }}>מרכז </span>
             <strong style={{ color: C.rose, fontWeight: 700 }}>רגשי</strong>
@@ -840,6 +889,7 @@ export default function Home() {
                 ['גישה טיפולית', '#methods'],
                 ['תחומי טיפול',  '#services'],
                 ['הרצאות',       '#lectures'],
+                ['בלוג',         '/blog/'],
                 ['יצירת קשר',    '#contact'],
               ].map(([label, href]) => (
                 <a

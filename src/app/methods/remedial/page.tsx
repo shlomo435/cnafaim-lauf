@@ -7,11 +7,25 @@ export const metadata: Metadata = {
   title: 'הוראה מתקנת | כנפיים לעוף - מרכז רגשי לימודי',
   description:
     'הוראה מתקנת לילדים המתקשים בקריאה, כתיבה, שטף, דיוק, הבנת הנקרא ותחושת מסוגלות בלמידה. תהליך מותאם אישית המשלב תנועה, תרגילי מוח וכלים מעשיים.',
+  alternates: {
+    canonical: 'https://cnafaim-lauf.netlify.app/methods/remedial',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
+    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafaim-lauf.netlify.app/#methods' },
+    { '@type': 'ListItem', position: 3, name: 'הוראה מתקנת', item: 'https://cnafaim-lauf.netlify.app/methods/remedial' },
+  ],
 };
 
 export default function RemedialPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.creamAlt, color: C.textDark }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* X close button — fixed top-left */}
       <Link

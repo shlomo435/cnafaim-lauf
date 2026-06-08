@@ -7,11 +7,25 @@ export const metadata: Metadata = {
   title: 'NLP - תכנות נוירו-לשוני | כנפיים לעוף',
   description:
     'שיטת NLP עובדת עם התת-מודע לשינוי דפוסי חשיבה, חיזוק ביטחון עצמי ושחרור חסמים רגשיים. גלו כיצד NLP יכול לשנות את תפיסת המציאות שלכם.',
+  alternates: {
+    canonical: 'https://cnafaim-lauf.netlify.app/methods/nlp',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
+    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafaim-lauf.netlify.app/#methods' },
+    { '@type': 'ListItem', position: 3, name: 'NLP', item: 'https://cnafaim-lauf.netlify.app/methods/nlp' },
+  ],
 };
 
 export default function NlpPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* HEADER */}
       <header

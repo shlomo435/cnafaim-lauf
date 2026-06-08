@@ -226,7 +226,7 @@ export default function SideDrawerClient() {
         <div className="px-5 py-4 border-t text-center" style={{ borderColor: C.border }}>
           <a
             href="tel:0502961213"
-            className="text-sm font-medium transition-colors text-[#D81B8C] hover:text-[#3949AB]"
+            className="text-sm font-medium transition-colors text-[#C01880] hover:text-[#3949AB]"
             style={{ direction: 'ltr' }}
           >
             050-296-1213

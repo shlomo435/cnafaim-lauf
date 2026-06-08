@@ -70,6 +70,9 @@ export async function generateMetadata({
   return {
     title: `${article.title} | כנפיים לעוף`,
     description: article.paragraphs[0].slice(0, 160),
+    alternates: {
+      canonical: `https://cnafaim-lauf.netlify.app/features/${slug}`,
+    },
   };
 }
 
@@ -105,8 +108,19 @@ export default async function FeaturePage({
     );
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
+      { '@type': 'ListItem', position: 2, name: 'הגישה שלי', item: 'https://cnafaim-lauf.netlify.app/#approach' },
+      { '@type': 'ListItem', position: 3, name: article.title, item: `https://cnafaim-lauf.netlify.app/features/${slug}` },
+    ],
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* HEADER */}
       <header

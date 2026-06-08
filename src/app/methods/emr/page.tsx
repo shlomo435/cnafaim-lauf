@@ -7,11 +7,25 @@ export const metadata: Metadata = {
   title: 'EMR - עיבוד תנועות עיניים | כנפיים לעוף',
   description:
     'טיפול EMR (עיבוד תנועות עיניים) לשחרור טראומה, חרדות ודפוסים רגשיים שאינם משרתים. גלו כיצד EMR יכול לשנות את חייכם.',
+  alternates: {
+    canonical: 'https://cnafaim-lauf.netlify.app/methods/emr',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
+    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafaim-lauf.netlify.app/#methods' },
+    { '@type': 'ListItem', position: 3, name: 'EMR', item: 'https://cnafaim-lauf.netlify.app/methods/emr' },
+  ],
 };
 
 export default function EmrPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* HEADER */}
       <header

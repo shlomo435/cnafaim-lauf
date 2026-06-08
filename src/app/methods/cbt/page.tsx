@@ -7,11 +7,25 @@ export const metadata: Metadata = {
   title: 'CBT - טיפול קוגניטיבי-התנהגותי | כנפיים לעוף',
   description:
     'טיפול CBT מבוסס על ההבנה שהמחשבות שלנו משפיעות על הרגשות שלנו, והרגשות משפיעים על ההתנהגות. גלו כיצד CBT יכול לעזור לכם.',
+  alternates: {
+    canonical: 'https://cnafaim-lauf.netlify.app/methods/cbt',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
+    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafaim-lauf.netlify.app/#methods' },
+    { '@type': 'ListItem', position: 3, name: 'CBT', item: 'https://cnafaim-lauf.netlify.app/methods/cbt' },
+  ],
 };
 
 export default function CbtPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* HEADER */}
       <header
