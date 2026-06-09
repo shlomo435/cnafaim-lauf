@@ -317,7 +317,7 @@ export default function Home() {
           </h1>
 
           {/* Image - fixed 265px mobile via class, auto height desktop */}
-          <div className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[265px] md:h-auto">
+          <div className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[320px] md:h-auto">
             <Image
               src="/founder_speaking.jpg"
               alt="גאולה אלון, מטפלת רגשית ומנהלת המרכז, כנפיים לעוף"
