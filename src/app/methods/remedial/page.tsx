@@ -72,13 +72,12 @@ export default function RemedialPage() {
           style={{ boxShadow: '0 16px 48px rgba(57,73,171,0.13)' }}
         >
           {/* subtle teal gradient overlay at the bottom of the image */}
-          <div className="relative w-full">
+          <div className="relative w-full aspect-[3/2]">
             <Image
               src="/founder_speaking.jpg"
               alt="גאולה אלון - מרכז כנפיים לעוף"
-              width={1400}
-              height={950}
-              className="w-full h-auto object-cover object-top block"
+              fill
+              className="object-cover object-top"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1000px"
               priority
             />

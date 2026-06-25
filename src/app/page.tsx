@@ -255,14 +255,13 @@ export default function Home() {
       {/* Fixed CTA - mobile only, centered between accessibility and WhatsApp buttons */}
       <a
         href="#contact"
-        className="fixed z-[9997] md:hidden flex items-center justify-center text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#D81B8C]"
+        className="fixed z-[9997] md:hidden flex items-center justify-center px-3 text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#D81B8C]"
         style={{
-          bottom: '27px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 'calc(100% - 180px)',
-          minWidth: '160px',
-          maxWidth: '220px',
+          bottom: '24px',
+          left: '116px',
+          right: '78px',
+          marginInline: 'auto',
+          maxWidth: '260px',
           height: '44px',
           backgroundColor: '#D81B8C',
           boxShadow: '0 4px 16px rgba(216,27,140,0.30)',
@@ -316,14 +315,13 @@ export default function Home() {
             <span style={{ color: C.textDark }}> ונשים</span>
           </h1>
 
-          {/* Image - fixed 265px mobile via class, auto height desktop */}
-          <div className="w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[320px] md:h-auto">
+          {/* Image - fixed mobile height, 4:3 landscape crop on desktop. fill + object-cover prevents distortion (source is portrait) and avoids layout shift */}
+          <div className="relative w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[360px] md:h-auto md:aspect-[4/3]">
             <Image
               src="/founder_speaking.jpg"
               alt="גאולה אלון, מטפלת רגשית ומנהלת המרכז, כנפיים לעוף"
-              width={960}
-              height={720}
-              className="w-full h-full md:h-auto object-cover object-top block"
+              fill
+              className="object-cover object-top"
               priority
               sizes="(max-width: 768px) 100vw, 480px"
             />
@@ -605,15 +603,19 @@ export default function Home() {
 
             {/* Image column */}
             <div className="relative order-2 md:order-1 sr sr-d1">
-              <Image
-                src="/conference_audience.jpg"
-                alt="הרצאות והדרכות"
-                width={1200}
-                height={800}
-                className="w-full h-auto block rounded-2xl"
+              <div
+                className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden"
                 style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+              >
+                <Image
+                  src="/conference_audience.jpg"
+                  alt="הרצאות והדרכות"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             {/* Text column */}
@@ -689,16 +691,16 @@ export default function Home() {
             {/* Cards image */}
             <div className="relative flex flex-col items-center gap-6 order-2 md:order-1 sr sr-d1">
               <div
-                className="relative w-full max-w-[340px] rounded-2xl overflow-hidden"
+                className="relative w-full max-w-[340px] aspect-[4/5] rounded-2xl overflow-hidden"
                 style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 4px 28px rgba(57,73,171,0.08)' }}
               >
                 <Image
                   src="/therapy_cards_box.jpg"
                   alt="קלפי ניצוץ"
-                  width={340}
-                  height={420}
-                  className="w-full h-auto object-cover object-top"
+                  fill
+                  className="object-cover object-top"
                   sizes="340px"
+                  loading="lazy"
                 />
               </div>
               <CtaButton href="#contact">לפרטים ורכישה</CtaButton>

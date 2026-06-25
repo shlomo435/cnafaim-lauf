@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { C } from '../lib/tokens';
 
 const NAV_LINKS = [
@@ -20,6 +20,16 @@ function smoothScrollTo(href: string) {
 
 export default function MobileMenuClient() {
   const [open, setOpen] = useState(false);
+
+  // Close the menu when the user scrolls the page while it is open.
+  // Nav-link clicks already close it before triggering smooth scroll, so this
+  // only catches manual scrolling.
+  useEffect(() => {
+    if (!open) return;
+    const onScroll = () => setOpen(false);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [open]);
 
   return (
     <>
