@@ -46,16 +46,34 @@ export default function HeaderScrollClient() {
         style={{ backgroundColor: 'rgba(255,255,255,0.97)', borderColor: C.borderLight }}
       >
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="relative h-20 md:h-24 flex items-center">
+          <div className="h-20 md:h-24 flex items-center justify-center lg:justify-between gap-4">
+
+            {/* Logo - centered on mobile, start-aligned (right) on desktop */}
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); smoothScroll('#'); }}
+              className="flex-shrink-0 cursor-pointer"
+              aria-label="כנפיים לעוף - דף הבית"
+            >
+              <Image
+                src="/logo.jpg"
+                alt="כנפיים לעוף"
+                width={200}
+                height={67}
+                className="h-14 md:h-16 w-auto object-contain"
+                style={{ maxWidth: 200, mixBlendMode: 'multiply' }}
+                priority
+              />
+            </a>
 
             {/* Desktop nav - smooth scroll on all links */}
-            <nav className="hidden md:flex items-center gap-3 text-sm font-light" aria-label="ניווט ראשי">
+            <nav className="hidden lg:flex items-center gap-3 xl:gap-5 text-sm font-light" aria-label="ניווט ראשי">
               {NAV_LINKS.map(([label, href]) => (
                 <a
                   key={label}
                   href={href}
                   onClick={(e) => { e.preventDefault(); smoothScroll(href); }}
-                  className="transition-colors duration-200 hover:text-[#D81B8C] cursor-pointer"
+                  className="whitespace-nowrap transition-colors duration-200 hover:text-[#D81B8C] cursor-pointer"
                   style={{ color: C.textMid }}
                 >
                   {label}
@@ -63,37 +81,15 @@ export default function HeaderScrollClient() {
               ))}
             </nav>
 
-            {/* Logo - centered, clicks scroll to top */}
-            <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-              <a
-                href="#"
-                onClick={(e) => { e.preventDefault(); smoothScroll('#'); }}
-                className="pointer-events-auto"
-                aria-label="כנפיים לעוף - דף הבית"
-              >
-                <Image
-                  src="/logo.jpg"
-                  alt="כנפיים לעוף"
-                  width={200}
-                  height={67}
-                  className="h-16 w-auto object-contain"
-                  style={{ maxWidth: 200, mixBlendMode: 'multiply' }}
-                  priority
-                />
-              </a>
-            </div>
-
             {/* CTA - desktop only, smooth scroll */}
-            <div className="mr-auto">
-              <a
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); smoothScroll('#contact'); }}
-                className="hidden md:inline-block px-5 py-2.5 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
-                style={{ backgroundColor: C.rose }}
-              >
-                לתיאום פגישה
-              </a>
-            </div>
+            <a
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); smoothScroll('#contact'); }}
+              className="hidden lg:inline-block flex-shrink-0 px-5 py-2.5 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+              style={{ backgroundColor: C.rose }}
+            >
+              לתיאום פגישה
+            </a>
           </div>
         </div>
       </header>

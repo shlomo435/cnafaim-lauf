@@ -68,22 +68,18 @@ export default function RemedialPage() {
       {/* ② HERO IMAGE + TAGLINE PANEL */}
       <section className="px-4 sm:px-6 md:px-10 max-w-5xl mx-auto">
         <div
-          className="w-full overflow-hidden rounded-t-3xl"
-          style={{ boxShadow: '0 16px 48px rgba(57,73,171,0.13)' }}
+          className="w-full overflow-hidden rounded-t-3xl pt-6 md:pt-10 px-6 flex justify-center"
+          style={{ boxShadow: '0 16px 48px rgba(57,73,171,0.13)', backgroundColor: C.creamDeep }}
         >
-          {/* subtle teal gradient overlay at the bottom of the image */}
-          <div className="relative w-full aspect-[3/2]">
+          {/* Natural 854x1280 portrait ratio, capped width and centered - full photo visible */}
+          <div className="relative w-full max-w-[360px] aspect-[854/1280] rounded-2xl overflow-hidden">
             <Image
               src="/founder_speaking.jpg"
               alt="גאולה אלון - מרכז כנפיים לעוף"
               fill
-              className="object-cover object-top"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1000px"
+              className="object-cover"
+              sizes="360px"
               priority
-            />
-            <div
-              className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
-              style={{ background: `linear-gradient(to bottom, transparent, ${C.creamDeep}CC)` }}
             />
           </div>
         </div>

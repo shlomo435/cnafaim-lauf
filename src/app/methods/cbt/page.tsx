@@ -88,17 +88,17 @@ export default function CbtPage() {
           טיפול קוגניטיבי-התנהגותי
         </p>
 
-        {/* Hero image - source is portrait; fixed 3:2 frame + object-cover gives a uniform landscape crop without distortion */}
+        {/* Hero image - natural 854x1280 portrait ratio, capped width and centered so the full photo is visible */}
         <div
-          className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden mb-10 border"
+          className="relative w-full max-w-[360px] mx-auto aspect-[854/1280] rounded-2xl overflow-hidden mb-10 border"
           style={{ borderColor: C.border, boxShadow: '0 8px 30px rgba(57,73,171,0.07)' }}
         >
           <Image
             src="/founder_speaking.jpg"
             alt="טיפול CBT - גאולה אלון"
             fill
-            className="object-cover object-top"
-            sizes="(max-width: 768px) 100vw, 768px"
+            className="object-cover"
+            sizes="360px"
             priority
           />
         </div>

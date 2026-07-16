@@ -36,7 +36,7 @@ export default function MobileMenuClient() {
       {/* Hamburger - fixed, always visible on mobile even when header hides */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="fixed top-4 right-4 z-[9999] md:hidden w-10 h-10 flex items-center justify-center rounded-md bg-white/80 backdrop-blur-sm shadow-sm transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D81B8C] focus-visible:ring-offset-1"
+        className="fixed top-4 right-4 z-[9999] lg:hidden w-10 h-10 flex items-center justify-center rounded-md bg-white/80 backdrop-blur-sm shadow-sm transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D81B8C] focus-visible:ring-offset-1"
         style={{ color: C.textDark }}
         aria-label={open ? 'סגור תפריט' : 'פתח תפריט'}
         aria-expanded={open}
@@ -57,7 +57,7 @@ export default function MobileMenuClient() {
       {open && (
         <div
           id="mobile-nav"
-          className="fixed top-16 inset-x-0 z-[9998] border-t shadow-lg md:hidden"
+          className="fixed top-16 inset-x-0 z-[9998] border-t shadow-lg lg:hidden"
           style={{ backgroundColor: 'rgba(255,240,245,0.99)', borderColor: C.borderLight }}
         >
           <nav className="max-w-6xl mx-auto px-5 py-3 flex flex-col text-right">

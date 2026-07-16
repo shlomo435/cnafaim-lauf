@@ -255,7 +255,7 @@ export default function Home() {
       {/* Fixed CTA - mobile only, centered between accessibility and WhatsApp buttons */}
       <a
         href="#contact"
-        className="fixed z-[9997] md:hidden flex items-center justify-center px-3 text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#D81B8C]"
+        className="fixed z-[9997] lg:hidden flex items-center justify-center px-3 text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#D81B8C]"
         style={{
           bottom: '24px',
           left: '116px',
@@ -315,15 +315,15 @@ export default function Home() {
             <span style={{ color: C.textDark }}> ונשים</span>
           </h1>
 
-          {/* Image - fixed mobile height, 4:3 landscape crop on desktop. fill + object-cover prevents distortion (source is portrait) and avoids layout shift */}
-          <div className="relative w-full md:max-w-[480px] mt-2 rounded-2xl overflow-hidden h-[360px] md:h-auto md:aspect-[4/3]">
+          {/* Image - natural 854x1280 portrait ratio so the full photo is visible (no crop), width capped so it stays balanced */}
+          <div className="relative w-full max-w-[280px] md:max-w-[340px] mt-2 rounded-2xl overflow-hidden aspect-[854/1280]">
             <Image
               src="/founder_speaking.jpg"
               alt="גאולה אלון, מטפלת רגשית ומנהלת המרכז, כנפיים לעוף"
               fill
-              className="object-cover object-top"
+              className="object-cover"
               priority
-              sizes="(max-width: 768px) 100vw, 480px"
+              sizes="(max-width: 768px) 280px, 340px"
             />
           </div>
 
@@ -336,7 +336,7 @@ export default function Home() {
           {/* CTA button - desktop only (mobile uses fixed bottom bar) */}
           <a
             href="#contact"
-            className="hidden md:inline-block mt-5 mb-2 px-8 py-3 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
+            className="hidden lg:inline-block mt-5 mb-2 px-8 py-3 text-white text-base font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
             style={{ backgroundColor: C.rose, boxShadow: '0 6px 24px rgba(216,27,140,0.22)' }}
           >
             לתיאום שיחת היכרות ←
@@ -370,18 +370,18 @@ export default function Home() {
       <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-14 lg:py-16">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
-          {/* Portrait - desktop only */}
-          <div className="hidden md:block relative sr sr-d1">
+          {/* Portrait - desktop only. Natural 733x1280 ratio, capped width, centered - full photo visible */}
+          <div className="hidden md:flex justify-center relative sr sr-d1">
             <div
-              className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden"
+              className="relative w-full max-w-[360px] aspect-[733/1280] rounded-2xl overflow-hidden"
               style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 8px 30px rgba(0,0,0,0.05)' }}
             >
               <Image
                 src="/founder_portrait.jpg"
                 alt="גאולה אלון, מנהלת מרכז כנפיים לעוף"
                 fill
-                className="object-cover object-top"
-                sizes="(max-width: 1024px) 50vw, 480px"
+                className="object-cover"
+                sizes="360px"
               />
             </div>
           </div>
@@ -449,80 +449,78 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 md:gap-14 lg:gap-20">
+          {/* Methods intro */}
+          <div className="text-center max-w-3xl mx-auto sr sr-d1">
+            <Rule className="mx-auto" />
+            <p className="text-[1.05rem] font-light leading-[1.8]" style={{ color: C.textMid }}>
+              במסגרת הטיפול, המטופל מקבל שילוב מדויק של מגוון כלים מתקדמים, המותאמים אישית לתוצאה האפקטיבית ביותר:
+            </p>
+          </div>
 
-            {/* Methods column */}
-            <div className="text-center sr sr-d1">
-              <Rule className="mx-auto" />
-              <p className="text-[1.05rem] font-light leading-[1.8] mb-5" style={{ color: C.textMid }}>
-                במסגרת הטיפול, המטופל מקבל שילוב מדויק של מגוון כלים מתקדמים, המותאמים אישית לתוצאה האפקטיבית ביותר:
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  {
-                    method: 'CBT',
-                    label: 'קוגניטיבי-התנהגותי',
-                    desc: 'זיהוי ושינוי דפוסי חשיבה והתנהגות שליליים המגבילים את איכות החיים.',
-                    href: '/methods/cbt',
-                  },
-                  {
-                    method: 'EMR',
-                    label: 'עיבוד תנועות עיניים',
-                    desc: 'עיבוד רגשי ותנועות עיניים לטיפול בטראומה, חרדות ומצוקה רגשית עמוקה.',
-                    href: '/methods/emr',
-                  },
-                  {
-                    method: 'NLP',
-                    label: 'תכנות נוירו-לשוני',
-                    desc: 'שינוי דפוסים מנטליים ורגשיים לשיפור יכולות, ביטחון עצמי ותקשורת.',
-                    href: '/methods/nlp',
-                  },
-                  {
-                    method: 'הוראה מתקנת',
-                    label: 'חיזוק מיומנויות למידה דרך תנועה ותרגילי מוח',
-                    desc: 'עבודה ממוקדת ומותאמת אישית לחיזוק הקריאה, הכתיבה, הבנת הנקרא והביטחון הלימודי - בשילוב תנועה, תרגילי מוח וכלים מעשיים שמקדמים הצלחה.',
-                    href: '/methods/remedial',
-                  },
-                ].map(({ method, label, desc, href }) => (
-                  <Link
-                    key={method}
-                    href={href}
-                    className="rounded-xl p-4 border border-[#F8BBD9] text-center transition-all duration-300 flex flex-col hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(57,73,171,0.07)] hover:-translate-y-1"
-                    style={{ backgroundColor: C.cream }}
-                  >
-                    <div className="font-display text-2xl font-semibold mb-1" style={{ color: C.textHeading }}>{method}</div>
-                    <div className="text-xs font-medium tracking-wide mb-2.5" style={{ color: C.rose }}>{label}</div>
-                    <p className="text-sm leading-[1.7] font-light flex-1" style={{ color: C.textMid }}>{desc}</p>
-                    <div className="mt-3 text-sm font-medium" style={{ color: C.rose }}>לפרטים →</div>
-                  </Link>
-                ))}
-              </div>
-            </div>
+          {/* Method cards - full-width row */}
+          <div className="mt-7 md:mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch sr sr-d2">
+            {[
+              {
+                method: 'CBT',
+                label: 'קוגניטיבי-התנהגותי',
+                desc: 'זיהוי ושינוי דפוסי חשיבה והתנהגות שליליים המגבילים את איכות החיים.',
+                href: '/methods/cbt',
+              },
+              {
+                method: 'EMR',
+                label: 'עיבוד תנועות עיניים',
+                desc: 'עיבוד רגשי ותנועות עיניים לטיפול בטראומה, חרדות ומצוקה רגשית עמוקה.',
+                href: '/methods/emr',
+              },
+              {
+                method: 'NLP',
+                label: 'תכנות נוירו-לשוני',
+                desc: 'שינוי דפוסים מנטליים ורגשיים לשיפור יכולות, ביטחון עצמי ותקשורת.',
+                href: '/methods/nlp',
+              },
+              {
+                method: 'הוראה מתקנת',
+                label: 'חיזוק מיומנויות למידה דרך תנועה ותרגילי מוח',
+                desc: 'עבודה ממוקדת ומותאמת אישית לחיזוק הקריאה, הכתיבה, הבנת הנקרא והביטחון הלימודי - בשילוב תנועה, תרגילי מוח וכלים מעשיים שמקדמים הצלחה.',
+                href: '/methods/remedial',
+              },
+            ].map(({ method, label, desc, href }) => (
+              <Link
+                key={method}
+                href={href}
+                className="rounded-xl p-5 border border-[#F8BBD9] text-center transition-all duration-300 flex flex-col hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(57,73,171,0.07)] hover:-translate-y-1"
+                style={{ backgroundColor: C.cream }}
+              >
+                <div className="font-display text-2xl font-semibold mb-1" style={{ color: C.textHeading }}>{method}</div>
+                <div className="text-xs font-medium tracking-wide mb-2.5" style={{ color: C.rose }}>{label}</div>
+                <p className="text-sm leading-[1.7] font-light flex-1" style={{ color: C.textMid }}>{desc}</p>
+                <div className="mt-3 text-sm font-medium" style={{ color: C.rose }}>לפרטים →</div>
+              </Link>
+            ))}
+          </div>
 
-            {/* Expertise column */}
-            <div className="text-center sr sr-d2">
-              <Rule className="mx-auto" />
-              <p className="text-[1.05rem] font-light leading-[1.8] mb-5" style={{ color: C.textMid }}>
-                ניסיון רב ומוכח בתחומים הבאים:
-              </p>
-              <div className="space-y-2.5">
-                {[
-                  'ויסות רגשי וחרדות',
-                  'חיזוק ביטחון ודימוי עצמי',
-                  'התמודדות עם מצבי משבר, שינוי וטראומה',
-                  'קשיים חברתיים ורגשיים',
-                  'קשיי למידה, קריאה, כתיבה וקשב',
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center justify-center gap-3 rounded-xl px-4 py-3 border border-[#F8BBD9]"
-                    style={{ backgroundColor: C.cream }}
-                  >
-                    <RoseDot />
-                    <span className="text-sm font-light" style={{ color: C.textMid, lineHeight: '1.7' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
+          {/* Expertise - full width */}
+          <div className="mt-10 md:mt-14 text-center sr sr-d3">
+            <p className="text-[1.05rem] font-light leading-[1.8] mb-5" style={{ color: C.textMid }}>
+              ניסיון רב ומוכח בתחומים הבאים:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 max-w-4xl mx-auto">
+              {[
+                'ויסות רגשי וחרדות',
+                'חיזוק ביטחון ודימוי עצמי',
+                'התמודדות עם מצבי משבר, שינוי וטראומה',
+                'קשיים חברתיים ורגשיים',
+                'קשיי למידה, קריאה, כתיבה וקשב',
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center justify-center gap-3 rounded-xl px-4 py-3 border border-[#F8BBD9]"
+                  style={{ backgroundColor: C.cream }}
+                >
+                  <RoseDot />
+                  <span className="text-sm font-light" style={{ color: C.textMid, lineHeight: '1.7' }}>{item}</span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -601,18 +599,18 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-center">
 
-            {/* Image column */}
-            <div className="relative order-2 md:order-1 sr sr-d1">
+            {/* Image column - natural 461x1024 story-format ratio, capped width, centered - full photo visible */}
+            <div className="relative flex justify-center order-2 md:order-1 sr sr-d1">
               <div
-                className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden"
+                className="relative w-full max-w-[300px] aspect-[461/1024] rounded-2xl overflow-hidden"
                 style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}
               >
                 <Image
                   src="/conference_audience.jpg"
                   alt="הרצאות והדרכות"
                   fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                  sizes="300px"
                   loading="lazy"
                 />
               </div>
@@ -691,14 +689,14 @@ export default function Home() {
             {/* Cards image */}
             <div className="relative flex flex-col items-center gap-6 order-2 md:order-1 sr sr-d1">
               <div
-                className="relative w-full max-w-[340px] aspect-[4/5] rounded-2xl overflow-hidden"
+                className="relative w-full max-w-[340px] aspect-[860/1280] rounded-2xl overflow-hidden"
                 style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 4px 28px rgba(57,73,171,0.08)' }}
               >
                 <Image
                   src="/therapy_cards_box.jpg"
                   alt="קלפי ניצוץ"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
                   sizes="340px"
                   loading="lazy"
                 />

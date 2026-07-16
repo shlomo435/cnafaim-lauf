@@ -33,10 +33,10 @@ const assistant = Assistant({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://cnafaim-lauf.netlify.app'),
-  title: 'מרכז טיפולי-לימודי לילדים ונשים | CBT, NLP והוראה מתקנת | גאולה אלון',
+  title: 'מרכז טיפולי-לימודי לילדים ונשים | CBT, EMR, NLP והוראה מתקנת | גאולה אלון',
   description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים. גאולה אלון, מטפלת ומאבחנת עם מעל 20 שנות ניסיון.',
   openGraph: {
-    title: 'מרכז טיפולי-לימודי לילדים ונשים | CBT, NLP והוראה מתקנת | גאולה אלון',
+    title: 'מרכז טיפולי-לימודי לילדים ונשים | CBT, EMR, NLP והוראה מתקנת | גאולה אלון',
     description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים.',
     url: 'https://cnafaim-lauf.netlify.app',
     siteName: 'כנפיים לעוף',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'מרכז טיפולי-לימודי לילדים ונשים | CBT, NLP והוראה מתקנת | גאולה אלון',
+    title: 'מרכז טיפולי-לימודי לילדים ונשים | CBT, EMR, NLP והוראה מתקנת | גאולה אלון',
     description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים.',
     images: ['https://cnafaim-lauf.netlify.app/og-image.jpg'],
   },
