@@ -910,12 +910,14 @@ export default function Home() {
             <div className="flex flex-col items-center md:items-end gap-2">
               <p className="text-xs font-semibold tracking-[0.2em] mb-1" style={{ color: 'rgba(255,255,255,0.45)' }}>ניווט מהיר</p>
               {[
-                ['אודות',        '#about'],
-                ['גישה טיפולית', '#methods'],
-                ['תחומי טיפול',  '#services'],
-                ['הרצאות',       '#lectures'],
-                ['בלוג',         '/blog/'],
-                ['יצירת קשר',    '#contact'],
+                ['אודות',         '#about'],
+                ['מטפלת רגשית',   '/metapel-regashi'],
+                ['הוראה מתקנת',   '/methods/remedial'],
+                ['גישה טיפולית',  '#methods'],
+                ['תחומי טיפול',   '#services'],
+                ['הרצאות',        '#lectures'],
+                ['בלוג',          '/blog/'],
+                ['יצירת קשר',     '#contact'],
               ].map(([label, href]) => (
                 <a
                   key={label}
