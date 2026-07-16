@@ -403,7 +403,7 @@ export default function Home() {
             >
               <Image
                 src="/founder_portrait.jpg"
-                alt="גאולה אלון, מנהלת מרכז כנפיים לעוף"
+                alt="גאולה אלון, מטפלת רגשית ומאבחנת לימודית, מרכז כנפיים לעוף נתיבות"
                 fill
                 className="object-cover"
                 sizes="360px"
@@ -632,7 +632,7 @@ export default function Home() {
               >
                 <Image
                   src="/conference_audience.jpg"
-                  alt="הרצאות והדרכות"
+                  alt="גאולה אלון בהרצאה להורים וצוותי חינוך, מרכז כנפיים לעוף"
                   fill
                   className="object-cover"
                   sizes="300px"

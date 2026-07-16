@@ -74,7 +74,7 @@ export default function AccessibilityMenu() {
                 color: '#fff',
                 fontWeight: 600,
                 fontSize: 15,
-                fontFamily: 'var(--font-assistant), sans-serif',
+                fontFamily: 'var(--font-heebo), sans-serif',
               }}
             >
               תפריט נגישות
@@ -84,7 +84,7 @@ export default function AccessibilityMenu() {
                 color: 'rgba(255,255,255,0.65)',
                 fontSize: 12,
                 marginTop: 3,
-                fontFamily: 'var(--font-assistant), sans-serif',
+                fontFamily: 'var(--font-heebo), sans-serif',
               }}
             >
               המרכז הלימודי טיפולי כנפיים לעוף
@@ -130,7 +130,7 @@ export default function AccessibilityMenu() {
                     fontSize: 14,
                     fontWeight: 500,
                     color: '#3949AB',
-                    fontFamily: 'var(--font-assistant), sans-serif',
+                    fontFamily: 'var(--font-heebo), sans-serif',
                   }}
                 >
                   גופן קריא
@@ -198,7 +198,7 @@ export default function AccessibilityMenu() {
                     fontSize: 14,
                     fontWeight: 500,
                     color: '#3949AB',
-                    fontFamily: 'var(--font-assistant), sans-serif',
+                    fontFamily: 'var(--font-heebo), sans-serif',
                   }}
                 >
                   ניגודיות
@@ -231,7 +231,7 @@ export default function AccessibilityMenu() {
                   fontSize: 11,
                   color: '#9CA3AF',
                   marginTop: 6,
-                  fontFamily: 'var(--font-assistant), sans-serif',
+                  fontFamily: 'var(--font-heebo), sans-serif',
                 }}
               >
                 <span>רגיל</span>
@@ -263,7 +263,7 @@ export default function AccessibilityMenu() {
           fontWeight: 600,
           boxShadow: '0 3px 12px rgba(57,73,171,0.28)',
           transition: 'background 0.2s, box-shadow 0.2s',
-          fontFamily: 'var(--font-assistant), sans-serif',
+          fontFamily: 'var(--font-heebo), sans-serif',
           userSelect: 'none',
         }}
       >

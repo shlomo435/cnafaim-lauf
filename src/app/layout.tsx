@@ -1,5 +1,5 @@
 ﻿import type { Metadata } from 'next';
-import { Heebo, Rubik, Frank_Ruhl_Libre, Assistant } from 'next/font/google';
+import { Heebo, Rubik } from 'next/font/google';
 import './globals.css';
 import AccessibilityMenu from '../components/AccessibilityMenu';
 
@@ -14,20 +14,6 @@ const rubik = Rubik({
   subsets: ['hebrew'],
   variable: '--font-rubik',
   weight: ['400', '500', '600', '700'],
-  display: 'swap',
-});
-
-const frankRuhl = Frank_Ruhl_Libre({
-  subsets: ['hebrew'],
-  variable: '--font-frank-ruhl',
-  weight: ['400', '500'],
-  display: 'swap',
-});
-
-const assistant = Assistant({
-  subsets: ['hebrew'],
-  variable: '--font-assistant',
-  weight: ['400', '600'],
   display: 'swap',
 });
 
@@ -68,7 +54,7 @@ export default function RootLayout({
     <html
       lang="he"
       dir="rtl"
-      className={`${heebo.variable} ${rubik.variable} ${frankRuhl.variable} ${assistant.variable}`}
+      className={`${heebo.variable} ${rubik.variable}`}
     >
       <body className="antialiased">
         <noscript>

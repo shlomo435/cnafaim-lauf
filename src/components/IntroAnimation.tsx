@@ -119,7 +119,7 @@ export default function IntroAnimation() {
         style={{
           marginTop:     28,
           textAlign:     'center',
-          fontFamily:    'var(--font-frank-ruhl), "Frank Ruhl Libre", serif',
+          fontFamily:    'var(--font-rubik), "Rubik", sans-serif',
           fontSize:      '3rem',
           fontWeight:    500,
           color:         '#3949AB',
@@ -136,7 +136,7 @@ export default function IntroAnimation() {
         style={{
           marginTop:     10,
           textAlign:     'center',
-          fontFamily:    'var(--font-assistant), sans-serif',
+          fontFamily:    'var(--font-heebo), sans-serif',
           fontSize:      '0.88rem',
           fontWeight:    400,
           color:         '#5C4A6E',
@@ -154,7 +154,7 @@ export default function IntroAnimation() {
           bottom:        28,
           fontSize:      '0.7rem',
           color:         '#8D6E63',
-          fontFamily:    'var(--font-assistant), sans-serif',
+          fontFamily:    'var(--font-heebo), sans-serif',
           letterSpacing: '0.06em',
           direction:     'rtl',
         }}

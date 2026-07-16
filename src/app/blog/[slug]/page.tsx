@@ -357,6 +357,41 @@ export default async function BlogPostPage({
           </section>
         )}
 
+        {/* Related pillar pages - internal links to the core service pages */}
+        <section className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>
+          <h2
+            className="font-display text-2xl font-medium mb-6"
+            style={{ color: C.textDark, letterSpacing: '-0.02em' }}
+          >
+            מידע נוסף שיכול לעזור
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              {
+                href: '/metapel-regashi',
+                title: 'מטפלת רגשית בנתיבות והדרום',
+                desc: 'טיפול רגשי לילדים, נערות ונשים - בגישה חמה ומותאמת אישית, וגם בזום.',
+              },
+              {
+                href: '/methods/remedial',
+                title: 'הוראה מתקנת בנתיבות והדרום',
+                desc: 'לקשיי קריאה, כתיבה, שטף וקשב - אבחון ותוכנית עבודה אישית.',
+              },
+            ].map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="rounded-xl p-5 border transition-all duration-300 hover:border-[#3949AB] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(57,73,171,0.06)]"
+                style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
+              >
+                <div className="font-display text-lg font-semibold mb-1" style={{ color: C.textDark }}>{l.title}</div>
+                <p className="text-sm font-light leading-[1.8]" style={{ color: C.textMid }}>{l.desc}</p>
+                <div className="mt-2 text-sm font-medium" style={{ color: C.rose }}>לפרטים ←</div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* CTA */}
         <div className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>
           <p className="text-sm font-light mb-5" style={{ color: C.textMid }}>
