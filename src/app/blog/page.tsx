@@ -174,7 +174,7 @@ export default function BlogArchivePage() {
             />
           </Link>
           <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            כל הזכויות שמורות &copy; 2025 · כנפיים לעוף | גאולה אלון
+            כל הזכויות שמורות &copy; 2026 · כנפיים לעוף | גאולה אלון
           </div>
         </div>
       </footer>

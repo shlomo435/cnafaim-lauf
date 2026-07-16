@@ -367,7 +367,7 @@ export default function Home() {
       </section>
 
       {/* ===== ABOUT ===== */}
-      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-14 lg:py-16">
+      <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-10 lg:py-12">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
           {/* Portrait - desktop only. Natural 733x1280 ratio, capped width, centered - full photo visible */}
@@ -437,7 +437,7 @@ export default function Home() {
       </div>
 
       {/* ===== METHODS & EXPERTISE ===== */}
-      <section id="methods" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
+      <section id="methods" className="py-7 md:py-12 lg:py-14" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-10 lg:mb-16 sr">
             <SectionLabel text="גישה טיפולית" />
@@ -536,7 +536,7 @@ export default function Home() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section id="services" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
+      <section id="services" className="py-7 md:py-12 lg:py-14" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12 lg:mb-16 sr">
             <SectionLabel text="תחומי טיפול" />
@@ -583,7 +583,7 @@ export default function Home() {
       </div>
 
       {/* ===== LECTURES & TRAINING ===== */}
-      <section id="lectures" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
+      <section id="lectures" className="py-7 md:py-12 lg:py-14" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
           {/* Section heading - mobile only (desktop heading is inside text column) */}
@@ -671,7 +671,7 @@ export default function Home() {
       </div>
 
       {/* ===== THERAPY CARDS ===== */}
-      <section id="cards" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
+      <section id="cards" className="py-7 md:py-12 lg:py-14" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
           <div className="text-center mb-8 md:mb-12 lg:mb-16 sr">
@@ -750,7 +750,7 @@ export default function Home() {
       </div>
 
       {/* ===== APPROACH ===== */}
-      <section id="approach" className="py-7 md:py-20 lg:py-24" style={{ backgroundColor: C.cream }}>
+      <section id="approach" className="py-7 md:py-12 lg:py-14" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12 lg:mb-16 sr">
             <SectionLabel text="הגישה שלי" />
@@ -796,7 +796,7 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" className="pt-7 pb-[88px] md:py-20 lg:py-24" style={{ backgroundColor: C.creamAlt }}>
+      <section id="contact" className="pt-7 pb-[88px] md:py-12 lg:py-14" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-5xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-5 gap-6 md:gap-10 lg:gap-16 items-start">
 
@@ -936,7 +936,7 @@ export default function Home() {
           {/* Copyright */}
           <div className="pt-6 text-center">
             <p className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.3)' }}>
-              כל הזכויות שמורות &copy; 2025 · כנפיים לעוף | גאולה אלון {/* Update annually */}
+              כל הזכויות שמורות &copy; 2026 · כנפיים לעוף | גאולה אלון {/* Update annually */}
             </p>
           </div>
         </div>
