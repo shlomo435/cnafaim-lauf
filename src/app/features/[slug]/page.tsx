@@ -71,7 +71,7 @@ export async function generateMetadata({
     title: `${article.title} | כנפיים לעוף`,
     description: article.paragraphs[0].slice(0, 160),
     alternates: {
-      canonical: `https://cnafaim-lauf.netlify.app/features/${slug}`,
+      canonical: `https://cnafim-lauf.co.il/features/${slug}`,
     },
   };
 }
@@ -112,9 +112,9 @@ export default async function FeaturePage({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
-      { '@type': 'ListItem', position: 2, name: 'הגישה שלי', item: 'https://cnafaim-lauf.netlify.app/#approach' },
-      { '@type': 'ListItem', position: 3, name: article.title, item: `https://cnafaim-lauf.netlify.app/features/${slug}` },
+      { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafim-lauf.co.il/' },
+      { '@type': 'ListItem', position: 2, name: 'הגישה שלי', item: 'https://cnafim-lauf.co.il/#approach' },
+      { '@type': 'ListItem', position: 3, name: article.title, item: `https://cnafim-lauf.co.il/features/${slug}` },
     ],
   };
 

@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   description:
     'מדריכים מקצועיים של גאולה אלון על ויסות רגשי, חרדה בילדים, הוראה מתקנת, דימוי עצמי ועוד. קריאה נוחה, בשפה של הורים ונשים.',
   alternates: {
-    canonical: 'https://cnafaim-lauf.netlify.app/blog/',
+    canonical: 'https://cnafim-lauf.co.il/blog/',
   },
   openGraph: {
     title: 'מדריכים וכתבות | כנפיים לעוף',
     description: 'מדריכים מקצועיים של גאולה אלון על ויסות רגשי, חרדה בילדים, הוראה מתקנת ועוד.',
-    url: 'https://cnafaim-lauf.netlify.app/blog/',
+    url: 'https://cnafim-lauf.co.il/blog/',
     type: 'website',
   },
 };

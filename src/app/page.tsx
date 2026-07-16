@@ -7,7 +7,7 @@ import { C } from '../lib/tokens';
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: 'https://cnafaim-lauf.netlify.app/',
+    canonical: 'https://cnafim-lauf.co.il/',
   },
 };
 
@@ -200,12 +200,37 @@ function FloatingContactButton() {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'MedicalBusiness',
-  '@id': 'https://cnafaim-lauf.netlify.app/#organization',
+  '@id': 'https://cnafim-lauf.co.il/#organization',
   name: 'כנפיים לעוף - מרכז טיפולי-לימודי',
-  url: 'https://cnafaim-lauf.netlify.app',
+  description:
+    'מרכז רגשי-לימודי בנתיבות - הוראה מתקנת, טיפול רגשי ואבחונים לימודיים לילדים, נערות ונשים. שירות בכל אזור הדרום וגם בזום.',
+  url: 'https://cnafim-lauf.co.il',
   telephone: '+972-50-296-1213',
   email: 'gehulaa@gmail.com',
-  areaServed: { '@type': 'Country', name: 'Israel' },
+  image: 'https://cnafim-lauf.co.il/og-image.jpg',
+  logo: 'https://cnafim-lauf.co.il/logo.jpg',
+  priceRange: '₪₪',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'נתיבות',
+    addressRegion: 'דרום',
+    addressCountry: 'IL',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 31.4231,
+    longitude: 34.5889,
+  },
+  areaServed: [
+    { '@type': 'City', name: 'נתיבות' },
+    { '@type': 'City', name: 'אופקים' },
+    { '@type': 'City', name: 'שדרות' },
+    { '@type': 'City', name: 'אשקלון' },
+    { '@type': 'City', name: 'באר שבע' },
+    { '@type': 'City', name: 'קריית גת' },
+    { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
+  ],
+  availableLanguage: { '@type': 'Language', name: 'Hebrew' },
   openingHours: ['Su-Th 09:00-18:00'],
   founder: {
     '@type': 'Person',

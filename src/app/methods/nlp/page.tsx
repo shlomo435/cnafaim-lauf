@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'שיטת NLP עובדת עם התת-מודע לשינוי דפוסי חשיבה, חיזוק ביטחון עצמי ושחרור חסמים רגשיים. גלו כיצד NLP יכול לשנות את תפיסת המציאות שלכם.',
   alternates: {
-    canonical: 'https://cnafaim-lauf.netlify.app/methods/nlp',
+    canonical: 'https://cnafim-lauf.co.il/methods/nlp',
   },
 };
 
@@ -16,9 +16,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
-    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafaim-lauf.netlify.app/#methods' },
-    { '@type': 'ListItem', position: 3, name: 'NLP', item: 'https://cnafaim-lauf.netlify.app/methods/nlp' },
+    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafim-lauf.co.il/' },
+    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafim-lauf.co.il/#methods' },
+    { '@type': 'ListItem', position: 3, name: 'NLP', item: 'https://cnafim-lauf.co.il/methods/nlp' },
   ],
 };
 

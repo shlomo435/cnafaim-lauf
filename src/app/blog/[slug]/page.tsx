@@ -188,12 +188,12 @@ export default async function BlogPostPage({
     author: {
       '@type': 'Person',
       name: 'גאולה אלון',
-      url: 'https://cnafaim-lauf.netlify.app',
+      url: 'https://cnafim-lauf.co.il',
     },
     publisher: {
       '@type': 'Organization',
       name: 'כנפיים לעוף - מרכז טיפולי-לימודי',
-      url: 'https://cnafaim-lauf.netlify.app',
+      url: 'https://cnafim-lauf.co.il',
     },
     datePublished: post.date,
     dateModified: post.lastModified ?? post.date,
@@ -204,8 +204,8 @@ export default async function BlogPostPage({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
-      { '@type': 'ListItem', position: 2, name: 'בלוג', item: 'https://cnafaim-lauf.netlify.app/blog/' },
+      { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafim-lauf.co.il/' },
+      { '@type': 'ListItem', position: 2, name: 'בלוג', item: 'https://cnafim-lauf.co.il/blog/' },
       { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl(post.slug) },
     ],
   };

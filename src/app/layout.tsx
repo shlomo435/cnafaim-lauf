@@ -32,17 +32,17 @@ const assistant = Assistant({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://cnafaim-lauf.netlify.app'),
-  title: 'מרכז טיפולי-לימודי לילדים ונשים | CBT, EMR, NLP והוראה מתקנת | גאולה אלון',
-  description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים. גאולה אלון, מטפלת ומאבחנת עם מעל 20 שנות ניסיון.',
+  metadataBase: new URL('https://cnafim-lauf.co.il'),
+  title: 'מטפלת רגשית והוראה מתקנת בנתיבות והדרום | כנפיים לעוף - גאולה אלון',
+  description: 'מטפלת רגשית והוראה מתקנת בנתיבות ובכל אזור הדרום, וגם בזום. גאולה אלון - טיפול רגשי, אבחונים לימודיים והוראה מתקנת לילדים, נערות ונשים. מעל 20 שנות ניסיון.',
   openGraph: {
-    title: 'מרכז טיפולי-לימודי לילדים ונשים | CBT, EMR, NLP והוראה מתקנת | גאולה אלון',
-    description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים.',
-    url: 'https://cnafaim-lauf.netlify.app',
+    title: 'מטפלת רגשית והוראה מתקנת בנתיבות והדרום | כנפיים לעוף - גאולה אלון',
+    description: 'מטפלת רגשית והוראה מתקנת בנתיבות ובכל הדרום, וגם בזום. טיפול רגשי ואבחונים לימודיים לילדים, נערות ונשים.',
+    url: 'https://cnafim-lauf.co.il',
     siteName: 'כנפיים לעוף',
     images: [
       {
-        url: 'https://cnafaim-lauf.netlify.app/og-image.jpg',
+        url: 'https://cnafim-lauf.co.il/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'כנפיים לעוף - מרכז טיפולי-לימודי',
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'מרכז טיפולי-לימודי לילדים ונשים | CBT, EMR, NLP והוראה מתקנת | גאולה אלון',
-    description: 'ליווי לצמיחה, חיזוק וחיבור עצמי לילדים, נערות ונשים.',
-    images: ['https://cnafaim-lauf.netlify.app/og-image.jpg'],
+    title: 'מטפלת רגשית והוראה מתקנת בנתיבות והדרום | כנפיים לעוף - גאולה אלון',
+    description: 'מטפלת רגשית והוראה מתקנת בנתיבות ובכל הדרום, וגם בזום. טיפול רגשי ואבחונים לימודיים לילדים, נערות ונשים.',
+    images: ['https://cnafim-lauf.co.il/og-image.jpg'],
   },
 };
 

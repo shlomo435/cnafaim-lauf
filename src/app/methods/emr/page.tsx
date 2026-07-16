@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'טיפול EMR (עיבוד תנועות עיניים) לשחרור טראומה, חרדות ודפוסים רגשיים שאינם משרתים. גלו כיצד EMR יכול לשנות את חייכם.',
   alternates: {
-    canonical: 'https://cnafaim-lauf.netlify.app/methods/emr',
+    canonical: 'https://cnafim-lauf.co.il/methods/emr',
   },
 };
 
@@ -16,9 +16,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
-    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafaim-lauf.netlify.app/#methods' },
-    { '@type': 'ListItem', position: 3, name: 'EMR', item: 'https://cnafaim-lauf.netlify.app/methods/emr' },
+    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafim-lauf.co.il/' },
+    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafim-lauf.co.il/#methods' },
+    { '@type': 'ListItem', position: 3, name: 'EMR', item: 'https://cnafim-lauf.co.il/methods/emr' },
   ],
 };
 

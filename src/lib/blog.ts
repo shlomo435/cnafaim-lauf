@@ -1,4 +1,4 @@
-const BASE_URL = 'https://cnafaim-lauf.netlify.app';
+const BASE_URL = 'https://cnafim-lauf.co.il';
 
 export type ContentBlock =
   | { type: 'intro';  text: string }

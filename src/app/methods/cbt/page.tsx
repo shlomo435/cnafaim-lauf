@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'טיפול CBT מבוסס על ההבנה שהמחשבות שלנו משפיעות על הרגשות שלנו, והרגשות משפיעים על ההתנהגות. גלו כיצד CBT יכול לעזור לכם.',
   alternates: {
-    canonical: 'https://cnafaim-lauf.netlify.app/methods/cbt',
+    canonical: 'https://cnafim-lauf.co.il/methods/cbt',
   },
 };
 
@@ -16,9 +16,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
-    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafaim-lauf.netlify.app/#methods' },
-    { '@type': 'ListItem', position: 3, name: 'CBT', item: 'https://cnafaim-lauf.netlify.app/methods/cbt' },
+    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafim-lauf.co.il/' },
+    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafim-lauf.co.il/#methods' },
+    { '@type': 'ListItem', position: 3, name: 'CBT', item: 'https://cnafim-lauf.co.il/methods/cbt' },
   ],
 };
 

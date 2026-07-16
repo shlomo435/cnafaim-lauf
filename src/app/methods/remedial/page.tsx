@@ -3,12 +3,64 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 
+const BASE = 'https://cnafim-lauf.co.il';
+const PAGE_URL = `${BASE}/methods/remedial`;
+
+// Areas served - fuels both the visible copy and the Service schema.
+const AREAS = [
+  'נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים',
+];
+
+// FAQ data - single source for both the visible section and the FAQPage schema.
+const FAQ = [
+  {
+    q: 'מה זה הוראה מתקנת ובמה היא שונה משיעורי עזר?',
+    a: 'שיעור עזר עוזר לילד להשלים חומר ולהתכונן למבחן. הוראה מתקנת מטפלת בשורש הקושי - בדרך שבה המוח מעבד קריאה, כתיבה וקשב. תחילה מבינים למה הקושי קיים, ורק אז בונים תוכנית שמדברת ישירות אליו, בשילוב תנועה, תרגילי מוח וכלים מותאמים אישית.',
+  },
+  {
+    q: 'מאיזה גיל מתאימה הוראה מתקנת?',
+    a: 'אפשר לפנות כבר מסוף כיתה א׳, בערך מגיל שש וחצי, וגם בכיתות הגבוהות ובחטיבה. ככל שמתחילים מוקדם יותר, כך התהליך קצר ויעיל יותר ומונע שחיקה של הביטחון העצמי.',
+  },
+  {
+    q: 'כמה זמן לוקח לראות שיפור?',
+    a: 'ברוב המקרים רואים שינוי ניכר תוך שניים עד ארבעה חודשים של עבודה עקבית. הקצב תלוי בסוג הקושי, בגיל ובמידת המעורבות של ההורים. כבר מהמפגשים הראשונים מרגישים הבדל בביטחון של הילד.',
+  },
+  {
+    q: 'האם אפשר לקבל הוראה מתקנת בזום?',
+    a: 'כן. חלק מהתהליך, ולעיתים כולו, מתקיים במפגשי זום יעילים ומותאמים לילדים. זה מנגיש טיפול איכותי גם למשפחות מרוחקות או עמוסות, בלי להתפשר על האיכות.',
+  },
+  {
+    q: 'אתם נותנים שירות רק בנתיבות?',
+    a: 'המרכז ממוקם בנתיבות ונותן שירות לכל אזור הדרום - אופקים, שדרות, אשקלון, באר שבע, קריית גת והיישובים שסביב. בנוסף, קיימת אפשרות לטיפולים מרחוק בזום לכל מקום בארץ.',
+  },
+  {
+    q: 'איך מתחילים? האם חייבים אבחון קודם?',
+    a: 'מתחילים בשיחת היכרות קצרה ולא מחייבת. לאחריה נערך אבחון תפקודי-לימודי קצר וממוקד שמאפשר להבין את הקושי במדויק, וממנו נבנית תוכנית עבודה אישית לילד או לילדה.',
+  },
+];
+
 export const metadata: Metadata = {
-  title: 'הוראה מתקנת | כנפיים לעוף - מרכז רגשי לימודי',
+  title: 'הוראה מתקנת בנתיבות ובדרום | כנפיים לעוף - גאולה אלון',
   description:
-    'הוראה מתקנת לילדים המתקשים בקריאה, כתיבה, שטף, דיוק, הבנת הנקרא ותחושת מסוגלות בלמידה. תהליך מותאם אישית המשלב תנועה, תרגילי מוח וכלים מעשיים.',
+    'הוראה מתקנת בנתיבות ובכל אזור הדרום, וגם בזום. לילדים עם קשיי קריאה, כתיבה, שטף, הבנת הנקרא וקשב. אבחון תפקודי-לימודי ותוכנית אישית המשלבת תנועה ותרגילי מוח. ניסיון רב וגישה חמה.',
+  keywords: [
+    'הוראה מתקנת',
+    'הוראה מתקנת נתיבות',
+    'הוראה מתקנת בדרום',
+    'מורה להוראה מתקנת',
+    'קשיי קריאה',
+    'אבחון לימודי',
+    'הוראה מתקנת בזום',
+  ],
   alternates: {
-    canonical: 'https://cnafaim-lauf.netlify.app/methods/remedial',
+    canonical: PAGE_URL,
+  },
+  openGraph: {
+    title: 'הוראה מתקנת בנתיבות ובדרום | כנפיים לעוף',
+    description:
+      'הוראה מתקנת לילדים עם קשיי קריאה, כתיבה וקשב - בנתיבות, בכל הדרום וגם בזום. אבחון ותוכנית אישית.',
+    url: PAGE_URL,
+    type: 'article',
   },
 };
 
@@ -16,16 +68,93 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafaim-lauf.netlify.app/' },
-    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafaim-lauf.netlify.app/#methods' },
-    { '@type': 'ListItem', position: 3, name: 'הוראה מתקנת', item: 'https://cnafaim-lauf.netlify.app/methods/remedial' },
+    { '@type': 'ListItem', position: 1, name: 'בית', item: `${BASE}/` },
+    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: `${BASE}/#methods` },
+    { '@type': 'ListItem', position: 3, name: 'הוראה מתקנת', item: PAGE_URL },
   ],
 };
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'הוראה מתקנת',
+  name: 'הוראה מתקנת - כנפיים לעוף',
+  description:
+    'הוראה מתקנת לילדים ולנוער עם קשיי קריאה, כתיבה, שטף, הבנת הנקרא וקשב. אבחון תפקודי-לימודי ותוכנית אישית המשלבת תנועה, תרגילי מוח וחיזוק ביטחון עצמי.',
+  url: PAGE_URL,
+  provider: {
+    '@type': 'Person',
+    name: 'גאולה אלון',
+    jobTitle: 'מורה להוראה מתקנת ומאבחנת לימודית',
+    url: BASE,
+  },
+  areaServed: [
+    ...AREAS.map((name) => ({ '@type': 'City', name })),
+    { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
+  ],
+  availableChannel: [
+    {
+      '@type': 'ServiceChannel',
+      name: 'מפגשים פנים אל פנים בנתיבות',
+      serviceLocation: {
+        '@type': 'Place',
+        name: 'כנפיים לעוף - נתיבות',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'נתיבות',
+          addressRegion: 'דרום',
+          addressCountry: 'IL',
+        },
+      },
+    },
+    {
+      '@type': 'ServiceChannel',
+      name: 'מפגשים מרחוק בזום',
+      serviceUrl: `${BASE}/#contact`,
+    },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+// ── Small server components ────────────────────────────────────────────────
+function H2({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      className="font-display text-2xl md:text-3xl font-medium mt-12 mb-4 leading-snug"
+      style={{ color: C.textDark, letterSpacing: '-0.02em' }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function P({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
+      {children}
+    </p>
+  );
+}
+
+function Strong({ children }: { children: React.ReactNode }) {
+  return <strong style={{ color: C.textDark, fontWeight: 600 }}>{children}</strong>;
+}
 
 export default function RemedialPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.creamAlt, color: C.textDark }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* X close button - fixed top-left */}
       <Link
@@ -40,7 +169,7 @@ export default function RemedialPage() {
         }}
       >
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
-          <path d="M11.5 3.5L3.5 11.5M3.5 3.5l8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+          <path d="M11.5 3.5L3.5 11.5M3.5 3.5l8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
       </Link>
 
@@ -49,7 +178,7 @@ export default function RemedialPage() {
         <Link href="/" className="inline-block">
           <Image
             src="/logo.jpg"
-            alt="כנפיים לעוף"
+            alt="כנפיים לעוף - הוראה מתקנת בנתיבות"
             width={240}
             height={80}
             className="h-16 md:h-20 w-auto object-contain"
@@ -61,7 +190,7 @@ export default function RemedialPage() {
           className="mt-3 text-sm md:text-[0.95rem] font-light tracking-[0.18em] uppercase"
           style={{ color: C.textLight }}
         >
-          מרכז רגשי לימודי
+          מרכז רגשי לימודי · נתיבות והדרום
         </p>
       </section>
 
@@ -75,7 +204,7 @@ export default function RemedialPage() {
           <div className="relative w-full max-w-[360px] aspect-[854/1280] rounded-2xl overflow-hidden">
             <Image
               src="/founder_speaking.jpg"
-              alt="גאולה אלון - מרכז כנפיים לעוף"
+              alt="גאולה אלון - מורה להוראה מתקנת ומאבחנת לימודית, מרכז כנפיים לעוף נתיבות"
               fill
               className="object-cover"
               sizes="360px"
@@ -114,41 +243,146 @@ export default function RemedialPage() {
         />
 
         <h1
-          className="font-display text-4xl md:text-5xl font-medium text-right mb-8 leading-tight"
+          className="font-display text-4xl md:text-5xl font-medium text-right mb-6 leading-tight"
           style={{ color: C.textDark, letterSpacing: '-0.02em' }}
         >
-          הוראה מתקנת
+          הוראה מתקנת בנתיבות ובאזור הדרום
         </h1>
 
-        <div className="space-y-6 text-right">
-          <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
-            במרכז &quot;כנפיים לעוף&quot; ניתנת הוראה מתקנת לילדים המתקשים ב
-            <strong style={{ color: C.textDark, fontWeight: 600 }}>
-              קריאה, כתיבה, שטף, דיוק, הבנת הנקרא
-            </strong>{' '}
-            ותחושת מסוגלות בלמידה.
-          </p>
+        <div className="space-y-5 text-right">
+          <P>
+            במרכז <Strong>&quot;כנפיים לעוף&quot;</Strong> בנתיבות ניתנת <Strong>הוראה מתקנת</Strong> לילדים,
+            נערים ונערות המתקשים בקריאה, כתיבה, שטף, דיוק, הבנת הנקרא, קשב ותחושת מסוגלות בלמידה.
+            המרכז משרת את כל אזור הדרום, וכן מציע מפגשים מרחוק בזום לכל מקום בארץ.
+          </P>
+          <P>
+            אם הילד או הילדה שלכם משקיעים ובכל זאת נשארים מאחור, אם כל שיעורי הבית הופכים למאבק,
+            ואם הביטחון העצמי בלימודים הולך ונשחק - <Strong>יש דרך אחרת</Strong>. הוראה מתקנת לא מתמקדת
+            רק בהשלמת חומר, אלא נוגעת בשורש הקושי ובונה מחדש את היכולת ואת האמונה של הילד בעצמו.
+          </P>
+        </div>
 
-          <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
-            התהליך מתחיל ב
-            <strong style={{ color: C.textDark, fontWeight: 600 }}>
-              אבחון תפקודי-לימודי קצר וממוקד
-            </strong>
-            , שמטרתו להבין היכן נמצא הקושי, על מה הוא יושב, ומהי הדרך הנכונה ביותר לקדם את הילד או הילדה.
-          </p>
+        {/* Local trust strip */}
+        <div
+          className="mt-8 rounded-2xl px-6 py-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-center border"
+          style={{ backgroundColor: C.cream, borderColor: C.border }}
+        >
+          {[
+            'מרכז בנתיבות',
+            'שירות בכל הדרום',
+            'אפשרות בזום',
+            'אבחון ותוכנית אישית',
+          ].map((item) => (
+            <span key={item} className="text-sm font-medium" style={{ color: C.textDark }}>
+              {item}
+            </span>
+          ))}
+        </div>
 
-          <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
-            העבודה נעשית מתוך ניסיון של כ-30 שנה בתחום ההוראה המתקנת, ומשלבת{' '}
-            <strong style={{ color: C.textDark, fontWeight: 600 }}>
-              כלים מקצועיים, תנועה, תרגילי מוח, חיזוק תפקודים לימודיים ובניית ביטחון עצמי
-            </strong>
-            .
-          </p>
+        <H2>מה זה הוראה מתקנת?</H2>
+        <div className="space-y-5 text-right">
+          <P>
+            הוראה מתקנת היא תחום מקצועי שנועד לעזור לילדים המתקשים ברכישת מיומנויות הלמידה הבסיסיות -
+            קריאה, כתיבה, הבנת הנקרא וחשבון. בשונה משיעורי עזר, שמטרתם להשלים חומר ולתרגל,
+            <Strong> הוראה מתקנת מטפלת בשורש הקושי</Strong>: בדרך שבה המוח קולט, מעבד ומייצר מידע.
+          </P>
+          <P>
+            הרעיון פשוט אך עמוק: לא כל מוח לומד באותה דרך. כשילד מתקשה, לרוב הוא פשוט זקוק
+            לדרך אחרת - כזו שמתאימה בדיוק אליו. ההוראה המתקנת מזהה את הדרך הזו ובונה סביבה תהליך
+            מדויק, סבלני ומחזק.
+          </P>
+        </div>
 
-          <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
-            המטרה היא לא רק לשפר קריאה וכתיבה, אלא לעזור לילד להרגיש:
+        <H2>הסימנים שהילד/ה זקוקים להוראה מתקנת</H2>
+        <P>כל ילד עובר רגעים קשים עם הלמידה. מה שחשוב הוא תבנית שחוזרת על עצמה לאורך זמן:</P>
+        <ul className="space-y-3 my-6">
+          {[
+            'מחליף/ה אותיות דומות בקריאה ובכתיבה גם אחרי שנה שלמה בבית הספר',
+            'קורא/ת לאט מאוד ובקושי, גם כשהמילים מוכרות',
+            'לא זוכר/ת מה קרא/ה - כל האנרגיה הלכה לפענוח ולא נשאר להבנה',
+            'מסתייג/ת מקריאה בקול, מתבייש/ת או מתנגד/ת',
+            'עייפות ותסכול גדולים אחרי מעט מאמץ לימודי',
+            'ירידה בביטחון העצמי ובחשק ללמוד',
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-3 justify-end">
+              <span className="text-[1.05rem] font-light leading-[1.8] text-right" style={{ color: C.textMid }}>
+                {item}
+              </span>
+              <span className="mt-2 w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: C.rose }} />
+            </li>
+          ))}
+        </ul>
+        <div
+          className="my-8 rounded-xl p-5 border text-right"
+          style={{ backgroundColor: C.cream, borderColor: C.border }}
+        >
+          <p className="text-sm font-semibold mb-2" style={{ color: C.rose }}>כדאי לדעת</p>
+          <p className="text-base font-light leading-[1.9]" style={{ color: C.textMid }}>
+            אם שלושה סימנים ומעלה חוזרים על פני כמה חודשים - שווה לפנות לאבחון תפקודי-לימודי.
+            ככל שמאבחנים מוקדם יותר, כך קל ומהיר יותר לטפל.
           </p>
+        </div>
 
+        <H2>ההבדל בין הוראה מתקנת למורה פרטית</H2>
+        <div className="space-y-5 text-right">
+          <P>
+            הרבה הורים מגלים בדרך הקשה ששנה שלמה עם מורה פרטית לא הביאה שינוי אמיתי - ולא בגלל
+            שהמורה לא טובה או שהילד לא השתדל. מורה פרטית עוזרת <Strong>להשלים ולתרגל</Strong> את החומר.
+            אבל אם שורש הקושי הוא באופן שבו המוח מעבד מידע, יותר תרגול של אותו הדבר לא יפתור את הבעיה.
+          </P>
+          <P>
+            הוראה מתקנת מתחילה צעד אחד אחורה: <Strong>קודם מבינים מה קורה</Strong>, ורק אז בונים תוכנית
+            שמדברת ישירות אל הקושי הספציפי - עם כלים, שיטות ותרגול שמותאמים לילד הזה, ולא לכלל.
+          </P>
+        </div>
+
+        <H2>איך נראה התהליך - שלב אחר שלב</H2>
+        <ol className="space-y-4 my-6">
+          {[
+            {
+              t: 'שיחת היכרות',
+              d: 'שיחה קצרה ולא מחייבת שבה מבינים את התמונה, מה מטריד אתכם ומה הצעד הנכון.',
+            },
+            {
+              t: 'אבחון תפקודי-לימודי',
+              d: 'אבחון קצר וממוקד שמטרתו להבין היכן נמצא הקושי, על מה הוא יושב, ומהי הדרך הנכונה לקדם.',
+            },
+            {
+              t: 'תוכנית עבודה אישית',
+              d: 'בניית תוכנית מדויקת לפי הצורך של הילד/ה, עם יעדים ברורים ומדידים.',
+            },
+            {
+              t: 'מפגשים והתקדמות',
+              d: 'עבודה עקבית המשלבת תנועה, תרגילי מוח וכלים מעשיים, תוך חיזוק מתמיד של הביטחון העצמי.',
+            },
+            {
+              t: 'שיתוף ההורים',
+              d: 'עדכון שוטף וכלים לבית, כדי שהשינוי ילווה את הילד גם מעבר לחדר.',
+            },
+          ].map((step, i) => (
+            <li key={step.t} className="flex items-start gap-4 justify-end text-right">
+              <div>
+                <div className="font-display text-lg font-semibold" style={{ color: C.textDark }}>{step.t}</div>
+                <p className="text-[1.02rem] font-light leading-[1.8]" style={{ color: C.textMid }}>{step.d}</p>
+              </div>
+              <span
+                className="mt-1 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-sm font-semibold text-white"
+                style={{ backgroundColor: C.plum }}
+              >
+                {i + 1}
+              </span>
+            </li>
+          ))}
+        </ol>
+
+        <H2>הגישה הייחודית - שילוב תנועה, מוח ורגש</H2>
+        <div className="space-y-5 text-right">
+          <P>
+            העבודה נעשית מתוך ניסיון של שנים רבות בתחום ההוראה המתקנת, ומשלבת <Strong>כלים מקצועיים,
+            תנועה, תרגילי מוח, חיזוק תפקודים לימודיים ובניית ביטחון עצמי</Strong>. תרגילי המוח והגוף
+            מפעילים מסלולי למידה שונים ומחזקים את הקשר בין תנועה ליכולת לימודית.
+          </P>
+          <P>המטרה איננה רק לשפר קריאה וכתיבה, אלא לעזור לילד להרגיש:</P>
           <blockquote
             className="text-xl md:text-2xl font-light leading-relaxed text-right pr-5 border-r-4 py-2 my-2"
             style={{ color: C.textDark, borderColor: C.rose }}
@@ -157,24 +391,36 @@ export default function RemedialPage() {
           </blockquote>
         </div>
 
+        <H2>הוראה מתקנת בכל הדרום - וגם בזום</H2>
+        <div className="space-y-5 text-right">
+          <P>
+            המרכז ממוקם ב<Strong>נתיבות</Strong> ונותן שירות להורים וילדים מכל אזור הדרום -
+            {' '}{AREAS.slice(1).join(', ')} והיישובים שסביב. הקרבה והזמינות מאפשרות תהליך רציף ונוח.
+          </P>
+          <P>
+            ולמי שגר רחוק יותר, או שפשוט נוח לו כך - קיימת אפשרות ל<Strong>הוראה מתקנת מרחוק בזום</Strong>,
+            במפגשים יעילים ומותאמים לילדים. כך טיפול איכותי נגיש לכל משפחה, בכל מקום בארץ.
+          </P>
+        </div>
+
         {/* Info cards */}
         <div className="mt-12 grid sm:grid-cols-2 gap-4">
           {[
             {
               title: 'למי זה מתאים?',
-              body: 'לילדים עם קושי בקריאה, כתיבה, שטף ודיוק, הבנת הנקרא, קשיי קשב, חוסר ביטחון בלמידה או פערים לימודיים.',
+              body: 'לילדים ונוער עם קושי בקריאה, כתיבה, שטף ודיוק, הבנת הנקרא, קשב, חוסר ביטחון בלמידה או פערים לימודיים.',
             },
             {
               title: 'איך מתחילים?',
-              body: 'מתאמים אבחון ראשוני, ולאחריו נבנית תוכנית עבודה אישית ומדויקת לפי הצורך של הילד.',
+              body: 'מתאמים שיחת היכרות ואבחון ראשוני, ולאחריו נבנית תוכנית עבודה אישית ומדויקת לפי הצורך של הילד.',
             },
             {
-              title: 'ניסיון של 30 שנה',
+              title: 'ניסיון רב ומוכח',
               body: 'עבודה מקצועית ומנוסה המשלבת את הידע העדכני בתחום ההוראה המתקנת עם גישה חמה ואישית.',
             },
             {
               title: 'שילוב תנועה ומוח',
-              body: 'תרגילי מוח וגוף המפעילים מסלולי למידה שונים ומחזקים את הקשר בין תנועה לבין יכולות לימודיות.',
+              body: 'תרגילי מוח וגוף המפעילים מסלולי למידה שונים ומחזקים את הקשר בין תנועה ליכולות לימודיות.',
             },
           ].map((card) => (
             <div
@@ -198,10 +444,32 @@ export default function RemedialPage() {
           ))}
         </div>
 
+        {/* FAQ */}
+        <H2>שאלות נפוצות על הוראה מתקנת</H2>
+        <div className="space-y-4 mt-2">
+          {FAQ.map((item) => (
+            <div
+              key={item.q}
+              className="rounded-xl p-5 border text-right"
+              style={{ backgroundColor: C.cream, borderColor: C.border }}
+            >
+              <h3 className="font-medium text-base mb-2.5" style={{ color: C.textDark }}>
+                {item.q}
+              </h3>
+              <p className="text-sm font-light leading-[1.9]" style={{ color: C.textMid }}>
+                {item.a}
+              </p>
+            </div>
+          ))}
+        </div>
+
         {/* CTA */}
         <div className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>
+          <p className="text-lg font-medium mb-1.5" style={{ color: C.textDark }}>
+            מוכנים לעזור לילד/ה להתקדם?
+          </p>
           <p className="text-sm font-light mb-5" style={{ color: C.textMid }}>
-            מעוניינים לשמוע עוד או לתאם שיחת היכרות?
+            תיאום שיחת היכרות קצרה, בנתיבות, בכל הדרום או בזום - ללא התחייבות.
           </p>
           <div className="flex items-center gap-4 justify-end flex-wrap">
             <Link
