@@ -210,7 +210,10 @@ const localBusinessSchema = {
   image: 'https://cnafim-lauf.co.il/og-image.jpg',
   logo: 'https://cnafim-lauf.co.il/logo.jpg',
   priceRange: '₪₪',
-  sameAs: ['https://www.facebook.com/profile.php?id=61585099706314'],
+  sameAs: [
+    'https://www.facebook.com/profile.php?id=61585099706314',
+    'https://www.instagram.com/gehula_alon',
+  ],
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'נתיבות',
@@ -256,7 +259,10 @@ const personSchema = {
   },
   telephone: '+972-50-296-1213',
   email: 'gehulaa@gmail.com',
-  sameAs: ['https://www.facebook.com/profile.php?id=61585099706314'],
+  sameAs: [
+    'https://www.facebook.com/profile.php?id=61585099706314',
+    'https://www.instagram.com/gehula_alon',
+  ],
 };
 
 // ======================
@@ -952,19 +958,34 @@ export default function Home() {
               <p className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.6)' }}>
                 ראשון–חמישי, 09:00–18:00
               </p>
-              <a
-                href="https://www.facebook.com/profile.php?id=61585099706314"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="עמוד הפייסבוק של כנפיים לעוף"
-                className="inline-flex items-center gap-2 text-sm font-light transition-colors hover:text-white"
-                style={{ color: 'rgba(255,255,255,0.7)' }}
-              >
-                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
-                  <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898v-2.89h2.54V9.797c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-                </svg>
-                עקבו בפייסבוק
-              </a>
+              <div className="flex items-center gap-2 mt-1">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61585099706314"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="עמוד הפייסבוק של כנפיים לעוף"
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-colors hover:text-white hover:bg-white/10"
+                  style={{ color: 'rgba(255,255,255,0.7)' }}
+                >
+                  <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor" aria-hidden="true">
+                    <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898v-2.89h2.54V9.797c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/gehula_alon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="עמוד האינסטגרם של כנפיים לעוף"
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-colors hover:text-white hover:bg-white/10"
+                  style={{ color: 'rgba(255,255,255,0.7)' }}
+                >
+                  <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                    <circle cx="12" cy="12" r="4.2" />
+                    <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+                  </svg>
+                </a>
+              </div>
               <a
                 href="#contact"
                 className="mt-1 inline-block px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5"
