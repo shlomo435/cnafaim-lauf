@@ -197,7 +197,7 @@ function CtaButton({
 // Floating WhatsApp button - CSS hover only, server-compatible
 function FloatingContactButton() {
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] pointer-events-none">
+    <div className="fixed bottom-[76px] right-4 lg:bottom-6 lg:right-6 z-[9999] pointer-events-none">
       <a
         href={`https://wa.me/972502961213?text=${encodeURIComponent('היי גאולה, הגעתי מהאתר ואשמח לפרטים')}`}
         target="_blank"
@@ -329,12 +329,10 @@ export default function Home() {
         href="#contact"
         className="fixed z-[9997] lg:hidden flex items-center justify-center px-3 text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#D81B8C]"
         style={{
-          bottom: '24px',
-          left: '116px',
-          right: '78px',
-          marginInline: 'auto',
-          maxWidth: '260px',
-          height: '44px',
+          bottom: '16px',
+          left: '16px',
+          right: '16px',
+          height: '48px',
           backgroundColor: '#D81B8C',
           boxShadow: '0 4px 16px rgba(216,27,140,0.30)',
         }}

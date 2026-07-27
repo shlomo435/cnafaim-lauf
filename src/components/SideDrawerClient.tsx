@@ -91,7 +91,7 @@ export default function SideDrawerClient() {
   return (
     <>
       {/* Floating trigger button - above the WhatsApp button */}
-      <div className="fixed bottom-24 right-6 z-[9998]">
+      <div className="fixed bottom-[132px] right-4 lg:bottom-24 lg:right-6 z-[9998]">
         <button
           onClick={() => setIsOpen(true)}
           aria-label="פתח טופס יצירת קשר מהיר"
