@@ -66,7 +66,10 @@ export default function RootLayout({
         <noscript>
           <style>{'.sr { opacity: 1 !important; transform: none !important; }'}</style>
         </noscript>
-        {children}
+        <a href="#main-content" className="skip-link">דלג לתוכן</a>
+        <div id="main-content" tabIndex={-1}>
+          {children}
+        </div>
         <AccessibilityMenu />
       </body>
     </html>

@@ -435,6 +435,22 @@ export default function Home() {
           <p className="mt-3 text-sm font-light italic text-center" style={{ color: C.rose }}>
             מקום שמעניק לילדים כלים, ביטחון וכנפיים לצמוח, להתמודד ולהאמין בעצמם
           </p>
+          <div
+            className="mt-3 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-sm font-medium"
+            style={{ color: C.textHeading }}
+          >
+            <span className="inline-flex items-center gap-1.5">
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                <path d="M12 21s-7-5.686-7-11a7 7 0 0 1 14 0c0 5.314-7 11-7 11z" strokeLinejoin="round" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+              נתיבות
+            </span>
+            <span style={{ color: C.rose }}>·</span>
+            <span>שירות בכל אזור הדרום</span>
+            <span style={{ color: C.rose }}>·</span>
+            <span>גם בזום</span>
+          </div>
         </div>
       </section>
 

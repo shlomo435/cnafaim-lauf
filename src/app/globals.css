@@ -101,6 +101,31 @@ html.a11y-contrast-3 {
   outline-offset: 2px;
 }
 
+/* ── Accessibility: Skip to content link ───────────────── */
+.skip-link {
+  position: fixed;
+  top: -64px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  background: #C01880;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 16px rgba(192, 24, 128, 0.3);
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: none;
+}
+/* Avoid a full-page focus ring when the skip link moves focus into the page */
+#main-content:focus {
+  outline: none;
+}
+
 /* ── Intro Animation ────────────────────────────────────── */
 @keyframes introWingLeft {
   from { transform: translateX(-110vw); }
