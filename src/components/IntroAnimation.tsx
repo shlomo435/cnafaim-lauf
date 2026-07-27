@@ -42,8 +42,15 @@ export default function IntroAnimation() {
     mountedRef.current = true;
 
     // Skip if already played this session, or if user prefers reduced motion.
-    const alreadySeen = sessionStorage.getItem('intro-seen') === '1';
-    if (alreadySeen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Guarded: sessionStorage/matchMedia can throw in privacy modes - a throw here
+    // must never leave the overlay stuck (that would make the site "not open").
+    let alreadySeen = false;
+    let reduceMotion = false;
+    try {
+      alreadySeen = sessionStorage.getItem('intro-seen') === '1';
+      reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    } catch { /* storage or matchMedia unavailable */ }
+    if (alreadySeen || reduceMotion) {
       document.body.style.overflow = '';
       const t = setTimeout(() => { if (mountedRef.current) setDone(true); }, 0);
       return () => {
@@ -93,6 +100,7 @@ export default function IntroAnimation() {
       onClick={skip}
       role="presentation"
       aria-hidden="true"
+      className="intro-overlay"
       style={{
         position:       'fixed',
         inset:          0,

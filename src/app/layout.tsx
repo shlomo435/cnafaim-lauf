@@ -56,6 +56,12 @@ export default function RootLayout({
       dir="rtl"
       className={`${heebo.variable} ${rubik.variable}`}
     >
+      <head>
+        {/* Mark JS as available before first paint. `.sr` content is hidden-for-
+            animation only under html.js; without working JS it stays fully visible,
+            so the page never depends on JS just to render its content. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="antialiased">
         <noscript>
           <style>{'.sr { opacity: 1 !important; transform: none !important; }'}</style>

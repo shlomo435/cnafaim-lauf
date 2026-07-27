@@ -36,14 +36,17 @@ p {
 }
 
 /* ── Scroll Reveal ─────────────────────────────────────── */
-.sr {
+/* Gated on html.js: content is visible by default and only hidden-for-animation
+   once JS is confirmed running. Without JS (or if JS fails to run) content stays
+   visible - the page must never depend on JS just to show its content. */
+html.js .sr {
   opacity: 0;
   transform: translateY(30px);
   transition:
     opacity  0.72s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.sr.sr-visible {
+html.js .sr.sr-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -135,6 +138,17 @@ html.a11y-contrast-3 {
 .intro-skip-hint {
   opacity:   0;
   animation: introTextUp 0.6s ease 2.8s both;
+}
+
+/* Safety net: if JS never dismisses the intro overlay (JS blocked/slow/errored),
+   pure CSS hides it after ~4.8s so the site is never permanently blocked.
+   In the normal path JS removes the overlay from the DOM at ~3.85s, well before
+   this fires. */
+.intro-overlay {
+  animation: introSafetyHide 0.6s ease 4.8s forwards;
+}
+@keyframes introSafetyHide {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
 }
 
 /* ── Fix 11: Prefers-reduced-motion - disable all animations/transitions globally ── */
