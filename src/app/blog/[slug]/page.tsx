@@ -11,19 +11,33 @@ import {
   type ContentBlock,
 } from '../../../lib/blog';
 
-// ── Inline bold parser: **text** → <strong> ────────────────────────────────
+// ── Inline parser: **text** → <strong>, [text](url) → <a> ───────────────────
 function renderText(text: string): React.ReactNode {
-  const parts = text.split(/(\*\*[^*]+\*\*)/);
+  const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/);
   if (parts.length === 1) return text;
-  return parts.map((part, i) =>
-    part.startsWith('**') && part.endsWith('**') ? (
-      <strong key={i} style={{ color: C.textDark, fontWeight: 600 }}>
-        {part.slice(2, -2)}
-      </strong>
-    ) : (
-      part
-    )
-  );
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={i} style={{ color: C.textDark, fontWeight: 600 }}>
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (link) {
+      return (
+        <Link
+          key={i}
+          href={link[2]}
+          className="font-medium hover:opacity-80 transition-opacity"
+          style={{ color: C.rose, textDecoration: 'underline', textUnderlineOffset: '3px' }}
+        >
+          {link[1]}
+        </Link>
+      );
+    }
+    return part;
+  });
 }
 
 // ── Block renderer ─────────────────────────────────────────────────────────
