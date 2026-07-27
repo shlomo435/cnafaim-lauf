@@ -71,7 +71,7 @@ export default function SideDrawerClient() {
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? '',
           name:       form.name,
           phone:      form.phone,
-          subject:    'פנייה מהירה מהאתר – כנפיים לעוף',
+          subject:    'פנייה מהירה מהאתר - כנפיים לעוף',
           message:    form.message,
           from_name:  'אתר כנפיים לעוף',
         }),

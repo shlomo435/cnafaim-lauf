@@ -86,6 +86,34 @@ const features = [
   },
 ];
 
+// FAQ - single source for the visible section and the FAQPage structured data.
+const homeFaq = [
+  {
+    q: 'איפה ממוקם המרכז ולאילו אזורים אתם נותנים שירות?',
+    a: 'המרכז ממוקם בנתיבות ונותן שירות לכל אזור הדרום - אופקים, שדרות, אשקלון, באר שבע, קריית גת והיישובים שסביב. בנוסף, קיימת אפשרות לטיפולים ולמפגשים מרחוק בזום לכל מקום בארץ.',
+  },
+  {
+    q: 'לאיזה גיל מתאים הטיפול?',
+    a: 'המרכז מלווה ילדים, נערות ונשים - מהגיל הרך ועד בגרות. הכלים והשיטות מותאמים אישית לגיל ולצורך של כל מטופל, בין אם דרך משחק ותנועה אצל ילדים ובין אם דרך שיחה וכלים קוגניטיביים אצל מבוגרות.',
+  },
+  {
+    q: 'מה ההבדל בין טיפול רגשי להוראה מתקנת, ואיך יודעים מה צריך?',
+    a: 'טיפול רגשי עוסק ברגש, בביטחון ובהתמודדות; הוראה מתקנת עוסקת בקשיי קריאה, כתיבה וקשב. לעיתים קרובות קושי לימודי וקושי רגשי שזורים זה בזה. בשיחת ההיכרות ובאבחון קצר מבינים יחד מה המענה הנכון, ולעיתים משלבים בין השניים.',
+  },
+  {
+    q: 'באילו שיטות טיפוליות את עובדת?',
+    a: 'הגישה הוליסטית ומשלבת שיטות מוכחות: CBT (טיפול קוגניטיבי-התנהגותי), EMR (עיבוד רגשי בתנועות עיניים), NLP (תכנות נוירו-לשוני) והוראה מתקנת - כולן מותאמות אישית לצורך הספציפי של כל מטופל.',
+  },
+  {
+    q: 'אפשר לקבל טיפול בזום?',
+    a: 'כן. קיימת אפשרות לטיפולים ולמפגשים מרחוק בזום, יעילים ומותאמים גם לילדים וגם למבוגרות. זה מאפשר ליווי איכותי וגמיש מכל מקום בארץ, לצד מפגשים פנים אל פנים בנתיבות.',
+  },
+  {
+    q: 'איך מתחילים תהליך?',
+    a: 'מתחילים בשיחת היכרות קצרה ולא מחייבת, שבה מבינים יחד מה מטריד ומה הצעד הנכון. משם נבנה תהליך מותאם אישית. כל פנייה מטופלת בדיסקרטיות מלאה ובמהירות.',
+  },
+];
+
 // ======================
 // SHARED SERVER COMPONENTS
 // ======================
@@ -265,6 +293,16 @@ const personSchema = {
   ],
 };
 
+const homeFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
 // ======================
 // MAIN PAGE (Server Component)
 // ======================
@@ -274,6 +312,7 @@ export default function Home() {
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }} />
 
       {/* Client scroll-reveal side-effect */}
       <ScrollRevealClient />
@@ -828,6 +867,54 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== FAQ ===== */}
+      <section id="faq" className="py-7 md:py-12 lg:py-14" style={{ backgroundColor: C.creamAlt }}>
+        <div className="max-w-3xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12 sr">
+            <SectionLabel text="שאלות נפוצות" />
+            <h2
+              className="font-display text-3xl md:text-4xl font-medium"
+              style={{ color: C.textHeading, letterSpacing: '-0.02em' }}
+            >
+              כל מה שרציתם לדעת
+            </h2>
+          </div>
+          <div className="space-y-3 sr sr-d1">
+            {homeFaq.map((item) => (
+              <details
+                key={item.q}
+                className="group rounded-xl border border-[#F8BBD9] overflow-hidden"
+                style={{ backgroundColor: C.cream }}
+              >
+                <summary
+                  className="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 text-right font-medium select-none"
+                  style={{ color: C.textHeading }}
+                >
+                  <svg
+                    className="w-4 h-4 flex-shrink-0 transition-transform duration-300 group-open:rotate-45"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"
+                    style={{ color: C.rose }}
+                  >
+                    <path d="M12 5v14M5 12h14" strokeLinecap="round" />
+                  </svg>
+                  <span className="flex-1">{item.q}</span>
+                </summary>
+                <div className="px-5 pb-4 text-sm font-light leading-[1.9] text-right" style={{ color: C.textMid }}>
+                  {item.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Divider between FAQ and contact (both on creamAlt) */}
+      <div style={{ backgroundColor: C.creamAlt }}>
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <SectionDivider />
+        </div>
+      </div>
+
       {/* ===== CONTACT ===== */}
       <section id="contact" className="pt-7 pb-[88px] md:py-12 lg:py-14" style={{ backgroundColor: C.creamAlt }}>
         <div className="max-w-5xl mx-auto px-4 md:px-6">
@@ -956,7 +1043,7 @@ export default function Home() {
                 gehulaa@gmail.com
               </a>
               <p className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                ראשון–חמישי, 09:00–18:00
+                ראשון-חמישי, 09:00-18:00
               </p>
               <div className="flex items-center gap-2 mt-1">
                 <a

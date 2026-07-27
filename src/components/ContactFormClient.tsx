@@ -40,7 +40,7 @@ export default function ContactFormClient() {
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? '',
           name:       form.name,
           phone:      form.phone,
-          subject:    `פנייה מהאתר – ${subjectLabel}`,
+          subject:    `פנייה מהאתר - ${subjectLabel}`,
           message:    form.message,
           from_name:  'אתר כנפיים לעוף',
         }),
