@@ -159,7 +159,18 @@ export default function SideDrawerClient() {
                 </svg>
               </div>
               <p className="font-display text-xl mb-1" style={{ color: C.textDark }}>ההודעה נשלחה!</p>
-              <p className="text-sm font-light" style={{ color: C.textMid }}>אחזור אליך בהקדם.</p>
+              <p className="text-sm font-light leading-[1.9]" style={{ color: C.textMid }}>
+                אחזור אליכם בהקדם האפשרי.
+                <br />
+                לפניות דחופות אל תהססו להתקשר:{' '}
+                <a
+                  href="tel:0502961213"
+                  className="font-medium transition-colors hover:opacity-80"
+                  style={{ color: C.rose, direction: 'ltr', display: 'inline-block' }}
+                >
+                  050-296-1213
+                </a>
+              </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>

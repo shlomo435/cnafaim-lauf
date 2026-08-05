@@ -75,8 +75,17 @@ export default function ContactFormClient() {
           >
             ההודעה נשלחה
           </h3>
-          <p className="text-sm font-light" style={{ color: C.textMid }}>
-            אחזור אליך בהקדם. תודה על הפנייה.
+          <p className="text-sm font-light leading-[1.9]" style={{ color: C.textMid }}>
+            אחזור אליכם בהקדם האפשרי.
+            <br />
+            לפניות דחופות אל תהססו להתקשר:{' '}
+            <a
+              href="tel:0502961213"
+              className="font-medium transition-colors hover:opacity-80"
+              style={{ color: C.rose, direction: 'ltr', display: 'inline-block' }}
+            >
+              050-296-1213
+            </a>
           </p>
         </div>
       ) : (
