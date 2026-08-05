@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { C } from '../lib/tokens';
 import { sendContact } from '../lib/contact';
 
@@ -87,6 +88,13 @@ export default function ContactFormClient() {
               050-296-1213
             </a>
           </p>
+          <Link
+            href="/blog/"
+            className="inline-block mt-5 text-sm font-medium transition-colors hover:opacity-80"
+            style={{ color: C.rose, textDecoration: 'underline', textUnderlineOffset: '4px' }}
+          >
+            בינתיים, מוזמנים לקרוא את המדריכים בבלוג ←
+          </Link>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4" noValidate>
