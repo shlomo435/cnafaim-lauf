@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
+import RelatedLinks from '../../../components/RelatedLinks';
 
 export const metadata: Metadata = {
   title: 'EMR - עיבוד תנועות עיניים | כנפיים לעוף',
@@ -202,6 +203,15 @@ export default function EmrPage() {
             </div>
           ))}
         </div>
+
+        <RelatedLinks
+          links={[
+            { href: '/blog/mah-ze-emr',  title: 'EMR: השיטה שעוזרת כשדיבור לא מספיק', desc: 'מהי EMR, במה היא שונה, ולאילו מצבים היא מתאימה.' },
+            { href: '/metapel-regashi',  title: 'מטפלת רגשית בנתיבות והדרום',        desc: 'טיפול רגשי לילדים, נערות ונשים - וגם בזום.' },
+            { href: '/methods/cbt',      title: 'CBT - קוגניטיבי-התנהגותי',           desc: 'זיהוי ושינוי דפוסי חשיבה שמגבילים את איכות החיים.' },
+            { href: '/methods/nlp',      title: 'NLP - תכנות נוירו-לשוני',            desc: 'שינוי דפוסי חשיבה לחיזוק ביטחון ומסוגלות.' },
+          ]}
+        />
 
         {/* CTA */}
         <div className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>

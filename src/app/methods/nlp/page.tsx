@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
+import RelatedLinks from '../../../components/RelatedLinks';
 
 export const metadata: Metadata = {
   title: 'NLP - תכנות נוירו-לשוני | כנפיים לעוף',
@@ -180,6 +181,15 @@ export default function NlpPage() {
             </div>
           ))}
         </div>
+
+        <RelatedLinks
+          links={[
+            { href: '/blog/isha-lo-maaminah-batzmah', title: 'למה נשים רבות לא מאמינות בעצמן', desc: 'הקול הביקורתי הפנימי, מקורו, וכלים לשינוי.' },
+            { href: '/metapel-regashi',               title: 'מטפלת רגשית בנתיבות והדרום',    desc: 'טיפול רגשי לילדים, נערות ונשים - וגם בזום.' },
+            { href: '/methods/cbt',                   title: 'CBT - קוגניטיבי-התנהגותי',       desc: 'זיהוי ושינוי דפוסי חשיבה שמגבילים את איכות החיים.' },
+            { href: '/methods/emr',                   title: 'EMR - עיבוד תנועות עיניים',      desc: 'להגיע לשורש הרגשי גם כשדיבור לא מספיק.' },
+          ]}
+        />
 
         {/* CTA */}
         <div className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>

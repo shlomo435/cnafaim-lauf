@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
+import RelatedLinks from '../../../components/RelatedLinks';
 
 export const metadata: Metadata = {
   title: 'CBT - טיפול קוגניטיבי-התנהגותי | כנפיים לעוף',
@@ -178,6 +179,15 @@ export default function CbtPage() {
             </div>
           ))}
         </div>
+
+        <RelatedLinks
+          links={[
+            { href: '/blog/cbt-yelad',   title: 'CBT לילדים: איך זה נראה בפועל', desc: 'מה קורה במפגש, דוגמה מהחיים, ומה הילד לוקח הביתה.' },
+            { href: '/metapel-regashi',  title: 'מטפלת רגשית בנתיבות והדרום',   desc: 'טיפול רגשי לילדים, נערות ונשים - וגם בזום.' },
+            { href: '/methods/emr',      title: 'EMR - עיבוד תנועות עיניים',     desc: 'להגיע לשורש הרגשי גם כשדיבור לא מספיק.' },
+            { href: '/methods/nlp',      title: 'NLP - תכנות נוירו-לשוני',       desc: 'שינוי דפוסי חשיבה לחיזוק ביטחון ומסוגלות.' },
+          ]}
+        />
 
         {/* CTA */}
         <div className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>

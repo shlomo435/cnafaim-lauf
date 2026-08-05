@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
+import RelatedLinks from '../../../components/RelatedLinks';
 
 // ======================
 // ARTICLE DATA
@@ -195,6 +196,15 @@ export default async function FeaturePage({
             </p>
           ))}
         </div>
+
+        <RelatedLinks
+          links={[
+            { href: '/metapel-regashi',  title: 'מטפלת רגשית בנתיבות והדרום', desc: 'טיפול רגשי לילדים, נערות ונשים - וגם בזום.' },
+            { href: '/methods/remedial', title: 'הוראה מתקנת בנתיבות והדרום', desc: 'לקשיי קריאה, כתיבה, שטף וקשב.' },
+            { href: '/blog/',            title: 'מדריכים וכתבות',             desc: 'מידע מקצועי להורים, בשפה שמדברת אליכם.' },
+            { href: '/#methods',         title: 'הגישה הטיפולית',             desc: 'CBT, EMR, NLP והוראה מתקנת - איך משלבים ביניהן.' },
+          ]}
+        />
 
         {/* CTA */}
         <div className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>

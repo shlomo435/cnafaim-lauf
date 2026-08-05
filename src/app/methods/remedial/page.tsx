@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
+import RelatedLinks from '../../../components/RelatedLinks';
 
 const BASE = 'https://cnafim-lauf.co.il';
 const PAGE_URL = `${BASE}/methods/remedial`;
@@ -462,6 +463,15 @@ export default function RemedialPage() {
             </div>
           ))}
         </div>
+
+        <RelatedLinks
+          links={[
+            { href: '/blog/avchun-didakti-madrich-horim', title: 'אבחון דידקטי: המדריך המלא להורים', desc: 'מה בודקים, כמה זה עולה, ומה עושים עם הדוח אחר כך.' },
+            { href: '/blog/kshei-kriya-yelad',            title: 'הילד שלי לא מצליח לקרוא',          desc: 'מתי זה שלב ומתי כדאי לפנות לעזרה מקצועית.' },
+            { href: '/metapel-regashi',                   title: 'מטפלת רגשית בנתיבות והדרום',      desc: 'כשקושי לימודי מלווה גם בקושי רגשי.' },
+            { href: '/blog/mesurav-beit-sefer',           title: 'ילד שמסרב ללכת לבית ספר',          desc: 'מה עומד מאחורי הסירוב ואיך להגיב נכון.' },
+          ]}
+        />
 
         {/* CTA */}
         <div className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>
