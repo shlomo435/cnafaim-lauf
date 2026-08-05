@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { C } from '../lib/tokens';
+import { sendContact } from '../lib/contact';
 
 const FOCUSABLE_SELECTORS = 'input, select, textarea, button, a[href]';
 
@@ -64,25 +65,17 @@ export default function SideDrawerClient() {
     setSending(true);
     setError('');
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? '',
-          name:       form.name,
-          phone:      form.phone,
-          subject:    'פנייה מהירה מהאתר - כנפיים לעוף',
-          message:    form.message,
-          from_name:  'אתר כנפיים לעוף',
-        }),
+      await sendContact({
+        name:    form.name,
+        phone:   form.phone,
+        subject: 'פנייה מהירה מהאתר - כנפיים לעוף',
+        message: form.message,
       });
-      const json = await res.json();
-      if (!json.success) throw new Error(json.message || `HTTP ${res.status}`);
       setForm({ name: '', phone: '', message: '' });
       setSent(true);
     } catch (err) {
       console.error('Web3Forms error (drawer):', err);
-      setError('אירעה שגיאה בשליחה. אנא נסו שוב או פנו בטלפון.');
+      setError('אירעה שגיאה בשליחה. אפשר להתקשר 050-296-1213 או לשלוח וואטסאפ, ונחזור אליכם.');
     } finally {
       setSending(false);
     }
