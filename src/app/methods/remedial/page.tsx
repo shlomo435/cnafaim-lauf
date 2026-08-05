@@ -304,11 +304,11 @@ export default function RemedialPage() {
             'עייפות ותסכול גדולים אחרי מעט מאמץ לימודי',
             'ירידה בביטחון העצמי ובחשק ללמוד',
           ].map((item) => (
-            <li key={item} className="flex items-start gap-3 justify-end">
-              <span className="text-[1.05rem] font-light leading-[1.8] text-right" style={{ color: C.textMid }}>
+            <li key={item} className="flex items-start gap-3">
+              <span className="mt-2 w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: C.rose }} />
+              <span className="flex-1 text-[1.05rem] font-light leading-[1.8] text-right" style={{ color: C.textMid }}>
                 {item}
               </span>
-              <span className="mt-2 w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: C.rose }} />
             </li>
           ))}
         </ul>
@@ -360,17 +360,17 @@ export default function RemedialPage() {
               d: 'עדכון שוטף וכלים לבית, כדי שהשינוי ילווה את הילד גם מעבר לחדר.',
             },
           ].map((step, i) => (
-            <li key={step.t} className="flex items-start gap-4 justify-end text-right">
-              <div>
-                <div className="font-display text-lg font-semibold" style={{ color: C.textDark }}>{step.t}</div>
-                <p className="text-[1.02rem] font-light leading-[1.8]" style={{ color: C.textMid }}>{step.d}</p>
-              </div>
+            <li key={step.t} className="flex items-start gap-4 text-right">
               <span
                 className="mt-1 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-sm font-semibold text-white"
                 style={{ backgroundColor: C.plum }}
               >
                 {i + 1}
               </span>
+              <div className="flex-1">
+                <div className="font-display text-lg font-semibold" style={{ color: C.textDark }}>{step.t}</div>
+                <p className="text-[1.02rem] font-light leading-[1.8]" style={{ color: C.textMid }}>{step.d}</p>
+              </div>
             </li>
           ))}
         </ol>

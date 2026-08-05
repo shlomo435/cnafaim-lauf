@@ -77,14 +77,15 @@ function Block({ block }: { block: ContentBlock }) {
       return (
         <ul className="space-y-3 my-6">
           {block.items.map((item, i) => (
-            <li key={i} className="flex items-start gap-3 justify-end">
-              <span className="text-[1.05rem] font-light leading-[1.8] text-right" style={{ color: C.textMid }}>
-                {renderText(item)}
-              </span>
+            <li key={i} className="flex items-start gap-3">
+              {/* Marker first in DOM so RTL places it at the inline start (right) */}
               <span
                 className="mt-2 w-2 h-2 rounded-full flex-shrink-0"
                 style={{ backgroundColor: C.rose }}
               />
+              <span className="flex-1 text-[1.05rem] font-light leading-[1.8] text-right" style={{ color: C.textMid }}>
+                {renderText(item)}
+              </span>
             </li>
           ))}
         </ul>
@@ -93,15 +94,16 @@ function Block({ block }: { block: ContentBlock }) {
       return (
         <ol className="space-y-3 my-6">
           {block.items.map((item, i) => (
-            <li key={i} className="flex items-start gap-3 justify-end">
-              <span className="text-[1.05rem] font-light leading-[1.8] text-right" style={{ color: C.textMid }}>
-                {renderText(item)}
-              </span>
+            <li key={i} className="flex items-start gap-3">
+              {/* Number first in DOM so RTL places it at the inline start (right) */}
               <span
                 className="mt-1 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-semibold text-white"
                 style={{ backgroundColor: C.plum }}
               >
                 {i + 1}
+              </span>
+              <span className="flex-1 text-[1.05rem] font-light leading-[1.8] text-right" style={{ color: C.textMid }}>
+                {renderText(item)}
               </span>
             </li>
           ))}
