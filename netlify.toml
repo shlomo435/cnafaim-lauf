@@ -9,5 +9,26 @@
 [[headers]]
   for = "/*"
   [headers.values]
+    # Clickjacking: this site is never meant to be framed.
     X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
+
+    # Stop the browser guessing a response's type (MIME confusion attacks).
+    X-Content-Type-Options = "nosniff"
+
+    # Don't leak full URLs to third parties.
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # No page here needs these device APIs - deny them outright.
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+    # The legacy XSS auditor is deprecated and can itself introduce bugs;
+    # 0 disables it and we rely on the CSP below instead.
+    X-XSS-Protection = "0"
+
+    # Static export, so scripts cannot carry a per-request nonce: 'unsafe-inline'
+    # is required for the inline JSON-LD blocks, the pre-paint js-class script,
+    # and inline style attributes. Everything else is locked to this origin, so
+    # injected third-party scripts/frames are still blocked.
+    # NOTE: adding analytics (GA4, Clarity) later means allowing its domain in
+    # script-src and connect-src, or it will be blocked here.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"

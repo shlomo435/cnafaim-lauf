@@ -75,7 +75,7 @@ export default function SideDrawerClient() {
       setForm({ name: '', phone: '', message: '' });
       setSent(true);
     } catch (err) {
-      console.error('Web3Forms error (drawer):', err);
+      console.error('Drawer form submission failed:', err);
       setError('אירעה שגיאה בשליחה. אפשר להתקשר 050-296-1213 או לשלוח וואטסאפ, ונחזור אליכם.');
     } finally {
       setSending(false);

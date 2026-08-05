@@ -44,7 +44,7 @@ export default function ContactFormClient() {
       setForm({ name: '', phone: '', subject: '', message: '' });
       setSubmitted(true);
     } catch (err) {
-      console.error('Web3Forms error (contact):', err);
+      console.error('Contact form submission failed:', err);
       setFormError('אירעה שגיאה בשליחה. אפשר להתקשר 050-296-1213 או לשלוח וואטסאפ, ונחזור אליכם.');
     } finally {
       setSending(false);
