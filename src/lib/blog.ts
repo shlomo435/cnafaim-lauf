@@ -1479,14 +1479,28 @@ export function getPostsByTag(tag: string): Post[] {
   return getPostsSorted().filter((p) => p.tags.includes(tag));
 }
 
-/** URL-safe slug for a Hebrew tag, and the reverse lookup. */
+/**
+ * Slug for a tag, and the reverse lookup.
+ *
+ * Deliberately NOT percent-encoded: generateStaticParams writes one file per
+ * slug, so an encoded slug produces a file literally named "%D7%90...html",
+ * while the browser decodes the URL before requesting it and asks for the
+ * Hebrew filename instead - a 404. Keeping the raw characters makes the two
+ * sides agree; the browser encodes on the wire and the host decodes back.
+ */
 export function tagToSlug(tag: string): string {
-  return encodeURIComponent(tag.replace(/\s+/g, '-'));
+  return tag.replace(/\s+/g, '-');
 }
 
 export function slugToTag(slug: string): string | undefined {
-  const decoded = decodeURIComponent(slug).replace(/-/g, ' ');
-  return getAllTags().find(({ tag }) => tag === decoded)?.tag;
+  let decoded = slug;
+  try {
+    decoded = decodeURIComponent(slug);
+  } catch {
+    // Already decoded, or not valid percent-encoding - use as-is.
+  }
+  const normalised = decoded.replace(/-/g, ' ');
+  return getAllTags().find(({ tag }) => tag === normalised)?.tag;
 }
 
 export function getAllTagSlugs(): { tag: string }[] {
