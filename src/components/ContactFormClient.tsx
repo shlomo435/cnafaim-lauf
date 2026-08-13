@@ -185,6 +185,13 @@ export default function ContactFormClient() {
           >
             {sending ? 'שולח...' : 'שלחו הודעה'}
           </button>
+
+          <p className="text-xs font-light text-center leading-relaxed" style={{ color: C.textLight }}>
+            הפרטים נשמרים בדיסקרטיות ומשמשים ליצירת קשר בלבד.{' '}
+            <Link href="/privacy" className="underline hover:opacity-80" style={{ color: C.rose, textUnderlineOffset: '3px' }}>
+              מדיניות פרטיות
+            </Link>
+          </p>
         </form>
       )}
     </div>

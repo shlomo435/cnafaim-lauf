@@ -239,6 +239,24 @@ export default function AccessibilityMenu() {
               </div>
             </div>
 
+            {/* Link to the full statement - where users expect to find it */}
+            <a
+              href="/accessibility"
+              style={{
+                display: 'block',
+                textAlign: 'center',
+                fontSize: 12.5,
+                fontWeight: 500,
+                color: PLUM,
+                textDecoration: 'underline',
+                textUnderlineOffset: 3,
+                paddingTop: 4,
+                fontFamily: 'var(--font-heebo), sans-serif',
+              }}
+            >
+              להצהרת הנגישות המלאה
+            </a>
+
           </div>
         </div>
       )}

@@ -1063,8 +1063,17 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Copyright */}
+          {/* Copyright + legal */}
           <div className="pt-6 text-center">
+            <div className="flex items-center justify-center gap-3 flex-wrap mb-3">
+              <Link href="/accessibility" className="text-xs font-light transition-colors hover:text-white" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                הצהרת נגישות
+              </Link>
+              <span className="text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>·</span>
+              <Link href="/privacy" className="text-xs font-light transition-colors hover:text-white" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                מדיניות פרטיות
+              </Link>
+            </div>
             <p className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.3)' }}>
               {COPYRIGHT_LINE}
             </p>
