@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../../lib/tokens';
 import { COPYRIGHT_LINE } from '../../lib/site';
-import { allPosts, formatDate, type Post } from '../../lib/blog';
+import { getPostsSorted, getAllTags, tagToSlug, formatDate, type Post } from '../../lib/blog';
 
 export const metadata: Metadata = {
   title: 'מדריכים וכתבות | כנפיים לעוף',
@@ -40,6 +40,9 @@ function PostCard({ post }: { post: Post }) {
           </span>
         ))}
       </div>
+      {/* Note: tags here stay plain text - the whole card is already a link, so a
+          nested anchor would be invalid HTML. Browsable tags live in the topic
+          strip above the grid and on the article pages. */}
 
       {/* Title */}
       <h2
@@ -130,9 +133,26 @@ export default function BlogArchivePage() {
           <div className="w-16 h-px mt-6 mx-auto" style={{ backgroundColor: C.border }} />
         </div>
 
-        {/* Posts grid */}
+        {/* Browse by topic */}
+        <div className="mb-10 text-center">
+          <p className="text-sm font-semibold tracking-[0.14em] mb-4" style={{ color: C.rose }}>עיון לפי נושא</p>
+          <div className="flex flex-wrap gap-2 justify-center">
+            {getAllTags().map(({ tag, count }) => (
+              <Link
+                key={tag}
+                href={`/blog/tag/${tagToSlug(tag)}`}
+                className="text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-200 hover:border-[#3949AB] hover:-translate-y-0.5"
+                style={{ backgroundColor: C.creamAlt, color: C.textMid, border: `1px solid ${C.border}` }}
+              >
+                {tag} ({count})
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Posts grid - newest first */}
         <div className="grid md:grid-cols-2 gap-5">
-          {allPosts.map((post) => (
+          {getPostsSorted().map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
         </div>

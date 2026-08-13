@@ -394,7 +394,7 @@ export const allPosts: Post[] = [
     slug: 'kshei-kriya-yelad',
     title: 'הילד שלי לא מצליח לקרוא - מתי לדאוג ומתי לפנות לעזרה מקצועית',
     description: 'ילד שמתקשה בקריאה לא תמיד צריך טיפול. איך מבחינים בין שלב לבין קושי אמיתי - ומתי כדאי לפנות לאבחון לימודי.',
-    date: '2026-06-08',
+    date: '2026-01-14',
     readingMinutes: 8,
     excerpt: 'כשמורה אומרת "הכול בסדר" אבל הביטחון העצמי של הילד שלך בלימודים נשחק כל סמסטר - משהו חשוב קורה. הנה המדריך שיעזור לכם להבחין בין קושי ארעי לבין קריאה אמיתית לעזרה.',
     primaryKeyword: 'ילד לא מצליח לקרוא',
@@ -507,7 +507,7 @@ export const allPosts: Post[] = [
     slug: 'simanim-harada-yelad',
     title: '7 סימנים שהילד שלך מתמודד עם חרדה - וצעד אחד שתוכלו לעשות עוד הערב',
     description: 'חרדה בילדים לא תמיד נראית כמו פחד. גלו 7 סימנים שהורים לרוב מפספסים, וצעד ראשון פשוט שאפשר לעשות בבית.',
-    date: '2026-06-08',
+    date: '2026-02-04',
     readingMinutes: 7,
     excerpt: 'כאבי בטן שחוזרים כל בוקר ראשון. שאלות שחוזרות שוב ושוב. ילד שנדבק לאמא. לפעמים אנחנו מחפשים פחד ומפספסים חרדה שמתחבאת בצורה אחרת.',
     primaryKeyword: 'סימנים לחרדה אצל ילדים',
@@ -618,7 +618,7 @@ export const allPosts: Post[] = [
     slug: 'vitur-regashi-madrich',
     title: 'ויסות רגשי בילדים: המדריך ההורי המלא',
     description: 'מה זה ויסות רגשי, למה ילדים מתפוצצים על דברים קטנים, וכלים פרקטיים שעובדים בבית - מדריך מקיף לפי גיל.',
-    date: '2026-06-08',
+    date: '2026-02-25',
     readingMinutes: 10,
     excerpt: '"הוא מתפוצץ על כלום" - הורים אומרים את המשפט הזה הרבה. אבל מה שנראה כ"כלום" מבחוץ, מרגיש ענק מבפנים. הנה מה שמדע המוח לימד אותנו על ויסות רגשי בילדים.',
     primaryKeyword: 'ויסות רגשי ילדים',
@@ -761,7 +761,7 @@ export const allPosts: Post[] = [
     slug: 'hora-metatenet',
     title: 'הוראה מתקנת: מה היא, למי היא מתאימה, ולמה היא שונה מ"עזרה בשיעורים"',
     description: 'הוראה מתקנת היא לא שיעורי עזר. היא שיטה מקצועית שמטפלת בשורש הקושי הלימודי. המדריך המלא להורים.',
-    date: '2026-06-08',
+    date: '2026-03-11',
     readingMinutes: 8,
     excerpt: '"אנחנו כבר שנה אצל מורה פרטית ולא רואים שינוי." אם המשפט הזה מוכר - כנראה שמה שהילד צריך הוא לא יותר תרגול, אלא גישה אחרת לגמרי.',
     primaryKeyword: 'הוראה מתקנת',
@@ -886,7 +886,7 @@ export const allPosts: Post[] = [
     slug: 'yalda-lo-ohevet-atzmah',
     title: 'ילדה שלא אוהבת את עצמה: מה מסתתר מאחורי המילים האלה וכיצד לתמוך בה',
     description: 'כשבת שלכם אומרת "אני לא יפה" או "כולם שונאים אותי" - זה יותר מסתם ביישנות. המדריך להורים שמזהים קושי עמוק בדימוי עצמי.',
-    date: '2026-06-08',
+    date: '2026-03-31',
     readingMinutes: 7,
     excerpt: 'יש הבדל בין ילדה ביישנית לבין ילדה שלא מאמינה בעצמה. הבדל שהורים לרוב מרגישים אבל לא יודעים איך לאבחן - ואפילו פחות יודעים איך לעזור.',
     primaryKeyword: 'ילדה דימוי עצמי נמוך',
@@ -989,7 +989,7 @@ export const allPosts: Post[] = [
     slug: 'mesurav-beit-sefer',
     title: 'ילד שמסרב ללכת לבית ספר - מה באמת קורה ואיך להגיב נכון',
     description: 'כשילד מסרב ללכת לבית ספר, ההורים לרוב מנסים לפתור את הסימפטום במקום את הסיבה. מה עומד מאחורי הסירוב ואיך להגיב.',
-    date: '2026-06-08',
+    date: '2026-04-15',
     readingMinutes: 8,
     excerpt: '"הבטן כואבת לי" - ביום ראשון, כל שבוע, שוב ושוב. ההורה מרגיש בין אמפתיה לתסכול לפחד. לפני שמכריחים, כדאי להבין מה קורה שם בפנים.',
     primaryKeyword: 'ילד מסרב ללכת לבית ספר',
@@ -1088,7 +1088,7 @@ export const allPosts: Post[] = [
     slug: 'cbt-yelad',
     title: 'CBT לילדים: איך הטיפול הקוגניטיבי-התנהגותי נראה בפועל',
     description: 'CBT הוא אחד הטיפולים המוכחים ביותר לחרדה ודכאון בילדים. בדיוק מה קורה בטיפול, מה הילד לוקח הביתה, וכמה זמן זה לוקח.',
-    date: '2026-06-08',
+    date: '2026-04-29',
     readingMinutes: 9,
     excerpt: '"CBT" נשמע טכני ומרתיע. אבל בפועל, זה אחד הדברים הכי פרקטיים שקיימים: ילד שלומד לזהות את המחשבות שמכניסות אותו לפאניקה - ולשנות אותן.',
     primaryKeyword: 'CBT לילדים',
@@ -1175,7 +1175,7 @@ export const allPosts: Post[] = [
     slug: 'isha-lo-maaminah-batzmah',
     title: 'כועסת על עצמך? למה נשים רבות לא מאמינות בעצמן - ואיך מתחילים לשנות',
     description: 'הקול הביקורתי הפנימי שמלווה נשים רבות לא גדל ביום אחד - ולכן הוא גם לא נעלם ביום אחד. אבל הוא יכול להשתנות.',
-    date: '2026-06-08',
+    date: '2026-05-13',
     readingMinutes: 7,
     excerpt: '"אני לא מספיק טובה" - ארבע מילים שנשים רבות אומרות לעצמן כל יום, בשקט, לפני הישיבה, לפני המפגש עם החברה, לפני השינה.',
     primaryKeyword: 'נשים ביטחון עצמי',
@@ -1258,7 +1258,7 @@ export const allPosts: Post[] = [
     slug: 'lehaskir-layelad-al-tipul',
     title: 'איך מסבירים לילד שהוא הולך לטיפול? המדריך לשיחה הכי חשובה',
     description: 'שיחה אחת לא נכונה יכולה לסגור ילד לפני שהטיפול התחיל. המדריך המלא לפי גיל - מה לומר ומה בהחלט לא.',
-    date: '2026-06-08',
+    date: '2026-05-27',
     readingMinutes: 6,
     excerpt: '"אתה לא משוגע, אתה רק..." - ההסבר הזה מתחיל בכוונה טובה ויכול לסיים בהגנה ובפחד. הנה מה שעובד לפי גיל.',
     primaryKeyword: 'איך להסביר לילד שהוא הולך לטיפול',
@@ -1457,4 +1457,54 @@ export function formatDate(iso: string): string {
     month: 'long',
     day: 'numeric',
   });
+}
+
+/** Posts newest first - the listing should not depend on array order. */
+export function getPostsSorted(): Post[] {
+  return [...allPosts].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+}
+
+/** Every tag used across the blog, with how many posts carry it. */
+export function getAllTags(): { tag: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const post of allPosts) {
+    for (const tag of post.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag, 'he'));
+}
+
+export function getPostsByTag(tag: string): Post[] {
+  return getPostsSorted().filter((p) => p.tags.includes(tag));
+}
+
+/** URL-safe slug for a Hebrew tag, and the reverse lookup. */
+export function tagToSlug(tag: string): string {
+  return encodeURIComponent(tag.replace(/\s+/g, '-'));
+}
+
+export function slugToTag(slug: string): string | undefined {
+  const decoded = decodeURIComponent(slug).replace(/-/g, ' ');
+  return getAllTags().find(({ tag }) => tag === decoded)?.tag;
+}
+
+export function getAllTagSlugs(): { tag: string }[] {
+  return getAllTags().map(({ tag }) => ({ tag: tagToSlug(tag) }));
+}
+
+/**
+ * Posts most related to the given one, ranked by how many tags they share.
+ * Used to end an article with something relevant instead of the same two links.
+ */
+export function getRelatedPosts(slug: string, limit = 3): Post[] {
+  const current = getPostBySlug(slug);
+  if (!current) return [];
+  return getPostsSorted()
+    .filter((p) => p.slug !== slug && p.content.length > 0)
+    .map((p) => ({ post: p, shared: p.tags.filter((t) => current.tags.includes(t)).length }))
+    .filter((x) => x.shared > 0)
+    .sort((a, b) => b.shared - a.shared)
+    .slice(0, limit)
+    .map((x) => x.post);
 }

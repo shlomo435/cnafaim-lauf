@@ -79,10 +79,10 @@ export default function EmrPage() {
         </p>
 
         <h1
-          className="font-display text-5xl md:text-6xl font-light leading-tight tracking-tighter text-right mb-4"
+          className="font-display text-4xl md:text-5xl font-light leading-tight tracking-tighter text-right mb-4"
           style={{ color: C.textDark }}
         >
-          EMR
+          EMR - עיבוד רגשי בתנועות עיניים
         </h1>
 
         <p className="text-xl font-light leading-relaxed text-right mb-10" style={{ color: C.textMid }}>
