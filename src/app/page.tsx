@@ -375,11 +375,20 @@ export default function Home() {
           style={{ backgroundColor: 'rgba(255,255,255,0.85)', borderTop: `1px solid ${C.borderLight}` }}
         >
           <div className="max-w-4xl mx-auto text-center md:flex md:flex-wrap md:justify-center md:gap-x-1">
-            {['הוראה מתקנת', 'טיפולים רגשיים', 'אבחונים תפקודיים לימודיים', 'הדרכת הורים'].map((item, i, arr) => (
-              <React.Fragment key={item}>
-                <span className="block md:inline text-base font-light" style={{ color: C.textMid }}>
-                  {item}
-                </span>
+            {[
+              { label: 'הוראה מתקנת',               href: '/methods/remedial' },
+              { label: 'טיפולים רגשיים',            href: '/metapel-regashi' },
+              { label: 'אבחונים תפקודיים לימודיים', href: '/avchun-didakti' },
+              { label: 'הדרכת הורים',               href: '/hadrachat-horim' },
+            ].map((item, i, arr) => (
+              <React.Fragment key={item.label}>
+                <Link
+                  href={item.href}
+                  className="block md:inline text-base font-light transition-colors hover:text-[#C01880]"
+                  style={{ color: C.textMid }}
+                >
+                  {item.label}
+                </Link>
                 {i < arr.length - 1 && (
                   <span className="hidden md:inline text-base mx-2" style={{ color: C.rose }}>•</span>
                 )}
@@ -701,7 +710,7 @@ export default function Home() {
               </div>
 
               <div className="mt-6 md:mt-8 flex justify-center">
-                <CtaButton href="#contact">לפרטים ותיאום הרצאה</CtaButton>
+                <CtaButton href="/hartzaot">לפרטים ותיאום הרצאה</CtaButton>
               </div>
             </div>
           </div>
@@ -743,7 +752,7 @@ export default function Home() {
                   loading="lazy"
                 />
               </div>
-              <CtaButton href="#contact">לפרטים ורכישה</CtaButton>
+              <CtaButton href="/klafim">לפרטים ורכישה</CtaButton>
             </div>
 
             {/* Cards text */}
@@ -975,14 +984,15 @@ export default function Home() {
             <div className="flex flex-col items-center md:items-end gap-2">
               <p className="text-xs font-semibold tracking-[0.2em] mb-1" style={{ color: 'rgba(255,255,255,0.45)' }}>ניווט מהיר</p>
               {[
-                ['אודות',         '#about'],
-                ['מטפלת רגשית',   '/metapel-regashi'],
-                ['הוראה מתקנת',   '/methods/remedial'],
-                ['גישה טיפולית',  '#methods'],
-                ['תחומי טיפול',   '#services'],
-                ['הרצאות',        '#lectures'],
-                ['בלוג',          '/blog/'],
-                ['יצירת קשר',     '#contact'],
+                ['אודות',          '#about'],
+                ['מטפלת רגשית',    '/metapel-regashi'],
+                ['הוראה מתקנת',    '/methods/remedial'],
+                ['אבחון דידקטי',   '/avchun-didakti'],
+                ['הדרכת הורים',    '/hadrachat-horim'],
+                ['הרצאות והדרכות', '/hartzaot'],
+                ['קלפי ניצוץ',     '/klafim'],
+                ['בלוג',           '/blog/'],
+                ['יצירת קשר',      '#contact'],
               ].map(([label, href]) => (
                 <a
                   key={label}
