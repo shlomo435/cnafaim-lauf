@@ -30,6 +30,10 @@ export async function generateMetadata({
     title: `${tag} - מדריכים וכתבות | כנפיים לעוף`,
     description: `כל המדריכים והכתבות בנושא ${tag}, מאת גאולה אלון - מטפלת רגשית ומאבחנת לימודית.`,
     alternates: { canonical: `${SITE_URL}/blog/tag/${tagSlug}` },
+    // Tag archives exist for readers, not for search: most hold a single post,
+    // so indexing them would add thin, near-duplicate pages. `follow` still lets
+    // link equity reach the articles, and they stay out of the sitemap.
+    robots: { index: false, follow: true },
   };
 }
 
