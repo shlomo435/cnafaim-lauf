@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../../../lib/tokens';
+import { COPYRIGHT_LINE } from '../../../lib/site';
 import {
   getPostBySlug,
   getAllPostSlugs,
@@ -449,7 +450,7 @@ export default async function BlogPostPage({
             />
           </Link>
           <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            כל הזכויות שמורות &copy; 2026 · כנפיים לעוף | גאולה אלון
+            {COPYRIGHT_LINE}
           </div>
         </div>
       </footer>

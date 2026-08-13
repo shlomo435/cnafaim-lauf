@@ -62,17 +62,29 @@ export default function IntroAnimation() {
 
     document.body.style.overflow = 'hidden';
 
+    // Keep this short: the splash hides all content, so every extra 100ms here
+    // is time a visitor stares at a blank screen before they can read anything.
+    //
+    // Anchor to navigation start, not to hydration. This effect runs only once
+    // React has hydrated, which on a slow phone can be a second or more after
+    // the page loaded - a plain setTimeout would add the splash on top of that
+    // and let the CSS safety-net beat the JS teardown, leaving the page visible
+    // but still scroll-locked.
+    const FADE_AT = 1200;
+    const DONE_AT = 1500;
+    const elapsed = performance.now();
+
     const t1 = setTimeout(() => {
       if (!mountedRef.current) return;
       setLeaving(true);
-    }, 3100);
+    }, Math.max(0, FADE_AT - elapsed));
 
     const t2 = setTimeout(() => {
       if (!mountedRef.current) return;
       setDone(true);
       document.body.style.overflow = '';
       try { sessionStorage.setItem('intro-seen', '1'); } catch { /* private browsing */ }
-    }, 3850);
+    }, Math.max(0, DONE_AT - elapsed));
 
     return () => {
       mountedRef.current = false;
@@ -155,20 +167,6 @@ export default function IntroAnimation() {
         טיפול רגשי CBT · גאולה אלון
       </div>
 
-      <div
-        className="intro-skip-hint"
-        style={{
-          position:      'absolute',
-          bottom:        28,
-          fontSize:      '0.7rem',
-          color:         '#8D6E63',
-          fontFamily:    'var(--font-heebo), sans-serif',
-          letterSpacing: '0.06em',
-          direction:     'rtl',
-        }}
-      >
-        הקישו לדילוג
-      </div>
     </div>
   );
 }

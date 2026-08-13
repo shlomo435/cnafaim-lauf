@@ -140,37 +140,35 @@ html.a11y-contrast-3 {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Choreography is compressed to fit the 1.2s exit / 1.5s teardown in
+   IntroAnimation.tsx - everything must have landed before the fade starts. */
 .intro-wing-left {
   position:  absolute;
   inset:     0;
   clip-path: inset(0 50% 0 0);
-  animation: introWingLeft 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  animation: introWingLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
 .intro-wing-right {
   position:  absolute;
   inset:     0;
   clip-path: inset(0 0 0 50%);
-  animation: introWingRight 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  animation: introWingRight 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
 .intro-title-anim {
   opacity:   0;
-  animation: introTextUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.7s both;
+  animation: introTextUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
 }
 .intro-subtitle-anim {
   opacity:   0;
-  animation: introTextUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 2.25s both;
-}
-.intro-skip-hint {
-  opacity:   0;
-  animation: introTextUp 0.6s ease 2.8s both;
+  animation: introTextUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.72s both;
 }
 
 /* Safety net: if JS never dismisses the intro overlay (JS blocked/slow/errored),
-   pure CSS hides it after ~4.8s so the site is never permanently blocked.
-   In the normal path JS removes the overlay from the DOM at ~3.85s, well before
+   pure CSS hides it after ~2.4s so the site is never permanently blocked.
+   In the normal path JS removes the overlay from the DOM at ~1.5s, well before
    this fires. */
 .intro-overlay {
-  animation: introSafetyHide 0.6s ease 4.8s forwards;
+  animation: introSafetyHide 0.5s ease 2.4s forwards;
 }
 @keyframes introSafetyHide {
   to { opacity: 0; visibility: hidden; pointer-events: none; }

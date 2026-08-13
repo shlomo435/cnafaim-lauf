@@ -4,6 +4,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { twMerge } from 'tailwind-merge';
 import { C } from '../lib/tokens';
+import { COPYRIGHT_LINE } from '../lib/site';
 
 export const metadata: Metadata = {
   alternates: {
@@ -797,7 +798,7 @@ export default function Home() {
                 <p>
                   קלפי &quot;ניצוץ&quot; נוצרו כדי לתת לכל ילד מרחב בטוח לביטוי עצמי. כל קלף
                   מזמין שיחה שמאפשרת לילד לבטא את עולמו הרגשי, להתחבר לכוחות הפנימיים
-                  שלו, ולחוות שהוא נראה, נשמע ומוקדד.
+                  שלו, ולחוות שהוא נראה, נשמע ומוערך.
                 </p>
                 <p>
                   הקלפים פועלים כגשר תקשורת בין הורים לילדים. הם יוצרים שפה משותפת
@@ -1000,7 +1001,7 @@ export default function Home() {
 
             {/* Logo + tagline */}
             <div className="flex flex-col items-center md:items-end gap-3">
-              <a href="#" aria-label="כנפיים לעוף - דף הבית">
+              <Link href="/" aria-label="כנפיים לעוף - דף הבית">
                 <Image
                   src="/logo.jpg"
                   alt="כנפיים לעוף"
@@ -1009,7 +1010,7 @@ export default function Home() {
                   className="h-12 w-auto object-contain"
                   style={{ maxWidth: 160, mixBlendMode: 'screen', opacity: 0.9 }}
                 />
-              </a>
+              </Link>
               <p className="text-sm font-light leading-relaxed max-w-[200px]" style={{ color: 'rgba(255,255,255,0.6)' }}>
                 מרכז רגשי-לימודי לילדים, נערות ונשים
               </p>
@@ -1100,7 +1101,7 @@ export default function Home() {
           {/* Copyright */}
           <div className="pt-6 text-center">
             <p className="text-xs font-light" style={{ color: 'rgba(255,255,255,0.3)' }}>
-              כל הזכויות שמורות &copy; 2026 · כנפיים לעוף | גאולה אלון {/* Update annually */}
+              {COPYRIGHT_LINE}
             </p>
           </div>
         </div>
