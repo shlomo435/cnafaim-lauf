@@ -957,7 +957,9 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="pt-8 pb-[88px] md:pt-12 md:pb-10 lg:pb-12" style={{ backgroundColor: C.plum }}>
+      {/* Bottom clearance for the fixed mobile CTA now lives on the credit bar
+          rendered after this footer in the root layout. */}
+      <footer className="pt-8 pb-8 md:pt-12 md:pb-10 lg:pb-12" style={{ backgroundColor: C.plum }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
           {/* Main footer grid */}
