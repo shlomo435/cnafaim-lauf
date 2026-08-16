@@ -48,7 +48,7 @@ export default function AccessibilityMenu() {
 
   return (
     <div
-      className="fixed bottom-[76px] left-4 lg:bottom-6 lg:left-6 z-50 flex flex-col items-start"
+      className="fab-shift fixed bottom-[76px] left-4 lg:bottom-6 lg:left-6 z-50 flex flex-col items-start"
       dir="rtl"
     >
       {/* Expandable Panel */}

@@ -1,4 +1,5 @@
 import SideDrawerClient from './SideDrawerClient';
+import MobileCtaClient from './MobileCtaClient';
 
 const WHATSAPP_TEXT = 'היי גאולה, הגעתי מהאתר ואשמח לפרטים';
 const WHATSAPP_HREF = `https://wa.me/972502961213?text=${encodeURIComponent(WHATSAPP_TEXT)}`;
@@ -15,24 +16,11 @@ const WHATSAPP_HREF = `https://wa.me/972502961213?text=${encodeURIComponent(WHAT
 export default function FloatingContact({ contactHref = '/#contact' }: { contactHref?: string }) {
   return (
     <>
-      {/* Mobile CTA bar - full-width pill pinned to the bottom */}
-      <a
-        href={contactHref}
-        className="fixed z-[9997] lg:hidden flex items-center justify-center px-3 text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#D81B8C]"
-        style={{
-          bottom: '16px',
-          left: '16px',
-          right: '16px',
-          height: '48px',
-          backgroundColor: '#D81B8C',
-          boxShadow: '0 4px 16px rgba(216,27,140,0.30)',
-        }}
-      >
-        לתיאום שיחת היכרות ←
-      </a>
+      {/* Mobile CTA bar - hides once the visitor starts scrolling */}
+      <MobileCtaClient href={contactHref} />
 
       {/* WhatsApp - sits above the CTA bar on mobile, in the corner on desktop */}
-      <div className="fixed bottom-[76px] right-4 lg:bottom-6 lg:right-6 z-[9999] pointer-events-none">
+      <div className="fab-shift fixed bottom-[76px] right-4 lg:bottom-6 lg:right-6 z-[9999] pointer-events-none">
         <a
           href={WHATSAPP_HREF}
           target="_blank"

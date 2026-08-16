@@ -101,6 +101,22 @@ html.a11y-contrast-3 {
   outline-offset: 2px;
 }
 
+/* ── Floating buttons: follow the mobile CTA bar ────────── */
+/* The WhatsApp, mail and accessibility buttons are stacked above the CTA bar.
+   When it hides on scroll (see MobileCtaClient), they drop into its place so no
+   empty band is left behind. Mobile only - on lg+ the CTA bar never renders. */
+@media (max-width: 1023px) {
+  .fab-shift {
+    transition: transform 0.25s ease;
+  }
+  html.cta-hidden .fab-shift {
+    transform: translateY(60px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab-shift { transition: none; }
+}
+
 /* ── Accessibility: Skip to content link ───────────────── */
 .skip-link {
   position: fixed;
