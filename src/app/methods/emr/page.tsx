@@ -3,14 +3,13 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
+import { canonicalMeta } from '../../../lib/site';
 
 export const metadata: Metadata = {
   title: 'EMR - עיבוד תנועות עיניים | כנפיים לעוף',
   description:
     'טיפול EMR (עיבוד תנועות עיניים) לשחרור טראומה, חרדות ודפוסים רגשיים שאינם משרתים. גלו כיצד EMR יכול לשנות את חייכם.',
-  alternates: {
-    canonical: 'https://cnafim-lauf.co.il/methods/emr',
-  },
+  ...canonicalMeta('/methods/emr'),
 };
 
 const breadcrumbSchema = {

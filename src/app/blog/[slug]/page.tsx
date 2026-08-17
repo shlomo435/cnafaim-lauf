@@ -191,7 +191,7 @@ export default async function BlogPostPage({
         <p className="text-2xl font-light mb-6" style={{ color: C.textMid }}>
           הכתבה לא נמצאה
         </p>
-        <Link href="/blog/" className="text-sm font-medium underline" style={{ color: C.rose }}>
+        <Link href="/blog" className="text-sm font-medium underline" style={{ color: C.rose }}>
           חזרה לבלוג
         </Link>
       </div>
@@ -227,7 +227,7 @@ export default async function BlogPostPage({
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafim-lauf.co.il/' },
-      { '@type': 'ListItem', position: 2, name: 'בלוג', item: 'https://cnafim-lauf.co.il/blog/' },
+      { '@type': 'ListItem', position: 2, name: 'בלוג', item: 'https://cnafim-lauf.co.il/blog' },
       { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl(post.slug) },
     ],
   };
@@ -271,7 +271,7 @@ export default async function BlogPostPage({
             />
           </Link>
           <Link
-            href="/blog/"
+            href="/blog"
             className="text-sm font-light transition-colors hover:text-[#C01880]"
             style={{ color: C.textMid }}
           >
@@ -291,7 +291,7 @@ export default async function BlogPostPage({
         >
           <Link href="/" className="hover:underline" style={{ color: C.rose }}>בית</Link>
           <span>/</span>
-          <Link href="/blog/" className="hover:underline" style={{ color: C.rose }}>בלוג</Link>
+          <Link href="/blog" className="hover:underline" style={{ color: C.rose }}>בלוג</Link>
           <span>/</span>
           <span>{post.title}</span>
         </nav>
@@ -508,7 +508,7 @@ export default async function BlogPostPage({
               לתיאום שיחת היכרות
             </Link>
             <Link
-              href="/blog/"
+              href="/blog"
               className="inline-block px-6 py-3.5 rounded-lg text-sm font-medium border transition-all duration-300 hover:-translate-y-1 hover:border-[#3949AB]"
               style={{ borderColor: C.border, color: C.textMid }}
             >

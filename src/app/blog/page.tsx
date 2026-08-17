@@ -3,20 +3,18 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../../lib/tokens';
-import { COPYRIGHT_LINE } from '../../lib/site';
+import { COPYRIGHT_LINE, absoluteUrl } from '../../lib/site';
 import { getPostsSorted, getAllTags, tagToSlug, formatDate, type Post } from '../../lib/blog';
 
 export const metadata: Metadata = {
   title: 'מדריכים וכתבות | כנפיים לעוף',
   description:
     'מדריכים מקצועיים של גאולה אלון על ויסות רגשי, חרדה בילדים, הוראה מתקנת, דימוי עצמי ועוד. קריאה נוחה, בשפה של הורים ונשים.',
-  alternates: {
-    canonical: 'https://cnafim-lauf.co.il/blog/',
-  },
+  alternates: { canonical: absoluteUrl('/blog') },
   openGraph: {
     title: 'מדריכים וכתבות | כנפיים לעוף',
     description: 'מדריכים מקצועיים של גאולה אלון על ויסות רגשי, חרדה בילדים, הוראה מתקנת ועוד.',
-    url: 'https://cnafim-lauf.co.il/blog/',
+    url: absoluteUrl('/blog'),
     type: 'website',
   },
 };

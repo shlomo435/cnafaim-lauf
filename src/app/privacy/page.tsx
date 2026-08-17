@@ -2,14 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
-import { SITE_URL, SITE_NAME, OWNER_NAME, PHONE_DISPLAY, PHONE_TEL, EMAIL } from '../../lib/site';
-
-const PAGE_URL = `${SITE_URL}/privacy`;
+import { SITE_NAME, OWNER_NAME, PHONE_DISPLAY, PHONE_TEL, EMAIL, canonicalMeta } from '../../lib/site';
 
 export const metadata: Metadata = {
   title: 'מדיניות פרטיות | כנפיים לעוף',
   description: 'מדיניות הפרטיות של אתר כנפיים לעוף - איזה מידע נאסף בטופס יצירת הקשר, למה הוא משמש, היכן הוא נשמר, למשך כמה זמן, וכיצד ניתן לבקש עיון או מחיקה.',
-  alternates: { canonical: PAGE_URL },
+  ...canonicalMeta('/privacy'),
   robots: { index: true, follow: true },
 };
 

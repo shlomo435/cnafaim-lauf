@@ -227,7 +227,7 @@ export default function LecturesPage() {
             { href: '/metapel-regashi',            title: 'מטפלת רגשית',                    desc: 'טיפול רגשי לילדים, נערות ונשים.' },
             { href: '/hadrachat-horim',            title: 'הדרכת הורים',                    desc: 'ליווי ממוקד להורים - כלים מעשיים לבית.' },
             { href: '/blog/vitur-regashi-madrich', title: 'ויסות רגשי בילדים',              desc: 'אחד הנושאים המבוקשים ביותר בהרצאות.' },
-            { href: '/blog/',                      title: 'מדריכים וכתבות',                 desc: 'תוכן מקצועי להורים ולצוותי חינוך.' },
+            { href: '/blog',                      title: 'מדריכים וכתבות',                 desc: 'תוכן מקצועי להורים ולצוותי חינוך.' },
           ]}
         />
 

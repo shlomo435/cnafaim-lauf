@@ -2,14 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
-import { SITE_URL, OWNER_NAME, PHONE_DISPLAY, PHONE_TEL, EMAIL } from '../../lib/site';
-
-const PAGE_URL = `${SITE_URL}/accessibility`;
+import { OWNER_NAME, PHONE_DISPLAY, PHONE_TEL, EMAIL, canonicalMeta } from '../../lib/site';
 
 export const metadata: Metadata = {
   title: 'הצהרת נגישות | כנפיים לעוף',
   description: 'הצהרת הנגישות של אתר כנפיים לעוף - האמצעים שננקטו להנגשת האתר, רמת ההתאמה, מגבלות ידועות ודרכי פנייה לרכז הנגישות.',
-  alternates: { canonical: PAGE_URL },
+  ...canonicalMeta('/accessibility'),
   robots: { index: true, follow: true },
 };
 

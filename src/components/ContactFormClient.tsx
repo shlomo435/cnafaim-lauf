@@ -89,7 +89,7 @@ export default function ContactFormClient() {
             </a>
           </p>
           <Link
-            href="/blog/"
+            href="/blog"
             className="inline-block mt-5 text-sm font-medium transition-colors hover:opacity-80"
             style={{ color: C.rose, textDecoration: 'underline', textUnderlineOffset: '4px' }}
           >

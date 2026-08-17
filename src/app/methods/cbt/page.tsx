@@ -3,14 +3,13 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
+import { canonicalMeta } from '../../../lib/site';
 
 export const metadata: Metadata = {
   title: 'CBT - טיפול קוגניטיבי-התנהגותי | כנפיים לעוף',
   description:
     'טיפול CBT מבוסס על ההבנה שהמחשבות שלנו משפיעות על הרגשות שלנו, והרגשות משפיעים על ההתנהגות. גלו כיצד CBT יכול לעזור לכם.',
-  alternates: {
-    canonical: 'https://cnafim-lauf.co.il/methods/cbt',
-  },
+  ...canonicalMeta('/methods/cbt'),
 };
 
 const breadcrumbSchema = {

@@ -3,14 +3,13 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
+import { canonicalMeta } from '../../../lib/site';
 
 export const metadata: Metadata = {
   title: 'NLP - תכנות נוירו-לשוני | כנפיים לעוף',
   description:
     'שיטת NLP עובדת עם התת-מודע לשינוי דפוסי חשיבה, חיזוק ביטחון עצמי ושחרור חסמים רגשיים. גלו כיצד NLP יכול לשנות את תפיסת המציאות שלכם.',
-  alternates: {
-    canonical: 'https://cnafim-lauf.co.il/methods/nlp',
-  },
+  ...canonicalMeta('/methods/nlp'),
 };
 
 const breadcrumbSchema = {

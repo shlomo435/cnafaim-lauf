@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../../../../lib/tokens';
-import { COPYRIGHT_LINE, SITE_URL } from '../../../../lib/site';
+import { COPYRIGHT_LINE, canonicalMeta } from '../../../../lib/site';
 import {
   getAllTagSlugs,
   getPostsByTag,
@@ -29,7 +29,7 @@ export async function generateMetadata({
   return {
     title: `${tag} - מדריכים וכתבות | כנפיים לעוף`,
     description: `כל המדריכים והכתבות בנושא ${tag}, מאת גאולה אלון - מטפלת רגשית ומאבחנת לימודית.`,
-    alternates: { canonical: `${SITE_URL}/blog/tag/${tagSlug}` },
+    ...canonicalMeta(`/blog/tag/${tagSlug}`),
     // Tag archives exist for readers, not for search: most hold a single post,
     // so indexing them would add thin, near-duplicate pages. `follow` still lets
     // link equity reach the articles, and they stay out of the sitemap.
@@ -73,7 +73,7 @@ export default async function TagArchivePage({ params }: { params: Promise<{ tag
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center px-6" style={{ backgroundColor: C.cream }}>
         <p className="text-2xl font-light mb-6" style={{ color: C.textMid }}>הנושא לא נמצא</p>
-        <Link href="/blog/" className="text-sm font-medium underline" style={{ color: C.rose }}>חזרה לבלוג</Link>
+        <Link href="/blog" className="text-sm font-medium underline" style={{ color: C.rose }}>חזרה לבלוג</Link>
       </div>
     );
   }
@@ -88,7 +88,7 @@ export default async function TagArchivePage({ params }: { params: Promise<{ tag
           <Link href="/" className="flex items-center flex-shrink-0">
             <Image src="/logo.jpg" alt="כנפיים לעוף" width={168} height={56} className="h-14 w-auto object-contain" style={{ maxWidth: 168, mixBlendMode: 'multiply' }} priority />
           </Link>
-          <Link href="/blog/" className="text-sm font-light transition-colors hover:text-[#C01880]" style={{ color: C.textMid }}>
+          <Link href="/blog" className="text-sm font-light transition-colors hover:text-[#C01880]" style={{ color: C.textMid }}>
             ← כל הכתבות
           </Link>
         </div>
@@ -98,7 +98,7 @@ export default async function TagArchivePage({ params }: { params: Promise<{ tag
         <nav className="flex items-center gap-2 text-xs mb-8 justify-end flex-wrap" style={{ color: C.textLight }} aria-label="נתיב ניווט">
           <Link href="/" className="hover:underline" style={{ color: C.rose }}>בית</Link>
           <span>/</span>
-          <Link href="/blog/" className="hover:underline" style={{ color: C.rose }}>בלוג</Link>
+          <Link href="/blog" className="hover:underline" style={{ color: C.rose }}>בלוג</Link>
           <span>/</span>
           <span>{tag}</span>
         </nav>

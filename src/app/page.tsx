@@ -993,7 +993,7 @@ export default function Home() {
                 ['הדרכת הורים',    '/hadrachat-horim'],
                 ['הרצאות והדרכות', '/hartzaot'],
                 ['קלפי ניצוץ',     '/klafim'],
-                ['בלוג',           '/blog/'],
+                ['בלוג',           '/blog'],
                 ['יצירת קשר',      '#contact'],
               ].map(([label, href]) => (
                 <a

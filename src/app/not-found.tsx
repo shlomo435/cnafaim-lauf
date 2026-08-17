@@ -12,7 +12,7 @@ const LINKS = [
   { href: '/',                  title: 'דף הבית',        desc: 'המרכז, השיטות ותחומי הטיפול' },
   { href: '/metapel-regashi',   title: 'מטפלת רגשית',    desc: 'טיפול רגשי לילדים, נערות ונשים' },
   { href: '/methods/remedial',  title: 'הוראה מתקנת',    desc: 'לקשיי קריאה, כתיבה וקשב' },
-  { href: '/blog/',             title: 'מדריכים וכתבות', desc: 'מידע מקצועי בשפה של הורים' },
+  { href: '/blog',             title: 'מדריכים וכתבות', desc: 'מידע מקצועי בשפה של הורים' },
 ];
 
 export default function NotFound() {

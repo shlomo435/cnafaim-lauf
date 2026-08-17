@@ -3,6 +3,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
+import { canonicalMeta } from '../../../lib/site';
 
 // ======================
 // ARTICLE DATA
@@ -71,9 +72,7 @@ export async function generateMetadata({
   return {
     title: `${article.title} | כנפיים לעוף`,
     description: article.paragraphs[0].slice(0, 160),
-    alternates: {
-      canonical: `https://cnafim-lauf.co.il/features/${slug}`,
-    },
+    ...canonicalMeta(`/features/${slug}`),
   };
 }
 
@@ -201,7 +200,7 @@ export default async function FeaturePage({
           links={[
             { href: '/metapel-regashi',  title: 'מטפלת רגשית בנתיבות והדרום', desc: 'טיפול רגשי לילדים, נערות ונשים - וגם בזום.' },
             { href: '/methods/remedial', title: 'הוראה מתקנת בנתיבות והדרום', desc: 'לקשיי קריאה, כתיבה, שטף וקשב.' },
-            { href: '/blog/',            title: 'מדריכים וכתבות',             desc: 'מידע מקצועי להורים, בשפה שמדברת אליכם.' },
+            { href: '/blog',            title: 'מדריכים וכתבות',             desc: 'מידע מקצועי להורים, בשפה שמדברת אליכם.' },
             { href: '/#methods',         title: 'הגישה הטיפולית',             desc: 'CBT, EMR, NLP והוראה מתקנת - איך משלבים ביניהן.' },
           ]}
         />
