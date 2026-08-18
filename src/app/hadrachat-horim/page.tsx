@@ -4,11 +4,14 @@ import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
-import { SITE_URL, OWNER_NAME } from '../../lib/site';
+import { SITE_URL, OWNER_NAME, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/hadrachat-horim`;
 
 const AREAS = ['נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים'];
+
+/** Regional councils - typed as AdministrativeArea in schema, not City. */
+const REGIONAL_COUNCILS = ['שדות נגב', 'מרחבים'];
 
 const FAQ = [
   {
@@ -56,6 +59,7 @@ export const metadata: Metadata = {
     description: 'כלים מעשיים להורים - התפרצויות, גבולות, שיתוף פעולה. בנתיבות, בכל הדרום וגם בזום.',
     url: PAGE_URL,
     type: 'article',
+    images: [OG_IMAGE],
   },
 };
 
@@ -67,9 +71,17 @@ const serviceSchema = {
   description:
     'הדרכת הורים ממוקדת: כלים מעשיים להתמודדות עם התפרצויות, גבולות, מריבות בין אחים, שיתוף פעולה וקשיי שינה. פנים אל פנים בנתיבות או בזום.',
   url: PAGE_URL,
-  provider: { '@type': 'Person', name: OWNER_NAME, jobTitle: 'מטפלת רגשית ומדריכת הורים', url: SITE_URL },
+  provider: {
+    '@type': 'Person',
+    '@id': SCHEMA_IDS.person,
+    name: OWNER_NAME,
+    jobTitle: 'מטפלת רגשית ומדריכת הורים',
+  },
   areaServed: [
-    ...AREAS.map((name) => ({ '@type': 'City', name })),
+    ...AREAS.map((name) => ({
+      '@type': REGIONAL_COUNCILS.includes(name) ? 'AdministrativeArea' : 'City',
+      name,
+    })),
     { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
   ],
 };

@@ -45,6 +45,7 @@ const STATIC_ROUTES = [
   { path: '/hadrachat-horim',     source: 'src/app/hadrachat-horim/page.tsx',     changefreq: 'monthly', priority: '0.8' },
   { path: '/hartzaot',            source: 'src/app/hartzaot/page.tsx',            changefreq: 'monthly', priority: '0.8' },
   { path: '/klafim',              source: 'src/app/klafim/page.tsx',              changefreq: 'monthly', priority: '0.8' },
+  { path: '/tipul-regashi-bezoom', source: 'src/app/tipul-regashi-bezoom/page.tsx', changefreq: 'monthly', priority: '0.8' },
   { path: '/blog',                source: 'src/app/blog/page.tsx',                changefreq: 'weekly',  priority: '0.9' },
   { path: '/methods/cbt',         source: 'src/app/methods/cbt/page.tsx',         changefreq: 'monthly', priority: '0.8' },
   { path: '/methods/emr',         source: 'src/app/methods/emr/page.tsx',         changefreq: 'monthly', priority: '0.8' },

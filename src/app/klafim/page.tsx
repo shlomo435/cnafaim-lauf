@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
-import { SITE_URL, OWNER_NAME } from '../../lib/site';
+import { SITE_URL, OWNER_NAME, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/klafim`;
 
@@ -32,9 +32,9 @@ const FAQ = [
 ];
 
 export const metadata: Metadata = {
-  title: 'קלפי ניצוץ - קלפים טיפוליים לילדים | כנפיים לעוף',
+  title: 'קלפים טיפוליים לילדים | קלפי ניצוץ - כנפיים לעוף',
   description:
-    'קלפי "ניצוץ" - קלפים טיפוליים שנוצרו כדי לפתוח שיחה רגשית עם ילדים. מרחב בטוח לביטוי עצמי, גשר תקשורת בין הורים לילדים ובניית חוסן. מתאימים להורים ולמטפלים.',
+    'קלפים טיפוליים לילדים - קלפי "ניצוץ" של גאולה אלון: פותחים שיחה רגשית, מרחב בטוח לביטוי עצמי וגשר בין הורים לילדים. מתאימים להורים, למטפלים ולאנשי חינוך.',
   keywords: ['קלפים טיפוליים', 'קלפי ניצוץ', 'קלפים טיפוליים לילדים', 'כלי טיפולי לילדים', 'שיחה רגשית עם ילדים'],
   alternates: { canonical: PAGE_URL },
   openGraph: {
@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     description: 'קלפים שפותחים שיחה רגשית עם ילדים - מרחב בטוח לביטוי עצמי וגשר תקשורת בין הורים לילדים.',
     url: PAGE_URL,
     type: 'article',
+    images: [OG_IMAGE],
   },
 };
 
@@ -54,6 +55,7 @@ const productSchema = {
   url: PAGE_URL,
   image: `${SITE_URL}/therapy_cards_box.jpg`,
   brand: { '@type': 'Brand', name: 'כנפיים לעוף' },
+  manufacturer: { '@id': SCHEMA_IDS.organization },
   category: 'כלים טיפוליים',
   audience: { '@type': 'Audience', audienceType: 'הורים, מטפלים ואנשי חינוך' },
 };
@@ -114,7 +116,7 @@ export default function CardsPage() {
         <div className="w-16 h-0.5 mb-6 mr-auto" style={{ background: `linear-gradient(to left, ${C.rose}55, ${C.rose})` }} />
 
         <h1 className="font-display text-4xl md:text-5xl font-medium text-right mb-6 leading-tight" style={{ color: C.textDark, letterSpacing: '-0.02em' }}>
-          קלפי &quot;ניצוץ&quot; - קלפים שמדליקים אור בכל ילד
+          קלפים טיפוליים לילדים - קלפי &quot;ניצוץ&quot; שמדליקים אור בכל ילד
         </h1>
 
         <div className="space-y-5 text-right">

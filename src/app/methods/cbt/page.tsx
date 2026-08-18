@@ -4,11 +4,12 @@ import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
 import { canonicalMeta } from '../../../lib/site';
+import InfoDisclaimer from '../../../components/InfoDisclaimer';
 
 export const metadata: Metadata = {
-  title: 'CBT - טיפול קוגניטיבי-התנהגותי | כנפיים לעוף',
+  title: 'טיפול CBT בנתיבות ובדרום | קוגניטיבי-התנהגותי - כנפיים לעוף',
   description:
-    'טיפול CBT מבוסס על ההבנה שהמחשבות שלנו משפיעות על הרגשות שלנו, והרגשות משפיעים על ההתנהגות. גלו כיצד CBT יכול לעזור לכם.',
+    'טיפול CBT בנתיבות, בדרום ובזום - לחרדה, דאגנות וביטחון עצמי לילדים, נערות ונשים. כלים מעשיים כבר מהפגישות הראשונות. גאולה אלון, מעל 20 שנות ניסיון.',
   ...canonicalMeta('/methods/cbt'),
 };
 
@@ -125,7 +126,7 @@ export default function CbtPage() {
             <strong style={{ color: C.textDark, fontWeight: 600 }}>
               לזהות את &quot;מלכודות החשיבה&quot;
             </strong>{' '}
-            &ndash; אותן מחשבות אוטומטיות ושליליות שמזינות את הקושי (כמו &quot;אף אחד לא ירצה להיות חבר שלי&quot;).
+            - אותן מחשבות אוטומטיות ושליליות שמזינות את הקושי (כמו &quot;אף אחד לא ירצה להיות חבר שלי&quot;).
           </p>
 
           <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
@@ -169,9 +170,9 @@ export default function CbtPage() {
               >
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: C.rose }} />
               </div>
-              <h3 className="font-display text-base font-semibold mb-1.5" style={{ color: C.textDark }}>
+              <h2 className="font-display text-base font-semibold mb-1.5" style={{ color: C.textDark }}>
                 {card.title}
-              </h3>
+              </h2>
               <p className="text-sm font-light leading-[1.8]" style={{ color: C.textLight }}>
                 {card.body}
               </p>
@@ -211,6 +212,8 @@ export default function CbtPage() {
             </Link>
           </div>
         </div>
+
+        <InfoDisclaimer />
       </main>
 
 {/* Site footer is rendered by the root layout */}

@@ -4,11 +4,15 @@ import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
-import { SITE_URL, OWNER_NAME } from '../../lib/site';
+import InfoDisclaimer from '../../components/InfoDisclaimer';
+import { SITE_URL, OWNER_NAME, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/avchun-didakti`;
 
 const AREAS = ['נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים'];
+
+/** Regional councils - typed as AdministrativeArea in schema, not City. */
+const REGIONAL_COUNCILS = ['שדות נגב', 'מרחבים'];
 
 const FAQ = [
   {
@@ -42,9 +46,9 @@ const FAQ = [
 ];
 
 export const metadata: Metadata = {
-  title: 'אבחון דידקטי בנתיבות ובדרום | אבחון תפקודי-לימודי - כנפיים לעוף',
+  title: 'אבחון דידקטי בנתיבות ובדרום | תפקודי-לימודי - כנפיים לעוף',
   description:
-    'אבחון דידקטי ותפקודי-לימודי בנתיבות ובכל אזור הדרום. בחינת קריאה, כתיבה, הבנת הנקרא, חשבון, זיכרון וקשב, דוח מפורט והמלצות להתאמות. מאבחנת מנוסה, ליווי מלא גם אחרי האבחון.',
+    'אבחון דידקטי ותפקודי-לימודי בנתיבות ובכל אזור הדרום. בחינת קריאה, כתיבה, הבנת הנקרא, חשבון, זיכרון וקשב, דוח מפורט והמלצות להתאמות. ליווי מלא גם אחרי האבחון.',
   keywords: [
     'אבחון דידקטי',
     'אבחון דידקטי נתיבות',
@@ -61,6 +65,7 @@ export const metadata: Metadata = {
       'אבחון תפקודי-לימודי מקיף לילדים ולנוער - קריאה, כתיבה, קשב וזיכרון. דוח מפורט, המלצות להתאמות וליווי אחרי האבחון.',
     url: PAGE_URL,
     type: 'article',
+    images: [OG_IMAGE],
   },
 };
 
@@ -74,12 +79,15 @@ const serviceSchema = {
   url: PAGE_URL,
   provider: {
     '@type': 'Person',
+    '@id': SCHEMA_IDS.person,
     name: OWNER_NAME,
     jobTitle: 'מאבחנת דידקטית ומורה להוראה מתקנת',
-    url: SITE_URL,
   },
   areaServed: [
-    ...AREAS.map((name) => ({ '@type': 'City', name })),
+    ...AREAS.map((name) => ({
+      '@type': REGIONAL_COUNCILS.includes(name) ? 'AdministrativeArea' : 'City',
+      name,
+    })),
     { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
   ],
 };
@@ -308,6 +316,8 @@ export default function DidacticAssessmentPage() {
             </Link>
           </div>
         </div>
+
+        <InfoDisclaimer />
       </main>
     </div>
   );

@@ -197,74 +197,6 @@ function CtaButton({
 // STRUCTURED DATA
 // ======================
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'MedicalBusiness',
-  '@id': 'https://cnafim-lauf.co.il/#organization',
-  name: 'כנפיים לעוף - מרכז טיפולי-לימודי',
-  description:
-    'מרכז רגשי-לימודי בנתיבות - הוראה מתקנת, טיפול רגשי ואבחונים לימודיים לילדים, נערות ונשים. שירות בכל אזור הדרום וגם בזום.',
-  url: 'https://cnafim-lauf.co.il',
-  telephone: '+972-50-296-1213',
-  email: 'gehulaa@gmail.com',
-  image: 'https://cnafim-lauf.co.il/og-image.jpg',
-  logo: 'https://cnafim-lauf.co.il/logo.jpg',
-  priceRange: '₪₪',
-  sameAs: [
-    'https://www.facebook.com/profile.php?id=61585099706314',
-    'https://www.instagram.com/gehula_alon',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'נתיבות',
-    addressRegion: 'דרום',
-    addressCountry: 'IL',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 31.4231,
-    longitude: 34.5889,
-  },
-  areaServed: [
-    { '@type': 'City', name: 'נתיבות' },
-    { '@type': 'City', name: 'אופקים' },
-    { '@type': 'City', name: 'שדרות' },
-    { '@type': 'City', name: 'אשקלון' },
-    { '@type': 'City', name: 'באר שבע' },
-    { '@type': 'City', name: 'קריית גת' },
-    { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
-  ],
-  availableLanguage: { '@type': 'Language', name: 'Hebrew' },
-  openingHours: ['Su-Th 09:00-18:00'],
-  founder: {
-    '@type': 'Person',
-    name: 'גאולה אלון',
-  },
-};
-
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'גאולה אלון',
-  jobTitle: 'מטפלת רגשית ומאבחנת לימודית',
-  knowsAbout: [
-    'CBT טיפול קוגניטיבי-התנהגותי',
-    'NLP תכנות נוירו-לשוני',
-    'EMR עיבוד תנועות עיניים',
-    'הוראה מתקנת',
-  ],
-  worksFor: {
-    '@type': 'Organization',
-    name: 'כנפיים לעוף - מרכז טיפולי-לימודי',
-  },
-  telephone: '+972-50-296-1213',
-  email: 'gehulaa@gmail.com',
-  sameAs: [
-    'https://www.facebook.com/profile.php?id=61585099706314',
-    'https://www.instagram.com/gehula_alon',
-  ],
-};
-
 const homeFaqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -282,8 +214,6 @@ const homeFaqSchema = {
 export default function Home() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }} />
 
       {/* Client scroll-reveal side-effect */}
@@ -908,7 +838,7 @@ export default function Home() {
                 <div className="h-px" style={{ backgroundColor: C.border }} />
                 <div className="flex flex-col text-center gap-1.5">
                   <span className="text-sm font-semibold tracking-[0.14em]" style={{ color: C.rose }}>מיקום</span>
-                  <span className="font-light" style={{ color: C.textDark }}>ישראל</span>
+                  <span className="font-light" style={{ color: C.textDark }}>נתיבות, שירות בכל אזור הדרום</span>
                   <span className="text-sm font-medium leading-relaxed mt-1" style={{ color: C.textHeading }}>
                     קיימת אפשרות לטיפולים מרחוק באמצעות פגישות Zoom.
                   </span>

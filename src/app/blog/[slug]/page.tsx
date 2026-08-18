@@ -12,7 +12,8 @@ import {
   tagToSlug,
   type ContentBlock,
 } from '../../../lib/blog';
-import { OWNER_NAME } from '../../../lib/site';
+import { OG_IMAGE, OWNER_NAME, SCHEMA_IDS } from '../../../lib/site';
+import InfoDisclaimer from '../../../components/InfoDisclaimer';
 
 // ── Inline parser: **text** → <strong>, [text](url) → <a> ───────────────────
 function renderText(text: string): React.ReactNode {
@@ -157,7 +158,9 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return { title: 'כנפיים לעוף' };
   return {
-    title: `${post.title} | כנפיים לעוף`,
+    // Brand suffix costs 14ch; long titles keep their full keyword text instead
+    // of truncating in the SERP.
+    title: post.title.length <= 46 ? `${post.title} | כנפיים לעוף` : post.title,
     description: post.description,
     alternates: { canonical: canonicalUrl(post.slug) },
     openGraph: {
@@ -168,6 +171,7 @@ export async function generateMetadata({
       publishedTime: post.date,
       modifiedTime: post.lastModified ?? post.date,
       authors: ['גאולה אלון'],
+      images: [OG_IMAGE],
     },
   };
 }
@@ -206,15 +210,17 @@ export default async function BlogPostPage({
     headline: post.title,
     description: post.description,
     keywords: post.tags.join(', '),
+    image: [OG_IMAGE],
     author: {
       '@type': 'Person',
+      '@id': SCHEMA_IDS.person,
       name: 'גאולה אלון',
-      url: 'https://cnafim-lauf.co.il',
     },
     publisher: {
       '@type': 'Organization',
+      '@id': SCHEMA_IDS.organization,
       name: 'כנפיים לעוף - מרכז טיפולי-לימודי',
-      url: 'https://cnafim-lauf.co.il',
+      logo: { '@type': 'ImageObject', url: 'https://cnafim-lauf.co.il/logo.jpg' },
     },
     datePublished: post.date,
     dateModified: post.lastModified ?? post.date,
@@ -379,6 +385,42 @@ export default async function BlogPostPage({
           </section>
         )}
 
+        {/* Sources - authoritative references under articles with clinical claims */}
+        {post.sources && post.sources.length > 0 && (
+          <section className="mt-12 pt-8 border-t text-right" style={{ borderColor: C.border }}>
+            <h2
+              className="font-display text-xl font-medium mb-5"
+              style={{ color: C.textDark, letterSpacing: '-0.02em' }}
+            >
+              מקורות
+            </h2>
+            <div
+              className="rounded-xl p-5 border"
+              style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
+            >
+              <ul className="space-y-2.5">
+                {post.sources.map((source, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span
+                      className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: C.rose }}
+                    />
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="flex-1 text-sm font-light leading-[1.8] underline hover:opacity-80 transition-opacity"
+                      style={{ color: C.textMid, textUnderlineOffset: '3px' }}
+                    >
+                      {source.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
         {/* Share - WhatsApp is the main sharing channel in Israel */}
         <section className="mt-12 pt-8 border-t" style={{ borderColor: C.border }}>
           <div className="flex items-center gap-3 justify-end flex-wrap">
@@ -515,6 +557,9 @@ export default async function BlogPostPage({
             </Link>
           </div>
         </div>
+
+        {/* YMYL disclaimer - informational content, not a substitute for care */}
+        <InfoDisclaimer />
       </main>
 
 {/* Site footer is rendered by the root layout */}

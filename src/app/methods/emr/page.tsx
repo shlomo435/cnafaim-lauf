@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
 import { canonicalMeta } from '../../../lib/site';
+import InfoDisclaimer from '../../../components/InfoDisclaimer';
 
 export const metadata: Metadata = {
   title: 'EMR - עיבוד תנועות עיניים | כנפיים לעוף',
@@ -139,7 +140,7 @@ export default function EmrPage() {
 
           <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
             <strong style={{ color: C.textDark, fontWeight: 600 }}>מטפל EMR מיומן</strong> יודע להוביל את המטופל
-            גם לשחרור של מנגנוני הגנה ודפוסי התנהגות שכבר אינם מועילים לו &ndash; דפוסים שנבנו בעבר מתוך
+            גם לשחרור של מנגנוני הגנה ודפוסי התנהגות שכבר אינם מועילים לו - דפוסים שנבנו בעבר מתוך
             צורך, חוסר אונים או הישרדות.
           </p>
 
@@ -171,7 +172,13 @@ export default function EmrPage() {
           </p>
 
           <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
-            כך נוצר שינוי עמוק &ndash; לא דרך מאבק בהתנהגות, אלא דרך ריפוי המקום שממנו היא נולדה.
+            כך נוצר שינוי עמוק - לא דרך מאבק בהתנהגות, אלא דרך ריפוי המקום שממנו היא נולדה.
+          </p>
+
+          <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
+            חשוב לנו לדייק: EMR היא שיטה קרובה ל-EMDR, אך אינה זהה לה. בסיס המחקר הרחב והמלצות
+            ההנחיות הקליניות מתייחסים ל-EMDR באופן ספציפי, והעקרונות המשותפים לשתי הגישות הם עיבוד
+            רגשי בעזרת תנועות עיניים.
           </p>
         </div>
 
@@ -193,9 +200,9 @@ export default function EmrPage() {
               >
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: C.rose }} />
               </div>
-              <h3 className="font-display text-base font-semibold mb-1.5" style={{ color: C.textDark }}>
+              <h2 className="font-display text-base font-semibold mb-1.5" style={{ color: C.textDark }}>
                 {card.title}
-              </h3>
+              </h2>
               <p className="text-sm font-light leading-[1.8]" style={{ color: C.textLight }}>
                 {card.body}
               </p>
@@ -234,6 +241,8 @@ export default function EmrPage() {
             </Link>
           </div>
         </div>
+
+        <InfoDisclaimer />
       </main>
 
 {/* Site footer is rendered by the root layout */}

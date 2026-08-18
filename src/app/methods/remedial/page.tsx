@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedLinks from '../../../components/RelatedLinks';
+import { OG_IMAGE } from '../../../lib/site';
 
 const BASE = 'https://cnafim-lauf.co.il';
 const PAGE_URL = `${BASE}/methods/remedial`;
@@ -63,6 +64,7 @@ export const metadata: Metadata = {
       'הוראה מתקנת לילדים עם קשיי קריאה, כתיבה וקשב - בנתיבות, בכל הדרום וגם בזום. אבחון ותוכנית אישית.',
     url: PAGE_URL,
     type: 'article',
+    images: [OG_IMAGE],
   },
 };
 

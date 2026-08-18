@@ -22,6 +22,7 @@ const NAV = [
   ['הדרכת הורים',    '/hadrachat-horim'],
   ['הרצאות והדרכות', '/hartzaot'],
   ['קלפי ניצוץ',     '/klafim'],
+  ['טיפול בזום',     '/tipul-regashi-bezoom'],
   ['בלוג',           '/blog'],
   ['יצירת קשר',      '/#contact'],
 ] as const;

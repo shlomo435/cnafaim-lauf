@@ -5,6 +5,7 @@ import AccessibilityMenu from '../components/AccessibilityMenu';
 import FloatingContact from '../components/FloatingContact';
 import BuiltByPropel from '../components/BuiltByPropel';
 import SiteFooter from '../components/SiteFooter';
+import SchemaGraph from '../components/SchemaGraph';
 
 const heebo = Heebo({
   subsets: ['hebrew'],
@@ -22,10 +23,10 @@ const rubik = Rubik({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://cnafim-lauf.co.il'),
-  title: 'מטפלת רגשית והוראה מתקנת בנתיבות והדרום | כנפיים לעוף - גאולה אלון',
+  title: 'מטפלת רגשית והוראה מתקנת בנתיבות והדרום | כנפיים לעוף',
   description: 'מטפלת רגשית והוראה מתקנת בנתיבות ובכל אזור הדרום, וגם בזום. גאולה אלון - טיפול רגשי, אבחונים לימודיים והוראה מתקנת לילדים, נערות ונשים. מעל 20 שנות ניסיון.',
   openGraph: {
-    title: 'מטפלת רגשית והוראה מתקנת בנתיבות והדרום | כנפיים לעוף - גאולה אלון',
+    title: 'מטפלת רגשית והוראה מתקנת בנתיבות והדרום | כנפיים לעוף',
     description: 'מטפלת רגשית והוראה מתקנת בנתיבות ובכל הדרום, וגם בזום. טיפול רגשי ואבחונים לימודיים לילדים, נערות ונשים.',
     url: 'https://cnafim-lauf.co.il',
     siteName: 'כנפיים לעוף',
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'מטפלת רגשית והוראה מתקנת בנתיבות והדרום | כנפיים לעוף - גאולה אלון',
+    title: 'מטפלת רגשית והוראה מתקנת בנתיבות והדרום | כנפיים לעוף',
     description: 'מטפלת רגשית והוראה מתקנת בנתיבות ובכל הדרום, וגם בזום. טיפול רגשי ואבחונים לימודיים לילדים, נערות ונשים.',
     images: ['https://cnafim-lauf.co.il/og-image.jpg'],
   },
@@ -66,6 +67,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body className="antialiased">
+        <SchemaGraph />
         <noscript>
           <style>{'.sr { opacity: 1 !important; transform: none !important; }'}</style>
         </noscript>

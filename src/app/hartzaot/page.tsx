@@ -4,11 +4,14 @@ import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
-import { SITE_URL, OWNER_NAME } from '../../lib/site';
+import { SITE_URL, OWNER_NAME, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/hartzaot`;
 
 const AREAS = ['נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים'];
+
+/** Regional councils - typed as AdministrativeArea in schema, not City. */
+const REGIONAL_COUNCILS = ['שדות נגב', 'מרחבים'];
 
 const TOPICS = [
   { t: 'חיזוק ביטחון עצמי אצל ילדים', d: 'איך נבנה דימוי עצמי, מה שוחק אותו, ומה הורים וצוותים יכולים לעשות אחרת.' },
@@ -43,9 +46,9 @@ const FAQ = [
 ];
 
 export const metadata: Metadata = {
-  title: 'הרצאות והדרכות להורים ולצוותי חינוך | נתיבות והדרום - גאולה אלון',
+  title: 'הרצאות להורים ולצוותי חינוך | נתיבות והדרום - גאולה אלון',
   description:
-    'הרצאות והדרכות מקצועיות וחווייתיות להורים, צוותי חינוך, בתי ספר, גנים וקהילות. ויסות רגשי, ביטחון עצמי, גבולות, מיומנויות חברתיות וקשיי למידה. בנתיבות, בכל הדרום ובזום.',
+    'הרצאות מקצועיות וחווייתיות להורים ולצוותי חינוך: ויסות רגשי, ביטחון עצמי, גבולות, מיומנויות חברתיות וקשיי למידה. בנתיבות, בכל הדרום וגם בזום - גאולה אלון.',
   keywords: [
     'הרצאות להורים',
     'הרצאות לצוותי חינוך',
@@ -60,6 +63,7 @@ export const metadata: Metadata = {
     description: 'הרצאות מקצועיות וחווייתיות בנושאים רגשיים, חינוכיים ולימודיים - בנתיבות, בכל הדרום ובזום.',
     url: PAGE_URL,
     type: 'article',
+    images: [OG_IMAGE],
   },
 };
 
@@ -71,9 +75,17 @@ const serviceSchema = {
   description:
     'הרצאות והדרכות להורים, צוותי חינוך, בתי ספר, גנים וקהילות בנושאים רגשיים, חינוכיים ולימודיים. פנים אל פנים בדרום או בזום.',
   url: PAGE_URL,
-  provider: { '@type': 'Person', name: OWNER_NAME, jobTitle: 'מטפלת רגשית ומרצה', url: SITE_URL },
+  provider: {
+    '@type': 'Person',
+    '@id': SCHEMA_IDS.person,
+    name: OWNER_NAME,
+    jobTitle: 'מטפלת רגשית ומרצה',
+  },
   areaServed: [
-    ...AREAS.map((name) => ({ '@type': 'City', name })),
+    ...AREAS.map((name) => ({
+      '@type': REGIONAL_COUNCILS.includes(name) ? 'AdministrativeArea' : 'City',
+      name,
+    })),
     { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
   ],
   audience: [

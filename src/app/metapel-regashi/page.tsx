@@ -3,6 +3,8 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import InfoDisclaimer from '../../components/InfoDisclaimer';
+import { OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
 
 const BASE = 'https://cnafim-lauf.co.il';
 const PAGE_URL = `${BASE}/metapel-regashi`;
@@ -10,6 +12,9 @@ const PAGE_URL = `${BASE}/metapel-regashi`;
 const AREAS = [
   'נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים',
 ];
+
+/** Regional councils - typed as AdministrativeArea in schema, not City. */
+const REGIONAL_COUNCILS = ['שדות נגב', 'מרחבים'];
 
 const METHODS = [
   {
@@ -81,6 +86,7 @@ export const metadata: Metadata = {
       'טיפול רגשי לילדים, נערות ונשים - בנתיבות, בכל הדרום וגם בזום. גישה חמה ומותאמת אישית.',
     url: PAGE_URL,
     type: 'article',
+    images: [OG_IMAGE],
   },
 };
 
@@ -94,12 +100,15 @@ const serviceSchema = {
   url: PAGE_URL,
   provider: {
     '@type': 'Person',
+    '@id': SCHEMA_IDS.person,
     name: 'גאולה אלון',
     jobTitle: 'מטפלת רגשית ומאבחנת לימודית',
-    url: BASE,
   },
   areaServed: [
-    ...AREAS.map((name) => ({ '@type': 'City', name })),
+    ...AREAS.map((name) => ({
+      '@type': REGIONAL_COUNCILS.includes(name) ? 'AdministrativeArea' : 'City',
+      name,
+    })),
     { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
   ],
   availableChannel: [
@@ -453,6 +462,8 @@ export default function EmotionalTherapistPage() {
             </Link>
           </div>
         </div>
+
+        <InfoDisclaimer />
       </main>
     </div>
   );

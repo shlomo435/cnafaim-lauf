@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
 import { canonicalMeta } from '../../../lib/site';
+import InfoDisclaimer from '../../../components/InfoDisclaimer';
 
 export const metadata: Metadata = {
   title: 'NLP - תכנות נוירו-לשוני | כנפיים לעוף',
@@ -134,7 +135,7 @@ export default function NlpPage() {
 
           <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
             NLP מתאים במיוחד לאנשים שרוצים לפתח ביטחון עצמי, לשחרר פחדים, לשפר ביצועים (בלימודים, בעבודה,
-            בספורט), ולשנות דפוסים רגשיים שמעכבים אותם &ndash; והכל מתוך עבודה על השורש, לא על הסימפטום.
+            בספורט), ולשנות דפוסים רגשיים שמעכבים אותם - והכל מתוך עבודה על השורש, לא על הסימפטום.
           </p>
         </div>
 
@@ -156,9 +157,9 @@ export default function NlpPage() {
               >
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: C.rose }} />
               </div>
-              <h3 className="font-display text-base font-semibold mb-1.5" style={{ color: C.textDark }}>
+              <h2 className="font-display text-base font-semibold mb-1.5" style={{ color: C.textDark }}>
                 {card.title}
-              </h3>
+              </h2>
               <p className="text-sm font-light leading-[1.8]" style={{ color: C.textLight }}>
                 {card.body}
               </p>
@@ -197,6 +198,8 @@ export default function NlpPage() {
             </Link>
           </div>
         </div>
+
+        <InfoDisclaimer />
       </main>
 
 {/* Site footer is rendered by the root layout */}

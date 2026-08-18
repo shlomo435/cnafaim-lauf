@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../../lib/tokens';
-import { absoluteUrl } from '../../lib/site';
+import { absoluteUrl, OG_IMAGE } from '../../lib/site';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import { getPostsSorted, getAllTags, tagToSlug, formatDate, type Post } from '../../lib/blog';
 
@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     description: 'מדריכים מקצועיים של גאולה אלון על ויסות רגשי, חרדה בילדים, הוראה מתקנת ועוד.',
     url: absoluteUrl('/blog'),
     type: 'website',
+    images: [OG_IMAGE],
   },
 };
 
