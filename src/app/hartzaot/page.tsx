@@ -167,10 +167,6 @@ export default function LecturesPage() {
           ))}
         </div>
 
-        <div className="relative w-full max-w-[300px] mx-auto mt-10 aspect-[461/1024] rounded-2xl overflow-hidden" style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-          <Image src="/conference_audience.jpg" alt="גאולה אלון בהרצאה להורים וצוותי חינוך" fill className="object-cover" sizes="300px" />
-        </div>
-
         <H2>נושאי ההרצאות</H2>
         <div className="mt-5 grid sm:grid-cols-2 gap-4">
           {TOPICS.map((t) => (

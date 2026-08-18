@@ -637,38 +637,10 @@ export default function Home() {
       <section id="lectures" className="py-7 md:py-12 lg:py-14" style={{ backgroundColor: C.cream }}>
         <div className="max-w-6xl mx-auto px-4 md:px-6">
 
-          {/* Section heading - mobile only (desktop heading is inside text column) */}
-          <div className="text-center mb-6 md:hidden sr">
-            <SectionLabel text="הרצאות והדרכות" />
-            <h2
-              className="font-display text-3xl font-medium leading-snug"
-              style={{ color: C.textHeading, letterSpacing: '-0.02em' }}
-            >
-              הרצאות והדרכות להורים, צוותי חינוך וקהילה
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-center">
-
-            {/* Image column - natural 461x1024 story-format ratio, capped width, centered - full photo visible */}
-            <div className="relative flex justify-center order-2 md:order-1 sr sr-d1">
-              <div
-                className="relative w-full max-w-[300px] aspect-[461/1024] rounded-2xl overflow-hidden"
-                style={{ border: `1px solid ${C.borderLight}`, boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}
-              >
-                <Image
-                  src="/conference_audience.jpg"
-                  alt="גאולה אלון בהרצאה להורים וצוותי חינוך, מרכז כנפיים לעוף"
-                  fill
-                  className="object-cover"
-                  sizes="300px"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-
-            {/* Text column */}
-            <div className="text-center order-1 md:order-2 sr sr-d2">
+          {/* Single centered column (the section previously paired this text with a
+              photo; the image was removed, so the two-column grid went with it) */}
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center sr sr-d1">
               <SectionLabel text="הרצאות והדרכות" />
               <h2
                 className="font-display text-3xl md:text-4xl font-medium leading-snug"

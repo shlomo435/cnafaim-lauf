@@ -88,21 +88,6 @@ export default function NlpPage() {
           תכנות נוירו-לשוני
         </p>
 
-        {/* Hero image - natural 461x1024 story-format ratio, capped width and centered so the full photo is visible */}
-        <div
-          className="relative w-full max-w-[300px] mx-auto aspect-[461/1024] rounded-2xl overflow-hidden mb-10 border"
-          style={{ borderColor: C.border, boxShadow: '0 8px 30px rgba(57,73,171,0.07)' }}
-        >
-          <Image
-            src="/conference_audience.jpg"
-            alt="NLP - הרצאה וטיפול"
-            fill
-            className="object-cover"
-            sizes="300px"
-            priority
-          />
-        </div>
-
         {/* Article body */}
         <div className="space-y-6 text-right">
           <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
