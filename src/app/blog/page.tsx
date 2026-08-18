@@ -4,7 +4,30 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../../lib/tokens';
 import { absoluteUrl } from '../../lib/site';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import { getPostsSorted, getAllTags, tagToSlug, formatDate, type Post } from '../../lib/blog';
+
+// CollectionPage schema: declares what this page IS (the blog index) and lists
+// every article in it, mirroring what tag archives and posts already declare.
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'מדריכים וכתבות - כנפיים לעוף',
+  description:
+    'מדריכים מקצועיים של גאולה אלון על ויסות רגשי, חרדה בילדים, הוראה מתקנת, דימוי עצמי ועוד.',
+  url: absoluteUrl('/blog'),
+  inLanguage: 'he',
+  isPartOf: { '@type': 'WebSite', name: 'כנפיים לעוף', url: absoluteUrl('/') },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: getPostsSorted().map((post, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: post.title,
+      url: absoluteUrl(`/blog/${post.slug}`),
+    })),
+  },
+};
 
 export const metadata: Metadata = {
   title: 'מדריכים וכתבות | כנפיים לעוף',
@@ -79,6 +102,7 @@ function PostCard({ post }: { post: Post }) {
 export default function BlogArchivePage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
 
       {/* HEADER */}
       <header
@@ -109,6 +133,7 @@ export default function BlogArchivePage() {
 
       {/* MAIN */}
       <main className="max-w-5xl mx-auto px-6 py-10 md:py-14">
+        <Breadcrumbs items={[{ label: 'בית', href: '/' }, { label: 'בלוג' }]} />
 
         {/* Hero */}
         <div className="text-center mb-12 md:mb-16">
