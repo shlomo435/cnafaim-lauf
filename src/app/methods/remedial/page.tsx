@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
+import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedLinks from '../../../components/RelatedLinks';
 
 const BASE = 'https://cnafim-lauf.co.il';
@@ -63,16 +64,6 @@ export const metadata: Metadata = {
     url: PAGE_URL,
     type: 'article',
   },
-};
-
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: `${BASE}/` },
-    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: `${BASE}/#methods` },
-    { '@type': 'ListItem', position: 3, name: 'הוראה מתקנת', item: PAGE_URL },
-  ],
 };
 
 const serviceSchema = {
@@ -153,7 +144,6 @@ function Strong({ children }: { children: React.ReactNode }) {
 export default function RemedialPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.creamAlt, color: C.textDark }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
@@ -236,6 +226,8 @@ export default function RemedialPage() {
 
       {/* ④ CONTENT */}
       <main className="max-w-3xl mx-auto px-6 py-12 md:py-16">
+        <Breadcrumbs items={[{ label: 'בית', href: '/' }, { label: 'שיטות הטיפול', href: '/#methods' }, { label: 'הוראה מתקנת' }]} />
+
 
         {/* Accent rule */}
         <div

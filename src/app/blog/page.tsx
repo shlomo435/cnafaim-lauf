@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../../lib/tokens';
-import { COPYRIGHT_LINE, absoluteUrl } from '../../lib/site';
+import { absoluteUrl } from '../../lib/site';
 import { getPostsSorted, getAllTags, tagToSlug, formatDate, type Post } from '../../lib/blog';
 
 export const metadata: Metadata = {
@@ -176,27 +176,7 @@ export default function BlogArchivePage() {
         </div>
       </main>
 
-      {/* FOOTER */}
-      <footer
-        className="py-10 mt-10"
-        style={{ backgroundColor: C.plum, color: 'rgba(255,255,255,0.65)' }}
-      >
-        <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
-          <Link href="/" aria-label="כנפיים לעוף - דף הבית">
-            <Image
-              src="/logo.jpg"
-              alt="כנפיים לעוף"
-              width={144}
-              height={48}
-              className="h-12 w-auto object-contain"
-              style={{ maxWidth: 144, mixBlendMode: 'screen', opacity: 0.85 }}
-            />
-          </Link>
-          <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            {COPYRIGHT_LINE}
-          </div>
-        </div>
-      </footer>
+{/* Site footer is rendered by the root layout */}
     </div>
   );
 }

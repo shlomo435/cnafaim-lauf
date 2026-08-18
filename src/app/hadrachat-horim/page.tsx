@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
 import { SITE_URL, OWNER_NAME } from '../../lib/site';
 
@@ -58,15 +59,6 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: `${SITE_URL}/` },
-    { '@type': 'ListItem', position: 2, name: 'הדרכת הורים', item: PAGE_URL },
-  ],
-};
-
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -109,7 +101,6 @@ function Strong({ children }: { children: React.ReactNode }) {
 export default function ParentGuidancePage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.creamAlt, color: C.textDark }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
@@ -134,6 +125,8 @@ export default function ParentGuidancePage() {
       </section>
 
       <main className="max-w-3xl mx-auto px-6 py-10 md:py-14">
+        <Breadcrumbs items={[{ label: 'בית', href: '/' }, { label: 'הדרכת הורים' }]} />
+
         <div className="w-16 h-0.5 mb-6 mr-auto" style={{ background: `linear-gradient(to left, ${C.rose}55, ${C.rose})` }} />
 
         <h1 className="font-display text-4xl md:text-5xl font-medium text-right mb-6 leading-tight" style={{ color: C.textDark, letterSpacing: '-0.02em' }}>

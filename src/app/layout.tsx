@@ -4,6 +4,7 @@ import './globals.css';
 import AccessibilityMenu from '../components/AccessibilityMenu';
 import FloatingContact from '../components/FloatingContact';
 import BuiltByPropel from '../components/BuiltByPropel';
+import SiteFooter from '../components/SiteFooter';
 
 const heebo = Heebo({
   subsets: ['hebrew'],
@@ -72,6 +73,7 @@ export default function RootLayout({
         <div id="main-content" tabIndex={-1}>
           {children}
         </div>
+        <SiteFooter />
         <BuiltByPropel />
         <FloatingContact />
         <AccessibilityMenu />

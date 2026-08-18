@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 const BASE = 'https://cnafim-lauf.co.il';
 const PAGE_URL = `${BASE}/metapel-regashi`;
@@ -83,15 +84,6 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: `${BASE}/` },
-    { '@type': 'ListItem', position: 2, name: 'מטפלת רגשית', item: PAGE_URL },
-  ],
-};
-
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -170,7 +162,6 @@ function Strong({ children }: { children: React.ReactNode }) {
 export default function EmotionalTherapistPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.creamAlt, color: C.textDark }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
@@ -253,6 +244,8 @@ export default function EmotionalTherapistPage() {
 
       {/* ④ CONTENT */}
       <main className="max-w-3xl mx-auto px-6 py-12 md:py-16">
+        <Breadcrumbs items={[{ label: 'בית', href: '/' }, { label: 'מטפלת רגשית' }]} />
+
 
         {/* Accent rule */}
         <div

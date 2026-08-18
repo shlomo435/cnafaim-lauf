@@ -236,24 +236,7 @@ export default function EmrPage() {
         </div>
       </main>
 
-      {/* FOOTER */}
-      <footer className="py-10" style={{ backgroundColor: C.plum, color: 'rgba(255,255,255,0.65)' }}>
-        <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-5 text-center md:text-right">
-          <Link href="/" className="flex items-center gap-3" aria-label="כנפיים לעוף - דף הבית">
-            <Image
-              src="/logo.jpg"
-              alt="כנפיים לעוף"
-              width={144}
-              height={48}
-              className="h-12 w-auto object-contain"
-              style={{ maxWidth: 144, mixBlendMode: 'screen', opacity: 0.85 }}
-            />
-          </Link>
-          <div className="text-sm font-light" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            כל הזכויות שמורות &copy; 2025 {/* Update annually */}
-          </div>
-        </div>
-      </footer>
+{/* Site footer is rendered by the root layout */}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import { SITE_NAME, OWNER_NAME, PHONE_DISPLAY, PHONE_TEL, EMAIL, canonicalMeta } from '../../lib/site';
 
 export const metadata: Metadata = {
@@ -47,6 +48,8 @@ export default function PrivacyPage() {
       </section>
 
       <main className="max-w-3xl mx-auto px-6 py-8 md:py-12">
+        <Breadcrumbs items={[{ label: 'בית', href: '/' }, { label: 'מדיניות פרטיות' }]} />
+
         <div className="w-16 h-0.5 mb-6 mr-auto" style={{ background: `linear-gradient(to left, ${C.rose}55, ${C.rose})` }} />
 
         <h1 className="font-display text-4xl md:text-5xl font-medium text-right mb-6 leading-tight" style={{ color: C.textDark, letterSpacing: '-0.02em' }}>
