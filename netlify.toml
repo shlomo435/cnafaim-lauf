@@ -6,6 +6,35 @@
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
   NEXT_SKIP_MIDDLEWARE_COMPILATION = "1"
 
+# ── Domain canonicalisation ────────────────────────────────────────────────────
+# One canonical origin: https://cnafim-lauf.co.il (apex, https). These make the
+# platform defaults explicit and repo-tracked. force = true so they fire even
+# though the requested file exists.
+#
+# Trailing-slash note: /blog/ -> /blog is deliberately NOT expressed here.
+# Netlify normalises paths BEFORE matching redirect rules, so a from = "/*/"
+# rule degrades to "/*" and would redirect the whole site into a loop. That
+# normalisation is done safely by Netlify's router itself, driven by the site
+# emitting flat files (trailingSlash: false in next.config.ts).
+
+[[redirects]]
+  from = "http://cnafim-lauf.co.il/*"
+  to = "https://cnafim-lauf.co.il/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.cnafim-lauf.co.il/*"
+  to = "https://cnafim-lauf.co.il/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.cnafim-lauf.co.il/*"
+  to = "https://cnafim-lauf.co.il/:splat"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

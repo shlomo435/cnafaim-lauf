@@ -2,6 +2,11 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   output: 'export',
+  // Canonical URL form is WITHOUT a trailing slash: Next emits blog.html (not
+  // blog/index.html) and Netlify's router then 301s /blog/ -> /blog. This is the
+  // source of the trailing-slash redirect Search Console sees - declared here
+  // explicitly so it survives upgrades and nobody flips it by accident.
+  trailingSlash: false,
   devIndicators: false,
   images: {
     loader: 'custom',
