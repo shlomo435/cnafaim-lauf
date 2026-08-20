@@ -24,9 +24,12 @@ import ContactFormClient from '../components/ContactFormClient';
 // DATA
 // ======================
 
-const services = [
+// href turns a card into a contextual in-body link to its service page - the
+// six cards were dead ends while the pages they describe starved for links.
+const services: { title: string; description: string; href?: string }[] = [
   {
     title: 'ויסות רגשי וחרדות',
+    href: '/metapel-regashi',
     description:
       'כלים פרקטיים לזיהוי, הבנה וניהול רגשות ומצבי חרדה בחיי היומיום, בגיל הילדות ובבגרות.',
   },
@@ -37,6 +40,7 @@ const services = [
   },
   {
     title: 'התמודדות עם משבר, שינוי וטראומה',
+    href: '/methods/emr',
     description:
       'ליווי מקצועי ומיומן במצבי מעבר, אובדן, שינוי ואירועים טראומטיים, בגישה עדינה ומכילה.',
   },
@@ -47,11 +51,13 @@ const services = [
   },
   {
     title: 'קשיי למידה, קריאה, כתיבה וקשב',
+    href: '/avchun-didakti',
     description:
       'אבחון והתאמת כלים פדגוגיים לסגנון הלמידה הייחודי של כל ילד ונערה, תוך חיזוק הביטחון העצמי.',
   },
   {
     title: 'הוראה מתקנת',
+    href: '/methods/remedial',
     description:
       'עבודה ממוקדת ומותאמת אישית לחיזוק הקריאה, הכתיבה, הבנת הנקרא והביטחון הלימודי - בשילוב תנועה, תרגילי מוח וכלים מעשיים שמקדמים הצלחה.',
   },
@@ -529,31 +535,42 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {services.map((service, i) => (
-              <div
-                key={service.title}
-                className={`sr ${srDelay(i)} group relative rounded-xl p-6 md:p-8 text-center border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1`}
-                style={{ backgroundColor: C.cream }}
-              >
-                {service.title === 'הוראה מתקנת' ? (
-                  <div className="mb-5 flex justify-center">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
-                      <path d="M2 17l10 5 10-5" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
-                      <path d="M2 12l10 5 10-5" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                ) : (
-                  <div className="w-8 h-px mb-5 transition-all duration-300 group-hover:w-14" style={{ backgroundColor: C.rose, opacity: 0.5 }} />
-                )}
-                <h3 className="font-display text-xl font-medium mb-2.5" style={{ color: C.textHeading, letterSpacing: '-0.02em' }}>
-                  {service.title}
-                </h3>
-                <p className="text-sm leading-[1.8] font-light" style={{ color: C.textMid }}>
-                  {service.description}
-                </p>
-              </div>
-            ))}
+            {services.map((service, i) => {
+              const cardClass = `sr ${srDelay(i)} group relative rounded-xl p-6 md:p-8 text-center border border-[#F8BBD9] transition-all duration-300 hover:border-[#3949AB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1`;
+              const inner = (
+                <>
+                  {service.title === 'הוראה מתקנת' ? (
+                    <div className="mb-5 flex justify-center">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
+                        <path d="M2 17l10 5 10-5" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
+                        <path d="M2 12l10 5 10-5" stroke="#D81B8C" strokeWidth="1.6" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  ) : (
+                    <div className="w-8 h-px mb-5 transition-all duration-300 group-hover:w-14" style={{ backgroundColor: C.rose, opacity: 0.5 }} />
+                  )}
+                  <h3 className="font-display text-xl font-medium mb-2.5" style={{ color: C.textHeading, letterSpacing: '-0.02em' }}>
+                    {service.title}
+                  </h3>
+                  <p className="text-sm leading-[1.8] font-light" style={{ color: C.textMid }}>
+                    {service.description}
+                  </p>
+                  {service.href && (
+                    <p className="mt-3 text-sm font-medium" style={{ color: C.rose }}>לפרטים ←</p>
+                  )}
+                </>
+              );
+              return service.href ? (
+                <Link key={service.title} href={service.href} className={cardClass} style={{ backgroundColor: C.cream }}>
+                  {inner}
+                </Link>
+              ) : (
+                <div key={service.title} className={cardClass} style={{ backgroundColor: C.cream }}>
+                  {inner}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

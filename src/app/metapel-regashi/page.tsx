@@ -400,7 +400,7 @@ export default function EmotionalTherapistPage() {
             {' '}{AREAS.slice(1).join(', ')} והיישובים שסביב.
           </P>
           <P>
-            ולמי שנוח לו כך, או שגר רחוק יותר - קיימת אפשרות ל<Strong>טיפול רגשי מרחוק בזום</Strong>,
+            ולמי שנוח לו כך, או שגר רחוק יותר - קיימת אפשרות ל<Link href="/tipul-regashi-bezoom" className="font-medium underline hover:opacity-80" style={{ color: C.rose, textUnderlineOffset: '3px' }}>טיפול רגשי בזום</Link>,
             שיעיל מאוד גם לילדים וגם לנשים ומאפשר ליווי איכותי מכל מקום בארץ.
           </P>
         </div>
@@ -415,6 +415,11 @@ export default function EmotionalTherapistPage() {
           <P>
             אני מאמינה שהדרך לשינוי אמיתי עוברת דרך הבנה עמוקה ומכילה של הצרכים הייחודיים של כל אדם,
             ומתוך מרחב שמרגיש כמו בית. כל פנייה מטופלת בדיסקרטיות מלאה.
+          </P>
+          <P>
+            מעבר לטיפול הפרטני, אני מלווה משפחות גם ב<Link href="/hadrachat-horim" className="font-medium underline hover:opacity-80" style={{ color: C.rose, textUnderlineOffset: '3px' }}>הדרכת הורים</Link>,
+            מעבירה <Link href="/hartzaot" className="font-medium underline hover:opacity-80" style={{ color: C.rose, textUnderlineOffset: '3px' }}>הרצאות להורים ולצוותי חינוך</Link>,
+            ובמקרים של קושי לימודי עורכת <Link href="/avchun-didakti" className="font-medium underline hover:opacity-80" style={{ color: C.rose, textUnderlineOffset: '3px' }}>אבחון דידקטי</Link> שממנו נבנית תוכנית מדויקת.
           </P>
         </div>
 

@@ -216,7 +216,8 @@ export default function ParentGuidancePage() {
         <H2>הדרכת הורים בכל הדרום וגם בזום</H2>
         <P>
           הפגישות מתקיימות ב<Strong>נתיבות</Strong> ומשרתות משפחות מ{AREAS.slice(1).join(', ')} והסביבה.
-          הפורמט מתאים במיוחד ל<Strong>זום</Strong> - בלי צורך בסידור לילדים, ומכל מקום בארץ.
+          הפורמט מתאים במיוחד ל<Link href="/tipul-regashi-bezoom" className="font-medium underline hover:opacity-80" style={{ color: C.rose, textUnderlineOffset: '3px' }}>מפגשים בזום</Link> - בלי צורך בסידור לילדים, ומכל מקום בארץ.
+          לקבוצות גדולות יותר, גאולה מעבירה גם <Link href="/hartzaot" className="font-medium underline hover:opacity-80" style={{ color: C.rose, textUnderlineOffset: '3px' }}>הרצאות להורים ולצוותי חינוך</Link>.
         </P>
 
         <H2>שאלות נפוצות</H2>

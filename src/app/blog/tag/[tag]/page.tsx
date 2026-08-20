@@ -29,7 +29,10 @@ export async function generateMetadata({
   return {
     title: `${tag} - מדריכים וכתבות | כנפיים לעוף`,
     description: `כל המדריכים והכתבות בנושא ${tag}, מאת גאולה אלון - מטפלת רגשית ומאבחנת לימודית.`,
-    ...canonicalMeta(`/blog/tag/${tagSlug}`),
+    // Built from the canonical (lowercased) slug - never from the raw param,
+    // which may be an uppercase/encoded variant that only reaches this page
+    // through a redirect.
+    ...canonicalMeta(`/blog/tag/${tagToSlug(tag)}`),
     // Tag archives exist for readers, not for search: most hold a single post,
     // so indexing them would add thin, near-duplicate pages. `follow` still lets
     // link equity reach the articles, and they stay out of the sitemap.

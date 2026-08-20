@@ -313,7 +313,7 @@ export default function RemedialPage() {
         >
           <p className="text-sm font-semibold mb-2" style={{ color: C.rose }}>כדאי לדעת</p>
           <p className="text-base font-light leading-[1.9]" style={{ color: C.textMid }}>
-            אם שלושה סימנים ומעלה חוזרים על פני כמה חודשים - שווה לפנות לאבחון תפקודי-לימודי.
+            אם שלושה סימנים ומעלה חוזרים על פני כמה חודשים - שווה לפנות ל<Link href="/avchun-didakti" className="font-medium underline hover:opacity-80" style={{ color: C.rose, textUnderlineOffset: '3px' }}>אבחון דידקטי ותפקודי-לימודי</Link>.
             ככל שמאבחנים מוקדם יותר, כך קל ומהיר יותר לטפל.
           </p>
         </div>

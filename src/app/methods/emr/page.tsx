@@ -3,7 +3,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
-import { canonicalMeta } from '../../../lib/site';
+import { canonicalMeta, SITE_URL } from '../../../lib/site';
 import InfoDisclaimer from '../../../components/InfoDisclaimer';
 
 export const metadata: Metadata = {
@@ -23,10 +23,28 @@ const breadcrumbSchema = {
   ],
 };
 
+// The demo clip below is server-rendered in the page, but without VideoObject
+// markup Google reported it as an unindexed video. Facts here are real: the
+// clip is 5 seconds long (parsed from the mp4 header) and was added to the
+// site on 2026-03-30 (git date of public/emr_video1.mp4).
+const videoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'הדגמת טיפול EMR - עיבוד רגשי בתנועות עיניים',
+  description:
+    'סרטון הדגמה קצר מתוך מפגש EMR: כך נראית העבודה עם תנועות עיניים בקליניקה של גאולה אלון.',
+  thumbnailUrl: `${SITE_URL}/emr_live.jpeg`,
+  uploadDate: '2026-03-30',
+  contentUrl: `${SITE_URL}/emr_video1.mp4`,
+  duration: 'PT5S',
+  inLanguage: 'he',
+};
+
 export default function EmrPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }} />
 
       {/* HEADER */}
       <header

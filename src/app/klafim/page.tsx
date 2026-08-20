@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
-import { SITE_URL, OWNER_NAME, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
+import { SITE_URL, OWNER_NAME, OG_IMAGE } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/klafim`;
 
@@ -46,19 +46,12 @@ export const metadata: Metadata = {
   },
 };
 
-const productSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: 'קלפי ניצוץ - קלפים טיפוליים לילדים',
-  description:
-    'קלפים טיפוליים שנוצרו כדי לתת לכל ילד מרחב בטוח לביטוי עצמי, ולשמש גשר תקשורת בין הורים לילדים.',
-  url: PAGE_URL,
-  image: `${SITE_URL}/therapy_cards_box.jpg`,
-  brand: { '@type': 'Brand', name: 'כנפיים לעוף' },
-  manufacturer: { '@id': SCHEMA_IDS.organization },
-  category: 'כלים טיפוליים',
-  audience: { '@type': 'Audience', audienceType: 'הורים, מטפלים ואנשי חינוך' },
-};
+// NOTE: a Product JSON-LD used to live here, but Google requires at least one of
+// offers / review / aggregateRating for a valid Product snippet. The cards are
+// price-on-request and inventing ratings or a price is out of the question, so
+// the schema was removed (invalid schema is worse than none). If a real price is
+// ever set, restore Product with an offers block (price, priceCurrency: 'ILS',
+// availability).
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -87,7 +80,6 @@ function Strong({ children }: { children: React.ReactNode }) {
 export default function CardsPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.creamAlt, color: C.textDark }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <Link
