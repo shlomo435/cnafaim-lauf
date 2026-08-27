@@ -19,6 +19,38 @@ export const SCHEMA_IDS = {
   website: `${SITE_URL}/#website`,
 } as const;
 
+/**
+ * Service area, single source of truth.
+ *
+ * These lists were duplicated verbatim across five page files and SchemaGraph,
+ * and had already drifted: /methods/remedial typed the two regional councils as
+ * `City`. Import from here instead.
+ */
+export const AREAS = [
+  'נתיבות',
+  'אופקים',
+  'שדרות',
+  'אשקלון',
+  'באר שבע',
+  'קריית גת',
+  'שדות נגב',
+  'מרחבים',
+] as const;
+
+/** Entries in AREAS that are councils, not cities - they need a different schema type. */
+export const REGIONAL_COUNCILS: readonly string[] = ['שדות נגב', 'מרחבים'];
+
+/** schema.org `areaServed` for a service offered across the region. */
+export function areaServed() {
+  return [
+    ...AREAS.map((name) => ({
+      '@type': REGIONAL_COUNCILS.includes(name) ? 'AdministrativeArea' : 'City',
+      name,
+    })),
+    { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
+  ];
+}
+
 export const PHONE_DISPLAY = '050-296-1213';
 export const PHONE_TEL = '0502961213';
 export const EMAIL = 'gehulaa@gmail.com';

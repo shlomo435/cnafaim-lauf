@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "check:seo": "node scripts/check-seo.mjs",
-    "prebuild": "node scripts/generate-sitemap.mjs"
+    "check:content": "node scripts/validate-content.mjs",
+    "check": "npm run check:content && npm run build && npm run check:seo",
+    "prebuild": "node scripts/generate-sitemap.mjs && node scripts/generate-llms.mjs"
   },
   "dependencies": {
     "next": "16.1.7",

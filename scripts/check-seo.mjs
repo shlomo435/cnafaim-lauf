@@ -12,6 +12,10 @@
  *   3. every built page has a canonical
  *   4. canonical === og:url on every page
  *   5. no canonical or og:url ends in "/" (except the root)
+ *   6. exactly one <h1> per page
+ *   7. every id="..." on a page is unique
+ *   8. every in-page href="#x" has a matching id="x"
+ *   9. every JSON-LD block parses
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -79,6 +83,32 @@ for (const file of files) {
     problems.push(`${route}: og:url !== canonical\n      canonical: ${canonical}\n      og:url   : ${ogUrl}`);
   }
   if (!ogUrl) problems.push(`${route}: no og:url (Next falls back to metadataBase, i.e. the homepage)`);
+
+  // --- Structure checks -------------------------------------------------
+  const h1s = html.match(/<h1[\s>]/g) ?? [];
+  if (h1s.length !== 1) problems.push(`${route}: ${h1s.length} <h1> elements (expected exactly 1)`);
+
+  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
+  const dupeIds = ids.filter((id, i) => ids.indexOf(id) !== i);
+  for (const id of new Set(dupeIds)) problems.push(`${route}: duplicate id="${id}"`);
+
+  // Anchors the page points at must exist on the page. React can emit an
+  // escaped fragment, so compare decoded.
+  const idSet = new Set(ids.map((id) => decodeURIComponent(id)));
+  const anchors = [...html.matchAll(/href="#([^"]+)"/g)].map((m) => decodeURIComponent(m[1]));
+  for (const a of new Set(anchors)) {
+    if (a && !idSet.has(a)) problems.push(`${route}: href="#${a}" has no matching id`);
+  }
+
+  // Structured data must be valid JSON, or Google silently discards it.
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
+  blocks.forEach((m, i) => {
+    try {
+      JSON.parse(m[1]);
+    } catch (err) {
+      problems.push(`${route}: JSON-LD block ${i + 1} does not parse (${err.message})`);
+    }
+  });
 }
 
 if (problems.length) {
@@ -90,3 +120,4 @@ if (problems.length) {
 
 console.log(`✓ SEO checks passed: ${files.length} pages, ${locs.length} sitemap URLs`);
 console.log('  canonical present and === og:url everywhere; no trailing-slash URLs.');
+console.log('  one h1 per page; ids unique; in-page anchors resolve; JSON-LD parses.');

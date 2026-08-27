@@ -3,24 +3,73 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
-import { canonicalMeta, SITE_URL } from '../../../lib/site';
+import { canonicalMeta, SITE_URL, SCHEMA_IDS, areaServed } from '../../../lib/site';
 import InfoDisclaimer from '../../../components/InfoDisclaimer';
+import Breadcrumbs from '../../../components/Breadcrumbs';
+
+const FAQ = [
+  {
+    q: 'מה זה טיפול EMR?',
+    a: 'EMR היא שיטת עיבוד רגשי שבה עובדים עם תנועות עיניים לצד תשאול מדויק, כדי להגיע לזיכרון או לחוויה שממשיכים להשפיע על ההווה ולעבד אותם. היא מתאימה במיוחד כשדיבור לבדו לא מצליח להזיז את הקושי.',
+  },
+  {
+    q: 'מה ההבדל בין EMR ל-EMDR?',
+    a: 'שתי הגישות מבוססות על עיבוד רגשי בעזרת תנועות עיניים, אך אינן זהות. בסיס המחקר הרחב וההנחיות הקליניות הבינלאומיות מתייחסים ל-EMDR באופן ספציפי. חשוב לנו לדייק בכך ולא להציג את השיטות כאותו דבר.',
+  },
+  {
+    q: 'האם EMR מתאים לילדים?',
+    a: 'כן, בהתאמה לגיל ולבשלות הרגשית, ותמיד בשיתוף ההורים. אצל ילדים העבודה קצרה יותר, משלבת משחק ודמיון, ונעשית במינון זהיר. ההחלטה אם השיטה מתאימה נעשית אחרי שיחת היכרות והיכרות עם הרקע.',
+  },
+  {
+    q: 'כמה מפגשים נדרשים?',
+    a: 'זה תלוי בסוג הקושי ובוותק שלו. לעיתים די בכמה מפגשים ממוקדים סביב אירוע אחד, ולעיתים נדרש תהליך ארוך יותר. בשיחת ההיכרות אפשר להעריך כיוון, ובמהלך העבודה בודקים יחד אם יש התקדמות.',
+  },
+  {
+    q: 'האם התהליך מציף או קשה רגשית?',
+    a: 'תוך כדי העבודה עשויות לעלות התנגדויות, רגשות עזים וזיכרונות נוספים. זה חלק מהתהליך, ותפקיד המטפל לזהות זאת בזמן אמת, לווסת ולשמור על קצב בטוח. לא נכנסים לחומר שהמטופל אינו מוכן אליו.',
+  },
+  {
+    q: 'האם אפשר לעבור טיפול EMR בזום?',
+    a: 'כן. חלק מהעבודה נעשית גם מרחוק, בהתאמה ובבדיקה שהתנאים בבית מאפשרים מרחב שקט ובטוח. בשיחת ההיכרות נבדוק יחד אם המסגרת הזאת מתאימה לך או לילד.',
+  },
+];
 
 export const metadata: Metadata = {
-  title: 'EMR - עיבוד תנועות עיניים | כנפיים לעוף',
+  title: 'טיפול EMR בנתיבות ובדרום - עיבוד בתנועות עיניים | כנפיים לעוף',
   description:
-    'טיפול EMR (עיבוד תנועות עיניים) לשחרור טראומה, חרדות ודפוסים רגשיים שאינם משרתים. גלו כיצד EMR יכול לשנות את חייכם.',
+    'טיפול EMR - עיבוד רגשי בתנועות עיניים - בנתיבות, בכל אזור הדרום וגם בזום. לטראומה, חרדות ודפוסים רגשיים שממשיכים להשפיע, גם כשדיבור לא מספיק.',
+  keywords: [
+    'EMR',
+    'טיפול EMR',
+    'עיבוד רגשי בתנועות עיניים',
+    'EMR נתיבות',
+    'EMR בדרום',
+    'ההבדל בין EMR ל-EMDR',
+    'טיפול בטראומה',
+  ],
   ...canonicalMeta('/methods/emr'),
 };
 
-const breadcrumbSchema = {
+const serviceSchema = {
   '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafim-lauf.co.il/' },
-    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafim-lauf.co.il/#methods' },
-    { '@type': 'ListItem', position: 3, name: 'EMR', item: 'https://cnafim-lauf.co.il/methods/emr' },
-  ],
+  '@type': 'Service',
+  serviceType: 'טיפול EMR - עיבוד רגשי בתנועות עיניים',
+  name: 'טיפול EMR - כנפיים לעוף',
+  description:
+    'עיבוד רגשי בעזרת תנועות עיניים לטיפול בטראומה, חרדות ודפוסים רגשיים מגבילים, לילדים, נערות ונשים. בנתיבות, בכל אזור הדרום וגם בזום.',
+  url: `${SITE_URL}/methods/emr`,
+  provider: { '@type': 'Person', '@id': SCHEMA_IDS.person },
+  areaServed: areaServed(),
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 };
 
 // The demo clip below is server-rendered in the page, but without VideoObject
@@ -43,7 +92,8 @@ const videoSchema = {
 export default function EmrPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }} />
 
       {/* HEADER */}
@@ -77,14 +127,13 @@ export default function EmrPage() {
       {/* MAIN */}
       <main className="max-w-3xl mx-auto px-6 py-10 md:py-14">
 
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs mb-10 justify-end" style={{ color: C.textLight }} aria-label="נתיב ניווט">
-          <Link href="/" className="hover:underline" style={{ color: C.rose }}>בית</Link>
-          <span>/</span>
-          <Link href="/#methods" className="hover:underline" style={{ color: C.rose }}>שיטות הטיפול</Link>
-          <span>/</span>
-          <span>EMR</span>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: 'בית', href: '/' },
+            { label: 'שיטות הטיפול', href: '/#methods' },
+            { label: 'EMR - עיבוד רגשי בתנועות עיניים' },
+          ]}
+        />
 
         {/* Accent rule */}
         <div
@@ -228,12 +277,38 @@ export default function EmrPage() {
           ))}
         </div>
 
+        {/* FAQ */}
+        <section className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>
+          <h2
+            className="font-display text-2xl font-medium mb-8"
+            style={{ color: C.textDark, letterSpacing: '-0.02em' }}
+          >
+            שאלות נפוצות על טיפול EMR
+          </h2>
+          <div className="space-y-4">
+            {FAQ.map((item) => (
+              <div
+                key={item.q}
+                className="rounded-xl p-5 border text-right"
+                style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
+              >
+                <h3 className="font-medium text-base mb-2.5" style={{ color: C.textDark }}>
+                  {item.q}
+                </h3>
+                <p className="text-sm font-light leading-[1.9]" style={{ color: C.textMid }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <RelatedLinks
           links={[
             { href: '/blog/mah-ze-emr',  title: 'EMR: השיטה שעוזרת כשדיבור לא מספיק', desc: 'מהי EMR, במה היא שונה, ולאילו מצבים היא מתאימה.' },
             { href: '/metapel-regashi',  title: 'מטפלת רגשית בנתיבות והדרום',        desc: 'טיפול רגשי לילדים, נערות ונשים - וגם בזום.' },
             { href: '/methods/cbt',      title: 'CBT - קוגניטיבי-התנהגותי',           desc: 'זיהוי ושינוי דפוסי חשיבה שמגבילים את איכות החיים.' },
-            { href: '/methods/nlp',      title: 'NLP - תכנות נוירו-לשוני',            desc: 'שינוי דפוסי חשיבה לחיזוק ביטחון ומסוגלות.' },
+            { href: '/methods/nlp',      title: 'ניתוב לשוני פיזיולוגי (NLP)',        desc: 'שינוי דפוסי חשיבה לחיזוק ביטחון ומסוגלות.' },
           ]}
         />
 

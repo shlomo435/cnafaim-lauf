@@ -13,6 +13,7 @@ import {
   type ContentBlock,
 } from '../../../lib/blog';
 import { OG_IMAGE, OWNER_NAME, SCHEMA_IDS } from '../../../lib/site';
+import { getHeadings, plainText, countHebrewWords } from '../../../lib/blog-text';
 import InfoDisclaimer from '../../../components/InfoDisclaimer';
 
 // ── Inline parser: **text** → <strong>, [text](url) → <a> ───────────────────
@@ -45,7 +46,7 @@ function renderText(text: string): React.ReactNode {
 }
 
 // ── Block renderer ─────────────────────────────────────────────────────────
-function Block({ block }: { block: ContentBlock }) {
+function Block({ block, id }: { block: ContentBlock; id?: string }) {
   switch (block.type) {
     case 'intro':
       return (
@@ -56,7 +57,8 @@ function Block({ block }: { block: ContentBlock }) {
     case 'h2':
       return (
         <h2
-          className="font-display text-2xl font-medium mt-12 mb-5 text-right"
+          id={id}
+          className="font-display text-2xl font-medium mt-12 mb-5 text-right scroll-mt-24"
           style={{ color: C.textDark, letterSpacing: '-0.02em' }}
         >
           {block.text}
@@ -65,7 +67,8 @@ function Block({ block }: { block: ContentBlock }) {
     case 'h3':
       return (
         <h3
-          className="font-display text-xl font-medium mt-8 mb-4 text-right"
+          id={id}
+          className="font-display text-xl font-medium mt-8 mb-4 text-right scroll-mt-24"
           style={{ color: C.textDark }}
         >
           {block.text}
@@ -123,6 +126,93 @@ function Block({ block }: { block: ContentBlock }) {
             {block.text}
           </p>
         </blockquote>
+      );
+    case 'takeaways':
+      return (
+        <div
+          className="my-8 rounded-xl p-6 border-2 text-right"
+          style={{ backgroundColor: C.creamAlt, borderColor: C.creamDeep }}
+        >
+          <p className="text-sm font-semibold mb-4" style={{ color: C.rose }}>
+            {block.title ?? 'השורה התחתונה'}
+          </p>
+          <ul className="space-y-3">
+            {block.items.map((item, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span
+                  className="mt-2 w-2 h-2 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: C.rose }}
+                />
+                <span
+                  className="flex-1 text-[1.05rem] font-light leading-[1.8] text-right"
+                  style={{ color: C.textMid }}
+                >
+                  {renderText(item)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    case 'table':
+      return (
+        <div className="my-8 rounded-xl border overflow-x-auto" style={{ borderColor: C.border }}>
+          <table className="w-full min-w-[520px] border-collapse text-right">
+            {block.caption && (
+              <caption
+                className="p-3 text-sm font-semibold text-right"
+                style={{ color: C.rose, backgroundColor: C.creamAlt }}
+              >
+                {block.caption}
+              </caption>
+            )}
+            <thead>
+              <tr style={{ backgroundColor: C.creamAlt }}>
+                {block.head.map((cell, i) => (
+                  <th
+                    key={i}
+                    scope="col"
+                    className="p-3 text-sm font-semibold border-b text-right"
+                    style={{ color: C.textDark, borderColor: C.border }}
+                  >
+                    {renderText(cell)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row, r) => (
+                <tr key={r} style={r % 2 ? { backgroundColor: C.cream } : undefined}>
+                  {row.map((cell, c) =>
+                    c === 0 ? (
+                      <th
+                        key={c}
+                        scope="row"
+                        className="p-3 text-[0.95rem] font-medium align-top border-b text-right"
+                        style={{ color: C.textDark, borderColor: C.borderLight }}
+                      >
+                        {renderText(cell)}
+                      </th>
+                    ) : (
+                      <td
+                        key={c}
+                        className="p-3 text-[0.95rem] font-light leading-[1.7] align-top border-b text-right"
+                        style={{ color: C.textMid, borderColor: C.borderLight }}
+                      >
+                        {renderText(cell)}
+                      </td>
+                    )
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {block.note && (
+            <p className="p-3 text-xs font-light text-right" style={{ color: C.textLight }}>
+              {renderText(block.note)}
+            </p>
+          )}
+        </div>
       );
     case 'tip':
       return (
@@ -202,6 +292,10 @@ export default async function BlogPostPage({
   }
 
   const related = getRelatedPosts(slug);
+  const headings = getHeadings(post.content);
+  const tocEntries = headings.filter((h) => h.level === 2);
+  const wordCount = countHebrewWords(plainText(post.content));
+  const updated = post.lastModified && post.lastModified !== post.date ? post.lastModified : null;
 
   // JSON-LD
   const articleSchema = {
@@ -225,6 +319,10 @@ export default async function BlogPostPage({
     datePublished: post.date,
     dateModified: post.lastModified ?? post.date,
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl(post.slug) },
+    inLanguage: 'he',
+    wordCount,
+    articleSection: post.tags[0],
+    isPartOf: { '@id': SCHEMA_IDS.website },
   };
 
   const breadcrumbSchema = {
@@ -336,15 +434,69 @@ export default async function BlogPostPage({
         >
           <span>{post.readingMinutes} דקות קריאה</span>
           <span>·</span>
-          <span>{formatDate(post.date)}</span>
+          <span>פורסם: {formatDate(post.date)}</span>
+          {updated && (
+            <>
+              <span>·</span>
+              <span>עודכן: {formatDate(updated)}</span>
+            </>
+          )}
           <span>·</span>
           <span>גאולה אלון</span>
         </div>
 
+        {/* Table of contents - long guides only. Anchors also make the article
+            eligible for Google's in-result jump links. */}
+        {tocEntries.length >= 3 && (
+          <nav
+            aria-label="תוכן העניינים"
+            className="mb-12 rounded-xl p-5 border text-right"
+            style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
+          >
+            <p className="text-sm font-semibold mb-3" style={{ color: C.rose }}>
+              מה בכתבה
+            </p>
+            <ol className="space-y-2">
+              {tocEntries.map((h) => (
+                <li key={h.id} className="flex items-start gap-3">
+                  <span
+                    className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: C.rose }}
+                  />
+                  <a
+                    href={`#${h.id}`}
+                    className="flex-1 text-[0.95rem] font-light hover:underline"
+                    style={{ color: C.textMid, textUnderlineOffset: '3px' }}
+                  >
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+              {post.faq && post.faq.length > 0 && (
+                <li className="flex items-start gap-3">
+                  <span
+                    className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: C.rose }}
+                  />
+                  <a
+                    href="#faq"
+                    className="flex-1 text-[0.95rem] font-light hover:underline"
+                    style={{ color: C.textMid, textUnderlineOffset: '3px' }}
+                  >
+                    שאלות נפוצות
+                  </a>
+                </li>
+              )}
+            </ol>
+          </nav>
+        )}
+
         {/* Content */}
         <div className="space-y-6">
           {post.content.length > 0 ? (
-            post.content.map((block, i) => <Block key={i} block={block} />)
+            post.content.map((block, i) => (
+              <Block key={i} block={block} id={headings.find((h) => h.index === i)?.id} />
+            ))
           ) : (
             <div
               className="py-16 text-center rounded-xl border"
@@ -361,7 +513,8 @@ export default async function BlogPostPage({
         {post.faq && post.faq.length > 0 && (
           <section className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>
             <h2
-              className="font-display text-2xl font-medium mb-8"
+              id="faq"
+              className="font-display text-2xl font-medium mb-8 scroll-mt-24"
               style={{ color: C.textDark, letterSpacing: '-0.02em' }}
             >
               שאלות נפוצות

@@ -4,15 +4,12 @@ import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedLinks from '../../../components/RelatedLinks';
-import { OG_IMAGE } from '../../../lib/site';
+import { AREAS, OG_IMAGE, areaServed } from '../../../lib/site';
 
 const BASE = 'https://cnafim-lauf.co.il';
 const PAGE_URL = `${BASE}/methods/remedial`;
 
 // Areas served - fuels both the visible copy and the Service schema.
-const AREAS = [
-  'נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים',
-];
 
 // FAQ data - single source for both the visible section and the FAQPage schema.
 const FAQ = [
@@ -82,10 +79,7 @@ const serviceSchema = {
     jobTitle: 'מורה להוראה מתקנת ומאבחנת לימודית',
     url: BASE,
   },
-  areaServed: [
-    ...AREAS.map((name) => ({ '@type': 'City', name })),
-    { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
-  ],
+  areaServed: areaServed(),
   availableChannel: [
     {
       '@type': 'ServiceChannel',
@@ -463,7 +457,7 @@ export default function RemedialPage() {
             { href: '/blog/avchun-didakti-madrich-horim', title: 'אבחון דידקטי: המדריך המלא להורים', desc: 'מה בודקים, כמה זה עולה, ומה עושים עם הדוח אחר כך.' },
             { href: '/blog/kshei-kriya-yelad',            title: 'הילד שלי לא מצליח לקרוא',          desc: 'מתי זה שלב ומתי כדאי לפנות לעזרה מקצועית.' },
             { href: '/metapel-regashi',                   title: 'מטפלת רגשית בנתיבות והדרום',      desc: 'כשקושי לימודי מלווה גם בקושי רגשי.' },
-            { href: '/blog/mesurav-beit-sefer',           title: 'ילד שמסרב ללכת לבית ספר',          desc: 'מה עומד מאחורי הסירוב ואיך להגיב נכון.' },
+            { href: '/blog/mesurav-beit-sefer',           title: 'הילד לא רוצה ללכת לבית הספר',          desc: 'מה עומד מאחורי הסירוב ואיך להגיב נכון.' },
           ]}
         />
 

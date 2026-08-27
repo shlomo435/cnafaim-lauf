@@ -4,14 +4,12 @@ import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
-import { SITE_URL, OWNER_NAME, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
+import { AREAS, OG_IMAGE, OWNER_NAME, SCHEMA_IDS, SITE_URL, areaServed } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/hadrachat-horim`;
 
-const AREAS = ['נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים'];
 
 /** Regional councils - typed as AdministrativeArea in schema, not City. */
-const REGIONAL_COUNCILS = ['שדות נגב', 'מרחבים'];
 
 const FAQ = [
   {
@@ -77,13 +75,7 @@ const serviceSchema = {
     name: OWNER_NAME,
     jobTitle: 'מטפלת רגשית ומדריכת הורים',
   },
-  areaServed: [
-    ...AREAS.map((name) => ({
-      '@type': REGIONAL_COUNCILS.includes(name) ? 'AdministrativeArea' : 'City',
-      name,
-    })),
-    { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
-  ],
+  areaServed: areaServed(),
 };
 
 const faqSchema = {
@@ -232,10 +224,10 @@ export default function ParentGuidancePage() {
 
         <RelatedLinks
           links={[
+            { href: '/blog/hitpartzuyot-zaam-yeladim', title: 'התפרצויות זעם אצל ילדים',      desc: 'מה עושים ברגע ההתפרצות, ומה מסתתר מאחוריה.' },
+            { href: '/blog/mesurav-beit-sefer',      title: 'הילד לא רוצה ללכת לבית הספר',    desc: 'הסיבות לפי גיל, תסריט לבוקר ותוכנית חזרה הדרגתית.' },
             { href: '/blog/vitur-regashi-madrich',   title: 'ויסות רגשי בילדים: המדריך המלא', desc: 'למה ילדים מתפוצצים על דברים קטנים, וכלים לפי גיל.' },
-            { href: '/blog/mesurav-beit-sefer',      title: 'ילד שמסרב ללכת לבית ספר',        desc: 'מה עומד מאחורי הסירוב ואיך להגיב נכון.' },
             { href: '/metapel-regashi',              title: 'מטפלת רגשית',                    desc: 'כשצריך גם עבודה ישירה עם הילד.' },
-            { href: '/blog/lehaskir-layelad-al-tipul', title: 'איך מסבירים לילד על טיפול',    desc: 'מדריך לשיחה לפי גיל - מה לומר ומה לא.' },
           ]}
         />
 

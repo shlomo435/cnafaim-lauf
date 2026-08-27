@@ -3,30 +3,80 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
-import { canonicalMeta } from '../../../lib/site';
+import { canonicalMeta, SITE_URL, SCHEMA_IDS, areaServed } from '../../../lib/site';
 import InfoDisclaimer from '../../../components/InfoDisclaimer';
+import Breadcrumbs from '../../../components/Breadcrumbs';
+
+const FAQ = [
+  {
+    q: 'מה זה ניתוב לשוני פיזיולוגי?',
+    a: 'ניתוב לשוני פיזיולוגי הוא התרגום העברי של NLP - Neuro-Linguistic Programming. זו גישה שעובדת על הדרך שבה אנחנו מייצגים חוויות בתוכנו: התמונות שעולות בראש, התחושות בגוף והמשפטים שאנחנו אומרים לעצמנו - ומנסה לשנות את התגובה הרגשית שנלווית אליהן.',
+  },
+  {
+    q: 'ניתוב לשוני פיזיולוגי, תכנות נוירו-לשוני ו-NLP - זה אותו דבר?',
+    a: 'כן. באנגלית יש שם אחד, NLP, ובעברית התקבלו שני תרגומים במקביל: "ניתוב לשוני פיזיולוגי" ו"תכנות נוירו-לשוני". שלושת השמות מתייחסים לאותה שיטה בדיוק.',
+  },
+  {
+    q: 'האם השיטה מוכחת מדעית?',
+    a: 'לא במידה שבה CBT מוכח. סקירה שיטתית שפורסמה ב-2012 בחנה עשרה מחקרים מבוקרים ולא מצאה ראיות מספקות ליעילות NLP בשיפור תוצאות בריאותיות, בעיקר בשל מיעוט המחקרים ואיכותם. לכן אנחנו מציגים את השיטה ככלי משלים לצד גישות מבוססות-ראיות, ולא כתחליף להן.',
+  },
+  {
+    q: 'מאיזה גיל אפשר לעבוד עם ילדים בשיטה?',
+    a: 'הכלים מותאמים לגיל, ואפשר לעבוד גם עם ילדי גן דרך משחק, ציור וסיפור. ככל שהילד גדול יותר משלבים יותר עבודה מילולית ומודעת. מה שקובע הוא הצורך ואופי הילד, ולא הגיל בפני עצמו.',
+  },
+  {
+    q: 'מה ההבדל בין NLP ל-CBT?',
+    a: 'CBT הוא טיפול מובנה ומבוסס-מחקר שעובד על הקשר בין מחשבה, רגש והתנהגות, וכולל חשיפה הדרגתית ותרגול בין המפגשים. NLP עובד יותר דרך דימויים, חושים ושפה פנימית, והבסיס המחקרי שלו מצומצם בהרבה. בחרדה משמעותית הקו הראשון הוא CBT.',
+  },
+  {
+    q: 'כמה מפגשים צריך?',
+    a: 'עבודה ממוקדת סביב מטרה ברורה היא לרוב קצרה יחסית. עם זאת, תהליך אמיתי לא נמדד במספר מפגשים אלא בשאלה אם משהו בחיים באמת השתנה. הבטחה מראש לתוצאה בשלושה מפגשים היא סימן אזהרה, לא הבטחה.',
+  },
+];
 
 export const metadata: Metadata = {
-  title: 'NLP - תכנות נוירו-לשוני | כנפיים לעוף',
+  title: 'ניתוב לשוני פיזיולוגי (NLP) בנתיבות ובדרום | כנפיים לעוף',
   description:
-    'שיטת NLP עובדת עם התת-מודע לשינוי דפוסי חשיבה, חיזוק ביטחון עצמי ושחרור חסמים רגשיים. גלו כיצד NLP יכול לשנות את תפיסת המציאות שלכם.',
+    'טיפול בשיטת ניתוב לשוני פיזיולוגי (NLP) בנתיבות, בכל אזור הדרום וגם בזום. עבודה על דפוסי חשיבה, חיזוק ביטחון עצמי ושחרור חסמים רגשיים - לילדים, נערות ונשים.',
+  keywords: [
+    'ניתוב לשוני פיזיולוגי',
+    'NLP',
+    'תכנות נוירו-לשוני',
+    'טיפול NLP לילדים',
+    'ניתוב לשוני פיזיולוגי נתיבות',
+    'NLP בדרום',
+    'NLP בזום',
+  ],
   ...canonicalMeta('/methods/nlp'),
 };
 
-const breadcrumbSchema = {
+const serviceSchema = {
   '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafim-lauf.co.il/' },
-    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafim-lauf.co.il/#methods' },
-    { '@type': 'ListItem', position: 3, name: 'NLP', item: 'https://cnafim-lauf.co.il/methods/nlp' },
-  ],
+  '@type': 'Service',
+  serviceType: 'ניתוב לשוני פיזיולוגי (NLP)',
+  name: 'ניתוב לשוני פיזיולוגי - כנפיים לעוף',
+  description:
+    'עבודה בכלי ניתוב לשוני פיזיולוגי (NLP) לחיזוק ביטחון עצמי, שחרור פחדים ממוקדים ושינוי דפוסי חשיבה - לילדים, נערות ונשים. בנתיבות, בכל אזור הדרום וגם בזום.',
+  url: `${SITE_URL}/methods/nlp`,
+  provider: { '@type': 'Person', '@id': SCHEMA_IDS.person },
+  areaServed: areaServed(),
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 };
 
 export default function NlpPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* HEADER */}
       <header
@@ -59,14 +109,13 @@ export default function NlpPage() {
       {/* MAIN */}
       <main className="max-w-3xl mx-auto px-6 py-10 md:py-14">
 
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs mb-10 justify-end" style={{ color: C.textLight }} aria-label="נתיב ניווט">
-          <Link href="/" className="hover:underline" style={{ color: C.rose }}>בית</Link>
-          <span>/</span>
-          <Link href="/#methods" className="hover:underline" style={{ color: C.rose }}>שיטות הטיפול</Link>
-          <span>/</span>
-          <span>NLP</span>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: 'בית', href: '/' },
+            { label: 'שיטות הטיפול', href: '/#methods' },
+            { label: 'ניתוב לשוני פיזיולוגי (NLP)' },
+          ]}
+        />
 
         {/* Accent rule */}
         <div
@@ -82,11 +131,11 @@ export default function NlpPage() {
           className="font-display text-4xl md:text-5xl font-light leading-tight tracking-tighter text-right mb-4"
           style={{ color: C.textDark }}
         >
-          NLP - תכנות נוירו-לשוני בנתיבות ובדרום
+          ניתוב לשוני פיזיולוגי (NLP) בנתיבות ובדרום
         </h1>
 
         <p className="text-xl font-light leading-relaxed text-right mb-10" style={{ color: C.textMid }}>
-          תכנות נוירו-לשוני
+          ניתוב לשוני פיזיולוגי · תכנות נוירו-לשוני · NLP
         </p>
 
         {/* Article body */}
@@ -167,9 +216,36 @@ export default function NlpPage() {
           ))}
         </div>
 
+        {/* FAQ */}
+        <section className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>
+          <h2
+            className="font-display text-2xl font-medium mb-8"
+            style={{ color: C.textDark, letterSpacing: '-0.02em' }}
+          >
+            שאלות נפוצות על ניתוב לשוני פיזיולוגי
+          </h2>
+          <div className="space-y-4">
+            {FAQ.map((item) => (
+              <div
+                key={item.q}
+                className="rounded-xl p-5 border text-right"
+                style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
+              >
+                <h3 className="font-medium text-base mb-2.5" style={{ color: C.textDark }}>
+                  {item.q}
+                </h3>
+                <p className="text-sm font-light leading-[1.9]" style={{ color: C.textMid }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <RelatedLinks
           links={[
-            { href: '/blog/isha-lo-maaminah-batzmah', title: 'למה נשים רבות לא מאמינות בעצמן', desc: 'הקול הביקורתי הפנימי, מקורו, וכלים לשינוי.' },
+            { href: '/blog/nituv-leshoni-fiziologi',  title: 'ניתוב לשוני פיזיולוגי - המדריך המלא', desc: 'מה זו השיטה, אילו טכניקות יש בה, ומה המחקר אומר.' },
+            { href: '/blog/isha-lo-maaminah-batzmah', title: 'ביטחון עצמי נמוך אצל נשים', desc: 'הקול הביקורתי הפנימי, מקורו, וכלים לשינוי.' },
             { href: '/metapel-regashi',               title: 'מטפלת רגשית בנתיבות והדרום',    desc: 'טיפול רגשי לילדים, נערות ונשים - וגם בזום.' },
             { href: '/methods/cbt',                   title: 'CBT - קוגניטיבי-התנהגותי',       desc: 'זיהוי ושינוי דפוסי חשיבה שמגבילים את איכות החיים.' },
             { href: '/methods/emr',                   title: 'EMR - עיבוד תנועות עיניים',      desc: 'להגיע לשורש הרגשי גם כשדיבור לא מספיק.' },

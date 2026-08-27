@@ -1,7 +1,5 @@
-import { SITE_URL, SITE_NAME, OWNER_NAME, OG_IMAGE, SCHEMA_IDS, EMAIL } from '../lib/site';
+import { SITE_URL, SITE_NAME, OWNER_NAME, OG_IMAGE, SCHEMA_IDS, EMAIL, areaServed } from '../lib/site';
 
-const AREAS_CITIES = ['נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת'];
-const AREAS_REGIONAL = ['שדות נגב', 'מרחבים', 'מחוז הדרום'];
 
 /**
  * The sitewide JSON-LD entity graph, rendered once from the root layout.
@@ -42,10 +40,7 @@ const graph = {
         addressCountry: 'IL',
       },
       geo: { '@type': 'GeoCoordinates', latitude: 31.4231, longitude: 34.5889 },
-      areaServed: [
-        ...AREAS_CITIES.map((name) => ({ '@type': 'City', name })),
-        ...AREAS_REGIONAL.map((name) => ({ '@type': 'AdministrativeArea', name })),
-      ],
+      areaServed: areaServed(),
       availableLanguage: { '@type': 'Language', name: 'Hebrew' },
       openingHoursSpecification: [
         {

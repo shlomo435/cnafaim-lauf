@@ -16,6 +16,7 @@
  *     (e.g. a brand-new file that is not committed yet).
  */
 import fs from 'node:fs';
+import { readPostsMeta } from './lib/posts-meta.mjs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 
@@ -61,34 +62,25 @@ const LEGAL_ROUTES = [
   { path: '/privacy',       source: 'src/app/privacy/page.tsx',       changefreq: 'yearly', priority: '0.3' },
 ];
 
-// Posts that outrank the rest; anything not listed gets 0.7.
+// Long-form guides (post.pillar) carry the site's ranking effort, so they outrank
+// ordinary posts. These two predate the pillar flag and keep their standing.
 const POST_PRIORITY = {
   'avchun-didakti-madrich-horim': '0.8',
   'eich-livchor-metapel-regashi-layeled': '0.8',
 };
+const priorityOf = (post) => POST_PRIORITY[post.slug] ?? (post.pillar ? '0.8' : '0.7');
 
-// ── Blog posts, read straight out of the content module ───────────────────────
-function readPosts() {
-  const src = fs.readFileSync('src/lib/blog.ts', 'utf8');
-  const posts = [];
-  // Each post literal opens with slug and carries date; lastModified is optional.
-  const re = /slug:\s*'([^']+)',[\s\S]{0,600}?date:\s*'(\d{4}-\d{2}-\d{2})'/g;
-  for (const m of src.matchAll(re)) {
-    const [, slug, date] = m;
-    const tail = src.slice(m.index, m.index + 900);
-    const lm = /lastModified:\s*'(\d{4}-\d{2}-\d{2})'/.exec(tail);
-    posts.push({ slug, lastmod: lm ? lm[1] : date });
-  }
-  return posts; // keep source-file order - the sitemap must match the existing URL order
-}
+// ── Blog posts ─────────────────────────────────────────────────────────────
+// readPostsMeta() keeps src/content/posts/index.ts order, which is the order the
+// sitemap has always used.
 
 // ── Build the entry list ──────────────────────────────────────────────────────
 const entries = [
   ...STATIC_ROUTES.map((r) => ({ ...r, lastmod: gitDate(r.source) })),
-  ...readPosts().map((p) => ({
+  ...readPostsMeta().map((p) => ({
     path: `/blog/${p.slug}`,
     changefreq: 'monthly',
-    priority: POST_PRIORITY[p.slug] ?? '0.7',
+    priority: priorityOf(p),
     lastmod: p.lastmod,
   })),
   ...FEATURE_SLUGS.map((slug) => ({

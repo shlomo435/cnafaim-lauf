@@ -4,17 +4,14 @@ import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import InfoDisclaimer from '../../components/InfoDisclaimer';
-import { OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
+import RelatedLinks from '../../components/RelatedLinks';
+import { AREAS, OG_IMAGE, SCHEMA_IDS, areaServed } from '../../lib/site';
 
 const BASE = 'https://cnafim-lauf.co.il';
 const PAGE_URL = `${BASE}/metapel-regashi`;
 
-const AREAS = [
-  'נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים',
-];
 
 /** Regional councils - typed as AdministrativeArea in schema, not City. */
-const REGIONAL_COUNCILS = ['שדות נגב', 'מרחבים'];
 
 const METHODS = [
   {
@@ -40,7 +37,7 @@ const METHODS = [
 const FAQ = [
   {
     q: 'מה ההבדל בין מטפלת רגשית לבין פסיכולוגית?',
-    a: 'מטפלת רגשית מתמקדת בליווי רגשי, במתן כלים פרקטיים ובעבודה על דפוסים, ביטחון וחוסן. בשונה מאבחון פסיכולוגי פורמלי, הדגש הוא על תהליך חם, מותאם אישית ומעשי. אני משלבת מספר שיטות מוכחות (CBT, EMR, NLP) ומתאימה אותן לכל מטופל.',
+    a: 'מטפלת רגשית מתמקדת בליווי רגשי, במתן כלים פרקטיים ובעבודה על דפוסים, ביטחון וחוסן. בשונה מאבחון פסיכולוגי פורמלי, הדגש הוא על תהליך חם, מותאם אישית ומעשי. אני משלבת כמה גישות ומתאימה אותן לכל מטופל: CBT, שנתמך במחקר רחב ומצוין על ידי משרד הבריאות כטיפול היעיל והנפוץ בהפרעות חרדה, לצד EMR ו-NLP ככלים משלימים.',
   },
   {
     q: 'מאיזה גיל אפשר לפנות לטיפול רגשי?',
@@ -104,13 +101,7 @@ const serviceSchema = {
     name: 'גאולה אלון',
     jobTitle: 'מטפלת רגשית ומאבחנת לימודית',
   },
-  areaServed: [
-    ...AREAS.map((name) => ({
-      '@type': REGIONAL_COUNCILS.includes(name) ? 'AdministrativeArea' : 'City',
-      name,
-    })),
-    { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
-  ],
+  areaServed: areaServed(),
   availableChannel: [
     {
       '@type': 'ServiceChannel',
@@ -409,7 +400,7 @@ export default function EmotionalTherapistPage() {
         <div className="space-y-5 text-right">
           <P>
             בעלת תואר שני בחינוך ומעל <Strong>עשרים שנות ניסיון</Strong> קליני ולימודי עם ילדים,
-            נערות ונשים. הגישה הטיפולית שלי הוליסטית ומשלבת שיטות מוכחות - <Strong>CBT, EMR ו-NLP</Strong> -
+            נערות ונשים. הגישה הטיפולית שלי הוליסטית ומשלבת <Strong>CBT</Strong> - שנתמך במחקר רחב - לצד <Strong>EMR ו-NLP</Strong> ככלים משלימים -
             כולן מותאמות אישית לצורך הספציפי של כל מטופל.
           </P>
           <P>
@@ -441,6 +432,15 @@ export default function EmotionalTherapistPage() {
             </div>
           ))}
         </div>
+
+        <RelatedLinks
+          links={[
+            { href: '/blog/hetkef-harada-yeladim',     title: 'התקף חרדה אצל ילדים: תסמינים ומה עושים', desc: 'איך מזהים, כמה זמן זה נמשך, ומה לעשות ברגע ההתקף.' },
+            { href: '/blog/mesurav-beit-sefer',        title: 'הילד לא רוצה ללכת לבית הספר',           desc: 'הסיבות לפי גיל, תסריט לבוקר, ותוכנית חזרה הדרגתית.' },
+            { href: '/blog/cbt-yelad',                 title: 'טיפול CBT לילדים: איך זה עובד',          desc: 'מה קורה מפגש אחרי מפגש, כמה זמן זה לוקח ולמי מתאים.' },
+            { href: '/blog/eich-livchor-metapel-regashi-layeled', title: 'איך לבחור מטפל רגשי לילד',    desc: 'השאלות שחשוב לשאול לפני שמתחילים תהליך.' },
+          ]}
+        />
 
         {/* CTA */}
         <div className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>

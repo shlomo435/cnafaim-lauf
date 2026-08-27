@@ -5,14 +5,12 @@ import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
 import InfoDisclaimer from '../../components/InfoDisclaimer';
-import { SITE_URL, OWNER_NAME, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
+import { AREAS, OG_IMAGE, OWNER_NAME, SCHEMA_IDS, SITE_URL, areaServed } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/avchun-didakti`;
 
-const AREAS = ['נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים'];
 
 /** Regional councils - typed as AdministrativeArea in schema, not City. */
-const REGIONAL_COUNCILS = ['שדות נגב', 'מרחבים'];
 
 const FAQ = [
   {
@@ -83,13 +81,7 @@ const serviceSchema = {
     name: OWNER_NAME,
     jobTitle: 'מאבחנת דידקטית ומורה להוראה מתקנת',
   },
-  areaServed: [
-    ...AREAS.map((name) => ({
-      '@type': REGIONAL_COUNCILS.includes(name) ? 'AdministrativeArea' : 'City',
-      name,
-    })),
-    { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
-  ],
+  areaServed: areaServed(),
 };
 
 const faqSchema = {

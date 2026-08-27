@@ -186,7 +186,7 @@ export default function CardsPage() {
             { href: '/metapel-regashi',              title: 'מטפלת רגשית',              desc: 'טיפול רגשי לילדים, נערות ונשים.' },
             { href: '/hadrachat-horim',              title: 'הדרכת הורים',              desc: 'כלים מעשיים לבית, מעבר לקלפים.' },
             { href: '/blog/vitur-regashi-madrich',   title: 'ויסות רגשי בילדים',        desc: 'הרקע המקצועי שמאחורי השיחות האלה.' },
-            { href: '/blog/yalda-lo-ohevet-atzmah',  title: 'ילדה שלא אוהבת את עצמה',   desc: 'איך מזהים ותומכים בדימוי עצמי נמוך.' },
+            { href: '/blog/yalda-lo-ohevet-atzmah',  title: 'דימוי עצמי נמוך אצל ילדה',   desc: 'איך מזהים ותומכים בדימוי עצמי נמוך.' },
           ]}
         />
 

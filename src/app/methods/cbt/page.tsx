@@ -3,30 +3,84 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import RelatedLinks from '../../../components/RelatedLinks';
-import { canonicalMeta } from '../../../lib/site';
+import { canonicalMeta, SITE_URL, SCHEMA_IDS, areaServed } from '../../../lib/site';
 import InfoDisclaimer from '../../../components/InfoDisclaimer';
+import Breadcrumbs from '../../../components/Breadcrumbs';
+
+const FAQ = [
+  {
+    q: 'מה זה טיפול CBT?',
+    a: 'CBT הוא טיפול קוגניטיבי-התנהגותי: גישה מובנית וקצרת מועד שעובדת על הקשר בין מחשבות, רגשות והתנהגות. במקום לנתח רק את העבר, לומדים לזהות מחשבות שמזינות את החרדה, לבדוק אותן, ולתרגל התמודדות שונה במצבים אמיתיים.',
+  },
+  {
+    q: 'מאיזה גיל מתאים טיפול CBT לילדים?',
+    a: 'בדרך כלל מגיל שש-שבע, כשילד כבר מסוגל להבחין בין מה שהוא חושב לבין מה שהוא מרגיש. עם ילדים צעירים יותר עובדים דרך משחק, ציור וסיפור, ולעיתים נכון יותר להתחיל דווקא בהדרכת הורים.',
+  },
+  {
+    q: 'כמה מפגשים נדרשים?',
+    a: 'CBT נחשב טיפול קצר מועד יחסית, ובעבודה ממוקדת מדובר לרוב בסדר גודל של שמונה עד שישה-עשר מפגשים. המספר המדויק תלוי בסוג הקושי, בוותק שלו ובקצב של הילד. בודקים התקדמות תוך כדי ולא רק בסוף.',
+  },
+  {
+    q: 'האם ההורים משתתפים בטיפול?',
+    a: 'כן, ובאופן משמעותי. בטיפול בילדים ההורים הם שותפים: יש מפגשי הורים, יש תרגול שממשיך בבית, ולעיתים גם תיאום עם בית הספר. בלי ההורים הכלים נשארים בחדר הטיפול ולא מגיעים לחיים.',
+  },
+  {
+    q: 'האם CBT יעיל לחרדה?',
+    a: 'משרד הבריאות מציין טיפול קוגניטיבי-התנהגותי כטיפול הנפוץ והיעיל בהפרעות חרדה, והוא נתמך במחקר רחב. עם זאת, אף טיפול אינו מתאים לכולם, ולכן בשיחת ההיכרות בודקים אם זו אכן הגישה הנכונה במקרה הזה.',
+  },
+  {
+    q: 'מה ההבדל בין CBT לטיפול רגשי אחר?',
+    a: 'CBT ממוקד, מובנה, כולל תרגול בין המפגשים ומטרות מוגדרות מראש. גישות אחרות עשויות לעבוד יותר דרך משחק, יצירה או עיבוד חוויות מוקדמות. לא פעם השילוב הוא הנכון, וההחלטה נעשית לפי הילד ולא לפי שיטה קבועה.',
+  },
+  {
+    q: 'אפשר לקבל טיפול CBT בזום?',
+    a: 'כן. חלק ניכר מהעבודה - זיהוי מחשבות, בניית מדרג חשיפות ותרגול - מתאים היטב למפגש מרחוק. עם ילדים צעירים בודקים תחילה שהמסגרת מאפשרת ריכוז ופרטיות בבית.',
+  },
+];
 
 export const metadata: Metadata = {
   title: 'טיפול CBT בנתיבות ובדרום | קוגניטיבי-התנהגותי - כנפיים לעוף',
   description:
     'טיפול CBT בנתיבות, בדרום ובזום - לחרדה, דאגנות וביטחון עצמי לילדים, נערות ונשים. כלים מעשיים כבר מהפגישות הראשונות. גאולה אלון, מעל 20 שנות ניסיון.',
+  keywords: [
+    'טיפול CBT',
+    'טיפול CBT לילדים',
+    'CBT נתיבות',
+    'CBT בדרום',
+    'טיפול קוגניטיבי התנהגותי',
+    'CBT לחרדה',
+    'CBT בזום',
+  ],
   ...canonicalMeta('/methods/cbt'),
 };
 
-const breadcrumbSchema = {
+const serviceSchema = {
   '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'בית', item: 'https://cnafim-lauf.co.il/' },
-    { '@type': 'ListItem', position: 2, name: 'שיטות הטיפול', item: 'https://cnafim-lauf.co.il/#methods' },
-    { '@type': 'ListItem', position: 3, name: 'CBT', item: 'https://cnafim-lauf.co.il/methods/cbt' },
-  ],
+  '@type': 'Service',
+  serviceType: 'טיפול קוגניטיבי-התנהגותי (CBT)',
+  name: 'טיפול CBT - כנפיים לעוף',
+  description:
+    'טיפול קוגניטיבי-התנהגותי לילדים, נערות ונשים - לחרדה, דאגנות, הימנעות וביטחון עצמי. בנתיבות, בכל אזור הדרום וגם בזום.',
+  url: `${SITE_URL}/methods/cbt`,
+  provider: { '@type': 'Person', '@id': SCHEMA_IDS.person },
+  areaServed: areaServed(),
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 };
 
 export default function CbtPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* HEADER */}
       <header
@@ -59,14 +113,13 @@ export default function CbtPage() {
       {/* MAIN */}
       <main className="max-w-3xl mx-auto px-6 py-10 md:py-14">
 
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs mb-10 justify-end" style={{ color: C.textLight }} aria-label="נתיב ניווט">
-          <Link href="/" className="hover:underline" style={{ color: C.rose }}>בית</Link>
-          <span>/</span>
-          <Link href="/#methods" className="hover:underline" style={{ color: C.rose }}>שיטות הטיפול</Link>
-          <span>/</span>
-          <span>CBT</span>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: 'בית', href: '/' },
+            { label: 'שיטות הטיפול', href: '/#methods' },
+            { label: 'CBT - טיפול קוגניטיבי-התנהגותי' },
+          ]}
+        />
 
         {/* Accent rule */}
         <div
@@ -180,12 +233,38 @@ export default function CbtPage() {
           ))}
         </div>
 
+        {/* FAQ */}
+        <section className="mt-14 pt-10 border-t text-right" style={{ borderColor: C.border }}>
+          <h2
+            className="font-display text-2xl font-medium mb-8"
+            style={{ color: C.textDark, letterSpacing: '-0.02em' }}
+          >
+            שאלות נפוצות על טיפול CBT
+          </h2>
+          <div className="space-y-4">
+            {FAQ.map((item) => (
+              <div
+                key={item.q}
+                className="rounded-xl p-5 border text-right"
+                style={{ backgroundColor: C.creamAlt, borderColor: C.border }}
+              >
+                <h3 className="font-medium text-base mb-2.5" style={{ color: C.textDark }}>
+                  {item.q}
+                </h3>
+                <p className="text-sm font-light leading-[1.9]" style={{ color: C.textMid }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <RelatedLinks
           links={[
-            { href: '/blog/cbt-yelad',   title: 'CBT לילדים: איך זה נראה בפועל', desc: 'מה קורה במפגש, דוגמה מהחיים, ומה הילד לוקח הביתה.' },
+            { href: '/blog/cbt-yelad',   title: 'טיפול CBT לילדים: איך זה עובד', desc: 'מה קורה במפגש, דוגמה מהחיים, ומה הילד לוקח הביתה.' },
             { href: '/metapel-regashi',  title: 'מטפלת רגשית בנתיבות והדרום',   desc: 'טיפול רגשי לילדים, נערות ונשים - וגם בזום.' },
             { href: '/methods/emr',      title: 'EMR - עיבוד תנועות עיניים',     desc: 'להגיע לשורש הרגשי גם כשדיבור לא מספיק.' },
-            { href: '/methods/nlp',      title: 'NLP - תכנות נוירו-לשוני',       desc: 'שינוי דפוסי חשיבה לחיזוק ביטחון ומסוגלות.' },
+            { href: '/methods/nlp',      title: 'ניתוב לשוני פיזיולוגי (NLP)',   desc: 'שינוי דפוסי חשיבה לחיזוק ביטחון ומסוגלות.' },
           ]}
         />
 

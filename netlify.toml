@@ -35,6 +35,30 @@
   status = 301
   force = true
 
+# ── Merged content ────────────────────────────────────────────────────────────
+# /blog/simanim-harada-yelad was folded into the panic-attack guide, which now
+# carries its "7 signs" section verbatim plus everything a reader arriving from
+# this URL was looking for. Two thin pages competing for the same Hebrew query
+# ("סימנים" and "תסמינים" are synonyms) split their own ranking signals, so they
+# were merged rather than kept apart. Keep this rule permanently: the old URL had
+# six months of history and external links may still point at it.
+[[redirects]]
+  from = "/blog/simanim-harada-yelad"
+  to = "/blog/hetkef-harada-yeladim"
+  status = 301
+  force = true
+
+# The 28 ad-hoc blog tags were consolidated onto 9 canonical ones, retiring 23 tag
+# archive URLs. They were always noindex and never in the sitemap, so nothing
+# indexed is lost - but they were linked from /blog and from every post, so
+# Googlebot has them queued and would now get a 404. Send the retired ones to the
+# blog index. Deliberately no force: the 9 archives that still build are real
+# files, and Netlify serves an existing file before applying a non-forced rule.
+[[redirects]]
+  from = "/blog/tag/*"
+  to = "/blog"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]

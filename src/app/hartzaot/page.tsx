@@ -4,14 +4,12 @@ import type { Metadata } from 'next';
 import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
-import { SITE_URL, OWNER_NAME, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
+import { AREAS, OG_IMAGE, OWNER_NAME, SCHEMA_IDS, SITE_URL, areaServed } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/hartzaot`;
 
-const AREAS = ['נתיבות', 'אופקים', 'שדרות', 'אשקלון', 'באר שבע', 'קריית גת', 'שדות נגב', 'מרחבים'];
 
 /** Regional councils - typed as AdministrativeArea in schema, not City. */
-const REGIONAL_COUNCILS = ['שדות נגב', 'מרחבים'];
 
 const TOPICS = [
   { t: 'חיזוק ביטחון עצמי אצל ילדים', d: 'איך נבנה דימוי עצמי, מה שוחק אותו, ומה הורים וצוותים יכולים לעשות אחרת.' },
@@ -81,13 +79,7 @@ const serviceSchema = {
     name: OWNER_NAME,
     jobTitle: 'מטפלת רגשית ומרצה',
   },
-  areaServed: [
-    ...AREAS.map((name) => ({
-      '@type': REGIONAL_COUNCILS.includes(name) ? 'AdministrativeArea' : 'City',
-      name,
-    })),
-    { '@type': 'AdministrativeArea', name: 'מחוז הדרום' },
-  ],
+  areaServed: areaServed(),
   audience: [
     { '@type': 'Audience', audienceType: 'הורים' },
     { '@type': 'Audience', audienceType: 'צוותי חינוך' },
