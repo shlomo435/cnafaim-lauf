@@ -48,16 +48,23 @@
   status = 301
   force = true
 
-# The 28 ad-hoc blog tags were consolidated onto 9 canonical ones, retiring 23 tag
-# archive URLs. They were always noindex and never in the sitemap, so nothing
-# indexed is lost - but they were linked from /blog and from every post, so
-# Googlebot has them queued and would now get a 404. Send the retired ones to the
-# blog index. Deliberately no force: the 9 archives that still build are real
-# files, and Netlify serves an existing file before applying a non-forced rule.
+# The 28 ad-hoc blog tags were consolidated onto 9 canonical ones, retiring 26 tag
+# archive URLs that Google still has queued.
+#
+# This was briefly a 301 to /blog. That was wrong: /blog is not an equivalent
+# replacement for a topic archive, so Google reads the redirect as a soft 404 and
+# keeps re-crawling the dead URL indefinitely - which is what "אימות נכשל" in the
+# indexing report was pointing at. It also meant any nonsense path under
+# /blog/tag/ answered 301 instead of admitting the page does not exist.
+#
+# 410 Gone says the page is deliberately gone and is not coming back, which drops
+# it from the index faster than a 404. Deliberately NOT forced: the archives that
+# still build are real static files, and Netlify serves an existing file before
+# applying a non-forced rule, so only genuinely missing tags reach this.
 [[redirects]]
   from = "/blog/tag/*"
-  to = "/blog"
-  status = 301
+  to = "/410.html"
+  status = 410
 
 [[headers]]
   for = "/*"

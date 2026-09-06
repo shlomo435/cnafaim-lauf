@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cnafim-lauf.co.il/</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/metapel-regashi</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/avchun-didakti</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/hadrachat-horim</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/hartzaot</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/klafim</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -50,25 +50,25 @@
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/methods/cbt</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/methods/emr</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/methods/nlp</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/methods/remedial</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -134,9 +134,9 @@
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/blog/mah-ze-emr</loc>
-    <lastmod>2026-06-08</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/blog/nituv-leshoni-fiziologi</loc>
@@ -233,6 +233,48 @@
     <lastmod>2026-08-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cnafim-lauf.co.il/blog/tag/%D7%94%D7%95%D7%A8%D7%95%D7%AA</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cnafim-lauf.co.il/blog/tag/%D7%97%D7%A8%D7%93%D7%94</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cnafim-lauf.co.il/blog/tag/%D7%91%D7%99%D7%AA-%D7%A1%D7%A4%D7%A8-%D7%95%D7%9C%D7%9E%D7%99%D7%93%D7%94</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cnafim-lauf.co.il/blog/tag/%D7%A9%D7%99%D7%98%D7%95%D7%AA-%D7%98%D7%99%D7%A4%D7%95%D7%9C</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cnafim-lauf.co.il/blog/tag/%D7%95%D7%99%D7%A1%D7%95%D7%AA-%D7%A8%D7%92%D7%A9%D7%99</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cnafim-lauf.co.il/blog/tag/%D7%90%D7%91%D7%97%D7%95%D7%9F-%D7%95%D7%94%D7%95%D7%A8%D7%90%D7%94-%D7%9E%D7%AA%D7%A7%D7%A0%D7%AA</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cnafim-lauf.co.il/blog/tag/%D7%93%D7%99%D7%9E%D7%95%D7%99-%D7%A2%D7%A6%D7%9E%D7%99-%D7%95%D7%91%D7%99%D7%98%D7%97%D7%95%D7%9F</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cnafim-lauf.co.il/accessibility</loc>

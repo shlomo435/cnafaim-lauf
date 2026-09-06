@@ -93,12 +93,47 @@ export function readPostsMeta() {
     const title = quotedField(src, 'title');
     const description = quotedField(src, 'description');
     const pillar = src.split(NL).some((l) => l.startsWith('  pillar: true'));
+    const tagLine = src.split(NL).find((l) => l.startsWith('  tags: ['));
+    const tags = tagLine ? [...tagLine.matchAll(/'([^']+)'/g)].map((m) => m[1]) : [];
 
     if (declared !== slug) throw new Error(slug + '.ts: slug does not match filename');
     if (!date) throw new Error(slug + '.ts: missing or malformed date');
     if (!title) throw new Error(slug + '.ts: could not read title');
     if (!description) throw new Error(slug + '.ts: could not read description');
 
-    return { slug, title, description, date, lastmod: lastModified ?? date, pillar };
+    if (!tags.length) throw new Error(slug + '.ts: could not read tags');
+
+    return { slug, title, description, date, lastmod: lastModified ?? date, pillar, tags };
   });
+}
+
+/**
+ * Kept in step with MIN_POSTS_FOR_INDEXED_TAG in src/lib/blog.ts, which the page
+ * uses to decide robots. This copy exists because the sitemap generator runs on
+ * the Netlify build image and cannot import TypeScript there. validate-content
+ * asserts the two agree, so a change to one without the other fails locally.
+ */
+export const MIN_POSTS_FOR_INDEXED_TAG = 3;
+
+/** Slug for a tag - must match tagToSlug() in src/lib/blog.ts exactly. */
+export const tagToSlug = (tag) => tag.replace(/\s+/g, '-').toLowerCase();
+
+/**
+ * Tag archives big enough to index, with the newest post date in each. Only these
+ * belong in the sitemap: listing a noindex URL there is a contradiction Google
+ * reports back.
+ */
+export function readIndexableTags(posts) {
+  const byTag = new Map();
+  for (const post of posts) {
+    for (const tag of post.tags) {
+      const bucket = byTag.get(tag) ?? { tag, count: 0, lastmod: '0000-00-00' };
+      bucket.count++;
+      if (post.lastmod > bucket.lastmod) bucket.lastmod = post.lastmod;
+      byTag.set(tag, bucket);
+    }
+  }
+  return [...byTag.values()]
+    .filter((t) => t.count >= MIN_POSTS_FOR_INDEXED_TAG)
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag, 'he'));
 }

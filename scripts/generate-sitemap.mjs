@@ -5,7 +5,8 @@
  * Rules this encodes (they are what Search Console complains about otherwise):
  *   - no trailing slash on any URL except the site root; the host 301s the
  *     slashed form, and a sitemap entry that redirects does not get indexed
- *   - /blog/tag/* is deliberately excluded: those archives are noindex
+ *   - only tag archives above the indexing threshold are listed; the thin ones
+ *     stay noindex and out of the file
  *
  * lastmod:
  *   - blog posts use their own lastModified ?? date from src/lib/blog.ts. The
@@ -16,7 +17,7 @@
  *     (e.g. a brand-new file that is not committed yet).
  */
 import fs from 'node:fs';
-import { readPostsMeta } from './lib/posts-meta.mjs';
+import { readPostsMeta, readIndexableTags, tagToSlug } from './lib/posts-meta.mjs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 
@@ -75,9 +76,21 @@ const priorityOf = (post) => POST_PRIORITY[post.slug] ?? (post.pillar ? '0.8' : 
 // sitemap has always used.
 
 // ── Build the entry list ──────────────────────────────────────────────────────
+const posts = readPostsMeta();
+
+// Tag archives that carry enough posts to be worth indexing. The path is
+// percent-encoded because Next renders the canonical that way, and a sitemap
+// <loc> that differs from the page's own canonical is a mismatch Google reports.
+const tagEntries = readIndexableTags(posts).map((t) => ({
+  path: '/blog/tag/' + encodeURIComponent(tagToSlug(t.tag)),
+  changefreq: 'weekly',
+  priority: '0.5',
+  lastmod: t.lastmod,
+}));
+
 const entries = [
   ...STATIC_ROUTES.map((r) => ({ ...r, lastmod: gitDate(r.source) })),
-  ...readPostsMeta().map((p) => ({
+  ...posts.map((p) => ({
     path: `/blog/${p.slug}`,
     changefreq: 'monthly',
     priority: priorityOf(p),
@@ -89,13 +102,16 @@ const entries = [
     priority: '0.6',
     lastmod: gitDate(FEATURES_SOURCE),
   })),
+  ...tagEntries,
   ...LEGAL_ROUTES.map((r) => ({ ...r, lastmod: gitDate(r.source) })),
 ];
 
 // ── Guards: fail the build rather than ship a bad sitemap ─────────────────────
 for (const e of entries) {
   if (e.path !== '/' && e.path.endsWith('/')) throw new Error(`trailing slash: ${e.path}`);
-  if (e.path.startsWith('/blog/tag/')) throw new Error(`tag archives are noindex: ${e.path}`);
+  if (e.path.startsWith('/blog/tag/') && !tagEntries.includes(e)) {
+    throw new Error(`tag archive below the indexing threshold: ${e.path}`);
+  }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(e.lastmod)) throw new Error(`bad lastmod on ${e.path}: ${e.lastmod}`);
 }
 const dupes = entries.map((e) => e.path).filter((p, i, a) => a.indexOf(p) !== i);

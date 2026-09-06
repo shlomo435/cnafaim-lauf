@@ -25,7 +25,9 @@ const SITEMAP = 'public/sitemap.xml';
 const ORIGIN = 'https://cnafim-lauf.co.il';
 
 // Pages that legitimately carry no canonical.
-const NO_CANONICAL_OK = new Set(['/404', '/_not-found']);
+// Error pages carry no canonical by design: /410 is the body Netlify serves for
+// retired tag archives, and canonicalising it would invite indexing.
+const NO_CANONICAL_OK = new Set(['/404', '/_not-found', '/410']);
 const SKIP = (p) => p.includes('__forms') || p.includes('google3');
 
 function walk(dir, acc = []) {

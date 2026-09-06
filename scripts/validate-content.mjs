@@ -7,7 +7,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readPostsMeta } from './lib/posts-meta.mjs';
+import {
+  readPostsMeta,
+  readIndexableTags,
+  tagToSlug as tagToSlugMjs,
+  MIN_POSTS_FOR_INDEXED_TAG as MIN_TAG_MJS,
+} from './lib/posts-meta.mjs';
 
 if (!process.features.typescript) {
   console.error('check:content needs Node >= 22.18 (native TypeScript type-stripping).');
@@ -190,6 +195,43 @@ try {
   }
 } catch (err) {
   fail('index.ts', 'sitemap reader threw: ' + err.message);
+}
+
+// The tag-archive rules live in two places: src/lib/blog.ts drives the page's
+// robots tag, scripts/lib/posts-meta.mjs drives the sitemap. If they disagree the
+// site ships a noindex URL inside its own sitemap - the exact contradiction Search
+// Console reports. blog.ts cannot be imported here (it re-exports a directory,
+// which Node's resolver rejects), so the threshold is read from its source and the
+// tag set is recomputed from the post modules already loaded above.
+{
+  const blogSrc = fs.readFileSync('src/lib/blog.ts', 'utf8');
+  const declared = /MIN_POSTS_FOR_INDEXED_TAG\s*=\s*(\d+)/.exec(blogSrc);
+  if (!declared) {
+    fail('tags', 'MIN_POSTS_FOR_INDEXED_TAG not found in src/lib/blog.ts');
+  } else if (Number(declared[1]) !== MIN_TAG_MJS) {
+    fail('tags', `indexing threshold differs: blog.ts says ${declared[1]}, posts-meta.mjs says ${MIN_TAG_MJS}`);
+  }
+
+  const counts = new Map();
+  for (const { post } of posts) {
+    for (const tag of post.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+  }
+  const fromModules = [...counts.entries()]
+    .filter(([, n]) => n >= MIN_TAG_MJS)
+    .map(([tag]) => tagToSlugMjs(tag))
+    .sort();
+
+  try {
+    const fromReader = readIndexableTags(readPostsMeta()).map(({ tag }) => tagToSlugMjs(tag)).sort();
+    if (fromModules.join('|') !== fromReader.join('|')) {
+      fail(
+        'tags',
+        `indexable tag sets differ between the post modules and the sitemap reader:\n    modules: ${fromModules.join(', ')}\n    reader : ${fromReader.join(', ')}`
+      );
+    }
+  } catch (err) {
+    fail('tags', 'sitemap reader threw while computing tags: ' + err.message);
+  }
 }
 
 if (process.argv.includes('--words')) {

@@ -11,6 +11,7 @@ import {
   tagToSlug,
   getAllTags,
   formatDate,
+  MIN_POSTS_FOR_INDEXED_TAG,
   type Post,
 } from '../../../../lib/blog';
 
@@ -26,17 +27,22 @@ export async function generateMetadata({
   const { tag: tagSlug } = await params;
   const tag = slugToTag(tagSlug);
   if (!tag) return { title: 'נושא לא נמצא | כנפיים לעוף' };
+  const count = getPostsByTag(tag).length;
+  // A blanket noindex used to sit here, from when 28 ad-hoc tags produced mostly
+  // single-post archives. After the consolidation the big archives are real topic
+  // hubs, and Search Console was reporting the blanket rule as 35 excluded pages.
+  // Index the substantial ones; keep the thin ones out. `follow` either way.
+  const index = count >= MIN_POSTS_FOR_INDEXED_TAG;
   return {
     title: `${tag} - מדריכים וכתבות | כנפיים לעוף`,
-    description: `כל המדריכים והכתבות בנושא ${tag}, מאת גאולה אלון - מטפלת רגשית ומאבחנת לימודית.`,
+    description: index
+      ? `${count} מדריכים וכתבות בנושא ${tag}, מאת גאולה אלון - מטפלת רגשית ומאבחנת לימודית במרכז כנפיים לעוף.`
+      : `כל המדריכים והכתבות בנושא ${tag}, מאת גאולה אלון - מטפלת רגשית ומאבחנת לימודית.`,
     // Built from the canonical (lowercased) slug - never from the raw param,
     // which may be an uppercase/encoded variant that only reaches this page
     // through a redirect.
     ...canonicalMeta(`/blog/tag/${tagToSlug(tag)}`),
-    // Tag archives exist for readers, not for search: most hold a single post,
-    // so indexing them would add thin, near-duplicate pages. `follow` still lets
-    // link equity reach the articles, and they stay out of the sitemap.
-    robots: { index: false, follow: true },
+    robots: { index, follow: true },
   };
 }
 

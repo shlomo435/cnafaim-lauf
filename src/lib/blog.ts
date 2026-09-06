@@ -50,6 +50,25 @@ export function getPostsByTag(tag: string): Post[] {
 }
 
 /**
+ * How many posts a tag archive needs before it is worth indexing.
+ *
+ * Below this the archive is a near-duplicate of the posts it lists and Search
+ * Console reports it as thin; at or above it the page is a genuine topic hub.
+ * Archives under the bar stay `noindex, follow`, so link equity still reaches
+ * the articles.
+ *
+ * scripts/lib/posts-meta.mjs carries the same number for the sitemap generator,
+ * which cannot import TypeScript on the Netlify build image. validate-content
+ * cross-checks the two, so they cannot drift apart silently.
+ */
+export const MIN_POSTS_FOR_INDEXED_TAG = 3;
+
+/** Tags whose archive is substantial enough to index - and to put in the sitemap. */
+export function indexableTags(): { tag: string; count: number }[] {
+  return getAllTags().filter(({ count }) => count >= MIN_POSTS_FOR_INDEXED_TAG);
+}
+
+/**
  * Slug for a tag, and the reverse lookup.
  *
  * Deliberately NOT percent-encoded: generateStaticParams writes one file per
