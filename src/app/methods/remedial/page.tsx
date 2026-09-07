@@ -9,8 +9,6 @@ import { AREAS, OG_IMAGE, areaServed } from '../../../lib/site';
 const BASE = 'https://cnafim-lauf.co.il';
 const PAGE_URL = `${BASE}/methods/remedial`;
 
-// Areas served - fuels both the visible copy and the Service schema.
-
 // FAQ data - single source for both the visible section and the FAQPage schema.
 const FAQ = [
   {
@@ -454,8 +452,8 @@ export default function RemedialPage() {
 
         <RelatedLinks
           links={[
-            { href: '/blog/avchun-didakti-madrich-horim', title: 'אבחון דידקטי: המדריך המלא להורים', desc: 'מה בודקים, כמה זה עולה, ומה עושים עם הדוח אחר כך.' },
-            { href: '/blog/kshei-kriya-yelad',            title: 'הילד שלי לא מצליח לקרוא',          desc: 'מתי זה שלב ומתי כדאי לפנות לעזרה מקצועית.' },
+            { href: '/blog/avchun-didakti-madrich-horim', title: 'מה בודקים באבחון דידקטי וכמה זה עולה', desc: 'מה בודקים, כמה זה עולה, ומה עושים עם הדוח אחר כך.' },
+            { href: '/blog/kshei-kriya-yelad',            title: 'הילד לא מצליח לקרוא? מתי לדאוג',          desc: 'מתי זה שלב ומתי כדאי לפנות לעזרה מקצועית.' },
             { href: '/metapel-regashi',                   title: 'מטפלת רגשית בנתיבות והדרום',      desc: 'כשקושי לימודי מלווה גם בקושי רגשי.' },
             { href: '/blog/mesurav-beit-sefer',           title: 'הילד לא רוצה ללכת לבית הספר',          desc: 'מה עומד מאחורי הסירוב ואיך להגיב נכון.' },
           ]}

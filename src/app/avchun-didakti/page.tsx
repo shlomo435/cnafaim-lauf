@@ -9,17 +9,17 @@ import { AREAS, OG_IMAGE, OWNER_NAME, SCHEMA_IDS, SITE_URL, areaServed } from '.
 
 const PAGE_URL = `${SITE_URL}/avchun-didakti`;
 
+type FaqItem = { q: string; a: string; link?: { text: string; href: string } };
 
-/** Regional councils - typed as AdministrativeArea in schema, not City. */
-
-const FAQ = [
+const FAQ: FaqItem[] = [
   {
     q: 'מה זה אבחון דידקטי?',
     a: 'אבחון דידקטי הוא תהליך מובנה שבוחן את המיומנויות הלימודיות של הילד - קריאה, כתיבה, הבנת הנקרא, חשבון, זיכרון וקשב. מטרתו להבין היכן בדיוק נמצא הקושי ומה עומד מאחוריו, וממנו נגזרת תוכנית עבודה מותאמת אישית והמלצות להתאמות בבית הספר.',
   },
   {
-    q: 'מה ההבדל בין אבחון דידקטי לאבחון פסיכודידקטי?',
-    a: 'אבחון דידקטי מתמקד בתפקוד הלימודי עצמו. אבחון פסיכודידקטי מוסיף לו רובד פסיכולוגי - מדידת משכל ובחינת היבטים רגשיים - ומבוצע בשיתוף פסיכולוג. כשהקושי נראה לימודי בעיקרו, אבחון דידקטי הוא לרוב המענה המדויק והמהיר יותר.',
+    q: 'איך יודעים איזה סוג אבחון מתאים לילד שלי?',
+    a: 'בשיחת ההיכרות עוברים יחד על מה שקורה בכיתה, מה אומרים המורים ומה אתם רואים בבית. כשהתמונה שעולה היא בעיקר לימודית - קריאה, כתיבה, חשבון או קשב - אבחון דידקטי הוא בדרך כלל המענה המתאים. כשעולות גם שאלות רגשיות או צורך במדידת משכל, צריך אבחון פסיכודידקטי שנעשה בשיתוף פסיכולוג, ואני אומרת את זה מראש. הרחבתי על ההבדל בין שני סוגי האבחון במדריך לאבחון דידקטי להורים.',
+    link: { text: 'במדריך לאבחון דידקטי להורים', href: '/blog/avchun-didakti-madrich-horim' },
   },
   {
     q: 'מאיזה גיל אפשר לבצע אבחון?',
@@ -115,6 +115,20 @@ function P({ children }: { children: React.ReactNode }) {
 
 function Strong({ children }: { children: React.ReactNode }) {
   return <strong style={{ color: C.textDark, fontWeight: 600 }}>{children}</strong>;
+}
+
+function FaqAnswer({ item }: { item: FaqItem }) {
+  if (!item.link || !item.a.includes(item.link.text)) return <>{item.a}</>;
+  const [before, ...rest] = item.a.split(item.link.text);
+  return (
+    <>
+      {before}
+      <Link href={item.link.href} className="underline underline-offset-2" style={{ color: C.plum }}>
+        {item.link.text}
+      </Link>
+      {rest.join(item.link.text)}
+    </>
+  );
 }
 
 export default function DidacticAssessmentPage() {
@@ -272,16 +286,18 @@ export default function DidacticAssessmentPage() {
           {FAQ.map((item) => (
             <div key={item.q} className="rounded-xl p-5 border text-right" style={{ backgroundColor: C.cream, borderColor: C.border }}>
               <h3 className="font-medium text-base mb-2.5" style={{ color: C.textDark }}>{item.q}</h3>
-              <p className="text-sm font-light leading-[1.9]" style={{ color: C.textMid }}>{item.a}</p>
+              <p className="text-sm font-light leading-[1.9]" style={{ color: C.textMid }}>
+                <FaqAnswer item={item} />
+              </p>
             </div>
           ))}
         </div>
 
         <RelatedLinks
           links={[
-            { href: '/blog/avchun-didakti-madrich-horim', title: 'המדריך המלא לאבחון דידקטי', desc: 'הרחבה: מה בודקים, טווחי מחירים, ומה עושים עם הדוח.' },
+            { href: '/blog/avchun-didakti-madrich-horim', title: 'מה בודקים באבחון דידקטי וכמה זה עולה', desc: 'הרחבה: מה בודקים, טווחי מחירים, ומה עושים עם הדוח.' },
             { href: '/methods/remedial',                  title: 'הוראה מתקנת',                 desc: 'המשך טבעי לאבחון - תוכנית עבודה שמטפלת בשורש הקושי.' },
-            { href: '/blog/kshei-kriya-yelad',            title: 'הילד שלי לא מצליח לקרוא',     desc: 'מתי זה שלב התפתחותי ומתי כדאי לפנות.' },
+            { href: '/blog/kshei-kriya-yelad',            title: 'הילד לא מצליח לקרוא? מתי לדאוג',     desc: 'מתי זה שלב התפתחותי ומתי כדאי לפנות.' },
             { href: '/metapel-regashi',                   title: 'מטפלת רגשית',                 desc: 'כשקושי לימודי מלווה גם בשחיקה רגשית.' },
           ]}
         />

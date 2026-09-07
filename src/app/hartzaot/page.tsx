@@ -9,8 +9,6 @@ import { AREAS, OG_IMAGE, OWNER_NAME, SCHEMA_IDS, SITE_URL, areaServed } from '.
 const PAGE_URL = `${SITE_URL}/hartzaot`;
 
 
-/** Regional councils - typed as AdministrativeArea in schema, not City. */
-
 const TOPICS = [
   { t: 'חיזוק ביטחון עצמי אצל ילדים', d: 'איך נבנה דימוי עצמי, מה שוחק אותו, ומה הורים וצוותים יכולים לעשות אחרת.' },
   { t: 'ויסות רגשי והתמודדות עם חרדות', d: 'למה ילדים מתפוצצים על דברים קטנים, ואיך מלווים אותם חזרה לשקט.' },

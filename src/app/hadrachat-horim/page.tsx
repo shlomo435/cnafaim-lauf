@@ -9,8 +9,6 @@ import { AREAS, OG_IMAGE, OWNER_NAME, SCHEMA_IDS, SITE_URL, areaServed } from '.
 const PAGE_URL = `${SITE_URL}/hadrachat-horim`;
 
 
-/** Regional councils - typed as AdministrativeArea in schema, not City. */
-
 const FAQ = [
   {
     q: 'מה זה הדרכת הורים?',

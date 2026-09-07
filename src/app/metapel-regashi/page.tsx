@@ -11,8 +11,6 @@ const BASE = 'https://cnafim-lauf.co.il';
 const PAGE_URL = `${BASE}/metapel-regashi`;
 
 
-/** Regional councils - typed as AdministrativeArea in schema, not City. */
-
 const METHODS = [
   {
     name: 'CBT',
