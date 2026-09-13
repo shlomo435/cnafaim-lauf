@@ -74,8 +74,6 @@ const serviceSchema = {
   provider: {
     '@type': 'Person',
     '@id': SCHEMA_IDS.person,
-    name: OWNER_NAME,
-    jobTitle: 'מטפלת רגשית ומרצה',
   },
   areaServed: areaServed(),
   audience: [

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../../../../lib/tokens';
 import { canonicalMeta } from '../../../../lib/site';
+import Breadcrumbs from '../../../../components/Breadcrumbs';
 import {
   getAllTagSlugs,
   getPostsByTag,
@@ -104,13 +105,13 @@ export default async function TagArchivePage({ params }: { params: Promise<{ tag
       </header>
 
       <main className="max-w-5xl mx-auto px-6 py-10 md:py-14">
-        <nav className="flex items-center gap-2 text-xs mb-8 justify-end flex-wrap" style={{ color: C.textLight }} aria-label="נתיב ניווט">
-          <Link href="/" className="hover:underline" style={{ color: C.rose }}>בית</Link>
-          <span>/</span>
-          <Link href="/blog" className="hover:underline" style={{ color: C.rose }}>בלוג</Link>
-          <span>/</span>
-          <span>{tag}</span>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: 'בית', href: '/' },
+            { label: 'בלוג', href: '/blog' },
+            { label: tag },
+          ]}
+        />
 
         <div className="text-center mb-10">
           <p className="text-sm font-semibold tracking-[0.2em] mb-3" style={{ color: C.rose }}>נושא</p>

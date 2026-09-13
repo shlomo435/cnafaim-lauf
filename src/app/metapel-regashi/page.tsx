@@ -96,8 +96,6 @@ const serviceSchema = {
   provider: {
     '@type': 'Person',
     '@id': SCHEMA_IDS.person,
-    name: 'גאולה אלון',
-    jobTitle: 'מטפלת רגשית ומאבחנת לימודית',
   },
   areaServed: areaServed(),
   availableChannel: [

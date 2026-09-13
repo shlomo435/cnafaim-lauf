@@ -5,7 +5,7 @@ import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
 import InfoDisclaimer from '../../components/InfoDisclaimer';
-import { AREAS, OG_IMAGE, OWNER_NAME, SCHEMA_IDS, SITE_URL, areaServed } from '../../lib/site';
+import { AREAS, OG_IMAGE, SCHEMA_IDS, SITE_URL, areaServed } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/avchun-didakti`;
 
@@ -78,8 +78,6 @@ const serviceSchema = {
   provider: {
     '@type': 'Person',
     '@id': SCHEMA_IDS.person,
-    name: OWNER_NAME,
-    jobTitle: 'מאבחנת דידקטית ומורה להוראה מתקנת',
   },
   areaServed: areaServed(),
 };

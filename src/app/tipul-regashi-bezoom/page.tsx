@@ -5,7 +5,7 @@ import { C } from '../../lib/tokens';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import RelatedLinks from '../../components/RelatedLinks';
 import InfoDisclaimer from '../../components/InfoDisclaimer';
-import { SITE_URL, OWNER_NAME, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
+import { SITE_URL, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
 
 const PAGE_URL = `${SITE_URL}/tipul-regashi-bezoom`;
 
@@ -66,8 +66,6 @@ const serviceSchema = {
   provider: {
     '@type': 'Person',
     '@id': SCHEMA_IDS.person,
-    name: OWNER_NAME,
-    jobTitle: 'מטפלת רגשית ומאבחנת לימודית',
   },
   areaServed: { '@type': 'Country', name: 'ישראל' },
   availableChannel: {

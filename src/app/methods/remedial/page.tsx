@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { C } from '../../../lib/tokens';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedLinks from '../../../components/RelatedLinks';
-import { AREAS, OG_IMAGE, areaServed } from '../../../lib/site';
+import { AREAS, OG_IMAGE, SCHEMA_IDS, areaServed } from '../../../lib/site';
 
 const BASE = 'https://cnafim-lauf.co.il';
 const PAGE_URL = `${BASE}/methods/remedial`;
@@ -71,12 +71,7 @@ const serviceSchema = {
   description:
     'הוראה מתקנת לילדים ולנוער עם קשיי קריאה, כתיבה, שטף, הבנת הנקרא וקשב. אבחון תפקודי-לימודי ותוכנית אישית המשלבת תנועה, תרגילי מוח וחיזוק ביטחון עצמי.',
   url: PAGE_URL,
-  provider: {
-    '@type': 'Person',
-    name: 'גאולה אלון',
-    jobTitle: 'מורה להוראה מתקנת ומאבחנת לימודית',
-    url: BASE,
-  },
+  provider: { '@type': 'Person', '@id': SCHEMA_IDS.person },
   areaServed: areaServed(),
   availableChannel: [
     {

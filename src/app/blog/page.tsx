@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { C } from '../../lib/tokens';
-import { absoluteUrl, OG_IMAGE } from '../../lib/site';
+import { absoluteUrl, OG_IMAGE, SCHEMA_IDS } from '../../lib/site';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import { getPostsSorted, getAllTags, tagToSlug, formatDate, type Post } from '../../lib/blog';
 
@@ -17,7 +17,7 @@ const collectionSchema = {
     'מדריכים מקצועיים של גאולה אלון על ויסות רגשי, חרדה בילדים, הוראה מתקנת, דימוי עצמי ועוד.',
   url: absoluteUrl('/blog'),
   inLanguage: 'he',
-  isPartOf: { '@type': 'WebSite', name: 'כנפיים לעוף', url: absoluteUrl('/') },
+  isPartOf: { '@id': SCHEMA_IDS.website },
   mainEntity: {
     '@type': 'ItemList',
     itemListElement: getPostsSorted().map((post, i) => ({

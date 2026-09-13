@@ -16,6 +16,13 @@
  *   7. every id="..." on a page is unique
  *   8. every in-page href="#x" has a matching id="x"
  *   9. every JSON-LD block parses
+ *  10. every internal link resolves to a page that was built
+ *  11. every indexable page is reachable by a link from somewhere else on the site
+ *  12. no internal link points at a route the site deliberately retired
+ *
+ * Checks 10-12 exist because a stale report once claimed half the blog posts were
+ * orphaned and that /blog still listed the retired tag taxonomy. Both were false,
+ * but nothing in the repo could prove it in one command. Now it can.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -113,6 +120,53 @@ for (const file of files) {
   });
 }
 
+// ---- internal link graph ----------------------------------------------------
+// Built from the rendered HTML, so it reflects what a crawler without JavaScript
+// actually sees - which is the only thing that counts for indexing.
+
+// Routes the site deliberately retired. An internal link to one of these is a
+// real bug: it sends a crawler to a 301 or a 410 from inside our own pages.
+const RETIRED = [/^\/blog\/simanim-harada-yelad$/, /^\/blog\/tag\//];
+// Tag archives that build but are noindex on purpose; they need no inbound link.
+const NOINDEX_OK = new Set(['/blog/tag/נשים', '/blog/tag/נערות']);
+const NOT_LINKABLE = new Set(['/404', '/_not-found', '/410']);
+const ASSET = /\.(jpg|jpeg|png|ico|svg|xml|txt|webp|mp4|json|pdf)$/i;
+
+const linkedTo = new Set();
+for (const file of files) {
+  const html = fs.readFileSync(file, 'utf8');
+  const from = routeOf(file);
+
+  for (const m of html.matchAll(/href="(\/[^"#?]*)"/g)) {
+    let target = decodeURIComponent(m[1]);
+    if (/^\/(_next|\.netlify)/.test(target) || ASSET.test(target)) continue;
+    if (target.length > 1) target = target.replace(/\/$/, '');
+
+    // A retired route is still "built" only when it is the 301 source, so check
+    // the retired list before the existence check to get the clearer message.
+    const retired = RETIRED.find((re) => re.test(target));
+    if (retired && !built.has(target)) {
+      problems.push(`${from}: links to retired route ${target} (crawler gets a 301 or 410)`);
+      continue;
+    }
+    if (!built.has(target)) {
+      problems.push(`${from}: links to ${target}, which was not built`);
+      continue;
+    }
+    if (target !== from) linkedTo.add(target);
+  }
+}
+
+// An indexable page nothing links to is invisible to a crawler that does not
+// read the sitemap, and weak even to one that does.
+for (const route of built) {
+  if (linkedTo.has(route) || route === '/') continue;
+  if (NOT_LINKABLE.has(route) || NOINDEX_OK.has(route) || SKIP(route)) continue;
+  const html = fs.readFileSync(path.join(OUT, route === '/' ? 'index.html' : `${route}.html`), 'utf8');
+  if (/<meta name="robots" content="[^"]*noindex/.test(html)) continue;
+  problems.push(`${route}: indexable but no internal link points at it (orphan)`);
+}
+
 if (problems.length) {
   console.error(`\n✗ ${problems.length} SEO problem(s):\n`);
   for (const p of problems) console.error('  - ' + p);
@@ -123,3 +177,4 @@ if (problems.length) {
 console.log(`✓ SEO checks passed: ${files.length} pages, ${locs.length} sitemap URLs`);
 console.log('  canonical present and === og:url everywhere; no trailing-slash URLs.');
 console.log('  one h1 per page; ids unique; in-page anchors resolve; JSON-LD parses.');
+console.log(`  ${linkedTo.size} routes have an inbound internal link; no orphans, no links to retired routes.`);
