@@ -21,6 +21,7 @@ import { post as ocdYeladim } from './ocd-yeladim';
 import { post as pchadimBalaylaYeladim } from './pchadim-balayla-yeladim';
 import { post as hardatBechinot } from './hardat-bechinot';
 import { post as keeveiBetenRegashiim } from './keevei-beten-regashiim';
+import { post as hafraatKeshevYeladim } from './hafraat-keshev-yeladim';
 
 /**
  * Every post, in publication-file order. The sitemap generator reads this order,
@@ -49,4 +50,5 @@ export const allPosts: Post[] = [
   pchadimBalaylaYeladim,
   hardatBechinot,
   keeveiBetenRegashiim,
+  hafraatKeshevYeladim,
 ];
