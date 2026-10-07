@@ -19,6 +19,10 @@
  *  10. every internal link resolves to a page that was built
  *  11. every indexable page is reachable by a link from somewhere else on the site
  *  12. no internal link points at a route the site deliberately retired
+ *  13. every VideoObject sits on the watch page the sitemap lists for its video,
+ *      plays that video, and points at files that exist
+ *  14. no meta description is long enough for Google to truncate it
+ *  15. every image a page claims in og:image, twitter:image or JSON-LD exists
  *
  * Checks 10-12 exist because a stale report once claimed half the blog posts were
  * orphaned and that /blog still listed the retired tag taxonomy. Both were false,
@@ -167,6 +171,106 @@ for (const route of built) {
   problems.push(`${route}: indexable but no internal link points at it (orphan)`);
 }
 
+// ---- declared images ---------------------------------------------------------
+// A per-post cover that was never rendered leaves og:image and Article.image
+// pointing at a 404. Nothing on the page looks wrong, and it only surfaces when
+// somebody shares the link. scripts/generate-post-covers.mjs writes those files;
+// this proves it ran before the build.
+for (const file of files) {
+  const html = fs.readFileSync(file, 'utf8');
+  const route = routeOf(file);
+  const declared = new Set();
+  for (const [, url] of html.matchAll(/<meta property="og:image" content="([^"]+)"/g)) declared.add(url);
+  for (const [, url] of html.matchAll(/<meta name="twitter:image" content="([^"]+)"/g)) declared.add(url);
+  for (const [, json] of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
+    let data;
+    try {
+      data = JSON.parse(json);
+    } catch {
+      continue; // already reported by check 9
+    }
+    for (const node of data['@graph'] ?? [data]) {
+      for (const value of [node.image, node.thumbnailUrl, node.logo?.url].flat()) {
+        if (typeof value === 'string') declared.add(value);
+      }
+    }
+  }
+  for (const url of declared) {
+    if (!url.startsWith(ORIGIN)) continue; // images hosted elsewhere are not ours to verify
+    if (!fs.existsSync(path.join(OUT, decodeURIComponent(url.slice(ORIGIN.length))))) {
+      problems.push(`${route}: declares image ${url}, which is not a file this site serves`);
+    }
+  }
+}
+
+// ---- meta description length -------------------------------------------------
+// Google truncates around 160 characters. Counting the raw HTML would overstate
+// every description containing a quote (&quot; is six characters for one), which
+// is exactly how two already-fine pages were reported as too long - so decode
+// first. No minimum is enforced here: a short description is weak, not broken.
+const decodeEntities = (s) =>
+  s.replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+for (const file of files) {
+  const html = fs.readFileSync(file, 'utf8');
+  const raw = /<meta name="description" content="([^"]*)"/.exec(html)?.[1];
+  if (!raw) continue;
+  const length = decodeEntities(raw).length;
+  if (length > 160) problems.push(`${routeOf(file)}: meta description is ${length} chars; Google truncates past 160`);
+}
+
+// ---- videos -----------------------------------------------------------------
+// Google indexes a video only from its watch page. A VideoObject on any other
+// page is what Search Console rejected as "Video is not on a watch page", and a
+// sitemap video that disagrees with the page's markup is a mismatch it reports.
+const sitemapVideos = new Map(); // contentUrl -> { page, thumbnail }
+for (const [, block] of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
+  const content = /<video:content_loc>([^<]+)</.exec(block)?.[1];
+  if (!content) continue;
+  sitemapVideos.set(content, {
+    page: /<loc>([^<]+)</.exec(block)[1].replace(ORIGIN, ''),
+    thumbnail: /<video:thumbnail_loc>([^<]+)</.exec(block)?.[1],
+  });
+}
+
+const markedUp = new Set();
+for (const file of files) {
+  const html = fs.readFileSync(file, 'utf8');
+  const route = routeOf(file);
+  for (const [, json] of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
+    let data;
+    try {
+      data = JSON.parse(json);
+    } catch {
+      continue; // already reported by check 9
+    }
+    for (const node of data['@graph'] ?? [data]) {
+      if (node['@type'] !== 'VideoObject') continue;
+      const listed = sitemapVideos.get(node.contentUrl);
+      if (!listed) {
+        problems.push(`${route}: VideoObject for ${node.contentUrl} has no <video:video> in the sitemap`);
+      } else if (listed.page !== route) {
+        problems.push(`${route}: VideoObject for ${node.contentUrl} belongs only on its watch page ${listed.page}`);
+      } else {
+        markedUp.add(node.contentUrl);
+        if (listed.thumbnail !== node.thumbnailUrl) {
+          problems.push(`${route}: thumbnailUrl ${node.thumbnailUrl} !== sitemap thumbnail_loc ${listed.thumbnail}`);
+        }
+      }
+      for (const url of [node.contentUrl, node.thumbnailUrl]) {
+        if (!url?.startsWith(ORIGIN) || !fs.existsSync(path.join(OUT, url.slice(ORIGIN.length)))) {
+          problems.push(`${route}: VideoObject points at ${url}, which is not a file this site serves`);
+        }
+      }
+      if (node.contentUrl && !html.includes(`src="${node.contentUrl.slice(ORIGIN.length)}"`)) {
+        problems.push(`${route}: VideoObject describes ${node.contentUrl}, but the page has no player for it`);
+      }
+    }
+  }
+}
+for (const [content, { page }] of sitemapVideos) {
+  if (!markedUp.has(content)) problems.push(`sitemap: ${page} lists video ${content} but carries no VideoObject for it`);
+}
+
 if (problems.length) {
   console.error(`\n✗ ${problems.length} SEO problem(s):\n`);
   for (const p of problems) console.error('  - ' + p);
@@ -178,3 +282,4 @@ console.log(`✓ SEO checks passed: ${files.length} pages, ${locs.length} sitema
 console.log('  canonical present and === og:url everywhere; no trailing-slash URLs.');
 console.log('  one h1 per page; ids unique; in-page anchors resolve; JSON-LD parses.');
 console.log(`  ${linkedTo.size} routes have an inbound internal link; no orphans, no links to retired routes.`);
+console.log(`  ${markedUp.size} video(s) marked up only on their watch page, matching the video sitemap.`);
