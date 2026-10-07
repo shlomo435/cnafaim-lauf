@@ -6,6 +6,9 @@ import RelatedLinks from '../../../components/RelatedLinks';
 import { canonicalMeta, SITE_URL, SCHEMA_IDS, areaServed } from '../../../lib/site';
 import InfoDisclaimer from '../../../components/InfoDisclaimer';
 import Breadcrumbs from '../../../components/Breadcrumbs';
+import VideoPlayer from '../../../components/VideoPlayer';
+import VideoTranscript from '../../../components/VideoTranscript';
+import { EMR_VIDEO, videoWatchPath } from '../../../lib/videos';
 
 const FAQ = [
   {
@@ -72,29 +75,11 @@ const faqSchema = {
   })),
 };
 
-// The demo clip below is server-rendered in the page, but without VideoObject
-// markup Google reported it as an unindexed video. Facts here are real: the
-// clip is 5 seconds long (parsed from the mp4 header) and was added to the
-// site on 2026-03-30 (git date of public/emr_video1.mp4).
-const videoSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'VideoObject',
-  name: 'הדגמת טיפול EMR - עיבוד רגשי בתנועות עיניים',
-  description:
-    'סרטון הדגמה קצר מתוך מפגש EMR: כך נראית העבודה עם תנועות עיניים בקליניקה של גאולה אלון.',
-  thumbnailUrl: `${SITE_URL}/emr_live.jpeg`,
-  uploadDate: '2026-03-30',
-  contentUrl: `${SITE_URL}/emr_video1.mp4`,
-  duration: 'PT5S',
-  inLanguage: 'he',
-};
-
 export default function EmrPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: C.cream, color: C.textDark }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }} />
 
       {/* HEADER */}
       <header
@@ -156,20 +141,28 @@ export default function EmrPage() {
           עיבוד תנועות עיניים
         </p>
 
-        {/* Video */}
-        <div
-          className="w-full rounded-2xl overflow-hidden mb-8 border"
-          style={{ borderColor: C.border, boxShadow: '0 8px 30px rgba(57,73,171,0.07)' }}
-        >
-          <video
-            controls
-            className="w-full block"
-            src="/emr_video1.mp4"
-            aria-label="סרטון הדגמה לטיפול EMR"
+        {/* Video. Readers get the player here, but the VideoObject lives only on
+            the watch page, which Google can index as the clip's own page. */}
+        <section className="mb-12 text-right">
+          <h2
+            className="font-display text-2xl font-medium mb-5"
+            style={{ color: C.textDark, letterSpacing: '-0.02em' }}
           >
-            הדפדפן שלך אינו תומך בתג הווידאו.
-          </video>
-        </div>
+            {EMR_VIDEO.title}
+          </h2>
+          <VideoPlayer video={EMR_VIDEO} />
+          <p className="text-[1.05rem] font-light leading-[1.9] mt-5 mb-6" style={{ color: C.textMid }}>
+            {EMR_VIDEO.description}
+          </p>
+          <VideoTranscript video={EMR_VIDEO} as="h3" />
+          <Link
+            href={videoWatchPath(EMR_VIDEO)}
+            className="inline-block mt-5 text-sm font-medium underline hover:opacity-80"
+            style={{ color: C.rose, textUnderlineOffset: '3px' }}
+          >
+            לצפייה בעמוד הסרטון
+          </Link>
+        </section>
 
         {/* Article body */}
         <div className="space-y-6 text-right">
