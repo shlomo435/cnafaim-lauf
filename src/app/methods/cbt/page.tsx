@@ -39,7 +39,10 @@ const FAQ = [
 ];
 
 export const metadata: Metadata = {
-  title: 'טיפול CBT בנתיבות ובדרום | קוגניטיבי-התנהגותי - כנפיים לעוף',
+  // "cbt לילדים" and "טיפול קוגניטיבי התנהגותי בילדים" both draw impressions and
+  // no clicks, and the old title said neither "לילדים" nor who the page is for -
+  // it opened with the service area. It also carried two separators (| and -).
+  title: 'CBT לילדים - טיפול קוגניטיבי-התנהגותי בנתיבות | כנפיים לעוף',
   description:
     'טיפול CBT בנתיבות, בדרום ובזום - לחרדה, דאגנות וביטחון עצמי לילדים, נערות ונשים. כלים מעשיים כבר מהפגישות הראשונות. גאולה אלון, מעל 20 שנות ניסיון.',
   keywords: [
@@ -159,11 +162,16 @@ export default function CbtPage() {
 
         {/* Article body */}
         <div className="space-y-6 text-right">
-          <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
-            <strong style={{ color: C.textDark, fontWeight: 600 }}>
-              אז איך נראה טיפול קוגניטיבי-התנהגותי (CBT)?
-            </strong>
-          </p>
+          {/* The page's first h2 used to be a three-word benefit card ("מוכח
+              מחקרית"), so nothing above the FAQ matched how a parent phrases the
+              question. This line was already here as bold text - it is a heading
+              in everything but markup. */}
+          <h2
+            className="font-display text-2xl font-medium pt-2"
+            style={{ color: C.textDark, letterSpacing: '-0.02em' }}
+          >
+            איך נראה טיפול קוגניטיבי-התנהגותי (CBT) לילדים?
+          </h2>
 
           <p className="text-[1.1rem] font-light leading-[1.9]" style={{ color: C.textMid }}>
             טיפול CBT מבוסס על ההבנה ש

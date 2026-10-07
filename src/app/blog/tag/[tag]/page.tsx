@@ -20,6 +20,31 @@ export function generateStaticParams() {
   return getAllTagSlugs();
 }
 
+/**
+ * Per-archive meta descriptions.
+ *
+ * One template produced seven near-identical snippets of 93-106 chars that said
+ * only how many posts the archive held. Each line here names the questions the
+ * archive's posts actually answer, and runs 140-160 chars so the SERP shows it
+ * whole. Tags with no entry (the thin, noindex ones) fall back to the template.
+ */
+const TAG_DESCRIPTIONS: Record<string, string> = {
+  'הורות':
+    '17 מדריכים וכתבות בנושא הורות. מה עושים כשהילד מתפרץ, נלחץ, נסגר או מסרב ללכת לבית הספר, ואיך מגיבים בלי להיגרר למאבק. מאת גאולה אלון, מטפלת רגשית.',
+  'חרדה':
+    '13 מדריכים וכתבות בנושא חרדה. התקף חרדה, חרדה חברתית, חרדת פרידה, חרדת בחינות ופחדי לילה: איך מזהים ומה עוזר ברגע עצמו. מאת גאולה אלון, מטפלת רגשית.',
+  'בית ספר ולמידה':
+    '9 מדריכים וכתבות בנושא בית ספר ולמידה. קשיי קריאה, סירוב ללכת לבית הספר, הפרעת קשב וחוסר מוטיבציה - מה מסתתר מאחורי הקושי. מאת גאולה אלון, מטפלת רגשית.',
+  'שיטות טיפול':
+    '7 מדריכים וכתבות בנושא שיטות טיפול. CBT, NLP ו-EMR: מה כל שיטה עושה, במה הן נבדלות ואיך בוחרים מטפל רגשי לילד. מאת גאולה אלון, מטפלת רגשית ומאבחנת לימודית.',
+  'אבחון והוראה מתקנת':
+    '6 מדריכים וכתבות בנושא אבחון והוראה מתקנת. אבחון דידקטי, הוראה מתקנת, קשיי קריאה והפרעת קשב: מה בודקים, כמה זה עולה ומה עושים אחר כך. מאת גאולה אלון.',
+  'ויסות רגשי':
+    '6 מדריכים וכתבות בנושא ויסות רגשי. התפרצויות זעם, התקפי חרדה, מחשבות טורדניות ופחדי לילה - איך עוזרים לילד להירגע ולווסת. מאת גאולה אלון, מטפלת רגשית.',
+  'דימוי עצמי וביטחון':
+    '5 מדריכים וכתבות בנושא דימוי עצמי וביטחון. ילדה שלא מאמינה בעצמה, חרדה חברתית, חוסר מוטיבציה וביטחון עצמי נמוך אצל נשים. מאת גאולה אלון, מטפלת רגשית.',
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -36,9 +61,9 @@ export async function generateMetadata({
   const index = count >= MIN_POSTS_FOR_INDEXED_TAG;
   return {
     title: `${tag} - מדריכים וכתבות | כנפיים לעוף`,
-    description: index
-      ? `${count} מדריכים וכתבות בנושא ${tag}, מאת גאולה אלון - מטפלת רגשית ומאבחנת לימודית במרכז כנפיים לעוף.`
-      : `כל המדריכים והכתבות בנושא ${tag}, מאת גאולה אלון - מטפלת רגשית ומאבחנת לימודית.`,
+    description:
+      TAG_DESCRIPTIONS[tag] ??
+      `כל המדריכים והכתבות בנושא ${tag}, מאת גאולה אלון - מטפלת רגשית ומאבחנת לימודית.`,
     // Built from the canonical (lowercased) slug - never from the raw param,
     // which may be an uppercase/encoded variant that only reaches this page
     // through a redirect.

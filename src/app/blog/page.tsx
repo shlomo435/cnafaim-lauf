@@ -30,13 +30,15 @@ const collectionSchema = {
 };
 
 export const metadata: Metadata = {
-  title: 'מדריכים וכתבות | כנפיים לעוף',
+  // The old pair ("מדריכים וכתבות", 121-char description) named no subject a
+  // parent would search for. Both now lead with the topics the archive covers.
+  title: 'מדריכים להורים: חרדה, ויסות רגשי ולמידה | כנפיים לעוף',
   description:
-    'מדריכים מקצועיים של גאולה אלון על ויסות רגשי, חרדה בילדים, הוראה מתקנת, דימוי עצמי ועוד. קריאה נוחה, בשפה של הורים ונשים.',
+    'מדריכים מעשיים של גאולה אלון להורים: התקפי חרדה, התפרצויות זעם, קשיי קריאה, דימוי עצמי וסירוב ללכת לבית הספר - מה מסתתר מאחורי הקושי ומה באמת עוזר.',
   alternates: { canonical: absoluteUrl('/blog') },
   openGraph: {
-    title: 'מדריכים וכתבות | כנפיים לעוף',
-    description: 'מדריכים מקצועיים של גאולה אלון על ויסות רגשי, חרדה בילדים, הוראה מתקנת ועוד.',
+    title: 'מדריכים להורים: חרדה, ויסות רגשי ולמידה',
+    description: 'מדריכים מעשיים של גאולה אלון להורים: חרדה, התפרצויות זעם, קשיי קריאה, דימוי עצמי וקשיי בית ספר.',
     url: absoluteUrl('/blog'),
     type: 'website',
     images: [OG_IMAGE],
