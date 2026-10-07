@@ -8,6 +8,14 @@ export const OWNER_NAME = 'גאולה אלון';
 export const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 /**
+ * Per-post share image (1200x630), rendered by scripts/generate-post-covers.mjs
+ * and committed under public/og/. Every post used to share OG_IMAGE, so a shared
+ * link previewed as the site logo whichever article it pointed at, and all 22
+ * Article nodes claimed the same image. check-seo verifies the file exists.
+ */
+export const postCover = (slug: string) => `${SITE_URL}/og/${slug}.jpg`;
+
+/**
  * Stable @id anchors for the sitewide JSON-LD entity graph. The full Person /
  * Organization / WebSite nodes are emitted once from the root layout; every
  * page-level schema references these ids instead of re-declaring the entities,

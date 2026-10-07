@@ -12,7 +12,7 @@ import {
   tagToSlug,
   type ContentBlock,
 } from '../../../lib/blog';
-import { OG_IMAGE, OWNER_NAME, SCHEMA_IDS } from '../../../lib/site';
+import { OWNER_NAME, SCHEMA_IDS, postCover } from '../../../lib/site';
 import { getHeadings, plainText, countHebrewWords } from '../../../lib/blog-text';
 import InfoDisclaimer from '../../../components/InfoDisclaimer';
 
@@ -261,7 +261,16 @@ export async function generateMetadata({
       publishedTime: post.date,
       modifiedTime: post.lastModified ?? post.date,
       authors: ['גאולה אלון'],
-      images: [OG_IMAGE],
+      images: [{ url: postCover(slug), width: 1200, height: 630, alt: `${post.title} - כנפיים לעוף` }],
+    },
+    // Next does not derive twitter from openGraph, and the root layout's twitter
+    // block names the sitewide image. Without this, every post shared on X showed
+    // the logo no matter which article the link pointed at.
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [postCover(slug)],
     },
   };
 }
@@ -304,7 +313,7 @@ export default async function BlogPostPage({
     headline: post.title,
     description: post.description,
     keywords: post.tags.join(', '),
-    image: [OG_IMAGE],
+    image: [postCover(post.slug)],
     author: {
       '@type': 'Person',
       '@id': SCHEMA_IDS.person,
