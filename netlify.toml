@@ -23,6 +23,10 @@
   status = 301
   force = true
 
+# This one lands on the apex in two hops, not the one it reads like: Netlify
+# upgrades the scheme on the same host first (http://www -> https://www), and
+# the rule below then sends www -> apex. Measured 2026-10-08. Kept anyway - it
+# costs nothing, and it states the intent if that ordering ever changes.
 [[redirects]]
   from = "http://www.cnafim-lauf.co.il/*"
   to = "https://cnafim-lauf.co.il/:splat"
@@ -31,6 +35,27 @@
 
 [[redirects]]
   from = "https://www.cnafim-lauf.co.il/*"
+  to = "https://cnafim-lauf.co.il/:splat"
+  status = 301
+  force = true
+
+# The deploy's own hostname was serving the whole site at 200, so every page
+# existed at two crawlable addresses with only the canonical tag arguing for one
+# of them (checked 2026-10-08: the home page and /videos/emr-demo both answered
+# 200 there, under a robots.txt that allows everything).
+#
+# The host is matched exactly, so branch and preview deploys - which live on
+# deploy-preview-N--cnafaim-lauf.netlify.app and branch--cnafaim-lauf.netlify.app
+# - keep working. force = true because the requested file really does exist on
+# that host, and a non-forced rule would lose to it.
+[[redirects]]
+  from = "https://cnafaim-lauf.netlify.app/*"
+  to = "https://cnafim-lauf.co.il/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://cnafaim-lauf.netlify.app/*"
   to = "https://cnafim-lauf.co.il/:splat"
   status = 301
   force = true
