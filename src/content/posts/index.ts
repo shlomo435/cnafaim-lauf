@@ -22,6 +22,10 @@ import { post as pchadimBalaylaYeladim } from './pchadim-balayla-yeladim';
 import { post as hardatBechinot } from './hardat-bechinot';
 import { post as keeveiBetenRegashiim } from './keevei-beten-regashiim';
 import { post as hafraatKeshevYeladim } from './hafraat-keshev-yeladim';
+import { post as shchikatImahot } from './shchikat-imahot';
+import { post as haradaHevratitNashim } from './harada-hevratit-nashim';
+import { post as lachatzChevratiNaarot } from './lachatz-chevrati-naarot';
+import { post as hitbagrutRegashitBanot } from './hitbagrut-regashit-banot';
 
 /**
  * Every post, in publication-file order. The sitemap generator reads this order,
@@ -51,4 +55,8 @@ export const allPosts: Post[] = [
   hardatBechinot,
   keeveiBetenRegashiim,
   hafraatKeshevYeladim,
+  shchikatImahot,
+  haradaHevratitNashim,
+  lachatzChevratiNaarot,
+  hitbagrutRegashitBanot,
 ];

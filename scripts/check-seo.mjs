@@ -131,8 +131,10 @@ for (const file of files) {
 // Routes the site deliberately retired. An internal link to one of these is a
 // real bug: it sends a crawler to a 301 or a 410 from inside our own pages.
 const RETIRED = [/^\/blog\/simanim-harada-yelad$/, /^\/blog\/tag\//];
-// Tag archives that build but are noindex on purpose; they need no inbound link.
-const NOINDEX_OK = new Set(['/blog/tag/נשים', '/blog/tag/נערות']);
+// Tag archives that build but are noindex on purpose (below MIN_POSTS_FOR_INDEXED_TAG);
+// they need no inbound link. Empty now - נשים and נערות crossed the threshold - but left
+// wired up because a post edit can drop a canonical tag back under the bar.
+const NOINDEX_OK = new Set();
 const NOT_LINKABLE = new Set(['/404', '/_not-found', '/410']);
 const ASSET = /\.(jpg|jpeg|png|ico|svg|xml|txt|webp|mp4|json|pdf)$/i;
 
