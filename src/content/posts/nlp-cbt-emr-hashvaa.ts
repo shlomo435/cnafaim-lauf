@@ -312,7 +312,7 @@ export const post: Post = {
     },
     {
       label: 'לחץ וחרדה אצל ילדים - בנפש בריאה, משרד הבריאות',
-      url: 'https://me.health.gov.il/mental-health/therapy-and-rehabilitation/crisis-support/child-stress-anxiety/',
+      url: 'https://me.health.gov.il/mental-health/therapy-rehabilitation/crisis-support/child-stress-anxiety/',
     },
     {
       label: 'Sturt et al. 2012 - סקירה שיטתית על יעילות NLP, British Journal of General Practice',

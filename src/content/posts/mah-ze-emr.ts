@@ -323,7 +323,7 @@ export const post: Post = {
     },
     {
       label: 'לחץ וחרדה אצל ילדים - בנפש בריאה, משרד הבריאות',
-      url: 'https://me.health.gov.il/mental-health/therapy-and-rehabilitation/crisis-support/child-stress-anxiety/',
+      url: 'https://me.health.gov.il/mental-health/therapy-rehabilitation/crisis-support/child-stress-anxiety/',
     },
     { label: 'APA - EMDR בהנחיות הקליניות לטיפול בפוסט-טראומה', url: 'https://www.apa.org/ptsd-guideline/treatments/eye-movement-reprocessing' },
     { label: 'NICE - הנחיה קלינית לטיפול בפוסט-טראומה (PTSD)', url: 'https://www.nice.org.uk/guidance/ng116' },

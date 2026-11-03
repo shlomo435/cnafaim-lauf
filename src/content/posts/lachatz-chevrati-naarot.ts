@@ -206,11 +206,11 @@ export const post: Post = {
   sources: [
     {
       label: 'זיהוי מצוקה נפשית אצל ילדים - בנפש בריאה, משרד הבריאות',
-      url: 'https://me.health.gov.il/mental-health/therapy-and-rehabilitation/crisis-support/child-distress/',
+      url: 'https://me.health.gov.il/mental-health/therapy-rehabilitation/crisis-support/child-distress/',
     },
     {
       label: 'התמודדות עם לחץ וחרדה אצל ילדים - משרד הבריאות',
-      url: 'https://me.health.gov.il/mental-health/therapy-and-rehabilitation/crisis-support/child-stress-anxiety/',
+      url: 'https://me.health.gov.il/mental-health/therapy-rehabilitation/crisis-support/child-stress-anxiety/',
     },
     { label: 'ער"ן - עזרה ראשונה נפשית, קו חם 1201', url: 'https://www.eran.org.il' },
   ],

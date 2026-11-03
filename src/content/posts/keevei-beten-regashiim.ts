@@ -229,11 +229,11 @@ export const post: Post = {
   sources: [
     {
       label: 'התמודדות עם לחץ וחרדה אצל ילדים - בנפש בריאה, משרד הבריאות',
-      url: 'https://me.health.gov.il/mental-health/therapy-and-rehabilitation/crisis-support/child-stress-anxiety/',
+      url: 'https://me.health.gov.il/mental-health/therapy-rehabilitation/crisis-support/child-stress-anxiety/',
     },
     {
       label: 'זיהוי מצוקה נפשית אצל ילדים - משרד הבריאות',
-      url: 'https://me.health.gov.il/mental-health/therapy-and-rehabilitation/crisis-support/child-distress/',
+      url: 'https://me.health.gov.il/mental-health/therapy-rehabilitation/crisis-support/child-distress/',
     },
     {
       label: 'חרדה בילדים - בית החולים שניידר',

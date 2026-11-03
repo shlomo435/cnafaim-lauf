@@ -234,7 +234,7 @@ export const post: Post = {
     },
     {
       label: 'התמודדות עם לחץ וחרדה אצל ילדים - משרד הבריאות',
-      url: 'https://me.health.gov.il/mental-health/therapy-and-rehabilitation/crisis-support/child-stress-anxiety/',
+      url: 'https://me.health.gov.il/mental-health/therapy-rehabilitation/crisis-support/child-stress-anxiety/',
     },
     {
       label: 'AACAP - The Anxious Child',

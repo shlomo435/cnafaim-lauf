@@ -328,7 +328,7 @@ export const post: Post = {
     },
     {
       label: 'זיהוי מצוקה נפשית אצל ילדים - בנפש בריאה, משרד הבריאות',
-      url: 'https://me.health.gov.il/mental-health/therapy-and-rehabilitation/crisis-support/child-distress/',
+      url: 'https://me.health.gov.il/mental-health/therapy-rehabilitation/crisis-support/child-distress/',
     },
     {
       label: 'Effective Child Therapy - טיפולים מבוססי מחקר לילדים',
