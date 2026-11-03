@@ -99,7 +99,20 @@ for (const { file, post } of posts) {
   if (descriptions.has(post.description)) fail(s, 'description duplicates ' + descriptions.get(post.description));
   descriptions.set(post.description, s);
 
-  if (post.title.length > 60) fail(s, 'title is ' + post.title.length + ' chars (max 60)');
+  // The 60-char limit is on what ships in <title>: seoTitle when a post has one,
+  // otherwise the title itself. A separate H1 is still capped, because it is also
+  // the Article headline, and it must not repeat another post's <title>.
+  if (post.seoTitle) {
+    if (post.seoTitle.length > 60) fail(s, 'seoTitle is ' + post.seoTitle.length + ' chars (max 60)');
+    if (post.title.length > 110) fail(s, 'title (H1 and Article headline) is ' + post.title.length + ' chars (max 110)');
+    if (titles.has(post.seoTitle)) fail(s, 'seoTitle duplicates ' + titles.get(post.seoTitle));
+    titles.set(post.seoTitle, s);
+    if (!post.seoTitle.toLowerCase().includes(post.primaryKeyword.toLowerCase())) {
+      warn(s, 'primaryKeyword missing from seoTitle');
+    }
+  } else if (post.title.length > 60) {
+    fail(s, 'title is ' + post.title.length + ' chars (max 60)');
+  }
   if (post.description.length < 100 || post.description.length > 160) {
     warn(s, 'description is ' + post.description.length + ' chars (aim 100-160)');
   }

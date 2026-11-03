@@ -21,7 +21,14 @@ export type FaqItem = { q: string; a: string };
 
 export type Post = {
   slug: string;
+  /** The H1, the Article headline and the card title everywhere on the site. */
   title: string;
+  /**
+   * The <title> tag, for a post whose H1 is too long to double as one. Used
+   * verbatim, brand suffix included, and held to 60 characters by check:content.
+   * Without it the <title> is derived from `title`, which is then held to 60.
+   */
+  seoTitle?: string;
   description: string;
   date: string;
   lastModified?: string;

@@ -12,7 +12,7 @@ import {
   tagToSlug,
   type ContentBlock,
 } from '../../../lib/blog';
-import { OWNER_NAME, SCHEMA_IDS, postCover } from '../../../lib/site';
+import { OWNER_NAME, SITE_NAME, SCHEMA_IDS, postCover } from '../../../lib/site';
 import { getHeadings, plainText, countHebrewWords } from '../../../lib/blog-text';
 import InfoDisclaimer from '../../../components/InfoDisclaimer';
 
@@ -29,6 +29,41 @@ function renderText(text: string): React.ReactNode {
       );
     }
     const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    // Off-site citations (the health ministry, helplines) open in a new tab with
+    // the same rel as the sources list under the article. <Link> is for in-site
+    // navigation only, so neither these nor tel: numbers go through it.
+    if (link && /^https?:\/\//.test(link[2])) {
+      return (
+        <a
+          key={i}
+          href={link[2]}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          className="font-medium hover:opacity-80 transition-opacity"
+          style={{ color: C.rose, textDecoration: 'underline', textUnderlineOffset: '3px' }}
+        >
+          {link[1]}
+          <span className="sr-only"> (נפתח בכרטיסייה חדשה)</span>
+        </a>
+      );
+    }
+    // dir="ltr" isolates the number from the Hebrew around it, so a short code is
+    // written in dial order ([*3362](tel:*3362)) and painted, read aloud and dialled
+    // the same way. Typed backwards to look right in RTL, a screen reader says it
+    // backwards.
+    if (link && /^(tel|mailto):/.test(link[2])) {
+      return (
+        <a
+          key={i}
+          href={link[2]}
+          dir="ltr"
+          className="font-medium hover:opacity-80 transition-opacity"
+          style={{ color: C.rose, textDecoration: 'underline', textUnderlineOffset: '3px' }}
+        >
+          {link[1]}
+        </a>
+      );
+    }
     if (link) {
       return (
         <Link
@@ -46,7 +81,7 @@ function renderText(text: string): React.ReactNode {
 }
 
 // ── Block renderer ─────────────────────────────────────────────────────────
-function Block({ block, id }: { block: ContentBlock; id?: string }) {
+function Block({ block, id, index }: { block: ContentBlock; id?: string; index: number }) {
   switch (block.type) {
     case 'intro':
       return (
@@ -127,13 +162,19 @@ function Block({ block, id }: { block: ContentBlock; id?: string }) {
           </p>
         </blockquote>
       );
-    case 'takeaways':
+    case 'takeaways': {
+      // A titled box (the helplines) is a named region a screen-reader user can
+      // jump to. The default "השורה התחתונה" box stays a plain div, and its label
+      // stays a <p>: it sits above the first h2, so a heading would skip a level.
+      const labelId = block.title ? `box-${index}` : undefined;
       return (
         <div
           className="my-8 rounded-xl p-6 border-2 text-right"
           style={{ backgroundColor: C.creamAlt, borderColor: C.creamDeep }}
+          role={labelId ? 'region' : undefined}
+          aria-labelledby={labelId}
         >
-          <p className="text-sm font-semibold mb-4" style={{ color: C.rose }}>
+          <p id={labelId} className="text-sm font-semibold mb-4" style={{ color: C.rose }}>
             {block.title ?? 'השורה התחתונה'}
           </p>
           <ul className="space-y-3">
@@ -154,6 +195,7 @@ function Block({ block, id }: { block: ContentBlock; id?: string }) {
           </ul>
         </div>
       );
+    }
     case 'table':
       return (
         <div className="my-8 rounded-xl border overflow-x-auto" style={{ borderColor: C.border }}>
@@ -249,14 +291,21 @@ export async function generateMetadata({
   if (!post) return { title: 'כנפיים לעוף' };
   return {
     // Brand suffix costs 14ch; long titles keep their full keyword text instead
-    // of truncating in the SERP.
-    title: post.title.length <= 46 ? `${post.title} | כנפיים לעוף` : post.title,
+    // of truncating in the SERP. A post whose H1 runs past 60 carries its own
+    // seoTitle, written to length with the brand already in it. `||`, not `??`:
+    // check:content treats an empty seoTitle as absent, and so must this, or the
+    // page ships with no <title> at all.
+    title: post.seoTitle || (post.title.length <= 46 ? `${post.title} | כנפיים לעוף` : post.title),
     description: post.description,
     alternates: { canonical: canonicalUrl(post.slug) },
     openGraph: {
       title: post.title,
       description: post.description,
       url: canonicalUrl(post.slug),
+      // This object replaces the layout's openGraph instead of merging with it,
+      // so the two site-level keys have to be restated here.
+      siteName: SITE_NAME,
+      locale: 'he_IL',
       type: 'article',
       publishedTime: post.date,
       modifiedTime: post.lastModified ?? post.date,
@@ -504,7 +553,7 @@ export default async function BlogPostPage({
         <div className="space-y-6">
           {post.content.length > 0 ? (
             post.content.map((block, i) => (
-              <Block key={i} block={block} id={headings.find((h) => h.index === i)?.id} />
+              <Block key={i} block={block} index={i} id={headings.find((h) => h.index === i)?.id} />
             ))
           ) : (
             <div
